@@ -19,26 +19,17 @@ const ReactTableSubheaderControl = ({
 
   const subHeaderRow = [
     {
-      headers: [
-        "test-product", 
-        "name", 
-        "brand"
-      ],
+      id: "sub-product",
       colspan: 3,
       name: "Sub Product",
     },
     {
-      headers: [
-        "stock-quantity",
-        "wholesale-cost",
-        "quantity-sold",
-        "gross-sales",
-      ],
+      id: "sub-quantity",
       colspan: 4,
       name: "Sub quantity",
     },
     {
-      headers: ["net-sales"],
+      id: "combined-sales",
       name: "Combined Sale",
     },
   ];
@@ -67,6 +58,17 @@ const ReactTableSubheaderControl = ({
     // ... Add more data rows here
   ];
 
+  const cellHeaders = [
+    [headers[0].id, subHeaderRow[0].id],
+    [headers[1].id, subHeaderRow[0].id],
+    [headers[2].id, subHeaderRow[0].id],
+    [headers[3].id, subHeaderRow[1].id],
+    [headers[4].id, subHeaderRow[1].id],
+    [headers[5].id, subHeaderRow[1].id],
+    [headers[6].id, subHeaderRow[1].id],
+    [headers[7].id, subHeaderRow[2].id],
+  ];
+
   return (
     <div>
       <table>
@@ -87,11 +89,12 @@ const ReactTableSubheaderControl = ({
             ))}
           </tr>
           <tr>
-            {subHeaderRow.map(({ headers, colspan, name }) => (
+            {subHeaderRow.map(({ id, colspan, name }) => (
               <th
                 className="tl-sub-header"
-                headers={headers.join(" ")}
-                key={name} style={{ fontWeight: thFontWeight }}
+                id={id}
+                key={id}
+                style={{ fontWeight: thFontWeight }}
                 colSpan={colspan}
               >
                 {name}
@@ -100,19 +103,23 @@ const ReactTableSubheaderControl = ({
           </tr>
         </thead>
         <tbody>
-          {data.map((rowData, rowIndex) => (
-            <tr key={rowIndex}>
-              {rowData.map((cellData, cellIndex) => (
-                <td key={cellIndex} style={{ fontWeight: tdFontWeight }}>
-                  {cellData}
-                </td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  );
+  {data.map((rowData, rowIndex) => (
+    <tr key={rowIndex}>
+      {rowData.map((cellData, cellIndex) => (
+        <td
+          key={cellIndex}
+          headers={cellHeaders[cellIndex].join(" ")}
+          style={{ fontWeight: tdFontWeight }}
+        >
+          {cellData}
+        </td>
+      ))}
+    </tr>
+  ))}
+</tbody>
+</table>
+</div>
+);
 };
 
 export default ReactTableSubheaderControl;
