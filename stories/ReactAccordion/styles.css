@@ -15,9 +15,6 @@ h3 {
 .ui.styled.accordion {
   width: 100%;
   max-width: 600px;
-  padding: 1rem;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .ui.styled.accordion .title {
