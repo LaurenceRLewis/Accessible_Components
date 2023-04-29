@@ -10,15 +10,23 @@ export default {
       description: "Allow multiple accordions to be open at once",
       defaultValue: false,
     },
+    items: {
+      table: { disable: true },
+    },
   },
 };
 
 const Template = (args) => (
-    <div role="region" aria-labelledby={`${args.groupName}-heading`}>
-      <h2 id={`${args.groupName}-heading`}>{args.groupName.charAt(0).toUpperCase() + args.groupName.slice(1)}</h2>
-      <Accordion {...args} />
-    </div>
-  );
+  <div
+    role="region"
+    aria-label={`Accordion group for ${args.groupName}`}
+  >
+    <h2 id={`${args.groupName}-heading`}>
+      {args.groupName.charAt(0).toUpperCase() + args.groupName.slice(1)}
+    </h2>
+    <Accordion {...args} />
+  </div>
+);
 
 export const Cats = Template.bind({});
 export const Dogs = Template.bind({});
