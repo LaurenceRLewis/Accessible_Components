@@ -5,7 +5,7 @@ const Tab = ({ id, title, isSelected, onClick, onKeyDown, textColor, tabBackgrou
   <button
     role="tab"
     id={id}
-    aria-controls={`${id}-tabpanel`}
+    aria-controls={`tabpanel-${id}`}
     aria-selected={isSelected}
     onClick={() => onClick(id)}
     onKeyDown={(event) => onKeyDown(id, event)}
@@ -23,7 +23,7 @@ const TabPanel = ({ id, isSelected, children, tabIndex }) => (
   <div
     role="tabpanel"
     id={`tabpanel-${id}`}
-    aria-labelledby={`tab-${id}`}
+    aria-labelledby={`${id}`}
     hidden={!isSelected}
     tabIndex={tabIndex}
   >
