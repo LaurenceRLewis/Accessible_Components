@@ -21,6 +21,9 @@ export default {
       ],
       defaultValue: "Contained in a named landmark region",
     },
+    groupName: {
+      table: { disable: true },
+    },
   },
 };
 
