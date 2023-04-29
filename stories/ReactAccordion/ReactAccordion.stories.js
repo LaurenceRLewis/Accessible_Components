@@ -13,20 +13,36 @@ export default {
     items: {
       table: { disable: true },
     },
+    NamedRegionContainer: {
+      control: { type: "select" },
+      options: [
+        "Contained in a named landmark region",
+        "Not contained in a named landmark region",
+      ],
+      defaultValue: "Contained in a named landmark region",
+    },
   },
 };
 
-const Template = (args) => (
-  <div
-    role="region"
-    aria-label={`Accordion group for ${args.groupName}`}
-  >
-    <h2 id={`${args.groupName}-heading`}>
-      {args.groupName.charAt(0).toUpperCase() + args.groupName.slice(1)}
-    </h2>
-    <Accordion {...args} />
-  </div>
-);
+const Template = (args) => {
+  const isNamedRegion = args.NamedRegionContainer === "Contained in a named landmark region";
+
+  return (
+    <div
+      {...(isNamedRegion
+        ? {
+            role: "region",
+            "aria-label": `Accordion group for ${args.groupName}`,
+          }
+        : {})}
+    >
+      <h2 id={`${args.groupName}-heading`}>
+        {args.groupName.charAt(0).toUpperCase() + args.groupName.slice(1)}
+      </h2>
+      <Accordion {...args} />
+    </div>
+  );
+};
 
 export const Cats = Template.bind({});
 export const Dogs = Template.bind({});
@@ -57,6 +73,7 @@ Cats.args = {
   ],
   groupName: "cats",
   multiExpand: false,
+  NamedRegionContainer: "Contained in a named landmark region",
 };
 
 Dogs.args = {
@@ -80,6 +97,7 @@ Dogs.args = {
   ],
   groupName: "dogs",
   multiExpand: false,
+  NamedRegionContainer: "Contained in a named landmark region",
 };
 
 Horses.args = {
@@ -107,4 +125,5 @@ Horses.args = {
   ],
   groupName: "horses",
   multiExpand: true,
+  NamedRegionContainer: "Contained in a named landmark region",
 };
