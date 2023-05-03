@@ -49,7 +49,6 @@ const Template = (args) => {
 
 export const Cats = Template.bind({});
 export const Dogs = Template.bind({});
-export const Horses = Template.bind({});
 
 Cats.args = {
   items: [
@@ -99,34 +98,6 @@ Dogs.args = {
     },
   ],
   groupName: "dogs",
-  multiExpand: false,
-  NamedRegionContainer: "Contained in a named landmark region",
-};
-
-Horses.args = {
-  items: [
-    {
-      title: "Arabian",
-      content:
-        "Arabian horses are known for their elegance, intelligence, and spirited nature.",
-    },
-    {
-      title: "Thoroughbred",
-      content:
-        "Thoroughbreds are athletic, fast, and primarily used for racing and jumping competitions.",
-    },
-    {
-      title: "Appaloosa",
-      content:
-        "Appaloosas are recognized by their unique spotted coat patterns and are versatile in various disciplines.",
-    },
-    {
-      title: "Clydesdale",
-      content:
-        "Clydesdales are large, strong horses known for their feathered legs and gentle temperament.",
-    },
-  ],
-  groupName: "horses",
   multiExpand: true,
-  NamedRegionContainer: "Contained in a named landmark region",
+  NamedRegionContainer: "Not contained in a named landmark region",
 };
