@@ -22,13 +22,19 @@ export default {
       options: { automated: "automated", manual: "manual" },
       defaultValue: "manual",
     },
+    viewportThreshold: {
+      control: { type: "number" },
+      defaultValue: 400,
+    },
     tabs: {
       table: { disable: true },
     },
   },
 };
 
-const Template = (args) => <AccordionTabComponent {...args} />;
+const Template = ({ viewportThreshold, ...args }) => (
+  <AccordionTabComponent viewportThreshold={viewportThreshold} {...args} />
+);
 
 export const Default = Template.bind({});
 Default.args = {

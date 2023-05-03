@@ -91,14 +91,15 @@ export const AccordionTabComponent = ({
     default: "rgba(209, 203, 219, 1)",
     selected: "rgba(156, 39, 176, 1)",
   },
+  viewportThreshold = 400,
 }) => {
   const [selectedTab, setSelectedTab] = useState(tabs[0].id);
   const [isAccordionView, setIsAccordionView] = useState(
-    window.innerWidth < 400
+    window.innerWidth < viewportThreshold
   );
 
   const handleWindowResize = () => {
-    setIsAccordionView(window.innerWidth < 400);
+    setIsAccordionView(window.innerWidth < viewportThreshold);
   };
 
   const windowResizeEvent = useRef(null);
@@ -106,11 +107,15 @@ export const AccordionTabComponent = ({
   useEffect(() => {
     windowResizeEvent.current = handleWindowResize;
     window.addEventListener("resize", windowResizeEvent.current);
-
+  
+    // This line will force the accordion to update based on the new viewportThreshold value.
+    setIsAccordionView(window.innerWidth < viewportThreshold);
+  
     return () => {
       window.removeEventListener("resize", windowResizeEvent.current);
     };
-  }, []);
+  }, [viewportThreshold]);
+  
 
   const handleKeyDown = (id, event) => {
     if (isAccordionView && (event.key === "Enter" || event.key === " ")) {
