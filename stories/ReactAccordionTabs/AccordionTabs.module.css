@@ -8,7 +8,7 @@ body {
     margin: 0 auto;
   }
   
-  [role="tablist"] {
+  .tabList {
     display: flex;
     border-bottom: 1px solid #ccc;
     padding-left: 0;
@@ -16,7 +16,7 @@ body {
     margin: 0;
   }
   
-  [role="tab"] {
+  .tab {
     flex-grow: 1;
     background: none;
     border: none;
@@ -26,43 +26,56 @@ body {
     font-size: 16px;
     border-bottom: 3px solid transparent;
   }
-  [role="tab"]:focus-visible {
+  
+  .tab:focus-visible {
     border-bottom: 3px solid green;
   }
-  [role="tab"][aria-selected="true"]:focus-visible {
+  
+  .tab[aria-selected="true"]:focus-visible {
     border-bottom: 3px solid blue;
   }
   
-  [role="tab"][aria-selected="true"] {
+  .tab[aria-selected="true"] {
     font-weight: bold;
     border-bottom-color: #9c27b0;
     background-color: #d1cbdb;
   }
   
-  [role="tabpanel"] {
+  .tabPanel {
     padding: 15px;
     border: 1px solid #ccc;
     border-top: none;
   }
   
-  [role="tabpanel"][hidden] {
+  .tabPanel[hidden] {
     display: none;
   }
   
-  /* Add this media query at the bottom of the TabComponent.module.css file */
-
-@media (max-width: 400px) {
-  [role="tablist"] {
-    flex-direction: column;
-  }
-  [role="tab"] {
+/* Accordion view styles */
+.accordionButton {
     width: 100%;
     text-align: left;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    background: none;
+    outline: none;
+    cursor: pointer;
   }
-  [role="tabpanel"] {
-    display: none;
+  
+  .accordionButton + .accordionTabPanel {
+    border-top: none;
   }
-  [role="tabpanel"][data-expanded="true"] {
-    display: block;
+  
+  .accordionButton:focus-visible {
+    border-color: green;
   }
-}
+  
+  .accordionButton[aria-expanded="true"] {
+    font-weight: bold;
+    background-color: #d1cbdb;
+  }
+  
+  .accordionButton[aria-expanded="true"]:focus-visible {
+    border-color: blue;
+  }
