@@ -17,7 +17,7 @@ const lighterColorMap = {
 };
 
 export default {
-  title: 'Components/ReactTableSubHeader',
+  title: 'Tables/ReactTableSubHeader',
   component: ReactTableSubheaderControl,
   argTypes: {
     headerTextColor: {

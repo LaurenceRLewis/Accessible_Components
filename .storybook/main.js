@@ -27,6 +27,10 @@ const config = {
         type: 'section',
         title: 'Components',
       },
+      {
+        type: 'section',
+        title: 'Tables',
+      },
     ],
   },
 };

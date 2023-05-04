@@ -2,7 +2,7 @@ import React from "react";
 import ReactTableCheckbox from "./ReactTableCheckbox";
 
 export default {
-  title: "Components/ReactTableCheckbox",
+  title: "Tables/ReactTableCheckbox",
   component: ReactTableCheckbox,
 };
 
