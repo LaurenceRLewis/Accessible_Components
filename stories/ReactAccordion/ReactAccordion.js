@@ -86,6 +86,7 @@ const Accordion = ({ items, groupName, multiExpand }) => {
           <div
             className={`content ${active}`}
             id={`${groupName}-panel-${index}`}
+            role="region"
             aria-labelledby={`${groupName}-heading-${index}`}
             hidden={active !== "active"}
           >
