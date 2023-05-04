@@ -1,4 +1,4 @@
-# Welcome to Accessible Components [![Accessible Components](https://img.shields.io/badge/-Accessible%20Components-green)](https://github.com/LaurenceRLewis/Accessible_Components)
+# Welcome to Accessible Components
 
 This experimental personal project by Laurence Lewis is a set of React-based storybook components designed with accessibility in mind, adhering to the Web Content Accessibility Guidelines (WCAG) 2.1. Please note that these components should not be used in production without thorough testing first. The testing should be done using a screen reader, keyboard navigation, and running an automated testing tool.
 
