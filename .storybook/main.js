@@ -1,4 +1,3 @@
-// main.js
 const config = {
   stories: ["../stories/**/*.mdx", "../stories/**/**/*.stories.@(js|jsx|ts|tsx)"],
   addons: [
@@ -14,24 +13,6 @@ const config = {
   },
   docs: {
     autodocs: "tag",
-  },
-  // Add this custom option
-  options: {
-    menu: [
-      {
-        type: 'section',
-        title: 'Introduction',
-        expanded: true,
-      },
-      {
-        type: 'section',
-        title: 'Components',
-      },
-      {
-        type: 'section',
-        title: 'Tables',
-      },
-    ],
   },
 };
 
