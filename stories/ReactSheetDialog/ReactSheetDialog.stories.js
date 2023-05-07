@@ -11,6 +11,15 @@ export default {
       },
       defaultValue: true,
     },
+    dialogType: {
+      control: { type: "select" },
+      options: {
+        'Standard Modal Dialog': 'standard',
+        'Sheet Dialog': "sheet",
+      },
+      defaultValue: "sheet",
+    },
+    
   },
 };
 
@@ -19,4 +28,5 @@ const Template = (args) => <ReactSheetDialog {...args} />;
 export const Default = Template.bind({});
 Default.args = {
   modal: true,
+  dialogType: 'sheet',
 };
