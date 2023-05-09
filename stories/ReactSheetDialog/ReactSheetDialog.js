@@ -51,53 +51,51 @@ function ReactSheetDialog(props) {
     sheetOpenClass
   );
 
-  // Function to apply or remove 'aria-hidden' attribute on elements outside the dialog
-  const setAriaHiddenOnSiblings = (isOpen) => {
-    const rootNode = ReactDOM.findDOMNode(props.rootNode || document.body);
-    const siblings = Array.from(rootNode.children).filter(
-      (child) => child !== rootNode
-    );
-
-    siblings.forEach((sibling) => {
-      if (isOpen) {
-        sibling.setAttribute("aria-hidden", "true");
-      } else {
-        sibling.removeAttribute("aria-hidden");
-      }
-    });
-  };
-
-  // Add event listener for keydown events to handle Esc key press
-  useEffect(() => {
-    window.addEventListener("keydown", handleEscKey);
-    return () => {
-      window.removeEventListener("keydown", handleEscKey);
+    // Function to apply or remove 'aria-hidden' attribute on elements outside the dialog
+    const setAriaHiddenOnSiblings = (isOpen) => {
+      const rootNode = ReactDOM.findDOMNode(props.rootNode || document.body);
+      const siblings = Array.from(rootNode.children).filter(
+        (child) => child !== rootNode
+      );
+  
+      siblings.forEach((sibling) => {
+        if (modal && isOpen) {
+          sibling.setAttribute("aria-hidden", "true");
+        } else {
+          sibling.removeAttribute("aria-hidden");
+        }
+      });
     };
-  }, [handleEscKey]);
-
-  // Set focus on the sheet heading when the sheet/dialog opens
-  useEffect(() => {
-    if (open) {
-      document.getElementById("sheet-heading").focus();
-    }
-  }, [open]);
-
-  // Add an effect to return focus to the triggering button when sheet/dialog is closed
-  useEffect(() => {
-    if (!open) {
-      const sideSheetButton = document.getElementById("side-sheet-button");
-      if (sideSheetButton) {
-        sideSheetButton.focus();
+  
+    // Add event listener for keydown events to handle Esc key press
+    useEffect(() => {
+      window.addEventListener("keydown", handleEscKey);
+      return () => {
+        window.removeEventListener("keydown", handleEscKey);
+      };
+    }, [handleEscKey]);
+  
+    // Set focus on the sheet heading when the sheet/dialog opens
+    useEffect(() => {
+      if (open) {
+        document.getElementById("sheet-heading").focus();
       }
-    }
-  }, [open]);
-
-  // Apply or remove 'aria-hidden' attribute on elements outside the dialog when the modal is open or closed
-  useEffect(() => {
-    if (modal) {
+    }, [open]);
+  
+    // Add an effect to return focus to the triggering button when sheet/dialog is closed
+    useEffect(() => {
+      if (!open) {
+        const sideSheetButton = document.getElementById("side-sheet-button");
+        if (sideSheetButton) {
+          sideSheetButton.focus();
+        }
+      }
+    }, [open]);
+  
+    // Apply or remove 'aria-hidden' attribute on elements outside the dialog when the modal is open or closed
+    useEffect(() => {
       setAriaHiddenOnSiblings(open);
-    }
-  }, [modal, open]);
+    }, [modal, open]);  
 
   // Exit early if the sheet is closed or not a modal
   const trapFocus = (event) => {

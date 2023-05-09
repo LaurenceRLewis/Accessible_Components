@@ -10,7 +10,7 @@ function SheetDialogContent() {
           </p>
           <ul>
             <li>
-              <code>modal</code>: Determines if the sheet/dialog
+              <code>modal</code>: Determines if the sheet is modal. Focus is trapped inside the dialog.
             </li>
             <li>
               <code>dialogType</code>: Defines the type of dialog to display,

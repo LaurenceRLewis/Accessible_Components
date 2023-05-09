@@ -10,7 +10,7 @@ function StandardDialogContent() {
           </p>
           <ul>
             <li>
-              <code>modal</code>: Determines if the sheet/dialog
+              <code>modal</code>: Determines if the dialog is modal. Focus is trapped inside the dialog. For a standard dialog this should be set to true.
             </li>
             <li>
               <code>dialogType</code>: Defines the type of dialog to display,
