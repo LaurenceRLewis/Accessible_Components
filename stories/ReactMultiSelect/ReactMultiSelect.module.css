@@ -1,0 +1,23 @@
+.multi-select-container {
+  position: relative;
+}
+
+.selected-options button {
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
+
+.listbox {
+  position: absolute;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.listbox-option {
+  padding: 5px;
+}
+
+.listbox-option.selected {
+  background-color: #e6e6e6;
+}
