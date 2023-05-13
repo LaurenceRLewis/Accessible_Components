@@ -1,23 +1,62 @@
 .multi-select-container {
-  position: relative;
+  width: 300px;
+  font-family: Arial, sans-serif;
+}
+
+.multi-select-container h2 {
+  color: #6200ee;
+  margin-bottom: 10px;
+}
+
+.selected-options {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
 }
 
 .selected-options button {
-  margin-right: 5px;
-  margin-bottom: 5px;
+  background-color: #6200ee;
+  color: #fff;
+  margin: 5px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.selected-options button:focus-visible {
+  outline: 3px solid #03dac5;
+}
+
+.selected-options button:hover {
+  background-color: #3700b3;
 }
 
 .listbox {
-  position: absolute;
-  list-style-type: none;
-  margin: 0;
+  border: 1px solid #6200ee;
   padding: 0;
+  margin: 0;
+  list-style-type: none;
+  max-height: 150px;
+  overflow-y: auto;
 }
 
 .listbox-option {
-  padding: 5px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.listbox-option:hover {
+  background-color: #3700b3;
+  color: #fff;
+}
+
+.listbox-option:focus-visible {
+  outline: 3px solid #03dac5;
 }
 
 .listbox-option.selected {
-  background-color: #e6e6e6;
+  background-color: #6200ee;
+  color: #fff;
 }

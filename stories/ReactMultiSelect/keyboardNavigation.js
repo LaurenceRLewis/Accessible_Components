@@ -1,4 +1,8 @@
+import { useEffect, useState } from 'react';
+
 const useKeyboardNavigation = (isListboxOpen, listboxRef, handleSelectOption, selectionModel) => {
+  const [focusedOptionIndex, setFocusedOptionIndex] = useState(0);
+
   useEffect(() => {
     if (isListboxOpen) {
       listboxRef.current.focus();
@@ -7,32 +11,48 @@ const useKeyboardNavigation = (isListboxOpen, listboxRef, handleSelectOption, se
 
   const handleKeyDown = (event) => {
     const { key } = event;
-    const currentIndex = Array.from(listboxRef.current.children).findIndex(
-      (child) => child === document.activeElement
-    );
+    const options = Array.from(listboxRef.current.children);
+    let newIndex;
 
-    if (key === 'ArrowUp' || key === 'ArrowDown') {
-      event.preventDefault();
-      const nextIndex =
-        key === 'ArrowUp'
-          ? currentIndex - 1
-          : currentIndex + 1;
+    switch (key) {
+      case 'ArrowUp':
+        event.preventDefault();
+        newIndex = focusedOptionIndex - 1 >= 0 ? focusedOptionIndex - 1 : options.length - 1;
+        options[newIndex].focus();
+        setFocusedOptionIndex(newIndex);
+        break;
+      
+      case 'ArrowDown':
+        event.preventDefault();
+        newIndex = focusedOptionIndex + 1 < options.length ? focusedOptionIndex + 1 : 0;
+        options[newIndex].focus();
+        setFocusedOptionIndex(newIndex);
+        break;
+      
+      case 'Home':
+        event.preventDefault();
+        options[0].focus();
+        setFocusedOptionIndex(0);
+        break;
+      
+      case 'End':
+        event.preventDefault();
+        options[options.length - 1].focus();
+        setFocusedOptionIndex(options.length - 1);
+        break;
+      
+      case ' ':
+      case 'Enter':
+        event.preventDefault();
+        handleSelectOption(options[focusedOptionIndex].textContent);
+        break;
 
-      if (nextIndex >= 0 && nextIndex < listboxRef.current.children.length) {
-        listboxRef.current.children[nextIndex].focus();
-      }
-    }
-    // If the selection model is 'default', Space or Enter key will select or deselect the option.
-    else if ((key === ' ' || key === 'Enter') && selectionModel === 'default') {
-      event.preventDefault();
-      handleSelectOption(document.activeElement.textContent);
-    }
-    // If selection model is 'alternative', Space or Enter key will select the option and deselect others.
-    else if ((key === ' ' || key === 'Enter') && selectionModel === 'alternative') {
-      event.preventDefault();
-      handleSelectOption(document.activeElement.textContent);
+      default:
+        break;
     }
   };
 
   return handleKeyDown;
 };
+
+export default useKeyboardNavigation;
