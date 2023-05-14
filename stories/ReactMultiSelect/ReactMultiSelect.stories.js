@@ -4,6 +4,9 @@ import ReactMultiSelect from './ReactMultiSelect';
 export default {
   title: 'Work in Progress/ReactMultiSelect',
   component: ReactMultiSelect,
+  parameters: {
+    docsOnly: true,
+  },
   argTypes: {
     selectionModel: {
       control: {
