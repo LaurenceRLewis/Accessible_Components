@@ -2,7 +2,7 @@ import React from 'react';
 import ReactMultiSelect from './ReactMultiSelect';
 
 export default {
-  title: 'Work in Progress/ReactMultiSelect',
+  title: 'Components/ReactMultiSelect',
   component: ReactMultiSelect,
   parameters: {
     docsOnly: true,
