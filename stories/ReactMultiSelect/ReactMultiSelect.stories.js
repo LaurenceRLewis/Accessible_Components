@@ -1,10 +1,17 @@
 import React from 'react';
+import { Description } from '@storybook/addon-docs/blocks';
 import ReactMultiSelect from './ReactMultiSelect';
+import reactMultiSelectDescription from './ReactMultiSelectDescription';
 
 export default {
   title: 'Components/ReactMultiSelect',
   component: ReactMultiSelect,
   parameters: {
+    docs: {
+      description: {
+        component: reactMultiSelectDescription,
+      },
+    },
     docsOnly: true,
   },
   argTypes: {
@@ -21,4 +28,4 @@ export default {
 
 const Template = (args) => <ReactMultiSelect {...args} />;
 
-export const Primary = Template.bind({})
+export const Primary = Template.bind({});
