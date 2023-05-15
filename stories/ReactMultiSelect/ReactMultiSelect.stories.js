@@ -1,5 +1,5 @@
 import React from 'react';
-import { Description } from '@storybook/addon-docs/blocks';
+//import { Description } from '@storybook/addon-docs/blocks';
 import ReactMultiSelect from './ReactMultiSelect';
 import reactMultiSelectDescription from './ReactMultiSelectDescription';
 

@@ -1,9 +1,18 @@
 import React from "react";
 import { TabComponent } from "./TabComponent";
+import TabComponentDescription from './TabComponentDescription';
 
 export default {
-  title: "Components/TabComponent",
+  title: "Components/ReactTabComponent",
   component: TabComponent,
+  parameters: {
+    docs: {
+      description: {
+        component: TabComponentDescription,
+      },
+    },
+    docsOnly: true,
+  },
   argTypes: {
     tabPanelTabindex: {
       control: { type: "boolean" },

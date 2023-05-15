@@ -1,9 +1,18 @@
 import React from "react";
 import { AccordionTabComponent } from "./AccordionTabs";
+import reactTabsDescription from './ReactTabsDescription';
 
 export default {
-  title: "Components/AccordionTabComponent",
+  title: "Components/ReactAccordionTabComponent",
   component: AccordionTabComponent,
+  parameters: {
+    docs: {
+      description: {
+        component: reactTabsDescription,
+      },
+    },
+    docsOnly: true,
+  },
   argTypes: {
     tabPanelTabindex: {
       control: { type: "boolean" },

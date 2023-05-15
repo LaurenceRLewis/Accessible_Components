@@ -1,9 +1,18 @@
 import React from "react";
 import Accordion from "./ReactAccordion";
+import reactAccordionDescription from './ReactAccordionDescription';
 
 export default {
   title: "Components/ReactAccordion",
   component: Accordion,
+  parameters: {
+    docs: {
+      description: {
+        component: reactAccordionDescription,
+      },
+    },
+    docsOnly: true,
+  },
   argTypes: {
     multiExpand: {
       control: "boolean",
