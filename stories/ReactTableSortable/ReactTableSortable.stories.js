@@ -1,9 +1,18 @@
 import React from 'react';
 import ReactTableSortableControl from './ReactTableSortableControl';
+import reactTableSortableDescription from './ReactTableSortableDescription';
 
 export default {
   title: 'Tables/ReactTableSortable',
   component: ReactTableSortableControl,
+  parameters: {
+    docs: {
+      description: {
+        component: reactTableSortableDescription,
+      },
+    },
+    docsOnly: true,
+  },
   argTypes: {
     sortable: {
       control: { type: 'select' },

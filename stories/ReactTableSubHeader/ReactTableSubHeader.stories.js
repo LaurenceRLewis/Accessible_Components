@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactTableSubheaderControl from './ReactTableSubheaderControl';
 import ReactTableSubHeader from './ReactTableSubHeader';
+import reactTableSubHeaderDescription from './ReactTableSubHeaderDescription';
 
 const colorMap = {
   'Purple template': 'rgba(128, 0, 128, 1)',
@@ -19,6 +20,14 @@ const lighterColorMap = {
 export default {
   title: 'Tables/ReactTableSubHeader',
   component: ReactTableSubheaderControl,
+  parameters: {
+    docs: {
+      description: {
+        component: reactTableSubHeaderDescription,
+      },
+    },
+    docsOnly: true,
+  },
   argTypes: {
     headerTextColor: {
       control: { type: 'select' },
