@@ -1,9 +1,18 @@
 import React from 'react';
 import ReactSheetDialog from './ReactSheetDialog';
+import reactSheetDialogDescription from './ReactSheetDialogDescription';
 
 export default {
   title: 'Components/ReactSheetDialog',
   component: ReactSheetDialog,
+  parameters: {
+    docs: {
+      description: {
+        component: reactSheetDialogDescription,
+      },
+    },
+    docsOnly: true,
+  },
   argTypes: {
     modal: {
       control: {
