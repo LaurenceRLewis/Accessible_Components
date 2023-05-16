@@ -17,8 +17,8 @@ const ChevronDown = () => (
   );
 
 // Define ChevronDown SVG icon component
-const Accordion = ({ items, groupName, multiExpand }) => {
-    const [activeIndices, setActiveIndices] = useState([]);
+const Accordion = ({ items, groupName, multiExpand, CustomIcon }) => {
+  const [activeIndices, setActiveIndices] = useState([]);
     
     // Handle title click event
     const onTitleClick = (index) => {
@@ -80,7 +80,7 @@ const Accordion = ({ items, groupName, multiExpand }) => {
               aria-expanded={active === "active"}
             >
               <span>{item.title}</span>
-              {active ? <ChevronDown /> : <ChevronUp />}
+              {CustomIcon ? <CustomIcon active={active} /> : (active ? <ChevronDown /> : <ChevronUp />)}
             </button>
           </h3>
           <div
