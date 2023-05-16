@@ -9,7 +9,7 @@ Each tab/accordion item has two main parts:
 
 In the tab view, the component supports keyboard navigation between tabs using the Arrow, Home, and End keys, in line with WAI-ARIA recommendations. 
 
-The component's selection behavior (automatic or manual) can be configured via the \`triggerActivation\` prop. In automatic mode, focusing on a tab (either by mouse hover or keyboard navigation) will automatically select it. In manual mode, a tab must be clicked or selected with the Enter or Space key to be activated.
+The component's selection behavior (automatic or manual) can be configured via the \`triggerActivation\` prop. In automatic mode, moving keyboard focus to a tab will automatically select it. In manual mode, a tab must be clicked or selected with the Enter or Space key to be activated.
 
 The component uses WAI-ARIA roles, states, and properties to ensure its accessibility. 
 
