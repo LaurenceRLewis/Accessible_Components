@@ -11,6 +11,8 @@ The Accordion component supports both single and multiple active items. This mea
 
 You can customize the icon used in the accordion headers by passing a React component to the \`CustomIcon\` prop. This component will receive an \`active\` prop, which is a boolean representing whether the accordion item is currently expanded. If the \`CustomIcon\` prop is not provided, default Chevron icons will be used.
 
+Adding a named region to the Accordion provides the advantage of organising and categorising the accordion items into distinct groups. By assigning a groupName to the Accordion, you can have multiple Accordions on the same page, each with its own set of items. This can be particularly useful when you have different sections of content that need to be independently expandable and collapsible.
+
 The Accordion uses WAI-ARIA roles, states, and properties to ensure it is accessible to screen readers and other assistive technologies. It supports all the necessary keyboard interactions as recommended by the WAI-ARIA Authoring Practices, such as Arrow, Home, and End keys.
 
 Learn more about the component and its properties at the Aria Practices Guide [Accordion Pattern (Sections With Show/Hide Functionality)](https://www.w3.org/WAI/ARIA/apg/patterns/accordion/).
