@@ -1,0 +1,72 @@
+body {
+    font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    line-height:1.5;
+}
+
+label{
+    display: block;
+}
+
+.comboboxContainer {
+    position: relative;
+    width: 300px;
+}
+
+.comboboxInput {
+    width: 100%;
+    height: 35px;
+    padding: 5px 10px;
+    border: 1px solid #6a1b9a;
+    border-radius: 5px;
+    outline: none;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+.comboboxInput:focus-visible {
+    border-color: #9c27b0;
+    box-shadow: 0 0 0 3px #D1C4E9; /* this will create a visible focus ring around the input */
+}
+
+.comboboxListbox {
+    position: absolute;
+    width: 100%;
+    max-height: 200px;
+    margin-top: 5px;
+    overflow-y: auto;
+    border: 1px solid #6a1b9a;
+    border-radius: 5px;
+    background-color: #ffffff;
+    box-sizing: border-box;
+    z-index: 10; 
+    list-style-type: none;
+    padding-left: 0px;
+}
+
+.comboboxListbox li {
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.comboboxListbox li[aria-selected="true"] {
+    background-color: #6a1b9a;
+    color: #ffffff;
+}
+
+.comboboxListbox li:hover {
+    background-color: #9c27b0;
+    color: #ffffff;
+}
+
+.helpText {
+    margin-top: 10px;
+    color: #454545;
+    font-size: .875rem;
+    margin:0;
+    padding:0;
+}
+
+.selectedOption {
+    background-color: #6a1b9a;
+    color: #ffffff;
+}

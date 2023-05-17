@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import ariaAnnounce from './ariaAnnounce';
+import ariaAnnounce from '../../.storybook/utils/ariaAnnounce';
 import useKeyboardNavigation from './keyboardNavigation';
 import styles from './ReactMultiSelect.module.css';
 
