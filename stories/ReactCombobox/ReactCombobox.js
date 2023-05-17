@@ -8,17 +8,24 @@ const ReactCombobox = ({ autocomplete = "list" }) => {
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const [showOptions, setShowOptions] = useState(false);
   const [options, setOptions] = useState(townsAndCities);
+  const [resultCount, setResultCount] = useState(0);
   const inputRef = useRef(null);
 
   useEffect(() => {
     if (autocomplete === "list" || autocomplete === "both") {
-      setOptions(
-        townsAndCities.filter((city) =>
-          city.toLowerCase().startsWith(inputValue.toLowerCase())
-        )
+      const filteredOptions = townsAndCities.filter((city) =>
+        city.toLowerCase().startsWith(inputValue.toLowerCase())
       );
+      setOptions(filteredOptions);
+      setResultCount(filteredOptions.length);
     }
   }, [inputValue, autocomplete]);
+
+  useEffect(() => {
+    if (showOptions) {
+      ariaAnnounce(`${resultCount} of ${townsAndCities.length} results found`);
+    }
+  }, [showOptions, resultCount]);
 
   const handleOptionClick = (value) => {
     setInputValue(value);
@@ -30,7 +37,17 @@ const ReactCombobox = ({ autocomplete = "list" }) => {
   const handleInputChange = (event) => {
     const { value } = event.target;
     setInputValue(value);
-    setOptions(townsAndCities.filter(city => city.toLowerCase().startsWith(value.toLowerCase())));
+    if (value === "") {
+      setShowOptions(false);
+      setOptions(townsAndCities);
+      setResultCount(townsAndCities.length);
+      return;
+    }
+    const filteredOptions = townsAndCities.filter((city) =>
+      city.toLowerCase().startsWith(value.toLowerCase())
+    );
+    setOptions(filteredOptions);
+    setResultCount(filteredOptions.length);
     setShowOptions(true);
   };
 
@@ -47,7 +64,7 @@ const ReactCombobox = ({ autocomplete = "list" }) => {
       if (showOptions) {
         setShowOptions(false);
       } else {
-        setInputValue('');
+        setInputValue("");
       }
     }
   };
@@ -55,8 +72,16 @@ const ReactCombobox = ({ autocomplete = "list" }) => {
   return (
     <div className={styles["comboboxContainer"]}>
       <label id="combobox-label" htmlFor="combobox-input">
-        Your City or Town
+        Australian cities and towns
       </label>
+      <p id="help-text" className={styles["helpText"]}>
+        Help text
+      </p>
+      {showOptions && (
+        <p id="result-count" className={styles["resultCount"]}>
+          {`${resultCount} of ${townsAndCities.length} results found`}
+        </p>
+      )}
       <input
         id="combobox-input"
         className={styles["comboboxInput"]}
@@ -97,9 +122,6 @@ const ReactCombobox = ({ autocomplete = "list" }) => {
           ))}
         </ul>
       )}
-      <p id="help-text" className={styles["helpText"]}>
-        Add instruction here
-      </p>
     </div>
   );
 };

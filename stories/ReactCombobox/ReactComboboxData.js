@@ -3,7 +3,6 @@ export const townsAndCities = [
   "Albany (WA)",
   "Ayr (QLD)",
   "Brisbane (QLD)",
-  "Brisbane (QLD)",
   "Bundaberg (QLD)",
   "Cairns (QLD)",
   "Charters Towers (QLD)",

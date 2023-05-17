@@ -60,10 +60,19 @@ label{
 
 .helpText {
     margin-top: 10px;
-    color: #454545;
+    color: #696868;
     font-size: .875rem;
     margin:0;
     padding:0;
+}
+
+.resultCount{
+    margin-top: 10px;
+    color: #6a1b9a;;
+    font-size: .8rem;
+    margin:0;
+    padding:0;
+    margin-bottom:.5em;
 }
 
 .selectedOption {

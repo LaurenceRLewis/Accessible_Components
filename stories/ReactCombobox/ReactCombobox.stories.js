@@ -26,5 +26,5 @@ export default {
 
 const Template = (args) => <ReactCombobox {...args} />;
 
-export const ListDefault = Template.bind({}); // Name changed to "ListDefault"
-ListDefault.storyName = "List (Default)"; // This will change the display name in the Storybook UI
+export const Combobox = Template.bind({}); // Name changed
+Combobox.storyName = "Combobox"; // This will change the display name in the Storybook UI
