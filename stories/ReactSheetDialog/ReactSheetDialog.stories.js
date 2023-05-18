@@ -3,7 +3,7 @@ import ReactSheetDialog from './ReactSheetDialog';
 import reactSheetDialogDescription from './ReactSheetDialogDescription';
 
 export default {
-  title: 'Components/ReactSheetDialog',
+  title: 'Components/React Sheet and Traditional Modal Dialog',
   component: ReactSheetDialog,
   parameters: {
     docs: {

@@ -3,7 +3,7 @@ import { TabComponent } from "./TabComponent";
 import TabComponentDescription from './TabComponentDescription';
 
 export default {
-  title: "Components/ReactTabComponent",
+  title: "Components/React Tab Component",
   component: TabComponent,
   parameters: {
     docs: {

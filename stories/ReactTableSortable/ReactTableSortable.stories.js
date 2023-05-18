@@ -3,7 +3,7 @@ import ReactTableSortableControl from './ReactTableSortableControl';
 import reactTableSortableDescription from './ReactTableSortableDescription';
 
 export default {
-  title: 'Tables/ReactTableSortable',
+  title: 'Tables/React Table Sortable',
   component: ReactTableSortableControl,
   parameters: {
     docs: {

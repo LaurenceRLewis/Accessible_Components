@@ -3,7 +3,7 @@ import { AccordionTabComponent } from "./AccordionTabs";
 import reactTabsDescription from './ReactTabsDescription';
 
 export default {
-  title: "Components/ReactAccordionTabComponent",
+  title: "Components/React Tab to Accordion Component",
   component: AccordionTabComponent,
   parameters: {
     docs: {

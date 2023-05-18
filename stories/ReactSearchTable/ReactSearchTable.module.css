@@ -1,0 +1,105 @@
+body {
+  font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  line-height: 1.5;
+}
+
+.container {
+  margin: 1.25em;
+}
+
+.searchContainer {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.25em;
+}
+
+.label {
+  margin-right: 0.625em;
+  font-weight: bold;
+  display: block;
+}
+
+.input {
+  padding: 0.3125em;
+  font-size: 0.875rem;
+  border: 1px solid #ccc;
+}
+
+.button {
+  padding: 0.3125em 0.625em;
+  background-color: #800080;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-top-right-radius: 0.3125em;
+  border-bottom-right-radius: 0.3125em;
+}
+
+.clearButton {
+  margin-left: 0.25em;
+  border-radius: 0.3125em;
+  width: 3.7em;
+}
+
+.searchButton {
+  width: 4.7em;
+}
+
+.helpText {
+  font-size: 0.75rem;
+  color: #666;
+  margin-top: 0.3125em;
+}
+
+.resultText {
+  font-size: 0.875rem;
+  font-weight: bold;
+  margin-bottom: 0.625em;
+}
+
+.table.searchTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1.25em;
+}
+
+.table.searchTable th,
+.table.searchTable td {
+  border: 1px solid #ccc;
+  padding: 0.625em;
+}
+
+.table.searchTable th {
+  background-color: #800080;
+  color: #fff;
+}
+
+.search {
+  margin-bottom: 1.25em;
+}
+
+.searchInput {
+  width: 200px;
+  margin-right: 0.625em;
+}
+
+.searchHelpText {
+  font-size: 0.75rem;
+  color: #666;
+  margin-top: 0.3125em;
+}
+
+.input:focus-visible,
+.button:focus-visible,
+.clearButton:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5);
+}
+
+.button:focus-visible {
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5), 0 0 0 1px #fff;
+}
+
+.table:focus-visible {
+  outline: 2px solid rgba(0, 123, 255, 0.5);
+}

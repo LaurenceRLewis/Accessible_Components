@@ -3,7 +3,7 @@ import Accordion from "./ReactAccordion";
 import reactAccordionDescription from './ReactAccordionDescription';
 
 export default {
-  title: "Components/ReactAccordion",
+  title: "Components/React Accordion",
   component: Accordion,
   parameters: {
     docs: {
@@ -18,6 +18,12 @@ export default {
       control: "boolean",
       description: "Allow multiple accordions to be open at once",
       defaultValue: false,
+    },
+    chevronPosition: {
+      control: "radio",
+      options: ['left', 'right'],
+      defaultValue: 'right',
+      description: "Position of the chevron"
     },
     items: {
       table: { disable: true },
@@ -84,6 +90,7 @@ Cats.args = {
   ],
   groupName: "cats",
   multiExpand: false,
+  chevronPosition: 'right',
   NamedRegionContainer: "Contained in a named landmark region",
 };
 
@@ -108,5 +115,6 @@ Dogs.args = {
   ],
   groupName: "dogs",
   multiExpand: true,
+  chevronPosition: 'left',
   NamedRegionContainer: "Not contained in a named landmark region",
 };
