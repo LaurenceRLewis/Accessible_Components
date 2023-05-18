@@ -1,4 +1,4 @@
-export default `
+const description = `
 The \`ReactSheetDialog\` is a responsive UI component which displays as a dialog or as a sheet based on the \`dialogType\` prop.
 
 The component has two main parts:
@@ -13,6 +13,15 @@ When the sheet/dialog is closed, focus is returned to the button that opened the
 
 The component uses WAI-ARIA roles, states, and properties to ensure its accessibility.
 
+## Props and Methods
+
+| Prop name | Type | Description |
+| --------- | ---- | ----------- |
+| modal | boolean | Determines if the dialog is modal or non-modal. A modal dialog will prevent interaction with the rest of the page until it's closed. Default value is \`true\`. |
+| dialogType | string | Determines the type of dialog to be rendered. Available options are 'standard' and 'sheet'. Default value is 'sheet'. |
+| rootNode | object | React node from where the dialog will be mounted. This is important for the implementation of accessibility features, such as \`aria-hidden\`. |
+
+
 ## Usage
 
 \`\`\`jsx
@@ -22,3 +31,5 @@ import ReactSheetDialog from './ReactSheetDialog';
 <ReactSheetDialog modal={true} dialogType='sheet' />
 \`\`\`
 `;
+
+export default description;

@@ -35,4 +35,16 @@ const tabs = [
 
 <AccordionTabComponent tabs={tabs} viewportThreshold={400} triggerActivation="manual" />
 \`\`\`
+
+## Props and Methods
+
+| Prop name           | Type                                         | Description                                                                                              |
+|---------------------|----------------------------------------------|----------------------------------------------------------------------------------------------------------|
+| tabs                | Array of { id, title, content }             | An array of objects representing the tabs, each with an id, title, and content.                         |
+| viewportThreshold   | number                                       | The viewport width below which the component displays as an accordion and above as tabs (default: 400). |
+| triggerActivation   | "automated" or "manual" (default: "manual") | Determines if tab selection is done automatically upon focus or manually upon click/keyboard action.     |
+| textColor           | string (optional)                            | The color of the text in the tab/accordion header.                                                      |
+| tabBackground       | object (optional)                            | An object with two properties: default and selected, specifying the background colors for tabs.         |
+| tabPanelTabindex    | boolean (optional)                           | If true, adds a tabIndex attribute to TabPanel component.                                                |
+
 `;

@@ -16,6 +16,12 @@ The **ReactMultiSelect** component uses the \`ariaAnnounce\` function for access
 
 The \`ariaAnnounce\` function is a part of the open-source project [aria-announce](https://github.com/WhatSock/aria-announce), which provides utilities for managing live region announcements in web applications.
 
+## Props and Methods
+
+| Prop Name | Type | Description |
+| --------- | ---- | ----------- |
+| \`selectionModel\` | \`string\` | The selection model can be one of the following: <br/> **Default**: Allows selection and deselection on click. <br/> **Alternative**: Selection on click but deselection only when the selected item is clicked in the selected items list. |
+
 **Usage:**
 \`\`\`jsx
 import ariaAnnounce from './ariaAnnounce';
