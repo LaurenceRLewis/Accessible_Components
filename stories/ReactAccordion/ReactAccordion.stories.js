@@ -63,7 +63,7 @@ const Template = (args) => {
 };
 
 export const Cats = Template.bind({});
-export const Dogs = Template.bind({});
+//export const Dogs = Template.bind({});
 
 Cats.args = {
   items: [
@@ -94,27 +94,27 @@ Cats.args = {
   NamedRegionContainer: "Contained in a named landmark region",
 };
 
-Dogs.args = {
-  items: [
-    {
-      title: "Golden Retriever",
-      content: "Golden Retrievers are friendly, intelligent, and devoted.",
-    },
-    {
-      title: "Labrador Retriever",
-      content: "Labrador Retrievers are friendly, active, and outgoing.",
-    },
-    {
-      title: "German Shepherd",
-      content: "German Shepherds are confident, courageous, and smart.",
-    },
-    {
-      title: "Bulldog",
-      content: "Bulldogs are friendly, courageous, and calm.",
-    },
-  ],
-  groupName: "dogs",
-  multiExpand: true,
-  chevronPosition: 'left',
-  NamedRegionContainer: "Not contained in a named landmark region",
-};
+// Dogs.args = {
+//   items: [
+//     {
+//       title: "Golden Retriever",
+//       content: "Golden Retrievers are friendly, intelligent, and devoted.",
+//     },
+//     {
+//       title: "Labrador Retriever",
+//       content: "Labrador Retrievers are friendly, active, and outgoing.",
+//     },
+//     {
+//       title: "German Shepherd",
+//       content: "German Shepherds are confident, courageous, and smart.",
+//     },
+//     {
+//       title: "Bulldog",
+//       content: "Bulldogs are friendly, courageous, and calm.",
+//     },
+//   ],
+//   groupName: "dogs",
+//   multiExpand: true,
+//   chevronPosition: 'left',
+//   NamedRegionContainer: "Not contained in a named landmark region",
+// };
