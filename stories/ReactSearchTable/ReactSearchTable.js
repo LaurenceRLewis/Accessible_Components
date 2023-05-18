@@ -49,7 +49,6 @@ const ReactSearchTable = () => {
           onChange={handleSearchInputChange}
           onKeyPress={handleKeyPress}
           role="searchbox"
-          aria-label="Search table"
           aria-describedby="helpText"
         />
         <button className={`${styles.button} ${styles.searchButton}`} onClick={handleSearch}>
