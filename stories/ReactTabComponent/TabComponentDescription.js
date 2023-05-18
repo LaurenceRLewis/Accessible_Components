@@ -1,4 +1,4 @@
-export default `
+const description = `
 The \`TabComponent\` is a UI component that allows users to switch between different sections of content. Each tab is associated with a content section, and selecting a tab brings its content to the forefront, hiding the content of other tabs.
 
 The component has two main parts:
@@ -12,6 +12,14 @@ The component supports keyboard navigation between tabs using the Arrow, Home, a
 The component's selection behavior (automatic or manual) can be configured via the \`triggerActivation\` prop. In automatic mode, moving keyboard focus to a tab will automatically select it. In manual mode, a tab must be clicked or selected with the Enter or Space key to be activated.
 
 The component uses WAI-ARIA roles, states, and properties to ensure its accessibility.
+
+## Props and Methods
+
+| Prop name | Type | Description |
+| :--- | :--- | :--- |
+| \`tabs\` | array of objects | An array of objects where each object represents a tab. Each object should have an \`id\`, \`title\`, and \`content\`. |
+| \`tabPanelTabindex\` | boolean | If set to true, the \`tabindex\` attribute will be added to each tab panel. |
+| \`triggerActivation\` | string | Determines the selection behavior of the tabs. If set to "manual", a tab must be clicked or selected with the Enter or Space key to be activated. If set to "automated", moving keyboard focus to a tab will automatically select it. |
 
 ## Usage
 
@@ -36,3 +44,5 @@ const tabs = [
 <TabComponent tabs={tabs} tabPanelTabindex={true} triggerActivation="manual" />
 \`\`\`
 `;
+
+export default description;
