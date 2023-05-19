@@ -1,20 +1,20 @@
-.multi-select-container {
+.multiSelectContainer {
   width: 300px;
   font-family: Arial, sans-serif;
 }
 
-.multi-select-container h2 {
+.multiSelectContainer h2 {
   color: #6200ee;
   margin-bottom: 10px;
 }
 
-.selected-options {
+.selectedOptions {
   display: flex;
   flex-wrap: wrap;
   margin-bottom: 10px;
 }
 
-.selected-options button {
+.listboxToggleButton {
   background-color: #6200ee;
   color: #fff;
   margin: 5px;
@@ -23,13 +23,28 @@
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  width:auto;
 }
 
-.selected-options button:focus-visible {
+.selectedOptionButton {
+  background-color: #9d2aa8;
+  color: #fff;
+  margin: 5px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width:auto;
+}
+
+.listboxToggleButton:focus-visible,
+.selectedOptionButton:focus-visible {
   outline: 3px solid #03dac5;
 }
 
-.selected-options button:hover {
+.listboxToggleButton:hover,
+.selectedOptionButton:hover {
   background-color: #3700b3;
 }
 
@@ -42,21 +57,21 @@
   overflow-y: auto;
 }
 
-.listbox-option {
+.listboxOption {
   padding: 10px;
   cursor: pointer;
 }
 
-.listbox-option:hover {
+.listboxOption:hover {
   background-color: #3700b3;
   color: #fff;
 }
 
-.listbox-option:focus-visible {
+.listboxOption:focus-visible {
   outline: 3px solid #03dac5;
 }
 
-.listbox-option.selected {
+.listboxOption.selected {
   background-color: #6200ee;
   color: #fff;
 }

@@ -47,12 +47,13 @@ const ReactMultiSelect = ({ selectionModel }) => {
   };
 
   return (
-    <div className={styles['multi-select-container']}>
+    <div className={styles['multiSelectContainer']}>
   <h2>Your Ingredients</h2>
-  <div className={styles['selected-options']}>
+  <div className={styles['selectedOptions']}>
       {selectedOptions.map((option, index) => (
   <button 
-    key={index} 
+    key={index}
+    className={styles['selectedOptionButton']}
     onClick={() => handleDismissOption(option)}
     aria-label={`Remove ${option}`}
   >
@@ -60,7 +61,10 @@ const ReactMultiSelect = ({ selectionModel }) => {
   </button>
 ))}
       </div>
-      <button onClick={() => setListboxOpen(!isListboxOpen)}>Toggle Listbox</button>
+      <button 
+      className={styles['listboxToggleButton']} 
+      onClick={() => setListboxOpen(!isListboxOpen)}>Toggle Listbox
+      </button>
       {isListboxOpen && (
         <ul
           ref={listboxRef}
@@ -75,7 +79,7 @@ const ReactMultiSelect = ({ selectionModel }) => {
               key={index}
               role="option"
               aria-selected={selectedOptions.includes(option)}
-              className={classNames(styles['listbox-option'], { [styles['selected']]: selectedOptions.includes(option) })}
+              className={classNames(styles['listboxOption'], { [styles['selected']]: selectedOptions.includes(option) })}
               onClick={() => handleSelectOption(option)}
               tabIndex="-1" // Ensure list items can receive focus
             >
