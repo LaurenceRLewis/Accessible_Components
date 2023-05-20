@@ -3,8 +3,8 @@ import React, { useCallback } from 'react';
 import styles from './HtmlSlider.module.css';
 
 const HtmlSlider = ({ min, max, step, onChange }) => {
-  const [value, setValue] = React.useState((min + max) / 2);
-
+  //const [value, setValue] = React.useState((min + max) / 2);
+  const [value, setValue] = React.useState(min);
   const handleChange = useCallback((event) => {
     const newValue = event.target.value;
     setValue(newValue);

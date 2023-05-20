@@ -3,6 +3,7 @@ import styles from "./AriaSlider.module.css";
 
 const AriaSlider = ({ min, max, step, onChange }) => {
   const [value, setValue] = useState(min);
+  const [isDragging, setIsDragging] = useState(false);
   const sliderRef = useRef(null);
 
   useEffect(() => {
@@ -46,13 +47,59 @@ const AriaSlider = ({ min, max, step, onChange }) => {
     [value, min, max, step, onChange]
   );
 
+  const handleMouseInteraction = useCallback(
+    (event) => {
+      if (event.buttons !== 1) return; // Only handle mouse interaction when left mouse button is pressed
+
+      const sliderRect = sliderRef.current.getBoundingClientRect();
+      const sliderWidth = sliderRect.width;
+      const clickPosition = event.clientX - sliderRect.left;
+      const clickPercentage = clickPosition / sliderWidth;
+      const newValue = min + clickPercentage * (max - min);
+
+      setValue(newValue);
+      onChange && onChange(newValue);
+    },
+    [min, max, onChange]
+  );
+
+  const handleMouseDown = useCallback(() => {
+    setIsDragging(true);
+  }, []);
+
+  const handleMouseUp = useCallback(() => {
+    setIsDragging(false);
+  }, []);
+
+  useEffect(() => {
+    const handleMouseMove = (event) => {
+      if (!isDragging) return;
+      handleMouseInteraction(event);
+    };
+
+    const handleMouseLeave = () => {
+      setIsDragging(false);
+    };
+
+    document.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("mouseup", handleMouseUp);
+    document.addEventListener("mouseleave", handleMouseLeave);
+
+    return () => {
+      document.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("mouseup", handleMouseUp);
+      document.removeEventListener("mouseleave", handleMouseLeave);
+    };
+  }, [isDragging, handleMouseInteraction, handleMouseUp]);
+
   return (
     <div>
       <h2 className={styles.sliderHeading}>ARIA Slider</h2>
       <p className={styles.sliderParagraph}>
         The ARIA slider allows you to select a value within a range using the
-        keyboard or mouse. You can define the range using the 'min' and 'max'
-        attributes, and the 'step' attribute sets the increment between values.
+        keyboard, mouse, or touch. You can define the range using the 'min' and
+        'max' attributes, and the 'step' attribute sets the increment between
+        values.
       </p>
       <div
         role="slider"
@@ -62,6 +109,7 @@ const AriaSlider = ({ min, max, step, onChange }) => {
         aria-valuemax={max}
         aria-valuenow={value}
         onKeyDown={handleKeyDown}
+        onMouseDown={handleMouseDown}
         className={styles.ariaSlider}
         aria-label="ARIA slider"
       >
@@ -78,7 +126,7 @@ const AriaSlider = ({ min, max, step, onChange }) => {
         <div className={styles.rangeContainer}>
           <div className={styles.rangeNumber}>{min}</div>
           <div aria-hidden="true" className={styles.nowValue}>
-            {value}
+            {Math.floor(value)}
           </div>
           <div className={styles.rangeNumber}>{max}</div>
         </div>
