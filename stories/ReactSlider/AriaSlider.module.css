@@ -1,0 +1,57 @@
+.ariaSlider {
+  position: relative;
+  width: 100%;
+}
+
+.ariaSliderTrack {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 4px;
+  width: 100%;
+  background-color: #8a63d2;
+  outline: none;
+}
+
+.ariaSliderThumb {
+  position: absolute;
+  height: 48px;
+  width: 48px;
+  background-color: #6B52AE;
+  border-radius: 50%;
+  top: -22px;
+  transition: box-shadow 0.3s ease-in-out;
+  outline: none;
+  transform: translateX(-50%);
+}
+
+.ariaSlider:focus .ariaSliderThumb {
+  box-shadow: 0 0 0 2px white, 0 0 0 4px rgba(0, 0, 0, 0.5);
+  border: 2px solid white;
+}
+
+.rangeContainer {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 40px;
+  outline: none;
+}
+
+.rangeNumber {
+  color: #8a63d2;
+  position: relative;
+  top: 40px;
+}
+
+.nowValue {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  width: 100px;
+  color: #8a63d2;
+  font-weight: bold;
+  top: 40px;
+}
