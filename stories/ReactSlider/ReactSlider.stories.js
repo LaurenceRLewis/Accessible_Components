@@ -2,10 +2,19 @@
 import React from 'react';
 import HtmlSlider from './HtmlSlider';
 import AriaSlider from './AriaSlider';
+import ReactSliderDescription from './ReactSliderDescription';
 
 export default {
-  title: 'Work in progress/Slider',
+  title: 'Work in progress/React Slider',
   component: HtmlSlider,
+  parameters: {
+    docs: {
+      description: {
+        component: ReactSliderDescription,
+      },
+    },
+    docsOnly: true,
+  },
   argTypes: {
     isAriaSlider: {
       control: { type: "select" },
