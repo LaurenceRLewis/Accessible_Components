@@ -63,6 +63,20 @@ const AriaSlider = ({ min, max, step, onChange }) => {
     [min, max, onChange]
   );
 
+  const handleTouchInteraction = useCallback(
+    (event) => {
+      const sliderRect = sliderRef.current.getBoundingClientRect();
+      const sliderWidth = sliderRect.width;
+      const touchPosition = event.touches[0].clientX - sliderRect.left;
+      const touchPercentage = touchPosition / sliderWidth;
+      const newValue = min + touchPercentage * (max - min);
+
+      setValue(newValue);
+      onChange && onChange(newValue);
+    },
+    [min, max, onChange]
+  );
+
   const handleMouseDown = useCallback(() => {
     setIsDragging(true);
   }, []);
@@ -92,6 +106,26 @@ const AriaSlider = ({ min, max, step, onChange }) => {
     };
   }, [isDragging, handleMouseInteraction, handleMouseUp]);
 
+  useEffect(() => {
+    const handleTouchMove = (event) => {
+      if (event.touches.length !== 1) return; // Only handle touch interaction with a single touch
+
+      handleTouchInteraction(event);
+    };
+
+    const handleTouchEnd = () => {
+      setIsDragging(false);
+    };
+
+    sliderRef.current.addEventListener("touchmove", handleTouchMove);
+    sliderRef.current.addEventListener("touchend", handleTouchEnd);
+
+    return () => {
+      sliderRef.current.removeEventListener("touchmove", handleTouchMove);
+      sliderRef.current.removeEventListener("touchend", handleTouchEnd);
+    };
+  }, [handleTouchInteraction]);
+
   return (
     <div>
       <h2 className={styles.sliderHeading}>ARIA Slider</h2>
@@ -110,6 +144,7 @@ const AriaSlider = ({ min, max, step, onChange }) => {
         aria-valuenow={value}
         onKeyDown={handleKeyDown}
         onMouseDown={handleMouseDown}
+        onTouchStart={handleMouseDown}
         className={styles.ariaSlider}
         aria-label="ARIA slider"
       >
