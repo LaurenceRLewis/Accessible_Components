@@ -18,7 +18,7 @@ The React Slider component uses the \`ariaAnnounce\` function for accessibility.
 
 The \`ariaAnnounce\` function is a part of the open-source project [aria-announce](https://github.com/WhatSock/aria-announce), which provides utilities for managing live region announcements in web applications.
 
-## Props and Methods
+## Props
 
 | Prop Name         | Type       | Description                                                     |
 | ----------------- | ---------- | --------------------------------------------------------------- |
