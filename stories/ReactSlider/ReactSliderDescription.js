@@ -4,19 +4,32 @@ const description = `
 React Slider is a custom slider component that allows users to select a value within a specified range. It provides a user-friendly interface for controlling numeric input.
 
 ## Features
-- A dropdown list with multi-select options.
-- Keyboard support for accessibility.
-- Support for different selection models.
+
+- Support for selecting a value within a range.
+- Customizable minimum and maximum values.
+- Incremental step size for fine-grained control.
+- Optional default value for initial selection.
+- Callback function for handling value changes.
 
 ## Selection Models
-The selection model can be one of the following:
+
+The React Slider component supports different selection models, which determine how selection and deselection behave:
+
 - **Default**: Allows selection and deselection on click.
-- **Alternative**: Selection on click but deselection only when the selected item is clicked in the selected items list.
+- **Alternative**: Allows selection on click, but deselection only occurs when the selected item is clicked again.
 
-## Accessibility
-The React Slider component uses the \`ariaAnnounce\` function for accessibility. This function creates an announcement that will be read by screen readers, helping to ensure that important updates or notifications are communicated to all users, regardless of their accessibility needs.
+Keyboard Accessibility
 
-The \`ariaAnnounce\` function is a part of the open-source project [aria-announce](https://github.com/WhatSock/aria-announce), which provides utilities for managing live region announcements in web applications.
+The React Slider component ensures keyboard accessibility for easy control and interaction. Users can navigate and adjust the slider value using the following keyboard controls:
+
+- **Left Arrow**: Decreases the value by one step.
+- **Right Arrow**: Increases the value by one step.
+- **Home**: Sets the value to the minimum.
+- **End**: Sets the value to the maximum.
+- **Page Up**: Increases the value by a larger increment.
+- **Page Down**: Decreases the value by a larger increment.
+
+The React Slider component provides a user-friendly and accessible way to select values within a specified range.
 
 ## Props
 
