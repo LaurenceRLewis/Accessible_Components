@@ -16,7 +16,7 @@ export default {
     docsOnly: true,
   },
   argTypes: {
-    isAriaSlider: {
+    SliderModel: {
       control: { type: "select" },
       options: ["HTML", "ARIA"],
       defaultValue: 'HTML',
@@ -46,7 +46,7 @@ export default {
 };
 
 const Template = (args) => {
-  return args.isAriaSlider === 'ARIA' 
+  return args.SliderModel === 'ARIA' 
   ? <AriaSlider min={0} max={10} step={1} {...args} /> 
   : <HtmlSlider min={0} max={10} step={1} value={0} {...args} />
 };

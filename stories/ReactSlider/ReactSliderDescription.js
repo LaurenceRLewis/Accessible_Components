@@ -1,6 +1,4 @@
 const description = `
-**React Slider**
-
 React Slider is a custom slider component that allows users to select a value within a specified range. It provides a user-friendly interface for controlling numeric input.
 
 ## Features
@@ -11,14 +9,7 @@ React Slider is a custom slider component that allows users to select a value wi
 - Optional default value for initial selection.
 - Callback function for handling value changes.
 
-## Selection Models
-
-The React Slider component supports different selection models, which determine how selection and deselection behave:
-
-- **Default**: Allows selection and deselection on click.
-- **Alternative**: Allows selection on click, but deselection only occurs when the selected item is clicked again.
-
-Keyboard Accessibility
+## Keyboard Accessibility
 
 The React Slider component ensures keyboard accessibility for easy control and interaction. Users can navigate and adjust the slider value using the following keyboard controls:
 
@@ -40,6 +31,29 @@ The React Slider component provides a user-friendly and accessible way to select
 | \`step\`          | \`number\` | The increment value for each step of the slider.                 |
 | \`defaultValue\`  | \`number\` | The default value of the slider.                                 |
 | \`onChange\`      | \`function\` | A callback function triggered when the slider value changes.     |
+| \`SliderModel\`  | \`select\` | Specifies whether to use the ARIA or HTML version of the slider.     |
+
+## ARIA Slider Props
+
+The ARIA Slider component accepts the following additional props:
+
+| Prop Name         | Type       | Description                                                     |
+| ----------------- | ---------- | --------------------------------------------------------------- |
+| \`ariaMin\`       | \`number\` | The minimum allowed value for the ARIA slider.                   |
+| \`ariaMax\`       | \`number\` | The maximum allowed value for the ARIA slider.                   |
+| \`ariaStep\`      | \`number\` | The increment value for each step of the ARIA slider.            |
+| \`ariaDefaultValue\`  | \`number\` | The default value of the ARIA slider.                            |
+
+## HTML Slider Props
+
+The HTML Slider component accepts the following additional props:
+
+| Prop Name         | Type       | Description                                                     |
+| ----------------- | ---------- | --------------------------------------------------------------- |
+| \`htmlMin\`       | \`number\` | The minimum allowed value for the HTML slider.                   |
+| \`htmlMax\`       | \`number\` | The maximum allowed value for the HTML slider.                   |
+| \`htmlStep\`      | \`number\` | The increment value for each step of the HTML slider.            |
+| \`htmlDefaultValue\`  | \`number\` | The default value of the HTML slider.                            |
 
 ## Methods
 
