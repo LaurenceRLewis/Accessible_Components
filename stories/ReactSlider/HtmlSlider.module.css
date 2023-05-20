@@ -1,3 +1,8 @@
+body {
+  font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  line-height:1.5;
+}
+
 .sliderContainer {
   position: relative;
 }
@@ -39,7 +44,7 @@
   transform: translateX(-50%);
   text-align: center;
   width: 100px;
-  color: #8a63d2;
+  color: #262626;
   font-weight: bold;
 }
 
@@ -51,7 +56,7 @@
 }
 
 .rangeNumber {
-  color: #8a63d2;
+  color: #262626;
 }
 
 .rangeNumber:first-child {

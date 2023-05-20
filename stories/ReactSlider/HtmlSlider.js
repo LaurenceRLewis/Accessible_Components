@@ -13,12 +13,13 @@ const HtmlSlider = ({ min, max, step, onChange }) => {
 
   return (
     <div className={styles.sliderContainer}>
-      <h2 className={styles.sliderHeading}>HTML Slider</h2>
+      <h2 id="sliderName44784" className={styles.sliderHeading}>HTML Slider</h2>
       <p className={styles.sliderParagraph}>
         The HTML input of type range lets you select a number within a range. You can define the range using the 'min' and 'max' attributes. The 'step' attribute allows you to define the increment between values.
       </p>
       <input
         type="range"
+        aria-labelledby="sliderName44784" 
         min={min}
         max={max}
         step={step}
