@@ -1,34 +1,40 @@
 const description = `
-**ReactMultiSelect** is a versatile component for multi-selection scenarios. 
+ReactMultiSelect is a custom multi-select component that provides users with a dropdown list of options. Users can select one or more options, and the selected options are displayed at the top of the dropdown. It supports keyboard navigation for better accessibility and a customizable selection model.
 
 ## Features
-- A dropdown list with multi-select options.
-- Keyboard support for accessibility.
-- Support for different selection models.
 
-## Selection Models
-The selection model can be one of the following:
-- **Default**: Allows selection and deselection on click.
-- **Alternative**: Selection on click but deselection only when the selected item is clicked in the selected items list.
+- Multiple option selection support.
+- Dropdown list for displaying available options.
+- Selection model can be default or alternative.
+- Utilizes keyboard navigation for easy control and interaction.
+- Utilizes ARIA live regions to announce changes to the user.
 
-## Accessibility
-The **ReactMultiSelect** component uses the \`ariaAnnounce\` function for accessibility. This function creates an announcement that will be read by screen readers, helping to ensure that important updates or notifications are communicated to all users, regardless of their accessibility needs.
+## Keyboard Accessibility
 
-The \`ariaAnnounce\` function is a part of the open-source project [aria-announce](https://github.com/WhatSock/aria-announce), which provides utilities for managing live region announcements in web applications.
+ReactMultiSelect component ensures keyboard accessibility for easy control and interaction. Users can navigate and interact with the list of options using keyboard controls.
 
-## Props and Methods
+## ARIA Announcements
 
-| Prop Name | Type | Description |
-| --------- | ---- | ----------- |
-| \`selectionModel\` | \`string\` | The selection model can be one of the following: <br/> **Default**: Allows selection and deselection on click. <br/> **Alternative**: Selection on click but deselection only when the selected item is clicked in the selected items list. |
+ReactMultiSelect uses an \`ariaAnnounce\` function to create an ARIA live region. This is an area of the page specifically designed to be monitored by assistive technologies. When changes occur in this area, those updates are read out by screen reader software. This ensures that users who can't or aren't looking at the screen can still receive important updates.
 
-**Usage:**
-\`\`\`jsx
-import ariaAnnounce from './ariaAnnounce';
+In the case of ReactMultiSelect, \`ariaAnnounce\` is used to communicate the selection or dismissal of an option. It dynamically generates a hidden live region, injects it into the DOM, updates it with the relevant message, and then removes it after a period of time.
 
-// Somewhere in your code...
-ariaAnnounce('This is an important announcement for screen readers.');
-\`\`\`
+## Props
+
+| Prop Name          | Type       | Description                                                 |
+| ------------------ | ---------- | ----------------------------------------------------------- |
+| \`selectionModel\` | \`string\` | Choose the selection model for the listbox. Can be 'default' or 'alternative'. |
+
+## Methods
+
+| Method Name            | Description                                                    |
+| ---------------------- | -------------------------------------------------------------- |
+| \`handleSelectOption\` | A method that handles the selection of an option.              |
+| \`handleDismissOption\`| A method that handles the dismissal of a selected option.      |
+| \`handleKeyDown\`      | A method that handles the keydown event in the list of options.|
+
+The ReactMultiSelect component ensures a seamless user experience for both mouse and keyboard interactions, making it accessible and easy to use.
+
 `;
 
 export default description;

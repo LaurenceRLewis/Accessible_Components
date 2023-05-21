@@ -1,3 +1,9 @@
+body {
+  font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto,
+    Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  line-height: 1.5;
+}
+
 .multiSelectContainer {
   width: 300px;
   font-family: Arial, sans-serif;

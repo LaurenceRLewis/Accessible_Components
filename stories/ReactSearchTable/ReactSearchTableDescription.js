@@ -1,29 +1,37 @@
-export default `
-The \`ReactSearchTable\` component is a searchable table that allows users to filter the results based on an ID.
+const description = `
+ReactSearchTable is a component that displays a table of data and includes a search box allowing users to filter the table based on their search query. The table search widget is robust and includes features such as keyboard accessibility and ARIA announcements for improved usability and accessibility.
 
-Functionality:
-- Users can enter a part or all of an ID in the search input.
-- Pressing the "Search" button will update the table to show only the results related to the search request.
-- The table consists of 4 columns: Given name, Last name, Mobile number, and ID.
-- The table initially displays 20 rows of dummy data.
-- The search is case-sensitive and matches the entered text with the ID column.
+## Features
 
-Accessibility:
-- The search input has a proper label associated with it.
-- The search input has the role "searchbox" for assistive technologies.
-- The number of results found is announced to screen reader users using the \`ariaAnnounce\` function.
+- Filtering of table data based on user's search query.
+- Showing count of search results in relation to total data.
+- Clear search function that resets the search field and shows all data.
+- ARIA live region announcement for search results.
+- Keyboard accessibility for activating search and clear functions.
 
-Usage:
-\`\`\`jsx
-import React from 'react';
-import ReactSearchTable from './ReactSearchTable';
+## Keyboard Accessibility
 
-const App = () => (
-  <div>
-    <ReactSearchTable />
-  </div>
-);
+ReactSearchTable component provides keyboard accessibility. The search field listens for 'Enter' keypress events and activates the search function when the 'Enter' key is pressed.
 
-export default App;
-\`\`\`
+## ARIA Announcements
+
+ReactSearchTable uses the \`ariaAnnounce\` function to create an ARIA live region. This live region announces the count of search results to the user after each search or when the search is cleared. This feature is particularly useful for screen reader users who would otherwise have no way of knowing the result count without navigating to the part of the page where it is displayed.
+
+## Props
+
+ReactSearchTable does not accept any props. It uses internal state for handling the search input and search results.
+
+## Methods
+
+| Method Name            | Description                                                    |
+| ---------------------- | -------------------------------------------------------------- |
+| \`handleSearch\`       | A method that handles the search function.                     |
+| \`handleClear\`        | A method that handles the clearing of the search field.        |
+| \`handleKeyPress\`     | A method that listens for 'Enter' keypress in the search field.|
+| \`handleSearchInputChange\` | A method that updates the search input state.              |
+
+ReactSearchTable provides a seamless and accessible user experience for both mouse and keyboard interactions, making it an essential widget for data-heavy applications.
+
 `;
+
+export default description;

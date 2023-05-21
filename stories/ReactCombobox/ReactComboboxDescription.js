@@ -1,45 +1,38 @@
-export default `
-The \`AccordionTabComponent\` is a responsive UI component which displays as an accordion in smaller viewports and as tabs in larger viewports. This adaptive behavior is controlled by the \`viewportThreshold\` prop.
+const description = `
+The ReactCombobox is an implementation of the ARIA Combobox Widget. It provides users with a dropdown list of options that can be filtered by typing into the text field.
 
-Each tab/accordion item has two main parts:
+## Features
 
-- The header (either a Tab or AccordionButton), which displays the title. Interacting with the header (mouse click or keyboard controls) will change the selected tab.
+- Provides Autocomplete functionality.
+- Supports keyboard navigation for easy control and interaction.
+- Announces changes to screen readers using ARIA properties.
+- Includes help text and result count for better user experience.
+- Uses a pre-defined list of Australian towns and cities for autocomplete suggestions.
 
-- The content (either a TabPanel or AccordionPanel), which is shown when its corresponding header is selected.
+## Keyboard Accessibility
 
-In the tab view, the component supports keyboard navigation between tabs using the Arrow, Home, and End keys, in line with WAI-ARIA recommendations. 
+Users can navigate and interact with the ReactCombobox using the following keyboard controls:
 
-The component's selection behavior (automatic or manual) can be configured via the \`triggerActivation\` prop. In automatic mode, moving keyboard focus to a tab will automatically select it. In manual mode, a tab must be clicked or selected with the Enter or Space key to be activated.
+- **ArrowDown/ArrowUp**: Moves focus to the next/previous item in the options list.
+- **Enter**: Selects the focused option and closes the options list.
+- **Escape**: Closes the options list if it's open, and clears the input if the list is closed.
 
-The component uses WAI-ARIA roles, states, and properties to ensure its accessibility. 
+## Props
 
-## Props and Methods
+| Prop Name     | Type      | Description                                        |
+| ------------- | --------- | -------------------------------------------------- |
+| \`autocomplete\` | \`string\`  | The autocomplete method. Can be 'list' or 'both'. |
 
-| Prop name          | Type   | Description                                                  |
-|--------------------|--------|--------------------------------------------------------------|
-| viewportThreshold  | number | The width threshold in pixels for changing between accordion and tab views. |
-| triggerActivation  | string | Determines whether the component activates tabs automatically or manually when focused. Accepts "automatic" or "manual". |
+## Methods
 
-## Usage
+| Method Name         | Description                                                        |
+| ------------------- | ------------------------------------------------------------------ |
+| \`handleOptionClick\` | Handles the click event on an option, setting it as the input value and closing the options list. |
+| \`handleInputChange\` | Handles changes to the input value, updating the options list.     |
+| \`handleKeyPress\` | Handles key events for navigation and selection within the options list. |
 
-\`\`\`jsx
-import React from 'react';
-import { AccordionTabComponent } from './AccordionTabs';
+This widget offers a user-friendly and accessible way to add a combobox with autocomplete functionality to your applications.
 
-const tabs = [
-  {
-    id: 'tab1',
-    title: 'Tab 1',
-    content: 'Content for tab 1',
-  },
-  {
-    id: 'tab2',
-    title: 'Tab 2',
-    content: 'Content for tab 2',
-  },
-  // More tabs...
-];
-
-<AccordionTabComponent tabs={tabs} viewportThreshold={400} triggerActivation="manual" />
-\`\`\`
 `;
+
+export default description;

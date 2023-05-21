@@ -1,48 +1,42 @@
 const description = `
-The \`TabComponent\` is a UI component that allows users to switch between different sections of content. Each tab is associated with a content section, and selecting a tab brings its content to the forefront, hiding the content of other tabs.
+TabComponent is a versatile and accessible React component that enables the creation of tabbed interfaces. It allows users to switch between different content sections by selecting the corresponding tabs. The TabComponent provides support for keyboard navigation, ARIA attributes, and customizable styles.
 
-The component has two main parts:
+## Features
 
-- The tab list, which includes all the tabs. When a user interacts with a tab, either through a mouse click or keyboard controls, it becomes the selected tab.
+- Tabbed interface for organizing and navigating content.
+- Keyboard navigation for easy accessibility.
+- Support for automated or manual tab activation.
+- Customizable styles for text color and tab backgrounds.
 
-- The tab panel, which displays the content for the selected tab. The content can be any type of HTML content.
+## Keyboard Navigation
 
-The component supports keyboard navigation between tabs using the Arrow, Home, and End keys, in line with WAI-ARIA recommendations.
+TabComponent supports keyboard navigation for enhanced accessibility. Users can use the arrow keys (Left, Right), Home, and End keys to navigate between tabs. Pressing Enter or Space can activate a tab when using manual activation mode.
 
-The component's selection behavior (automatic or manual) can be configured via the \`triggerActivation\` prop. In automatic mode, moving keyboard focus to a tab will automatically select it. In manual mode, a tab must be clicked or selected with the Enter or Space key to be activated.
+## ARIA Usage
 
-The component uses WAI-ARIA roles, states, and properties to ensure its accessibility.
+The TabComponent implements ARIA attributes to improve accessibility. Each tab has the 'tab' role and is associated with a corresponding tab panel using 'aria-controls' and 'aria-labelledby' attributes. The currently selected tab is indicated using the 'aria-selected' attribute. The tab panel is marked with the 'tabpanel' role and is hidden when not selected.
 
-## Props and Methods
+## Props
 
-| Prop name | Type | Description |
-| :--- | :--- | :--- |
-| \`tabs\` | array of objects | An array of objects where each object represents a tab. Each object should have an \`id\`, \`title\`, and \`content\`. |
-| \`tabPanelTabindex\` | boolean | If set to true, the \`tabindex\` attribute will be added to each tab panel. |
-| \`triggerActivation\` | string | Determines the selection behavior of the tabs. If set to "manual", a tab must be clicked or selected with the Enter or Space key to be activated. If set to "automated", moving keyboard focus to a tab will automatically select it. |
+| Prop Name              | Type      | Description                                                    |
+| ---------------------- | --------- | -------------------------------------------------------------- |
+| \`tabs\`               | array     | An array of objects representing the tabs and their content.    |
+| \`tabPanelTabindex\`   | boolean   | Determines whether the tab panel should have a tabindex of 0.  |
+| \`triggerActivation\`  | string    | Determines how tab activation is triggered ('automated' or 'manual'). |
+| \`textColor\`          | string    | The color of the tab text.                                     |
+| \`tabBackground\`      | object    | An object with 'default' and 'selected' properties for tab backgrounds. |
 
-## Usage
+## Tab Object
 
-\`\`\`jsx
-import React from 'react';
-import { TabComponent } from './TabComponent';
+Each tab object in the \`tabs\` array should have the following properties:
 
-const tabs = [
-  {
-    id: 'tab1',
-    title: 'Tab 1',
-    content: 'Content for tab 1',
-  },
-  {
-    id: 'tab2',
-    title: 'Tab 2',
-    content: 'Content for tab 2',
-  },
-  // More tabs...
-];
+| Property   | Type   | Description                                              |
+| ---------- | ------ | -------------------------------------------------------- |
+| \`id\`     | string | The unique ID of the tab.                                |
+| \`title\`  | string | The title or label of the tab.                           |
+| \`content\`| node   | The content to be displayed when the tab is selected.    |
 
-<TabComponent tabs={tabs} tabPanelTabindex={true} triggerActivation="manual" />
-\`\`\`
+TabComponent provides a powerful and accessible solution for implementing tabbed interfaces in React applications.
 `;
 
 export default description;

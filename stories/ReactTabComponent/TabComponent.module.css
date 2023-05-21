@@ -1,7 +1,8 @@
 body {
-    font-family: Arial, sans-serif;
-    line-height: 1.5;
-  }
+  font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto,
+    Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  line-height: 1.5;
+}
   
   .tab-container {
     max-width: 800px;

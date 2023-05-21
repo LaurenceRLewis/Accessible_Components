@@ -5,7 +5,7 @@ import AriaSlider from './AriaSlider';
 import ReactSliderDescription from './ReactSliderDescription';
 
 export default {
-  title: 'Work in progress/React Slider',
+  title: 'Components/React Slider',
   component: HtmlSlider,
   parameters: {
     docs: {

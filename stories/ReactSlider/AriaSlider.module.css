@@ -1,6 +1,7 @@
 body {
-  font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-  line-height:1.5;
+  font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto,
+    Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  line-height: 1.5;
 }
 
 .ariaSlider {
@@ -30,7 +31,11 @@ body {
   transform: translateX(-50%);
 }
 
-.ariaSlider:focus .ariaSliderThumb {
+.ariaSlider:focus-visible {
+  outline: none;
+}
+
+.ariaSlider:focus-visible .ariaSliderThumb {
   box-shadow: 0 0 0 2px white, 0 0 0 4px rgba(0, 0, 0, 0.5);
   border: 2px solid white;
 }

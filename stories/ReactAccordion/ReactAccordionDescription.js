@@ -1,99 +1,44 @@
-export default `
-The \`ReactAccordion\` is a fully accessible component that provides a way to condense content in a structured manner. It allows users to show and hide sections of content.
+const description = `
+React Accordion is a custom accordion component that allows users to expand and collapse content sections. It provides a user-friendly interface for toggling the visibility of the content.
 
-Each Accordion item consists of two parts: 
+## Features
 
-- The accordion header, which includes a title and an icon indicating the expansion state. When a user interacts with the header, either through a mouse click or keyboard controls, it toggles the expansion state. 
+- Support for multiple accordion items.
+- Option to allow multiple items to be expanded at once.
+- Keyboard navigation for easy control and interaction.
+- Customizable chevron position to either left or right.
+- Option to contain accordion in a named landmark region.
 
-- The accordion content, which is displayed when the accordion header is expanded. The content can be any type of HTML content.
+## Keyboard Accessibility
 
-The Accordion component supports both single and multiple active items. This means you can configure it to either allow multiple content sections to be open at once, or to ensure that only one section is open at a time.
+The React Accordion component ensures keyboard accessibility for easy control and interaction. Users can navigate and interact with the accordion using the following keyboard controls:
 
-You can customize the icon used in the accordion headers by passing a React component to the \`CustomIcon\` prop. This component will receive an \`active\` prop, which is a boolean representing whether the accordion item is currently expanded. If the \`CustomIcon\` prop is not provided, default Chevron icons will be used.
+- **Enter/Space**: Toggles the expansion of the accordion item.
+- **Arrow Down/Up**: Moves focus to the next/previous accordion item.
+- **Home**: Moves focus to the first accordion item.
+- **End**: Moves focus to the last accordion item.
 
-Adding a named region to the Accordion provides the advantage of organising and categorising the accordion items into distinct groups. By assigning a groupName to the Accordion, you can have multiple Accordions on the same page, each with its own set of items. This can be particularly useful when you have different sections of content that need to be independently expandable and collapsible.
+The React Accordion component provides a user-friendly and accessible way to manage multiple content sections in a compact view.
 
-The Accordion uses WAI-ARIA roles, states, and properties to ensure it is accessible to screen readers and other assistive technologies. It supports all the necessary keyboard interactions as recommended by the WAI-ARIA Authoring Practices, such as Arrow, Home, and End keys.
+## Props
 
-Learn more about the component and its properties at the Aria Practices Guide [Accordion Pattern (Sections With Show/Hide Functionality)](https://www.w3.org/WAI/ARIA/apg/patterns/accordion/).
+| Prop Name               | Type       | Description                                                       |
+| ----------------------- | ---------- | ----------------------------------------------------------------- |
+| \`items\`               | \`array\`  | An array of accordion items. Each item is an object with title and content. |
+| \`groupName\`           | \`string\` | The group name of the accordion.                                  |
+| \`multiExpand\`         | \`boolean\` | Determines if multiple accordion items can be open at once.       |
+| \`chevronPosition\`     | \`string\` | The position of the chevron. Can be 'left' or 'right'.           |
+| \`NamedRegionContainer\`| \`select\` | Specifies if the accordion is contained in a named landmark region. |
 
-## Props and Methods
+## Methods
 
-| Prop name | Type | Description |
-| --------- | ---- | ----------- |
-| items     | array of objects | Array containing the title and content of each accordion item. |
-| groupName | string | Name of the accordion group. This can be used to group multiple accordions on a single page. |
-| multiExpand | boolean | If true, multiple accordion items can be expanded at once. If false, only one item can be expanded at a time. |
-| CustomIcon | React component | Custom icon component to use in the accordion header. Receives an 'active' prop indicating whether the accordion item is expanded. |
+| Method Name         | Description                                                   |
+| ------------------- | ------------------------------------------------------------- |
+| \`onTitleClick\`    | A method that handles the click event on the accordion title.   |
+| \`onTitleKeyDown\`  | A method that handles the keydown event on the accordion title. |
 
-## Usage
-
-\`\`\`jsx
-import React from 'react';
-import Accordion from './ReactAccordion';
-
-// Define your custom icon component
-const MyIcon = ({ active }) => {
-  const color = active ? 'red' : 'blue';
-  return (
-    <svg aria-hidden="true" viewBox="0 0 20 20" width="20" height="20">
-      <path d="M5 8l5 5 5-5H5z" fill={color} />
-    </svg>
-  );
-};
-
-const items = [
-  {
-    title: 'Item 1',
-    content: 'Content for item 1',
-  },
-  {
-    title: 'Item 2',
-    content: 'Content for item 2',
-  },
-  // More items...
-];
-
-// Pass the custom icon component to the Accordion
-<Accordion items={items} groupName="group1" multiExpand={true} CustomIcon={MyIcon} />
-\`\`\`
-
-## Example
-
-This is an example of how to use the Accordion component with multiple active items and a custom icon:
-
-\`\`\`jsx
-import React from 'react';
-import Accordion from './ReactAccordion';
-
-const MyIcon = ({ active }) => {
-  const color = active ? 'red' : 'blue';
-  return (
-    <svg aria-hidden="true" viewBox="0 0 20 20" width="20" height="20">
-      <path d="M5 8l5 5 5-5H5z" fill={color} />
-    </svg>
-  );
-};
-
-const items = [
-  {
-    title: 'Section 1',
-    content: 'This is the content for section 1.',
-  },
-  {
-    title: 'Section 2',
-    content: 'This is the content for section 2.',
-  },
-  // More sections...
-];
-
-const App = () => (
-  <Accordion items={items} groupName="myGroup" multiExpand={true} CustomIcon={MyIcon} />
-);
-
-export default App;
-\`\`\`
-
-In the example above, the \`items\` prop is an array of objects, each with a \`title\` and \`content\` property. The \`groupName\` prop sets the name of the accordion group, allowing you to have multiple independent accordions on the same page. The \`multiExpand\` prop is set to \`true\`, meaning multiple sections can be expanded at the same time. Finally, the \`CustomIcon\` prop is used to pass a custom icon component to be used in the accordion headers. The custom icon component receives an \`active\` prop indicating whether the accordion item is expanded.
+The React Accordion component ensures a seamless user experience for keyboard interactions, making it accessible and easy to use.
 
 `;
+
+export default description;

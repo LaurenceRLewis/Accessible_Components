@@ -1,50 +1,44 @@
-export default `
-The \`AccordionTabComponent\` is a responsive UI component which displays as an accordion in smaller viewports and as tabs in larger viewports. This adaptive behavior is controlled by the \`viewportThreshold\` prop.
+const description = `
+The TabsAccordion widget is a sophisticated component developed in React that displays content in a tabular or accordion view depending on the viewport size. It provides a user-friendly way to condense a lot of information into a small space.
 
-Each tab/accordion item has two main parts:
+## Features
 
-- The header (either a Tab or AccordionButton), which displays the title. Interacting with the header (mouse click or keyboard controls) will change the selected tab.
+- Transition from tabs to accordion based on the viewport size.
+- Supports customizable colors and styles for both tabs and accordion.
+- Interactive keyboard navigation for both tab and accordion view.
+- Customizable activation triggers: manual (via enter/space keys) or automated.
+- An array of objects each containing an ID, title, and content for tab data.
 
-- The content (either a TabPanel or AccordionPanel), which is shown when its corresponding header is selected.
+## Keyboard Accessibility
 
-In the tab view, the component supports keyboard navigation between tabs using the Arrow, Home, and End keys, in line with WAI-ARIA recommendations. 
+The TabsAccordion widget ensures keyboard accessibility for easy control and interaction in both accordion and tab views. Here are the keyboard controls:
 
-The component's selection behavior (automatic or manual) can be configured via the \`triggerActivation\` prop. In automatic mode, moving keyboard focus to a tab will automatically select it. In manual mode, a tab must be clicked or selected with the Enter or Space key to be activated.
+- **Enter/Space**: Toggles the expansion of the accordion item or activates the tab.
+- **Arrow Right/Left**: Moves focus to the next/previous tab.
+- **Home**: Moves focus to the first tab.
+- **End**: Moves focus to the last tab.
 
-The component uses WAI-ARIA roles, states, and properties to ensure its accessibility. 
+This component provides a user-friendly and accessible way to manage multiple content sections in a compact view.
 
-## Usage
+## Props
 
-\`\`\`jsx
-import React from 'react';
-import { AccordionTabComponent } from './AccordionTabs';
+| Prop Name            | Type            | Description                                                       |
+| -------------------- | --------------- | ----------------------------------------------------------------- |
+| \`tabs\`             | \`array\`       | An array of objects with 'id', 'title', and 'content' for each tab. |
+| \`tabPanelTabindex\` | \`boolean\`     | Determines if the tab panel can be focused directly. |
+| \`triggerActivation\`| \`string\`      | Determines if tab activation is "manual" or "automated". |
+| \`textColor\`        | \`string\`      | The color of the text in tabs. |
+| \`tabBackground\`    | \`object\`      | An object specifying the default and selected background color of tabs. |
+| \`viewportThreshold\`| \`number\`      | The width below which the component switches to accordion view. |
 
-const tabs = [
-  {
-    id: 'tab1',
-    title: 'Tab 1',
-    content: 'Content for tab 1',
-  },
-  {
-    id: 'tab2',
-    title: 'Tab 2',
-    content: 'Content for tab 2',
-  },
-  // More tabs...
-];
+## Methods
 
-<AccordionTabComponent tabs={tabs} viewportThreshold={400} triggerActivation="manual" />
-\`\`\`
+| Method Name         | Description                                                    |
+| ------------------- | -------------------------------------------------------------- |
+| \`handleKeyDown\`   | A method that handles the keydown event on the accordion or tab. |
+| \`handleWindowResize\`| A method that updates the component view based on window size. |
 
-## Props and Methods
-
-| Prop name           | Type                                         | Description                                                                                              |
-|---------------------|----------------------------------------------|----------------------------------------------------------------------------------------------------------|
-| tabs                | Array of { id, title, content }             | An array of objects representing the tabs, each with an id, title, and content.                         |
-| viewportThreshold   | number                                       | The viewport width below which the component displays as an accordion and above as tabs (default: 400). |
-| triggerActivation   | "automated" or "manual" (default: "manual") | Determines if tab selection is done automatically upon focus or manually upon click/keyboard action.     |
-| textColor           | string (optional)                            | The color of the text in the tab/accordion header.                                                      |
-| tabBackground       | object (optional)                            | An object with two properties: default and selected, specifying the background colors for tabs.         |
-| tabPanelTabindex    | boolean (optional)                           | If true, adds a tabIndex attribute to TabPanel component.                                                |
-
+The TabsAccordion component ensures a seamless user experience for both keyboard interactions and responsive design, making it accessible and adaptable to different device sizes.
 `;
+
+export default description;
