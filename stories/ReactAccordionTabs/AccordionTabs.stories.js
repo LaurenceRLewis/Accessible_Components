@@ -8,7 +8,7 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: reactAccordionTabsDescription,
+        component: reacteactAccordionTabsDescription,
       },
     },
     docsOnly: true,
