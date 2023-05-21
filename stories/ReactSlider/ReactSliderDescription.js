@@ -22,6 +22,9 @@ The React Slider component ensures keyboard accessibility for easy control and i
 
 The React Slider component provides a user-friendly and accessible way to select values within a specified range.
 
+### Download build files
+- **[Development files](https://github.com/LaurenceRLewis/Accessible_Components/tree/main/stories/ReactSlider)
+
 ## Props
 
 | Prop Name         | Type       | Description                                                     |

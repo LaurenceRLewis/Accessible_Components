@@ -16,6 +16,9 @@ ReactSheetDialog component supports keyboard accessibility. It allows opening an
 
 ReactSheetDialog sets appropriate ARIA roles and properties based on the dialog's state and type. It also manages 'aria-hidden' attributes on sibling elements to the dialog when it's open in modal mode, helping to ensure that screen readers only expose the appropriate content to users.
 
+### Download build files
+- **[Development files](https://github.com/LaurenceRLewis/Accessible_Components/tree/main/stories/ReactSheetDialog)
+
 ## Props
 
 | Prop Name   | Type   | Description                                                    |

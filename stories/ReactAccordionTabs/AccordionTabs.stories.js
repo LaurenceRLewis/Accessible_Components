@@ -1,6 +1,6 @@
 import React from "react";
 import { AccordionTabComponent } from "./AccordionTabs";
-import reactTabsDescription from './ReactTabsDescription';
+import reacteactAccordionTabsDescription from './ReactAccordionTabsDescription';
 
 export default {
   title: "Components/React Tab to Accordion Component",
@@ -8,7 +8,7 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: reactTabsDescription,
+        component: reactAccordionTabsDescription,
       },
     },
     docsOnly: true,

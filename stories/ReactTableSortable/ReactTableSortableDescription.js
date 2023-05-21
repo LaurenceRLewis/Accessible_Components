@@ -23,6 +23,9 @@ ReactTableSortable accepts the following props:
 
 The ReactTableSortable component ensures accessibility by providing proper ARIA attributes and visual indicators for the sorting functionality. The header buttons have accessible labels and ARIA attributes to indicate the sorting order (ascending or descending). This allows screen readers and assistive technologies to provide accurate information about the table sorting.
 
+### Download build files
+- **[Development files](https://github.com/LaurenceRLewis/Accessible_Components/tree/main/stories/ReactTableSortable)
+
 ## Example
 
 \`\`\`jsx

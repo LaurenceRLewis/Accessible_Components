@@ -12,6 +12,9 @@ ReactTableCheckbox is a table component that displays data with checkboxes in th
 
 The ReactTableCheckbox component receives an array of data objects and renders them in a table. Each row has a checkbox in the first cell, and the remaining cells display the corresponding data fields.
 
+### Download build files
+- **[Development files](https://github.com/LaurenceRLewis/Accessible_Components/tree/main/stories/ReactTableCheckbox)
+
 ## Props
 
 ReactTableCheckbox does not accept any props. It uses internal data and does not require external configuration.

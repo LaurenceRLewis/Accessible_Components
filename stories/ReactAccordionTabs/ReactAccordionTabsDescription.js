@@ -20,6 +20,9 @@ The TabsAccordion widget ensures keyboard accessibility for easy control and int
 
 This component provides a user-friendly and accessible way to manage multiple content sections in a compact view.
 
+### Download build files
+- **[Development files](https://github.com/LaurenceRLewis/Accessible_Components/tree/main/stories/ReactAccordionTabs)
+
 ## Props
 
 | Prop Name            | Type            | Description                                                       |

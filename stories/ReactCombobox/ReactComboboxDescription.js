@@ -17,6 +17,9 @@ Users can navigate and interact with the ReactCombobox using the following keybo
 - **Enter**: Selects the focused option and closes the options list.
 - **Escape**: Closes the options list if it's open, and clears the input if the list is closed.
 
+### Download build files
+- **[Development files](https://github.com/LaurenceRLewis/Accessible_Components/tree/main/stories/ReactCombobox)
+
 ## Props
 
 | Prop Name     | Type      | Description                                        |

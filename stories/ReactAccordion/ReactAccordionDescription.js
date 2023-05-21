@@ -20,6 +20,9 @@ The React Accordion component ensures keyboard accessibility for easy control an
 
 The React Accordion component provides a user-friendly and accessible way to manage multiple content sections in a compact view.
 
+### Download build files
+- **[Development files](https://github.com/LaurenceRLewis/Accessible_Components/tree/main/stories/ReactAccordion)
+
 ## Props
 
 | Prop Name               | Type       | Description                                                       |

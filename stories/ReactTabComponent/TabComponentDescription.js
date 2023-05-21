@@ -16,6 +16,9 @@ TabComponent supports keyboard navigation for enhanced accessibility. Users can 
 
 The TabComponent implements ARIA attributes to improve accessibility. Each tab has the 'tab' role and is associated with a corresponding tab panel using 'aria-controls' and 'aria-labelledby' attributes. The currently selected tab is indicated using the 'aria-selected' attribute. The tab panel is marked with the 'tabpanel' role and is hidden when not selected.
 
+### Download build files
+- **[Development files](https://github.com/LaurenceRLewis/Accessible_Components/tree/main/stories/ReactTabComponent)
+
 ## Props
 
 | Prop Name              | Type      | Description                                                    |

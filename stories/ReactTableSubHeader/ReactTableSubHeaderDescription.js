@@ -1,6 +1,9 @@
 const description = `
 ReactTableSubHeader is a table component that supports two header rows. The second header row can have cells that span multiple columns, allowing for more complex table structures. This component is useful for displaying data with hierarchical headers or subcategories.
 
+### Download build files
+- **[Development files](https://github.com/LaurenceRLewis/Accessible_Components/tree/main/stories/ReactTableSubHeader)
+
 ## Props
 
 | Prop Name                  | Type                        | Description                                                                                                                                                                                           |
