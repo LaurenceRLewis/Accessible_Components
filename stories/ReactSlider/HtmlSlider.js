@@ -17,6 +17,7 @@ const HtmlSlider = ({ min, max, step, onChange }) => {
       <p className={styles.sliderParagraph}>
         The HTML input of type range lets you select a number within a range. You can define the range using the 'min' and 'max' attributes. The 'step' attribute allows you to define the increment between values.
       </p>
+      <p>The HTMK slider is not fully supported across Browsers and Screen Readers, so it is recommended to use the ARIA model in production</p>
       <input
         type="range"
         aria-labelledby="sliderName44784" 
