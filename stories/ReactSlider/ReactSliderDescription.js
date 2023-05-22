@@ -45,8 +45,8 @@ The ARIA Slider component accepts the following additional props:
 | \`ariaMin\`       | \`number\` | The minimum allowed value for the ARIA slider.                   |
 | \`ariaMax\`       | \`number\` | The maximum allowed value for the ARIA slider.                   |
 | \`ariaStep\`      | \`number\` | The increment value for each step of the ARIA slider.            |
-| \`ariaDefaultValue\`  | \`number\` | The default value of the ARIA slider from aria-valuenow.                          |
-| \`getAriaValueText\` | \`function\` | A function that returns a custom string for the aria-valuetext attribute based on the current value. |
+| \`ariaDefaultValue\`  | \`number\` | The default value of the ARIA slider from aria-valuenow.      |
+| \`getAriaValueText\` | \`function\` | A function that returns a custom string for the aria-valuetext. Format is 'min of max [aria-valuetext]' |
 
 
 ## HTML Slider Props

@@ -7,7 +7,7 @@ const AriaSlider = ({ min, max, step, onChange, ariaValueText, useAriaValueText 
   const sliderRef = useRef(null);
 
   // Calculate the aria-valuetext attribute
-  const ariaValueNow = `${value} of ${ariaValueText}`;
+  const ariaValueNow = `${value} of ${max} ${ariaValueText}`;
 
   useEffect(() => {
     sliderRef.current.focus();
