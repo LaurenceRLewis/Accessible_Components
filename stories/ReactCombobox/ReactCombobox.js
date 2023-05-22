@@ -12,13 +12,13 @@ const ReactCombobox = ({ autocomplete = "list" }) => {
   const inputRef = useRef(null);
 
   useEffect(() => {
-    if (autocomplete === "list" || autocomplete === "both") {
+    //if (autocomplete === "list" || autocomplete === "both") {
       const filteredOptions = townsAndCities.filter((city) =>
         city.toLowerCase().startsWith(inputValue.toLowerCase())
       );
       setOptions(filteredOptions);
       setResultCount(filteredOptions.length);
-    }
+    //}
   }, [inputValue, autocomplete]);
 
   useEffect(() => {
@@ -36,20 +36,25 @@ const ReactCombobox = ({ autocomplete = "list" }) => {
 
   const handleInputChange = (event) => {
     const { value } = event.target;
-    setInputValue(value);
-    if (value === "") {
-      setShowOptions(false);
-      setOptions(townsAndCities);
-      setResultCount(townsAndCities.length);
-      return;
-    }
     const filteredOptions = townsAndCities.filter((city) =>
       city.toLowerCase().startsWith(value.toLowerCase())
     );
     setOptions(filteredOptions);
     setResultCount(filteredOptions.length);
     setShowOptions(true);
-  };
+    if (value === "") {
+      setShowOptions(false);
+      setOptions(townsAndCities);
+      setResultCount(townsAndCities.length);
+    }
+    
+    // check if autocomplete prop is 'both'
+    if (autocomplete === 'both' && filteredOptions.length > 0) {
+      setInputValue(filteredOptions[0]);  // set the inputValue to the first matching option
+    } else {
+      setInputValue(value);
+    }
+  };  
 
   const handleKeyPress = (e) => {
     if (e.key === "ArrowDown" && selectedIndex < options.length - 1) {

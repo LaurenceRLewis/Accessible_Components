@@ -1,10 +1,13 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import styles from "./AriaSlider.module.css";
 
-const AriaSlider = ({ min, max, step, onChange }) => {
+const AriaSlider = ({ min, max, step, onChange, ariaValueText, useAriaValueText }) => {
   const [value, setValue] = useState(min);
   const [isDragging, setIsDragging] = useState(false);
   const sliderRef = useRef(null);
+
+  // Calculate the aria-valuetext attribute
+  const ariaValueNow = `${value} of ${ariaValueText}`;
 
   useEffect(() => {
     sliderRef.current.focus();
@@ -49,7 +52,7 @@ const AriaSlider = ({ min, max, step, onChange }) => {
 
   const handleMouseInteraction = useCallback(
     (event) => {
-      if (event.buttons !== 1) return; // Only handle mouse interaction when left mouse button is pressed
+      if (event.buttons !== 1) return;
 
       const sliderRect = sliderRef.current.getBoundingClientRect();
       const sliderWidth = sliderRect.width;
@@ -128,7 +131,7 @@ const AriaSlider = ({ min, max, step, onChange }) => {
 
   return (
     <div>
-      <h2 className={styles.sliderHeading}>ARIA Slider</h2>
+      <h2 id="ariaSlider88967" className={styles.sliderHeading}>ARIA Slider</h2>
       <p className={styles.sliderParagraph}>
         The ARIA slider allows you to select a value within a range using the
         keyboard, mouse, or touch. You can define the range using the 'min' and
@@ -142,11 +145,12 @@ const AriaSlider = ({ min, max, step, onChange }) => {
         aria-valuemin={min}
         aria-valuemax={max}
         aria-valuenow={value}
+        aria-valuetext={useAriaValueText ? ariaValueNow : undefined} 
         onKeyDown={handleKeyDown}
         onMouseDown={handleMouseDown}
         onTouchStart={handleMouseDown}
         className={styles.ariaSlider}
-        aria-label="ARIA slider"
+        aria-labelledby="ariaSlider88967"
       >
         <div className={styles.ariaSliderTrack}>
           <div

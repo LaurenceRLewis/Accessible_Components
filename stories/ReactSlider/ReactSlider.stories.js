@@ -42,6 +42,14 @@ export default {
       defaultValue: 5,
       description: 'The current value of the slider',
     },
+    useAriaValueText: {
+      control: 'boolean',
+      description: 'Should the slider use the custom aria-valuetext',
+    },
+    ariaValueText: {
+      control: 'text',
+      description: 'The custom aria-valuetext for the slider',
+    },
   },  
 };
 

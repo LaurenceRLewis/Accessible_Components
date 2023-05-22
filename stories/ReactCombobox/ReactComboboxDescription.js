@@ -24,7 +24,7 @@ Users can navigate and interact with the ReactCombobox using the following keybo
 
 | Prop Name     | Type      | Description                                        |
 | ------------- | --------- | -------------------------------------------------- |
-| \`autocomplete\` | \`string\`  | The autocomplete method. Can be 'list' or 'both'. |
+| \`autocomplete\` | \`string\`  | The autocomplete method.|
 
 ## Methods
 
