@@ -7,36 +7,30 @@ export default {
     component: ReactCombobox,
     parameters: {
         docs: {
-          description: {
-            component: reactComboboxDescription,
-          },
+            description: {
+                component: reactComboboxDescription,
+            },
         },
         docsOnly: true,
-      },
+    },
     argTypes: {
-        version: {
+        isTechnology: {
             options: ['HTML', 'ARIA'],
             control: { type: 'radio' }
         },
-        autocomplete: {
-            options: ['list', 'both'],
-            control: { type: 'radio' }
-        }
     }
 };
 
 const Template = (args) => <ReactCombobox {...args} />;
 
-export const Combobox = Template.bind({});
-Combobox.args = {
-    version: 'HTML',
-    autocomplete: 'list'
+export const ARIACombobox = Template.bind({});
+ARIACombobox.storyName = "ARIA Combobox";
+ARIACombobox.args = {
+    isTechnology: 'ARIA',
 };
-Combobox.storyName = "Datalist";
 
-export const AriaCombobox = Template.bind({});
-AriaCombobox.args = {
-    version: 'ARIA',
-    autocomplete: 'both'
-};
-AriaCombobox.storyName = "ARIA Combobox";
+// export const HTMLDatalistCombobox = Template.bind({});
+// HTMLDatalistCombobox.storyName = "HTML Datalist Combobox";
+// HTMLDatalistCombobox.args = {
+//     isTechnology: 'HTML',
+// };

@@ -3,7 +3,7 @@ import ariaAnnounce from "../../.storybook/utils/ariaAnnounce";
 import { townsAndCities } from "./ReactComboboxData";
 import styles from "./ReactCombobox.module.css";
 
-const ReactCombobox = ({ version = "ARIA", autocomplete = "list" }) => {
+const ReactCombobox = ({ isTechnology = "ARIA" }) => {
   const [inputValue, setInputValue] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const [showOptions, setShowOptions] = useState(false);
@@ -17,7 +17,7 @@ const ReactCombobox = ({ version = "ARIA", autocomplete = "list" }) => {
     );
     setOptions(filteredOptions);
     setResultCount(filteredOptions.length);
-  }, [inputValue, autocomplete]);
+  }, [inputValue]);
 
   useEffect(() => {
     if (showOptions) {
@@ -35,7 +35,7 @@ const ReactCombobox = ({ version = "ARIA", autocomplete = "list" }) => {
   const handleInputChange = (event) => {
     const { value } = event.target;
     setInputValue(value);
-    if (version === "HTML" || value === "") {
+    if (isTechnology === "HTML" || value === "") {
       setShowOptions(false);
       setOptions(townsAndCities);
       setResultCount(townsAndCities.length);
@@ -67,31 +67,31 @@ const ReactCombobox = ({ version = "ARIA", autocomplete = "list" }) => {
     }
   };
 
-  if (version === "HTML") {
+  if (isTechnology === "HTML") {
     return (
       <>
-      <h1>HTML Datalist</h1>
-      <p>The datalist element has good support across modern browsers and ATs. The exception is IOS Voiceover where there are some gaps in support.</p>
-      <div className={styles["comboboxContainer"]}>
-        <label id="combobox-label" htmlFor="combobox-input">
-          Australian cities and towns
-        </label>
-        <p id="help-text" className={styles["helpText"]}>
-        Help text
-      </p>
-        <input
-          id="combobox-input"
-          list="combobox-list"
-          aria-describedby="help-text"
-          value={inputValue}
-          onChange={handleInputChange}
-        />
-        <datalist id="combobox-list">
-          {townsAndCities.map((city, index) => (
-            <option key={index} value={city}>{city}</option>
-          ))}
-        </datalist>
-      </div>
+        <h1>HTML Datalist</h1>
+        <p>
+          The datalist element has good support across modern browsers and ATs.
+          However, there are some gaps in support.
+        </p>
+        <div className={styles["comboboxContainer"]}>
+          <label id="combobox-label" htmlFor="combobox-input">
+            Australian cities and towns
+          </label>
+          <p id="help-text" className={styles["helpText"]}>Help text</p>
+          <input
+            id="combobox-input"
+            className={styles["comboboxInput"]}
+            list="combobox-list"
+            aria-describedby="help-text"
+          />
+          <datalist id="combobox-list">
+            {townsAndCities.map((city, index) => (
+              <option key={index} value={city}>{city}</option>
+            ))}
+          </datalist>
+        </div>
       </>
     );
   }
@@ -116,7 +116,7 @@ const ReactCombobox = ({ version = "ARIA", autocomplete = "list" }) => {
               id="combobox-input"
               className={styles["comboboxInput"]}
               role="combobox"
-              aria-autocomplete={autocomplete}
+              aria-autocomplete="list"
               autocomplete="off"
               aria-controls="combobox-listbox"
               aria-activedescendant={
