@@ -98,48 +98,51 @@ function ReactSheetDialog(props) {
     }, [modal, open]);  
 
   // Exit early if the sheet is closed or not a modal
-  const trapFocus = (event) => {
-    if (!open || !modal) {
-      return;
+const trapFocus = (event) => {
+  if (!open || !modal) {
+    return;
+  }
+
+  // Check if the Tab key was pressed
+  const isTabPressed = event.key === "Tab" || event.keyCode === 9;
+
+  // Exit early if the pressed key is not Tab
+  if (!isTabPressed) {
+    return;
+  }
+
+  // Define the CSS selectors for focusable elements
+  const focusableElements =
+    'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+  const modalContent = document.querySelector(`.${styles.sheet}`);
+  const focusableContent = modalContent.querySelectorAll(focusableElements);
+  
+  // Filter out any hidden elements from the list of focusable elements
+  const trapElements = Array.from(focusableContent).filter(
+    (el) => el.offsetParent !== null
+  );
+
+  // Identify the first and last focusable elements within the modal
+  const firstTrapEl = trapElements[0];
+  const lastTrapEl = trapElements[trapElements.length - 1];
+
+  // Trap focus by moving focus to the last focusable element when
+  // the Shift key is held down and the first element is focused
+  if (event.shiftKey) {
+    if (document.activeElement === firstTrapEl) {
+      lastTrapEl.focus();
+      event.preventDefault();
     }
-
-    // Check if the Tab key was pressed
-    const isTabPressed = event.key === "Tab" || event.keyCode === 9;
-
-    // Exit early if the pressed key is not Tab
-    if (!isTabPressed) {
-      return;
+    // Trap focus by moving focus to the first focusable element when
+    // the last element is focused without the Shift key held down
+  } else {
+    if (document.activeElement === lastTrapEl) {
+      firstTrapEl.focus();
+      event.preventDefault();
     }
+  }
+};
 
-    // Define the CSS selectors for focusable elements
-    const focusableElements =
-      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
-    const focusableContent = document.querySelectorAll(focusableElements);
-    // Filter out any hidden elements from the list of focusable elements
-    const trapElements = Array.from(focusableContent).filter(
-      (el) => el.offsetParent !== null
-    );
-
-    // Identify the first and last focusable elements within the modal
-    const firstTrapEl = trapElements[0];
-    const lastTrapEl = trapElements[trapElements.length - 1];
-
-    // Trap focus by moving focus to the last focusable element when
-    // the Shift key is held down and the first element is focused
-    if (event.shiftKey) {
-      if (document.activeElement === firstTrapEl) {
-        lastTrapEl.focus();
-        event.preventDefault();
-      }
-      // Trap focus by moving focus to the first focusable element when
-      // the last element is focused without the Shift key held down
-    } else {
-      if (document.activeElement === lastTrapEl) {
-        firstTrapEl.focus();
-        event.preventDefault();
-      }
-    }
-  };
 
   return (
     <>
@@ -150,7 +153,22 @@ function ReactSheetDialog(props) {
       >
         Open Sheet
       </button>
-      {overlayClass && <div className={styles.overlay}></div>}
+      {overlayClass && (
+  <div
+    className={styles.overlay}
+    onClick={() => {
+      const focusableElements =
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+      const modalContent = document.querySelector(`.${styles.sheet}`);
+      const focusableContent = modalContent.querySelectorAll(focusableElements);
+      const trapElements = Array.from(focusableContent).filter(
+        (el) => el.offsetParent !== null
+      );
+      const firstTrapEl = trapElements[0];
+      firstTrapEl.focus();
+    }}
+  ></div>
+)}
       <div
         className={sheetStyle}
         role="dialog"
