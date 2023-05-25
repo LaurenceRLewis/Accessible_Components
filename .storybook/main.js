@@ -11,7 +11,6 @@ module.exports = {
     "@storybook/addon-controls",
     "@storybook/addon-docs",
     "@storybook/addon-a11y",
-    "@storybook/addon-mdx-gfm",
   ],
   webpackFinal: async (config) => {
     config.resolve.alias = {

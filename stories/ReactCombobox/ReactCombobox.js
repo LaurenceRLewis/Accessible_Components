@@ -3,7 +3,7 @@ import ariaAnnounce from "../../.storybook/utils/ariaAnnounce";
 import { townsAndCities } from "./ReactComboboxData";
 import styles from "./ReactCombobox.module.css";
 
-const ReactCombobox = ({ isTechnology = "ARIA" }) => {
+const ReactCombobox = ({ autocomplete = "list" }) => {
   const [inputValue, setInputValue] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const [showOptions, setShowOptions] = useState(false);
@@ -12,12 +12,14 @@ const ReactCombobox = ({ isTechnology = "ARIA" }) => {
   const inputRef = useRef(null);
 
   useEffect(() => {
-    const filteredOptions = townsAndCities.filter((city) =>
-      city.toLowerCase().startsWith(inputValue.toLowerCase())
-    );
-    setOptions(filteredOptions);
-    setResultCount(filteredOptions.length);
-  }, [inputValue]);
+    //if (autocomplete === "list" || autocomplete === "both") {
+      const filteredOptions = townsAndCities.filter((city) =>
+        city.toLowerCase().startsWith(inputValue.toLowerCase())
+      );
+      setOptions(filteredOptions);
+      setResultCount(filteredOptions.length);
+    //}
+  }, [inputValue, autocomplete]);
 
   useEffect(() => {
     if (showOptions) {
@@ -34,20 +36,25 @@ const ReactCombobox = ({ isTechnology = "ARIA" }) => {
 
   const handleInputChange = (event) => {
     const { value } = event.target;
-    setInputValue(value);
-    if (isTechnology === "HTML" || value === "") {
+    const filteredOptions = townsAndCities.filter((city) =>
+      city.toLowerCase().startsWith(value.toLowerCase())
+    );
+    setOptions(filteredOptions);
+    setResultCount(filteredOptions.length);
+    setShowOptions(true);
+    if (value === "") {
       setShowOptions(false);
       setOptions(townsAndCities);
       setResultCount(townsAndCities.length);
-    } else {
-      const filteredOptions = townsAndCities.filter((city) =>
-        city.toLowerCase().startsWith(value.toLowerCase())
-      );
-      setOptions(filteredOptions);
-      setResultCount(filteredOptions.length);
-      setShowOptions(true);
     }
-  };
+    
+    // check if autocomplete prop is 'both'
+    if (autocomplete === 'both' && filteredOptions.length > 0) {
+      setInputValue(filteredOptions[0]);  // set the inputValue to the first matching option
+    } else {
+      setInputValue(value);
+    }
+  };  
 
   const handleKeyPress = (e) => {
     if (e.key === "ArrowDown" && selectedIndex < options.length - 1) {
@@ -67,39 +74,7 @@ const ReactCombobox = ({ isTechnology = "ARIA" }) => {
     }
   };
 
-  if (isTechnology === "HTML") {
-    return (
-      <>
-        <h1>HTML Datalist</h1>
-        <p>
-          The datalist element has good support across modern browsers and ATs.
-          However, there are some gaps in support.
-        </p>
-        <div className={styles["comboboxContainer"]}>
-          <label id="combobox-label" htmlFor="combobox-input">
-            Australian cities and towns
-          </label>
-          <p id="help-text" className={styles["helpText"]}>Help text</p>
-          <input
-            id="combobox-input"
-            className={styles["comboboxInput"]}
-            list="combobox-list"
-            aria-describedby="help-text"
-          />
-          <datalist id="combobox-list">
-            {townsAndCities.map((city, index) => (
-              <option key={index} value={city}>{city}</option>
-            ))}
-          </datalist>
-        </div>
-      </>
-    );
-  }
-
   return (
-    <>
-      <h1>ARIA Combobox</h1>
-      <p>The ARIA version uses the aria-autocomplete list. Examples for both and none may be added later.</p>
     <div className={styles["comboboxContainer"]}>
       <label id="combobox-label" htmlFor="combobox-input">
         Australian cities and towns
@@ -108,55 +83,52 @@ const ReactCombobox = ({ isTechnology = "ARIA" }) => {
         Help text
       </p>
       {showOptions && (
-                <p id="result-count" className={styles["resultCount"]}>
-                {`${resultCount} of ${townsAndCities.length} results found`}
-              </p>
-            )}
-            <input
-              id="combobox-input"
-              className={styles["comboboxInput"]}
-              role="combobox"
-              aria-autocomplete="list"
-              autocomplete="off"
-              aria-controls="combobox-listbox"
-              aria-activedescendant={
-                selectedIndex === -1 ? "" : `option-${selectedIndex}`
+        <p id="result-count" className={styles["resultCount"]}>
+          {`${resultCount} of ${townsAndCities.length} results found`}
+        </p>
+      )}
+      <input
+        id="combobox-input"
+        className={styles["comboboxInput"]}
+        role="combobox"
+        aria-autocomplete={autocomplete}
+        autocomplete="off"
+        aria-controls="combobox-listbox"
+        aria-activedescendant={
+          selectedIndex === -1 ? "" : `option-${selectedIndex}`
+        }
+        aria-expanded={showOptions}
+        aria-labelledby="combobox-label"
+        ref={inputRef}
+        type="text"
+        value={inputValue}
+        onChange={handleInputChange}
+        onKeyDown={handleKeyPress}
+      />
+      {showOptions && (
+        <ul
+          id="combobox-listbox"
+          className={styles["comboboxListbox"]}
+          role="listbox"
+        >
+          {options.map((option, index) => (
+            <li
+              id={`option-${index}`}
+              className={
+                index === selectedIndex ? styles["selectedOption"] : ""
               }
-              aria-expanded={showOptions}
-              aria-labelledby="combobox-label"
-              aria-describedby="result-count"
-              ref={inputRef}
-              type="text"
-              value={inputValue}
-              onChange={handleInputChange}
-              onKeyDown={handleKeyPress}
-            />
-            {showOptions && (
-              <ul
-                id="combobox-listbox"
-                className={styles["comboboxListbox"]}
-                role="listbox"
-              >
-                {options.map((option, index) => (
-                  <li
-                    id={`option-${index}`}
-                    className={
-                      index === selectedIndex ? styles["selectedOption"] : ""
-                    }
-                    key={option}
-                    role="option"
-                    aria-selected={index === selectedIndex}
-                    onClick={() => handleOptionClick(option)}
-                  >
-                    {option}
-                  </li>
-                ))}
-              </ul>
-            )}
-          </div>
-          </>
-        );
-      };
-      
-      export default ReactCombobox;
-      
+              key={option}
+              role="option"
+              aria-selected={index === selectedIndex}
+              onClick={() => handleOptionClick(option)}
+            >
+              {option}
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+};
+
+export default ReactCombobox;
