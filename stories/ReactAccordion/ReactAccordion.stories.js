@@ -1,17 +1,15 @@
 import React from "react";
+import { Meta, Description } from "@storybook/addon-docs/blocks";
 import Accordion from "./ReactAccordion";
-import reactAccordionDescription from './ReactAccordionDescription';
+import ReactAccordionDescription from "./ReactAccordionDescription.mdx";
 
 export default {
   title: "Components/React Accordion",
   component: Accordion,
   parameters: {
     docs: {
-      description: {
-        component: reactAccordionDescription,
-      },
+      page: ReactAccordionDescription,
     },
-    docsOnly: true,
   },
   argTypes: {
     multiExpand: {
@@ -20,20 +18,24 @@ export default {
       defaultValue: false,
     },
     chevronPosition: {
-      control: "radio",
-      options: ['left', 'right'],
-      defaultValue: 'right',
-      description: "Position of the chevron"
+      control: {
+        type: "radio",
+        options: ["left", "right"],
+      },
+      defaultValue: "right",
+      description: "Position of the chevron",
     },
     items: {
       table: { disable: true },
     },
     NamedRegionContainer: {
-      control: { type: "select" },
-      options: [
-        "Contained in a named landmark region",
-        "Not contained in a named landmark region",
-      ],
+      control: {
+        type: "select",
+        options: [
+          "Contained in a named landmark region",
+          "Not contained in a named landmark region",
+        ],
+      },
       defaultValue: "Contained in a named landmark region",
     },
     groupName: {
@@ -43,7 +45,8 @@ export default {
 };
 
 const Template = (args) => {
-  const isNamedRegion = args.NamedRegionContainer === "Contained in a named landmark region";
+  const isNamedRegion =
+    args.NamedRegionContainer === "Contained in a named landmark region";
 
   return (
     <div
@@ -89,6 +92,6 @@ Cats.args = {
   ],
   groupName: "cats",
   multiExpand: false,
-  chevronPosition: 'right',
+  chevronPosition: "right",
   NamedRegionContainer: "Contained in a named landmark region",
 };
