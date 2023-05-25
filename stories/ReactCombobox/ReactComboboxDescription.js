@@ -1,17 +1,18 @@
 const description = `
-The ReactCombobox is an implementation of the ARIA Combobox Widget. It provides users with a dropdown list of options that can be filtered by typing into the text field.
+The ReactCombobox is a flexible implementation of both the ARIA Combobox Widget and the HTML Datalist. It provides users with a dropdown list of options that can be filtered by typing into the text field.
 
 ## Features
 
 - Provides Autocomplete functionality.
-- Supports keyboard navigation for easy control and interaction.
-- Announces changes to screen readers using ARIA properties.
-- Includes help text and result count for better user experience.
+- Supports two technologies: ARIA Combobox and HTML Datalist.
+- Supports keyboard navigation for easy control and interaction in the ARIA version.
+- Announces changes to screen readers using ARIA properties in the ARIA version.
+- Includes help text and result count for better user experience in the ARIA version.
 - Uses a pre-defined list of Australian towns and cities for autocomplete suggestions.
 
 ## Keyboard Accessibility
 
-Users can navigate and interact with the ReactCombobox using the following keyboard controls:
+Users can navigate and interact with the ARIA version of the ReactCombobox using the following keyboard controls:
 
 - **ArrowDown/ArrowUp**: Moves focus to the next/previous item in the options list.
 - **Enter**: Selects the focused option and closes the options list.
@@ -24,17 +25,17 @@ Users can navigate and interact with the ReactCombobox using the following keybo
 
 | Prop Name     | Type      | Description                                        |
 | ------------- | --------- | -------------------------------------------------- |
-| \`autocomplete\` | \`string\`  | The autocomplete method.|
+| \`isTechnology\` | \`string\` | Determines which technology is used for the component. Can be either "ARIA" for ARIA Combobox or "HTML" for HTML Datalist. Defaults to "ARIA".|
 
 ## Methods
 
 | Method Name         | Description                                                        |
 | ------------------- | ------------------------------------------------------------------ |
-| \`handleOptionClick\` | Handles the click event on an option, setting it as the input value and closing the options list. |
+| \`handleOptionClick\` | Handles the click event on an option, setting it as the input value and closing the options list in the ARIA version. |
 | \`handleInputChange\` | Handles changes to the input value, updating the options list.     |
-| \`handleKeyPress\` | Handles key events for navigation and selection within the options list. |
+| \`handleKeyPress\` | Handles key events for navigation and selection within the options list in the ARIA version. |
 
-This widget offers a user-friendly and accessible way to add a combobox with autocomplete functionality to your applications.
+This widget offers a user-friendly and accessible way to add a combobox with autocomplete functionality to your applications. The component is flexible, allowing you to choose between using ARIA Combobox or HTML Datalist technology based on your requirements.
 
 `;
 
