@@ -79,12 +79,11 @@ const ReactCombobox = ({ isTechnology = "ARIA" }) => {
           <label id="combobox-label" htmlFor="combobox-input">
             Australian cities and towns
           </label>
-          <p id="help-text" className={styles["helpText"]}>Help text</p>
+          <p id="datalistHelpText" className={styles["helpText"]}>Help text</p>
           <input
             id="combobox-input"
             className={styles["comboboxInput"]}
             list="combobox-list"
-            aria-describedby="help-text"
           />
           <datalist id="combobox-list">
             {townsAndCities.map((city, index) => (
@@ -124,7 +123,7 @@ const ReactCombobox = ({ isTechnology = "ARIA" }) => {
               }
               aria-expanded={showOptions}
               aria-labelledby="combobox-label"
-              aria-describedby="result-count"
+              aria-describedby="help-text result-count"
               ref={inputRef}
               type="text"
               value={inputValue}

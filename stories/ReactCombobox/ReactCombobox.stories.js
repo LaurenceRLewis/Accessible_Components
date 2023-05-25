@@ -24,7 +24,7 @@ export default {
 const Template = (args) => <ReactCombobox {...args} />;
 
 export const ARIACombobox = Template.bind({});
-ARIACombobox.storyName = "ARIA Combobox";
+ARIACombobox.storyName = "Combobox";
 ARIACombobox.args = {
     isTechnology: 'ARIA',
 };
