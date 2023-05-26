@@ -20,17 +20,17 @@ label{
     flex-grow: 1;
     width: 100%;
     height: 35px;
-    padding: 5px 10px;
-    border: 1px solid #6a1b9a;
-    border-radius: 5px;
+    padding: .3125em .625em;
+    border: .0625em solid #6a1b9a;
+    border-radius: .3125em;
     outline: none;
     box-sizing: border-box;
-    font-size: 16px;
+    font-size: 1rem;
 }
 
 .comboboxInput:focus-visible {
     border-color: #9c27b0;
-    box-shadow: 0 0 0 3px #D1C4E9;
+    box-shadow: 0 0 0 .1875em #D1C4E9;
 }
 
 .comboboxWrapper {
@@ -45,24 +45,33 @@ label{
     width: 44px;
     height: 38px;
     background-color: #6a1b9a;
+    border:none;
     border-radius: 50%;
     cursor: pointer;
-    margin-left: 5px;
+    margin-left: .3125em;
 }
 
-.toggleButton:hover,
+.toggleButton:hover {
+    outline: .125em solid #ffffff;
+}
+
 .toggleButton:focus {
-    outline: 2px solid #ffffff;
+    box-shadow: 0px 0px 0px .1875em #6a1b9a;
+}
+
+.toggleButton:active {
+    border: .125em solid #6a1b9a;
+    box-shadow: 0 0 .625em purple;
 }
 
 .comboboxListbox {
     position: absolute;
     width: 100%;
     max-height: 200px;
-    margin-top: 5px;
+    margin-top: .3125em;
     overflow-y: auto;
-    border: 1px solid #6a1b9a;
-    border-radius: 5px;
+    border: .0625em solid #6a1b9a;
+    border-radius: .3125em;
     background-color: #ffffff;
     box-sizing: border-box;
     z-index: 10;
@@ -71,7 +80,7 @@ label{
 }
 
 .comboboxListbox li {
-    padding: 5px 10px;
+    padding: .3125em .625em;
     cursor: pointer;
 }
 
@@ -86,7 +95,7 @@ label{
 }
 
 .helpText {
-    margin-top: 10px;
+    margin-top: .625em;
     color: #696868;
     font-size: .875rem;
     margin:0;
@@ -94,7 +103,7 @@ label{
 }
 
 .resultCount{
-    margin-top: 10px;
+    margin-top: .625em;
     color: #6a1b9a;
     font-size: .8rem;
     margin:0;
