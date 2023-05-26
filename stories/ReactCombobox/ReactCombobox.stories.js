@@ -19,7 +19,8 @@ export default {
             control: { type: 'radio' }
         },
         showHelpText: {
-            control: { type: 'boolean' }
+            options: ['Yes', 'No'],
+            control: { type: 'radio' }
         },
     }
 };
@@ -30,4 +31,5 @@ export const ARIACombobox = Template.bind({});
 ARIACombobox.storyName = "Combobox";
 ARIACombobox.args = {
     isTechnology: 'ARIA',
+    showHelpText: 'No', 
 };
