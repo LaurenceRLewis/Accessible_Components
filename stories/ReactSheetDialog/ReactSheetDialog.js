@@ -28,6 +28,16 @@ function ReactSheetDialog(props) {
     }
   };
 
+  // Add an effect to remove tabindex from the modal content container when sheet/dialog is closed
+  useEffect(() => {
+    if (!open) {
+      const modalContentContainer = document.querySelector(`.${styles.sheetContent}`);
+      if (modalContentContainer) {
+        modalContentContainer.removeAttribute('tabindex');
+      }
+    }
+  }, [open]);
+
   const isStandardDialog = dialogType === "standard";
   // Determine the sheet class based on the open state
   const sheetOpenClass = open ? styles.open : "";
