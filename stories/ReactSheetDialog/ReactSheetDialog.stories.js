@@ -3,7 +3,7 @@ import ReactSheetDialog from './ReactSheetDialog';
 import reactSheetDialogDescription from './ReactSheetDialogDescription';
 
 export default {
-  title: 'Components/React Sheet and Traditional Modal Dialog',
+  title: 'Work in progress/React Modal Dialog',
   component: ReactSheetDialog,
   parameters: {
     docs: {
@@ -26,7 +26,7 @@ export default {
         'Standard Modal Dialog': 'standard',
         'Sheet Dialog': "sheet",
       },
-      defaultValue: "sheet",
+      defaultValue: "standard",
     },
     
   },
@@ -34,8 +34,8 @@ export default {
 
 const Template = (args) => <ReactSheetDialog {...args} />;
 
-export const Default = Template.bind({});
-Default.args = {
+export const ModalDialog = Template.bind({});
+ModalDialog.args = {
   modal: true,
-  dialogType: 'sheet',
+  dialogType: 'standard',
 };
