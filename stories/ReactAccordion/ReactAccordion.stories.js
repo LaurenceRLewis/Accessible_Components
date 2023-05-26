@@ -62,9 +62,9 @@ const Template = (args) => {
   );
 };
 
-export const Cats = Template.bind({});
+export const AccordionExample = Template.bind({});
 
-Cats.args = {
+AccordionExample.args = {
   items: [
     {
       title: "Persian",

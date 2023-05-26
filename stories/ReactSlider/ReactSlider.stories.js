@@ -59,4 +59,4 @@ const Template = (args) => {
   : <HtmlSlider min={0} max={10} step={1} value={0} {...args} />
 };
 
-export const Default = Template.bind({});
+export const Slider = Template.bind({});

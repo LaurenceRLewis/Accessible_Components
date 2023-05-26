@@ -28,4 +28,4 @@ export default {
 
 const Template = (args) => <ReactMultiSelect {...args} />;
 
-export const Primary = Template.bind({});
+export const MultiSelect = Template.bind({});

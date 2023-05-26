@@ -3,7 +3,7 @@ import { AccordionTabComponent } from "./AccordionTabs";
 import reacteactAccordionTabsDescription from './ReactAccordionTabsDescription';
 
 export default {
-  title: "Components/React Tab to Accordion Component",
+  title: "Components/React Tabs to Accordion",
   component: AccordionTabComponent,
   parameters: {
     docs: {
@@ -45,8 +45,8 @@ const Template = ({ viewportThreshold, ...args }) => (
   <AccordionTabComponent viewportThreshold={viewportThreshold} {...args} />
 );
 
-export const Default = Template.bind({});
-Default.args = {
+export const ResponsiveTabs = Template.bind({});
+ResponsiveTabs.args = {
   tabs: [
     {
       id: "html-009878",

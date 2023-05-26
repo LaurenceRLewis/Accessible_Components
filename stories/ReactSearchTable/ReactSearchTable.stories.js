@@ -15,4 +15,4 @@ export default {
   },
 };
 
-export const Default = () => <ReactSearchTable />;
+export const TableWithSearchFunction = () => <ReactSearchTable />;

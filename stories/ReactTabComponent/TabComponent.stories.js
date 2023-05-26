@@ -39,8 +39,8 @@ export default {
 
 const Template = (args) => <TabComponent {...args} />;
 
-export const Default = Template.bind({});
-Default.args = {
+export const StandardTabs = Template.bind({});
+StandardTabs.args = {
   tabs: [
     {
       id: "html-009878",

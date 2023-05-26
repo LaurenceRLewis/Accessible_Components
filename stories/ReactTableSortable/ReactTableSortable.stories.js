@@ -32,9 +32,8 @@ export default {
 
 const Template = (args) => <ReactTableSortableControl {...args} />;
 
-export const Default = Template.bind({});
+export const SortableTableColumns = Template.bind({});
 
-// Update the args to pass the sortable prop directly
-Default.args = {
+SortableTableColumns.args = {
   sortable: 'Sort',
 };

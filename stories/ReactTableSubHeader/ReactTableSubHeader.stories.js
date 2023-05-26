@@ -63,8 +63,8 @@ const Template = (args) => {
   return <ReactTableSubheaderControl {...args} />;
 };
 
-export const Default = Template.bind({});
-Default.args = {
+export const TableWithSubHeader = Template.bind({});
+TableWithSubHeader.args = {
   headerTextColor: ReactTableSubHeader.defaultProps.headerTextColor,
   //headerBackgroundColor: ReactTableSubHeader.defaultProps.headerBackgroundColor,
   tdFontWeight: 400,

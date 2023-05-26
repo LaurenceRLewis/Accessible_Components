@@ -17,5 +17,5 @@ export default {
 
 const Template = (args) => <ReactTableCheckbox {...args} />;
 
-export const Default = Template.bind({});
-Default.args = {};
+export const TableWithCheckbox = Template.bind({});
+TableWithCheckbox.args = {};
