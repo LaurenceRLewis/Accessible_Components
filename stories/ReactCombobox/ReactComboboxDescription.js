@@ -37,7 +37,7 @@ HTML Datalist is a simple and native way to add autocomplete functionality to an
 | Prop Name     | Type      | Description                                        |
 | ------------- | --------- | -------------------------------------------------- |
 | \`isTechnology\` | \`string\` | Determines which technology is used for the component. Can be either "ARIA" for ARIA Combobox or "HTML" for HTML Datalist. Defaults to "ARIA".|
-| \`showHelpText\` | \`boolean\` | Determines whether the help text is visible. Defaults to false. Applies to the ARIA version only. |
+| \`showHelpText\` | \`string\` | Determines whether the help text is visible. Defaults to false. Applies to the ARIA version only. |
 
 ## Methods
 
