@@ -16,6 +16,12 @@ const ReactCombobox = ({ isTechnology = "ARIA", showHelpText = false }) => {
   };
 
   useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [showOptions]);
+
+  useEffect(() => {
     const filteredOptions = townsAndCities.filter((city) =>
       city.toLowerCase().startsWith(inputValue.toLowerCase())
     );
@@ -28,6 +34,12 @@ const ReactCombobox = ({ isTechnology = "ARIA", showHelpText = false }) => {
       ariaAnnounce(`${resultCount} of ${townsAndCities.length} results found`);
     }
   }, [showOptions, resultCount]);
+
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [showOptions]);
 
   const handleOptionClick = (value) => {
     setInputValue(value);
@@ -56,10 +68,8 @@ const ReactCombobox = ({ isTechnology = "ARIA", showHelpText = false }) => {
   const handleKeyPress = (e) => {
     if (e.key === "ArrowDown" && selectedIndex < options.length - 1) {
       if (e.altKey) {
-        // Alt + ArrowDown
         setShowOptions(true);
       } else {
-        // ArrowDown
         setSelectedIndex(selectedIndex + 1);
       }
     } else if (e.key === "ArrowUp" && selectedIndex > 0) {
@@ -74,8 +84,16 @@ const ReactCombobox = ({ isTechnology = "ARIA", showHelpText = false }) => {
       } else {
         setInputValue("");
       }
+    } else if (e.key === "Home") {
+      if (inputRef.current) {
+        inputRef.current.setSelectionRange(0, 0);
+      }
+    } else if (e.key === "End") {
+      if (inputRef.current) {
+        inputRef.current.setSelectionRange(inputValue.length, inputValue.length);
+      }
     }
-  };
+  };  
 
   const ChevronDown = () => (
     <svg
@@ -114,8 +132,7 @@ const ReactCombobox = ({ isTechnology = "ARIA", showHelpText = false }) => {
       <>
         <h1>HTML Datalist</h1>
         <p>
-          The datalist element has good support across modern browsers and ATs.
-          However, there are some gaps in support.
+          The datalist element has good support across modern browsers and assistive technology.
         </p>
         <div className={styles["comboboxContainer"]}>
           <label id="combobox-label" htmlFor="combobox-input">
@@ -166,13 +183,16 @@ const ReactCombobox = ({ isTechnology = "ARIA", showHelpText = false }) => {
             role="combobox"
             aria-autocomplete="list"
             autocomplete="off"
-            aria-controls="combobox-listbox"
+            aria-controls={showOptions ? "combobox-listbox" : ""}
             aria-activedescendant={
               selectedIndex === -1 ? "" : `option-${selectedIndex}`
             }
             aria-expanded={showOptions}
             aria-labelledby="combobox-label"
-            aria-describedby="help-text result-count"
+            aria-describedby={`
+            ${showHelpText === "Yes" ? "help-text" : ""}
+            ${showOptions ? "result-count" : ""}
+            `.trim()}
             ref={inputRef}
             type="text"
             value={inputValue}
@@ -182,7 +202,7 @@ const ReactCombobox = ({ isTechnology = "ARIA", showHelpText = false }) => {
           <button
             id="toggle-button"
             aria-label="Australian towns and cities"
-            aria-controls="combobox-listbox"
+            aria-controls={showOptions ? "combobox-listbox" : ""}
             aria-expanded={showOptions}
             role="button"
             tabIndex="-1"

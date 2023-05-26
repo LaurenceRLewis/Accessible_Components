@@ -10,6 +10,7 @@ The ReactCombobox is a flexible implementation of both the ARIA Combobox Widget 
 - Includes help text and result count for better user experience (ARIA version only).
 - Help text visibility can be controlled via a prop (ARIA version only).
 - Uses a pre-defined list of Australian towns and cities for autocomplete suggestions.
+- \`aria-controls\` attribute dynamically updates its value based on the state of the options list (ARIA version only).
 
 ### Keyboard Accessibility (ARIA version only)
 
@@ -19,6 +20,7 @@ Users can navigate and interact with the ARIA version of the ReactCombobox using
 - **Alt + Down Arrow**: Opens the listbox without moving focus or changing selection.
 - **Enter**: Selects the focused option and closes the options list.
 - **Escape**: Closes the options list if it's open, and clears the input if the list is closed.
+- **Home/End**: Moves visual focus to the beginning/end of the textbox.
 
 ## ARIA Announcements (ARIA version only)
 
