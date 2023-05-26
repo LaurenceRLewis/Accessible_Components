@@ -185,6 +185,7 @@ const ReactCombobox = ({ isTechnology = "ARIA", showHelpText = false }) => {
             id="combobox-listbox"
             className={styles["comboboxListbox"]}
             role="listbox"
+            aria-label="Australian towns and cities"
           >
             {options.map((option, index) => (
               <li
