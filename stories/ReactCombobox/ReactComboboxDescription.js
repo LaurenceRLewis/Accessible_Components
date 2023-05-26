@@ -18,8 +18,13 @@ Users can navigate and interact with the ARIA version of the ReactCombobox using
 - **Enter**: Selects the focused option and closes the options list.
 - **Escape**: Closes the options list if it's open, and clears the input if the list is closed.
 
+## ARIA Announcements
+
+ReactSearchTable uses the \`ariaAnnounce\` function to create an ARIA live region. This live region announces the count of search results to the user after each search or when the search is cleared. This feature is particularly useful for screen reader users who would otherwise have no way of knowing the result count without navigating to the part of the page where it is displayed.
+
 ### Download build files
 - **[Development files](https://github.com/LaurenceRLewis/Accessible_Components/tree/main/stories/ReactCombobox)
+- **[ariaAnnounce](https://github.com/LaurenceRLewis/Accessible_Components/tree/main/.storybook/utils)
 
 ## Props
 
