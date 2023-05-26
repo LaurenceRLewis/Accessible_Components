@@ -186,8 +186,13 @@ function ReactSheetDialog(props) {
           <h2 id="sheet-heading" className={styles.sheetHeading} tabIndex="-1">
             Sheet Dialog
           </h2>
-          <button className={styles.closeButton} onClick={closeSheet}>
+          <button
+            className={styles.closeButton}
+            onClick={closeSheet}
+            aria-label="Close dialog"
+          >
             <svg
+              aria-hidden="true"
               width="24"
               height="24"
               viewBox="0 0 24 24"
