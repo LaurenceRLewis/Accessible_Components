@@ -3,7 +3,7 @@ import ReactCombobox from './ReactCombobox';
 import reactComboboxDescription from './ReactComboboxDescription';
 
 export default {
-    title: 'Work in progress/React Combobox',
+    title: 'Components/React Combobox',
     component: ReactCombobox,
     parameters: {
         docs: {
@@ -18,6 +18,9 @@ export default {
             options: ['HTML', 'ARIA'],
             control: { type: 'radio' }
         },
+        showHelpText: {
+            control: { type: 'boolean' }
+        },
     }
 };
 
@@ -28,9 +31,3 @@ ARIACombobox.storyName = "Combobox";
 ARIACombobox.args = {
     isTechnology: 'ARIA',
 };
-
-// export const HTMLDatalistCombobox = Template.bind({});
-// HTMLDatalistCombobox.storyName = "HTML Datalist Combobox";
-// HTMLDatalistCombobox.args = {
-//     isTechnology: 'HTML',
-// };
