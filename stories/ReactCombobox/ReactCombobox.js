@@ -173,7 +173,8 @@ const ReactCombobox = ({ isTechnology = "ARIA", showHelpText = false }) => {
         )}
         {showOptions && (
           <p id="result-count" className={styles["resultCount"]}>
-            {`${resultCount} of ${townsAndCities.length} results found`}
+            {/* {`${resultCount} of ${townsAndCities.length} possible results`} */}
+            {`${resultCount} results found`}
           </p>
         )}
         <div className={styles["comboboxWrapper"]}>
