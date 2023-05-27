@@ -1,14 +1,14 @@
 import React from "react";
-import { TabComponent } from "./TabComponent";
-import TabComponentDescription from './TabComponentDescription';
+import { ReactTabs } from "./ReactTabs";
+import reactTabsDescription from './ReactTabsDescription';
 
 export default {
-  title: "Components/React Tab Component",
-  component: TabComponent,
+  title: "Components/React Tabs",
+  component: ReactTabs,
   parameters: {
     docs: {
       description: {
-        component: TabComponentDescription,
+        component: reactTabsDescription,
       },
     },
     docsOnly: true,
@@ -31,16 +31,22 @@ export default {
       options: { automated: "automated", manual: "manual" },
       defaultValue: "manual",
     },
+    viewportThreshold: {
+      control: { type: "number" },
+      defaultValue: 400,
+    },
     tabs: {
       table: { disable: true },
     },
   },
 };
 
-const Template = (args) => <TabComponent {...args} />;
+const Template = ({ viewportThreshold, ...args }) => (
+  <ReactTabs viewportThreshold={viewportThreshold} {...args} />
+);
 
-export const StandardTabs = Template.bind({});
-StandardTabs.args = {
+export const ResponsiveTabs = Template.bind({});
+ResponsiveTabs.args = {
   tabs: [
     {
       id: "html-009878",

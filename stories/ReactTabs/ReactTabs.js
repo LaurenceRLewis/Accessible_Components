@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import styles from "./AccordionTabs.module.css";
+import styles from "./ReactTabs.module.css";
 
 const AccordionButton = ({
   id,
@@ -82,7 +82,7 @@ const TabPanel = ({ id, isSelected, children, tabIndex }) => (
     </div>
   );
 
-export const AccordionTabComponent = ({
+export const ReactTabs = ({
   tabs,
   tabPanelTabindex,
   triggerActivation = "automated",

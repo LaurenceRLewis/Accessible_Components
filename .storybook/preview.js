@@ -12,4 +12,13 @@ const preview = {
   },
 };
 
+export const parameters = {
+  options: {
+    storySort: {
+      method: 'alphabetical',
+      order: ['Introduction', 'Components', 'Tables'],
+    },
+  },
+};
+
 export default preview;
