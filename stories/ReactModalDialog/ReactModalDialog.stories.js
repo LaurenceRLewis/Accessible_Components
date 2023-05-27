@@ -1,14 +1,14 @@
 import React from 'react';
-import ReactSheetDialog from './ReactSheetDialog';
-import reactSheetDialogDescription from './ReactSheetDialogDescription';
+import ReactModalDialog from './ReactModalDialog';
+import reactModalDialogDescription from './ReactModalDialogDescription';
 
 export default {
   title: 'Components/React Modal Dialog',
-  component: ReactSheetDialog,
+  component: ReactModalDialog,
   parameters: {
     docs: {
       description: {
-        component: reactSheetDialogDescription,
+        component: reactModalDialogDescription,
       },
     },
     docsOnly: true,
@@ -32,7 +32,7 @@ export default {
   },
 };
 
-const Template = (args) => <ReactSheetDialog {...args} />;
+const Template = (args) => <ReactModalDialog {...args} />;
 
 export const ModalDialog = Template.bind({});
 ModalDialog.args = {

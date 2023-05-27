@@ -1,5 +1,5 @@
 const description = `
-ReactSheetDialog is a flexible and accessible React component that provides the functionality for creating both standard modal dialogues and sheet dialogues. 
+ReactModalDialog is a flexible and accessible React component that provides the functionality for creating both standard modal dialogues and sheet dialogues. 
 
 ## Features
 
@@ -10,11 +10,11 @@ ReactSheetDialog is a flexible and accessible React component that provides the 
 
 ## Keyboard Accessibility
 
-ReactSheetDialog component supports keyboard accessibility. It allows opening and closing of the dialog via the 'Enter' key, and closing via the 'Escape' key. It also includes functionality to trap focus within the dialog when it's open and in modal mode.
+ReactModalDialog component supports keyboard accessibility. It allows opening and closing of the dialog via the 'Enter' key, and closing via the 'Escape' key. It also includes functionality to trap focus within the dialog when it's open and in modal mode.
 
 ## ARIA Usage
 
-ReactSheetDialog sets appropriate ARIA roles and properties based on the dialog's state and type. It also manages 'aria-hidden' attributes on sibling elements to the dialog when it's open in modal mode, helping to ensure that screen readers only expose the appropriate content to users.
+ReactModalDialog sets appropriate ARIA roles and properties based on the dialog's state and type. It also manages 'aria-hidden' attributes on sibling elements to the dialog when it's open in modal mode, helping to ensure that screen readers only expose the appropriate content to users.
 
 ### Download build files
 - **[Development files](https://github.com/LaurenceRLewis/Accessible_Components/tree/main/stories/ReactSheetDialog)

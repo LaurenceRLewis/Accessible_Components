@@ -3,9 +3,9 @@ import ReactDOM from "react-dom";
 import classNames from "classnames";
 import SheetDialogContent from "./SheetDialogContent";
 import StandardDialogContent from "./StandardDialogContent";
-import styles from "./ReactSheet.module.css";
+import styles from "./ReactModalDialog.module.css";
 
-function ReactSheetDialog(props) {
+function ReactModalDialog(props) {
   // Declare state variable for sheet/dialog open state
   const [open, setOpen] = useState(false);
   // Destructure the modal and dialogType props
@@ -234,4 +234,4 @@ function ReactSheetDialog(props) {
   );
 }
 
-export default ReactSheetDialog;
+export default ReactModalDialog;
