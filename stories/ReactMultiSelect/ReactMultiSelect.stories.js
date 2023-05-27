@@ -4,7 +4,7 @@ import ReactMultiSelect from './ReactMultiSelect';
 import reactMultiSelectDescription from './ReactMultiSelectDescription';
 
 export default {
-  title: 'Work in progress/React Multi-Select',
+  title: 'Components/React Multi-Select',
   component: ReactMultiSelect,
   parameters: {
     docs: {

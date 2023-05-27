@@ -35,10 +35,11 @@ const ReactMultiSelect = ({ selectionModel }) => {
         : [...selectedOptions, option];
     }
     setSelectedOptions(newSelectedOptions);
-    ariaAnnounce(`Selected ${newSelectedOptions.length} items.`);
+    //ariaAnnounce(`Selected ${newSelectedOptions.length} items.`);
+    ariaAnnounce(`You have ${newSelectedOptions.length} ingredients selected.`);
   };
 
-  const handleKeyDown = useKeyboardNavigation(isListboxOpen, listboxRef, handleSelectOption, selectionModel);
+  const handleKeyDown = useKeyboardNavigation(isListboxOpen, listboxRef, handleSelectOption, setListboxOpen, selectionModel);
 
   const handleDismissOption = (option) => {
     const newSelectedOptions = selectedOptions.filter((item) => item !== option);
@@ -47,8 +48,10 @@ const ReactMultiSelect = ({ selectionModel }) => {
   };
 
   return (
+    <>
+    <h2>Shopping List</h2>
+  <p className={styles['HelpText']} >Remove ingredients from you shopping list by clicking on the buttons below.</p>
     <div className={styles['multiSelectContainer']}>
-  <h2>Your Ingredients</h2>
   <div className={styles['selectedOptions']}>
       {selectedOptions.map((option, index) => (
   <button 
@@ -61,9 +64,10 @@ const ReactMultiSelect = ({ selectionModel }) => {
   </button>
 ))}
       </div>
+      <p className={styles['SrOnly']} >You have {selectedOptions.length} ingredients selected.</p>
       <button 
       className={styles['listboxToggleButton']} 
-      onClick={() => setListboxOpen(!isListboxOpen)}>Toggle Listbox
+      onClick={() => setListboxOpen(!isListboxOpen)}>Ingredients
       </button>
       {isListboxOpen && (
         <ul
@@ -89,6 +93,7 @@ const ReactMultiSelect = ({ selectionModel }) => {
         </ul>
       )}
     </div>
+    </>
   );
 };
 

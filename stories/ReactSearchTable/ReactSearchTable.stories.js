@@ -3,7 +3,7 @@ import ReactSearchTable from './ReactSearchTable';
 import reactSearchTableDescription from './ReactSearchTableDescription';
 
 export default {
-  title: 'Work in progress/ReactSearchTable',
+  title: 'Tables/React Table with search function',
   component: ReactSearchTable,
   parameters: {
     docs: {

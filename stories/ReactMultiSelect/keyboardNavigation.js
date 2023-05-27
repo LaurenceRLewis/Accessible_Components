@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-const useKeyboardNavigation = (isListboxOpen, listboxRef, handleSelectOption, selectionModel) => {
+const useKeyboardNavigation = (isListboxOpen, listboxRef, handleSelectOption, setListboxOpen, selectionModel) => {
   const [focusedOptionIndex, setFocusedOptionIndex] = useState(0);
 
   useEffect(() => {
@@ -45,6 +45,11 @@ const useKeyboardNavigation = (isListboxOpen, listboxRef, handleSelectOption, se
       case 'Enter':
         event.preventDefault();
         handleSelectOption(options[focusedOptionIndex].textContent);
+        break;
+
+      case 'Escape':
+        event.preventDefault();
+        setListboxOpen(false);
         break;
 
       default:
