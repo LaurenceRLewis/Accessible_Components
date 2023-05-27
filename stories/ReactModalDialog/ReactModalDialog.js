@@ -31,9 +31,11 @@ function ReactModalDialog(props) {
   // Add an effect to remove tabindex from the modal content container when sheet/dialog is closed
   useEffect(() => {
     if (!open) {
-      const modalContentContainer = document.querySelector(`.${styles.sheetContent}`);
+      const modalContentContainer = document.querySelector(
+        `.${styles.sheetContent}`
+      );
       if (modalContentContainer) {
-        modalContentContainer.removeAttribute('tabindex');
+        modalContentContainer.removeAttribute("tabindex");
       }
     }
   }, [open]);
@@ -203,14 +205,15 @@ function ReactModalDialog(props) {
           >
             <svg
               aria-hidden="true"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
+              width="48"
+              height="48"
+              viewBox="0 0 48 48"
               fill="none"
+              preserveAspectRatio="xMidYMid meet"
               xmlns="http://www.w3.org/2000/svg"
             >
               <path
-                d="M6 18L18 6M6 6L18 18"
+                d="M12 36L36 12M12 12L36 36"
                 stroke="#7B61C4"
                 strokeWidth="2"
                 strokeLinecap="round"

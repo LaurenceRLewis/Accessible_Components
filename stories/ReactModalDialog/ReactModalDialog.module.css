@@ -78,12 +78,20 @@ body {
   font-weight: bold;
 }
 
+.sheetHeading[tabindex="-1"]{
+  border:none;
+  outline:none;
+  box-shadow:none;
+}
+
 .closeButton {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 48px;
   height: 48px;
+  min-height:48px;
+  min-width:48px;
   border-radius: 50%;
   background-color: white;
   color: purple;
