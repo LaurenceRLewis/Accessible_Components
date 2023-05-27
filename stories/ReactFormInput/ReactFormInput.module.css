@@ -1,0 +1,43 @@
+body {
+    font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    line-height:1.5;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 1em;
+  }
+  
+  .label {
+    font-size: 1em;
+    margin-bottom: 0.5em;
+    color: #5c5c5c;
+  }
+  
+  .helpText {
+    margin-bottom: 0.5em;
+    margin-top:0;
+    font-size: 0.8rem;
+    color: #767676;
+  }
+  
+  .input {
+    height: 2em;
+    width: 20em;
+    font-size: 1em;
+    padding: 0.5em;
+    border: 1px solid #a1a1a1;
+    border-radius: 3px;
+    outline: none;
+  }
+  
+  .input:focus {
+    border: 2px solid purple;
+    outline: none;
+  }
+  
+  .input:focus-visible {
+    box-shadow: 0 0 0 3px rgba(128, 0, 128, 0.5);
+  }  
