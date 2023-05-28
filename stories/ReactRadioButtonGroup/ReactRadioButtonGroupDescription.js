@@ -27,9 +27,13 @@ This will render a radio button group with a custom group name (legend) "Example
 
 ## Adding More Radio Buttons in Code
 
-To add more radio buttons, you will need to make changes in your code. Specifically, extend the \`labels\` array with more label strings. Each new label you add will create a new radio button in the group.
+To add more radio buttons, you will need to make changes in your code. Specifically, extend the \`labels\` array with more label strings. Each new label you add will create a new radio button in the group. You will need to update the \`numberOfRadioButtons\` constant to match the number of radio button labels.
 
 For example:
+
+\`\`\`jsx
+const numberOfRadioButtons = 5;
+\`\`\`
 
 \`\`\`jsx
 <ReactRadioButtonGroup
