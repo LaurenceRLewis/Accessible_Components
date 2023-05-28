@@ -1,0 +1,47 @@
+:root {
+    --purple-900: #4338ca;
+    --purple-700: #5941a9;
+    --purple-500: #7b61c4;
+    --purple-300: #a886e5;
+    --purple-100: #d3beff;
+    --white: #ffffff;
+    --black: #262626;
+  }
+  
+  body {
+    font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    line-height: 1.5;
+  }
+  
+  .fieldset {
+    border: 2px solid var(--purple-900);
+    padding: 1em;
+    border-radius: 0.25em;
+  }
+  
+  .legend {
+    color: var(--black);
+    font-weight: bold;
+    margin-bottom: 0.5em;
+    font-size: 1.5rem;
+  }
+  
+  .checkboxContainer {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5em;
+  }
+  
+  .checkboxInput {
+    margin-right: 0.5em;
+  }
+  
+  .checkboxLabel {
+    color: var(--black);
+    margin-left: 0.5em;
+  }
+  
+  input[type="checkbox"]:focus-visible {
+    outline: 2px solid var(--purple-900);
+    outline-offset: 2px;
+  }

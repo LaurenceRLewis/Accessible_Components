@@ -2,26 +2,31 @@ import React from 'react';
 import ReactRadioButtonGroup from './ReactRadioButtonGroup';
 import ReactRadioButtonGroupDescription from './ReactRadioButtonGroupDescription';
 
-// This must match the number of labels set in the RadioButtonGroup array
-const numberOfRadioButtons = 2;
+// Defines the count of radio buttons that will be displayed in the Storybook UI
+const numberOfRadioButtons = 4;
 
+// argTypes defines the control type and other properties for each prop that is editable in Storybook UI
 const argTypes = {
+  // groupName is the name of the radio button group. It populates the legend in the UI.
   groupName: {
     control: { type: 'text' },
     defaultValue: 'Group Name',
     description: "The group name of the radio buttons that populates the Legend",
   },
+  // labels is disabled in the Storybook UI since it is auto-generated based on the number of radio buttons.
   labels: {
     table: {
-      disable: true, // Disable the labels control
+      disable: true, 
     },
   },
 };
 
+// Default props to be used for rendering the radio button group in the Storybook
 const args = {
   groupName: 'Group Name',
 };
 
+// Loop to dynamically add labels for each radio button in the group based on the specified count
 for (let i = 0; i < numberOfRadioButtons; i++) {
   const key = `labelText${i + 1}`;
   argTypes[key] = {
@@ -31,31 +36,36 @@ for (let i = 0; i < numberOfRadioButtons; i++) {
   args[key] = i < 2 ? `Label ${i + 1}` : '';
 }
 
+// Default export for Storybook. It includes metadata for the Storybook to know how to handle and present the component.
 export default {
   title: 'Building Blocks/Radio Button Group',
   component: ReactRadioButtonGroup,
   parameters: {
     docs: {
+      // Component description pulled in from ReactRadioButtonGroupDescription.
       description: {
         component: ReactRadioButtonGroupDescription,
       },
     },
+    // Parameter that specifies this component should only appear in the docs panel.
     docsOnly: true,
   },
   argTypes,
 };
 
+// Template function to create a new instance of the RadioButtonGroup with the props from args.
 const Template = (args) => {
+  // Creates an array of labels based on the number of radio buttons.
   const labelTexts = Array.from({ length: numberOfRadioButtons }, (_, i) => args[`labelText${i + 1}`]);
-  const { labelText1, labelText2, ...restArgs } = args;
-  const filteredLabelTexts = labelTexts.filter(label => label); // Filters out undefined and empty labels
+  // Makes a copy of the args object. This includes all properties, including those used for the labelTexts.
+const { ...restArgs } = args;
+  // Filters out any undefined or empty labels.
+  const filteredLabelTexts = labelTexts.filter(label => label);
+  // Returns a new instance of the ReactRadioButtonGroup with the filtered labels and other args.
   return <ReactRadioButtonGroup labels={filteredLabelTexts} {...restArgs} />;
 };
 
-// Define the RadioButtonGroup
-// Make sure to update the number of radio buttons and their labels according to your need
+// Story that provides a use case for the RadioButtonGroup.
 export const RadioButtonGroup = Template.bind({});
+// Sets initial arguments for this story, derived from the args object we constructed.
 RadioButtonGroup.args = args;
-
-// Add labelText3, labelText4, etc. to the RadioButtonGroup.args above if you need more radio buttons by default
-// And remember to update the numberOfRadioButtons value.
