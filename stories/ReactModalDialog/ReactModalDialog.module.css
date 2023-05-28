@@ -12,7 +12,7 @@ body {
   --purple-300: #a886e5;
   --purple-100: #d3beff;
   --white: #ffffff;
-  --black: #000000;
+  --black: #262626;
 }
 
 /*Triggering button*/
@@ -47,7 +47,7 @@ body {
   right: -400px;
   width: 400px;
   height: 100%;
-  background-color: white;
+  background-color: var(--white);
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   z-index: 999;
   transition: right 0.3s ease-in-out;
@@ -68,7 +68,7 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
-  background-color: purple;
+  background-color: var(--purple-700);
   color: white;
 }
 
@@ -93,7 +93,7 @@ body {
   min-height:48px;
   min-width:48px;
   border-radius: 50%;
-  background-color: white;
+  background-color: var(--white);
   color: purple;
   font-weight: bold;
   font-size: 1.25rem;
@@ -119,12 +119,12 @@ body {
   left: 50%;
   width: 70%;
   max-width: 640px;
-  height: 80%; /* Updated */
+  height: 80%;
   transform: translate(-50%, -50%);
   border-radius: 8px;
-  overflow: hidden; /* Added */
-  background-color: white; /* Added */
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Added */
+  overflow: hidden;
+  background-color: var(--white);
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .contentContainer {
@@ -139,19 +139,23 @@ body {
 }
 
 /* Focus styles */
-:focus {
+.sideSheetButton:focus {
   outline: none;
   box-shadow: 0px 0px 0px 3px var(--purple-100);
 }
 
-:focus-visible {
+.sideSheetButton:focus-visible {
   outline: none;
-  box-shadow: 0px 0px 0px 3px var(--purple-100);
+  box-shadow: 0px 0px 0px 2px var(--white), 0px 0px 0px 4px var(--purple-900);
 }
 
-[tabindex="-1"]:focus-visible {
+.closeButton:focus-visible {
   outline: none;
-  box-shadow: none;
+  box-shadow: 0px 0px 0px 2px var(--purple-900), 0px 0px 0px 4px var(--white);
+}
+
+.sheetContent[tabindex="0"]:focus {
+  border: 2px solid var(--purple-900);
 }
 
 .hidden {
