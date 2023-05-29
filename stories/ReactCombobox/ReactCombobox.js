@@ -77,8 +77,15 @@ const ReactCombobox = ({ isTechnology = "ARIA", showHelpText = false }) => {
           setSelectedIndex(selectedIndex + 1);
         }
       }
-    } else if (e.key === "ArrowUp" && selectedIndex > 0) {
-      setSelectedIndex(selectedIndex - 1);
+    } else if (e.key === "ArrowUp") {
+      if (inputValue !== "" && showOptions) {
+        setSelectedIndex(options.length - 1);
+      } else if (inputValue === "" && !showOptions) {
+        setShowOptions(true);
+        setSelectedIndex(options.length - 1);
+      } else if (selectedIndex > 0) {
+        setSelectedIndex(selectedIndex - 1);
+      }
     } else if (e.key === "Enter" && selectedIndex !== -1) {
       setInputValue(options[selectedIndex]);
       setSelectedIndex(-1);
@@ -100,8 +107,8 @@ const ReactCombobox = ({ isTechnology = "ARIA", showHelpText = false }) => {
     } else if (e.key === "Tab") {
       setShowOptions(false);
     }
-  };  
-
+  };
+  
   const ChevronDown = () => (
     <svg
       xmlns="http://www.w3.org/2000/svg"
