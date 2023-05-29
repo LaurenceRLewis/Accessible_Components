@@ -66,11 +66,16 @@ const ReactCombobox = ({ isTechnology = "ARIA", showHelpText = false }) => {
   };
 
   const handleKeyPress = (e) => {
-    if (e.key === "ArrowDown" && selectedIndex < options.length - 1) {
-      if (e.altKey) {
+    if (e.key === "ArrowDown") {
+      if (inputValue === "" && !showOptions) {
         setShowOptions(true);
-      } else {
-        setSelectedIndex(selectedIndex + 1);
+        setSelectedIndex(0);
+      } else if (selectedIndex < options.length - 1) {
+        if (e.altKey) {
+          setShowOptions(true);
+        } else {
+          setSelectedIndex(selectedIndex + 1);
+        }
       }
     } else if (e.key === "ArrowUp" && selectedIndex > 0) {
       setSelectedIndex(selectedIndex - 1);
@@ -92,8 +97,7 @@ const ReactCombobox = ({ isTechnology = "ARIA", showHelpText = false }) => {
       if (inputRef.current) {
         inputRef.current.setSelectionRange(inputValue.length, inputValue.length);
       }
-    }
-    if (e.key === "Tab") {
+    } else if (e.key === "Tab") {
       setShowOptions(false);
     }
   };  
