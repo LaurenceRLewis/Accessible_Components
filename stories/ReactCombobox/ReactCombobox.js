@@ -64,50 +64,51 @@ const ReactCombobox = ({ isTechnology = "ARIA", showHelpText = false }) => {
       setShowOptions(true);
     }
   };
+  
+  const [shouldFocusOnOption, setShouldFocusOnOption] = useState(false);
 
-  const handleKeyPress = (e) => {
-    if (e.key === "ArrowDown") {
-      if (inputValue === "" && !showOptions) {
-        setShowOptions(true);
-        setSelectedIndex(0);
-      } else if (selectedIndex < options.length - 1) {
-        if (e.altKey) {
-          setShowOptions(true);
-        } else {
-          setSelectedIndex(selectedIndex + 1);
-        }
-      }
-    } else if (e.key === "ArrowUp") {
-      if (inputValue !== "" && showOptions) {
-        setSelectedIndex(options.length - 1);
-      } else if (inputValue === "" && !showOptions) {
-        setShowOptions(true);
-        setSelectedIndex(options.length - 1);
-      } else if (selectedIndex > 0) {
-        setSelectedIndex(selectedIndex - 1);
-      }
-    } else if (e.key === "Enter" && selectedIndex !== -1) {
-      setInputValue(options[selectedIndex]);
-      setSelectedIndex(-1);
-      setShowOptions(false);
-    } else if (e.key === "Escape") {
-      if (showOptions) {
-        setShowOptions(false);
-      } else {
-        setInputValue("");
-      }
-    } else if (e.key === "Home") {
-      if (inputRef.current) {
-        inputRef.current.setSelectionRange(0, 0);
-      }
-    } else if (e.key === "End") {
-      if (inputRef.current) {
-        inputRef.current.setSelectionRange(inputValue.length, inputValue.length);
-      }
-    } else if (e.key === "Tab") {
-      setShowOptions(false);
+const handleKeyPress = (e) => {
+  if (e.key === "ArrowDown") {
+    if (!showOptions) {
+      setShowOptions(true);
+      setShouldFocusOnOption(false);
+    } else if (selectedIndex < options.length - 1) {
+      setSelectedIndex(selectedIndex + 1);
+      setShouldFocusOnOption(true);
     }
-  };
+  } else if (e.key === "ArrowUp") {
+    if (selectedIndex === -1 || selectedIndex === 0) {
+      if (!showOptions) {
+        setShowOptions(true);
+        setShouldFocusOnOption(false);
+      }
+      setSelectedIndex(options.length - 1);
+    } else if (selectedIndex > 0) {
+      setSelectedIndex(selectedIndex - 1);
+      setShouldFocusOnOption(true);
+    }
+  } else if (e.key === "Enter" && selectedIndex !== -1) {
+    setInputValue(options[selectedIndex]);
+    setSelectedIndex(-1);
+    setShowOptions(false);
+    setShouldFocusOnOption(false);
+  } else if (e.key === "Escape") {
+    setShowOptions(false);
+    setSelectedIndex(-1);
+    setShouldFocusOnOption(false);
+  } else if (e.key === "Home") {
+    if (inputRef.current) {
+      inputRef.current.setSelectionRange(0, 0);
+    }
+  } else if (e.key === "End") {
+    if (inputRef.current) {
+      inputRef.current.setSelectionRange(inputValue.length, inputValue.length);
+    }
+  } else if (e.key === "Tab") {
+    setShowOptions(false);
+    setShouldFocusOnOption(false);
+  }
+};         
   
   const ChevronDown = () => (
     <svg
@@ -187,7 +188,6 @@ const ReactCombobox = ({ isTechnology = "ARIA", showHelpText = false }) => {
         )}
         {showOptions && (
           <p id="result-count" className={styles["resultCount"]}>
-            {/* {`${resultCount} of ${townsAndCities.length} possible results`} */}
             {`${resultCount} results found`}
           </p>
         )}
