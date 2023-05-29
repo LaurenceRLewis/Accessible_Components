@@ -93,6 +93,9 @@ const ReactCombobox = ({ isTechnology = "ARIA", showHelpText = false }) => {
         inputRef.current.setSelectionRange(inputValue.length, inputValue.length);
       }
     }
+    if (e.key === "Tab") {
+      setShowOptions(false);
+    }
   };  
 
   const ChevronDown = () => (
