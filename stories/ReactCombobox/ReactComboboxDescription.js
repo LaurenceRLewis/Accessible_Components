@@ -16,7 +16,8 @@ The ReactCombobox is a flexible implementation of both the ARIA Combobox Widget 
 
 Users can navigate and interact with the ARIA version of the ReactCombobox using the following keyboard controls:
 
-- **ArrowDown/ArrowUp**: Moves focus to the next/previous item in the options list.
+- **ArrowDown**: If the textbox is not empty and the listbox is displayed, moves visual focus to the first suggested value. If the textbox is empty and the listbox is not displayed, opens the listbox and moves visual focus to the first option. In both cases, DOM focus remains on the textbox.
+- **ArrowUp**: Moves visual focus to the previous item in the options list. If the textbox is empty and the listbox is not displayed, opens the listbox and moves visual focus to the last option. In both cases, DOM focus remains on the textbox.
 - **Alt + Down Arrow**: Opens the listbox without moving focus or changing selection.
 - **Enter**: Selects the focused option and closes the options list.
 - **Escape**: Closes the options list if it's open, and clears the input if the list is closed.

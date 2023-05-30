@@ -67,12 +67,31 @@ const ReactCombobox = ({ isTechnology = "ARIA", showHelpText = false }) => {
   
   const [shouldFocusOnOption, setShouldFocusOnOption] = useState(false);
 
+  useEffect(() => {
+    if (showOptions && shouldFocusOnOption) {
+      if (selectedIndex >= 0 && selectedIndex < options.length) {
+        document.getElementById(`option-${selectedIndex}`).scrollIntoView();
+      }
+    } else if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [showOptions, selectedIndex, shouldFocusOnOption]);
+
 const handleKeyPress = (e) => {
   if (e.key === "ArrowDown") {
-    if (!showOptions) {
+    // Add new conditions for empty inputValue and non-displayed listbox
+    if (inputValue === "" && !showOptions) {
       setShowOptions(true);
-      setShouldFocusOnOption(false);
-    } else if (selectedIndex < options.length - 1) {
+      setSelectedIndex(0);
+      setShouldFocusOnOption(true);
+    }
+    // Condition for non-empty inputValue and displayed listbox
+    else if (inputValue !== "" && showOptions) {
+      setSelectedIndex(0);
+      setShouldFocusOnOption(true);
+    }
+    // Condition for navigating in displayed listbox
+    else if (showOptions && selectedIndex < options.length - 1) {
       setSelectedIndex(selectedIndex + 1);
       setShouldFocusOnOption(true);
     }
