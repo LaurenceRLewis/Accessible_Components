@@ -1,10 +1,10 @@
 import React from 'react';
-import ReactTableSortableControl from './ReactTableSortableControl';
+import ReactTableSortable from './ReactTableSortable';
 import reactTableSortableDescription from './ReactTableSortableDescription';
 
 export default {
   title: 'Tables/React Table Sortable',
-  component: ReactTableSortableControl,
+  component: ReactTableSortable,
   parameters: {
     docs: {
       description: {
@@ -24,16 +24,26 @@ export default {
         defaultValue: { summary: 'Sort' },
       },
     },
+    includeScope: {
+      control: { type: 'boolean' },
+      description: 'Include scope="col" attribute on header cells',
+      defaultValue: true,
+      table: {
+        type: { summary: 'boolean' },
+        defaultValue: { summary: true },
+      },
+    },
     tabs: {
       table: { disable: true },
     },
   },
 };
 
-const Template = (args) => <ReactTableSortableControl {...args} />;
+const Template = (args) => <ReactTableSortable {...args} />;
 
 export const SortableTableColumns = Template.bind({});
 
 SortableTableColumns.args = {
   sortable: 'Sort',
+  includeScope: true,
 };

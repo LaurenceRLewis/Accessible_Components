@@ -2,7 +2,7 @@
 import React, { useState, useCallback } from "react";
 import "./styles.css";
 
-export const ReactTableSortable = ({ sortable }) => {
+export const ReactTableSortable = ({ sortable = 'Sort', includeScope = true }) => {
   // Initialize tableData with initial data.
   const [tableData, setTableData] = useState([
     [
@@ -128,6 +128,7 @@ export const ReactTableSortable = ({ sortable }) => {
             <th
               key={header}
               id={`${header.replace(/\s+/g, "-").toLowerCase()}-${index}`}
+              {...(includeScope ? { scope: "col" } : {})}
               {...(sortedColumn.index === index && sortable === "Sort"
                 ? {
                     "aria-sort": sortedColumn.ascending

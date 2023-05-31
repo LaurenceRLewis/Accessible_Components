@@ -8,6 +8,7 @@ ReactTableSortable is a table component that displays data in a sortable format.
 - Providing visual indicators for the sorting order.
 - Customizable sorting behavior based on column data types.
 - Accessible and keyboard-friendly interaction.
+- Option to include \`scope="col"\` attribute on header cells.
 
 ## Usage
 
@@ -18,12 +19,13 @@ The ReactTableSortable component receives the data to be displayed in the table 
 ReactTableSortable accepts the following props:
 
 - \`sortable\` (string, default: 'Sort'): Determines whether sorting is enabled or disabled for the columns. Possible values are 'Sort' and "Don't Sort".
+- \`includeScope\` (boolean, default: true): Determines whether to include \`scope="col"\` attribute on header cells. 
 
 ## Accessibility
 
 The ReactTableSortable component ensures accessibility by providing proper ARIA attributes and visual indicators for the sorting functionality. The header buttons have accessible labels and ARIA attributes to indicate the sorting order (ascending or descending). This allows screen readers and assistive technologies to provide accurate information about the table sorting.
 
-### Download build files
+## Download build files
 - **[Development files](https://github.com/LaurenceRLewis/Accessible_Components/tree/main/stories/ReactTableSortable)
 
 ## Example
@@ -38,7 +40,7 @@ const MyComponent = () => {
   ];
 
   return (
-    <ReactTableSortable sortable="Sort" tableData={tableData} />
+    <ReactTableSortable sortable="Sort" includeScope={true} tableData={tableData} />
   );
 };
 \`\`\`
