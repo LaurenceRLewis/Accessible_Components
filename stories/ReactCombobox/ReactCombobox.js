@@ -10,7 +10,6 @@ const ReactCombobox = ({ isTechnology = "ARIA", showHelpText = false }) => {
   const [options, setOptions] = useState(townsAndCities);
   const [resultCount, setResultCount] = useState(0);
   const inputRef = useRef(null);
-
   const toggleOptions = () => {
     setShowOptions(!showOptions);
   };
@@ -79,20 +78,18 @@ const ReactCombobox = ({ isTechnology = "ARIA", showHelpText = false }) => {
 
 const handleKeyPress = (e) => {
   if (e.key === "ArrowDown") {
-    // Add new conditions for empty inputValue and non-displayed listbox
     if (inputValue === "" && !showOptions) {
       setShowOptions(true);
       setSelectedIndex(0);
       setShouldFocusOnOption(true);
     }
-    // Condition for non-empty inputValue and displayed listbox
-    else if (inputValue !== "" && showOptions) {
+    else if (inputValue !== "" && !showOptions) {
+      setShowOptions(true);
       setSelectedIndex(0);
       setShouldFocusOnOption(true);
     }
-    // Condition for navigating in displayed listbox
     else if (showOptions && selectedIndex < options.length - 1) {
-      setSelectedIndex(selectedIndex + 1);
+      setSelectedIndex(prevIndex => prevIndex + 1);
       setShouldFocusOnOption(true);
     }
   } else if (e.key === "ArrowUp") {
