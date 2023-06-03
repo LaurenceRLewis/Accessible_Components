@@ -3,7 +3,7 @@ import ariaAnnounce from "../../.storybook/utils/ariaAnnounce";
 import { townsAndCities } from "./ReactComboboxData";
 import styles from "./ReactCombobox.module.css";
 
-const ReactCombobox = ({ isTechnology = "ARIA", showHelpText = false }) => {
+const ReactCombobox = ({ showHelpText = false }) => {
   const [inputValue, setInputValue] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const [showOptions, setShowOptions] = useState(false);
@@ -157,34 +157,6 @@ const handleKeyPress = (e) => {
       />
     </svg>
   );
-
-  if (isTechnology === "HTML") {
-    return (
-      <>
-        <h1>HTML Datalist</h1>
-        <p>
-          The datalist element has good support across modern browsers and assistive technology.
-        </p>
-        <div className={styles["comboboxContainer"]}>
-          <label id="combobox-label" htmlFor="combobox-input">
-            Australian cities and towns
-          </label>
-          <input
-            id="combobox-input"
-            className={styles["comboboxInput"]}
-            list="combobox-list"
-          />
-          <datalist id="combobox-list">
-            {townsAndCities.map((city, index) => (
-              <option key={index} value={city}>
-                {city}
-              </option>
-            ))}
-          </datalist>
-        </div>
-      </>
-    );
-  }
 
   return (
     <>

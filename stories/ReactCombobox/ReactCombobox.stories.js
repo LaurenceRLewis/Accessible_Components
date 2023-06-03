@@ -14,10 +14,6 @@ export default {
         docsOnly: true,
     },
     argTypes: {
-        isTechnology: {
-            options: ['HTML', 'ARIA'],
-            control: { type: 'radio' }
-        },
         showHelpText: {
             options: ['Yes', 'No'],
             control: { type: 'radio' }
@@ -30,6 +26,5 @@ const Template = (args) => <ReactCombobox {...args} />;
 export const ARIACombobox = Template.bind({});
 ARIACombobox.storyName = "Combobox";
 ARIACombobox.args = {
-    isTechnology: 'ARIA',
     showHelpText: 'No', 
 };
