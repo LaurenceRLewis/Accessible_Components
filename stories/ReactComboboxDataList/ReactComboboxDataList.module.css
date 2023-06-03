@@ -1,0 +1,47 @@
+body {
+    font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    line-height:1.5;
+}
+h1{
+    margin-bottom:.5em;
+}
+
+label{
+    display: block;
+}
+
+.comboboxContainer {
+    position: relative;
+    padding-bottom:1em;
+    width: 300px;
+}
+
+.comboboxInput {
+    flex-grow: 1;
+    width: 100%;
+    height: 35px;
+    padding: .3125em .625em;
+    border: .0625em solid #6a1b9a;
+    border-radius: .3125em;
+    outline: none;
+    box-sizing: border-box;
+    font-size: 1rem;
+}
+
+.comboboxInput:focus-visible {
+    border-color: #9c27b0;
+    box-shadow: 0 0 0 .1875em #D1C4E9;
+}
+
+.comboboxWrapper {
+    display: flex;
+    align-items: stretch;
+}
+
+.helpText {
+    margin-top: .625em;
+    color: #696868;
+    font-size: .875rem;
+    margin:0;
+    padding:0;
+}
