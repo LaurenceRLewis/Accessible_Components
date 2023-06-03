@@ -14,6 +14,14 @@ const ReactComboboxBoth = ({ showHelpText = false }) => {
 
   const inputRef = useRef(null);
 
+  const onBlur = () => {
+    if (selectedIndex !== -1 && filteredOptions.length > selectedIndex) {
+      setUserInput(filteredOptions[selectedIndex]);
+      setPredictiveText(filteredOptions[selectedIndex]);
+    }
+    hideOptions();
+  };
+
   const filterOptions = (query) => {
     return townsAndCities.filter((option) => option.toLowerCase().startsWith(query.toLowerCase()));
   };
@@ -172,6 +180,7 @@ const ReactComboboxBoth = ({ showHelpText = false }) => {
           aria-autocomplete="both"
           onKeyDown={onKeydown}
           onInput={onInput}
+          onBlur={onBlur}
           value={predictiveText}
           aria-describedby={`
             ${showHelpText === "Yes" ? "help-text" : ""}
