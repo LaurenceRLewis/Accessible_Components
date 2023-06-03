@@ -188,10 +188,9 @@ const handleKeyPress = (e) => {
 
   return (
     <>
-      <h1>ARIA Combobox</h1>
+      <h1>ARIA Combobox (List)</h1>
       <p>
-        The ARIA version uses the aria-autocomplete list. Examples for both and
-        none may be added later.
+        The version uses the aria-autocomplete list methid.
       </p>
       <div className={styles["comboboxContainer"]}>
         <label id="combobox-label" htmlFor="combobox-input">

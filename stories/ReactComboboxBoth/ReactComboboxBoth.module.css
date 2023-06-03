@@ -26,18 +26,13 @@ body {
     padding: 0;
   }
   
-  #optionsCount {
-    color: #464646;
-    font-size: 0.8rem;
-  }
-  
-  #optionsCount {
-    margin-top: .625em;
+  .optionsCount {
+    margin-top: 0.625em;
     color: #6a1b9a;
     font-size: .8rem;
     margin: 0;
     padding: 0;
-    margin-bottom: .5em;
+    margin-bottom: 0.5em;
   }
   
   .comboboxWrapper {

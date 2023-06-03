@@ -1,41 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { townsAndCities } from "./ReactComboboxBothData";
+import ariaAnnounce from "../../.storybook/utils/ariaAnnounce";
 import styles from './ReactComboboxBoth.module.css';
 
-const townsAndCities = [
-  'Adelaide (SA)',
-  'Albany (WA)',
-  'Ayr (QLD)',
-  'Brisbane (QLD)',
-  'Bundaberg (QLD)',
-  'Cairns (QLD)',
-  'Charters Towers (QLD)',
-  'Dalby (QLD)',
-  'Gladstone (QLD)',
-  'Gold Coast (QLD)',
-  'Gympie (QLD)',
-  'Hervey Bay (QLD)',
-  'Innisfail (QLD)',
-  'Mackay (QLD)',
-  'Maryborough (QLD)',
-  'Melbourne (VIC)',
-  'Moranbah (QLD)',
-  'Mount Isa (QLD)',
-  'Perth (WA)',
-  'Rockhampton (QLD)',
-  'Sunshine Coast (QLD)',
-  'Sydney (NSW)',
-  'Toowoomba (QLD)',
-  'Townsville (QLD)',
-  'Warwick (QLD)',
-];
-
-const ReactComboboxBoth = () => {
+const ReactComboboxBoth = ({ showHelpText = false }) => {
   const [filteredOptions, setFilteredOptions] = useState([...townsAndCities]);
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const [userInput, setUserInput] = useState('');
   const [listboxVisible, setListboxVisible] = useState(false);
   const [predictiveText, setPredictiveText] = useState('');
-  const [textboxEmpty, setTextboxEmpty] = useState(true); // New state variable
+  const [predictiveIndex, setPredictiveIndex] = useState(-1);
+  const [textboxEmpty, setTextboxEmpty] = useState(true);
 
   const inputRef = useRef(null);
 
@@ -60,6 +35,7 @@ const ReactComboboxBoth = () => {
       setSelectedIndex(-1);
       inputRef.current.focus();
       inputRef.current.setSelectionRange(userInput.length, selectedOption.length);
+      ariaAnnounce(`Option ${selectedOption} selected.`);
     }
   };
 
@@ -73,6 +49,7 @@ const ReactComboboxBoth = () => {
     if (newValue === '') {
       setTextboxEmpty(true); // Update textboxEmpty state when the value is empty
       setPredictiveText('');
+      setPredictiveIndex(-1);
     } else {
       setTextboxEmpty(false); // Update textboxEmpty state when the value is not empty
       showOptions();
@@ -80,7 +57,10 @@ const ReactComboboxBoth = () => {
         setSelectedIndex(0);
         const selectedOption = newFilteredOptions[0];
         setPredictiveText(selectedOption);
+        setPredictiveIndex(0); // Set predictiveIndex to 0 when new options are found
         inputRef.current.setSelectionRange(newValue.length, selectedOption.length);
+      } else {
+        setPredictiveIndex(-1); // Set predictiveIndex to -1 when no options found
       }
     }
   };
@@ -91,6 +71,7 @@ const ReactComboboxBoth = () => {
         event.preventDefault();
         if (filteredOptions.length > 0) {
           setSelectedIndex((selectedIndex + 1) % filteredOptions.length);
+          setPredictiveIndex(-1); // Remove predictive class when ArrowDown is pressed
         }
         break;
       case 'ArrowUp':
@@ -111,33 +92,34 @@ const ReactComboboxBoth = () => {
         setUserInput(inputRef.current.value);
         setPredictiveText('');
         break;
-      case 'Backspace':
-        if (userInput !== '') {
-          event.preventDefault();
-          if (userInput.length === 1) {
-            setUserInput('');
-            setPredictiveText('');
-            setFilteredOptions([...townsAndCities]);
-            setSelectedIndex(-1);
-          } else {
-            const newValue = userInput.slice(0, -1);
-            setUserInput(newValue);
-            const newFilteredOptions = filterOptions(newValue);
-            setFilteredOptions(newFilteredOptions);
-            if (newFilteredOptions.length > 0) {
-              setSelectedIndex(0);
-              setPredictiveText(newFilteredOptions[0]);
-            } else {
-              setSelectedIndex(-1);
+        case 'Backspace':
+          if (userInput !== '') {
+            event.preventDefault();
+            if (userInput.length === 1) {
+              setUserInput('');
               setPredictiveText('');
+              setFilteredOptions([...townsAndCities]);
+              setSelectedIndex(-1);
+              setTextboxEmpty(true); // set textboxEmpty to true when textbox becomes empty
+            } else {
+              const newValue = userInput.slice(0, -1);
+              setUserInput(newValue);
+              const newFilteredOptions = filterOptions(newValue);
+              setFilteredOptions(newFilteredOptions);
+              if (newFilteredOptions.length > 0) {
+                setSelectedIndex(0);
+                setPredictiveText(newFilteredOptions[0]);
+              } else {
+                setSelectedIndex(-1);
+                setPredictiveText('');
+              }
             }
           }
-        }
-        break;
-      default:
-        break;
-    }
-  };
+          break;
+        default:
+          break;
+      }
+    };
 
   const onToggleButtonClick = () => {
     if (!listboxVisible) {
@@ -152,6 +134,7 @@ const ReactComboboxBoth = () => {
       const selectedOption = filteredOptions[selectedIndex];
       setPredictiveText(selectedOption);
       inputRef.current.setSelectionRange(userInput.length, selectedOption.length);
+      ariaAnnounce(`Option ${selectedOption} is highlighted.`);
     }
   }, [selectedIndex, userInput, filteredOptions]);
 
@@ -163,10 +146,20 @@ const ReactComboboxBoth = () => {
   }, [textboxEmpty]);
 
   return (
+    <>
+      <h1>ARIA Combobox (Both)</h1>
+      <p>
+        The version uses the aria-autocomplete Both method.
+      </p>
     <div className={styles['comboboxContainer']}>
       <label id={styles['combobox-label']} htmlFor={styles['combobox-input']}>
         Australian cities and towns
       </label>
+      {showHelpText === "Yes" && (
+          <p id="datalistHelpText" className={styles["helpText"]}>
+            Help text
+          </p>
+        )}
       <div className={styles['optionsCount']} aria-live="assertive" aria-atomic="true" role="region">
         {listboxVisible ? `${filteredOptions.length} options available.` : ''}
       </div>
@@ -180,6 +173,10 @@ const ReactComboboxBoth = () => {
           onKeyDown={onKeydown}
           onInput={onInput}
           value={predictiveText}
+          aria-describedby={`
+            ${showHelpText === "Yes" ? "help-text" : ""}
+            ${showOptions ? "result-count" : ""}
+            `.trim()}
           ref={inputRef}
         />
         <button
@@ -205,13 +202,18 @@ const ReactComboboxBoth = () => {
             aria-selected={selectedIndex === index ? 'true' : 'false'}
             onClick={() => selectOption(index)}
             key={index}
-            className={selectedIndex === index ? styles['selectedOption'] : ''}
+            className={
+              selectedIndex === index 
+                ? `${styles['selectedOption']} ${predictiveIndex === index ? styles['predictive'] : ''}`
+                : `${predictiveIndex === index ? styles['predictive'] : ''}`
+            }
           >
             {option}
           </li>
         ))}
       </ul>
     </div>
+    </>
   );
 };
 
