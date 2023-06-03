@@ -12,7 +12,7 @@ The HTML Datalist provides users with a dropdown list of options that can be fil
 HTML Datalist is a simple and native way to add autocomplete functionality to an input field. It uses the \`<datalist>\` element, which works in conjunction with an \`<input>\` to provide a dropdown of options. These options can be static or dynamically generated, and are filtered by the browser as the user types into the input. It's a straightforward solution for simpler use cases.
 
 ### Download build files
-- **[Development files](https://github.com/LaurenceRLewis/Accessible_Components/tree/main/stories/ReactCombobox)
+- **[Development files](https://github.com/LaurenceRLewis/Accessible_Components/tree/main/stories/ReactComboboxDataList)
 
 ## Props
 
