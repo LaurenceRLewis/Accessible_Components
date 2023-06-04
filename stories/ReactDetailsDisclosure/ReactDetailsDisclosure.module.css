@@ -1,0 +1,43 @@
+:root {
+  --purple-900: #4338ca;
+  --purple-700: #5941a9;
+  --purple-500: #7b61c4;
+  --purple-300: #a886e5;
+  --purple-100: #d3beff;
+  --white: #ffffff;
+  --black: #262626;
+}
+
+.detailsContainer {
+  background-color: var(--purple-100);
+  border-radius: 5px;
+  padding: 10px;
+  color: var(--purple-900);
+  max-width: 500px;
+  margin: 20px;
+}
+
+.summary {
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: var(--purple-700);
+  cursor: pointer;
+  padding: 5px;
+  outline: none;
+}
+
+.summary:focus-visible {
+  box-shadow: 0 0 0 3px var(--purple-300);
+}
+
+.summary h2 {
+  margin: 0;
+  padding: 0;
+  font-size: inherit;
+  display: inline;
+}
+
+.detailsContent {
+  background: var(--white);
+  padding: 1em;
+}
