@@ -50,34 +50,36 @@ const selectOption = (index) => {
   }
 };
 
-  const onInput = (event) => {
-    const newValue = event.target.value;
-    setUserInput(newValue);
+const onInput = (event) => {
+  const newValue = event.target.value;
+  setUserInput(newValue);
 
-    const newFilteredOptions = filterOptions(newValue);
-    setFilteredOptions(newFilteredOptions);
+  const newFilteredOptions = filterOptions(newValue);
+  setFilteredOptions(newFilteredOptions);
 
-    if (newValue === "") {
-      setTextboxEmpty(true); // Update textboxEmpty state when the value is empty
-      setPredictiveText("");
-      setPredictiveIndex(-1);
+  if (newValue === "") {
+    setTextboxEmpty(true); 
+    setPredictiveText("");
+    setPredictiveIndex(-1);
+    setSelectedIndex(-1); // set selectedIndex to -1 when textbox is empty
+  } else {
+    setTextboxEmpty(false); 
+    showOptions();
+    if (newFilteredOptions.length > 0) {
+      setSelectedIndex(0); // set selectedIndex to 0 when new options are found
+      const selectedOption = newFilteredOptions[0];
+      setPredictiveText(selectedOption);
+      setPredictiveIndex(0);
+      inputRef.current.setSelectionRange(
+        newValue.length,
+        selectedOption.length
+      );
     } else {
-      setTextboxEmpty(false); // Update textboxEmpty state when the value is not empty
-      showOptions();
-      if (newFilteredOptions.length > 0) {
-        setSelectedIndex(0);
-        const selectedOption = newFilteredOptions[0];
-        setPredictiveText(selectedOption);
-        setPredictiveIndex(0); // Set predictiveIndex to 0 when new options are found
-        inputRef.current.setSelectionRange(
-          newValue.length,
-          selectedOption.length
-        );
-      } else {
-        setPredictiveIndex(-1); // Set predictiveIndex to -1 when no options found
-      }
+      setSelectedIndex(-1); // set selectedIndex to -1 when no options are found
+      setPredictiveIndex(-1);
     }
-  };
+  }
+};
 
   const onKeydown = (event) => {
     switch (event.key) {
@@ -142,46 +144,29 @@ const selectOption = (index) => {
         setPredictiveText("");
         break;
         case "Backspace":
-          // Check if the user input is not empty
-          if (userInput !== "") {
-            // Prevent the default backspace behaviour
-            event.preventDefault();
-            // If the user input length is 1
-            if (userInput.length === 1) {
-              // Clear the user input
-              setUserInput("");
-              // Clear the predictive text
-              setPredictiveText("");
-              // Reset the options to the original list
-              setFilteredOptions([...townsAndCities]);
-              // Reset the selected index
-              setSelectedIndex(-1);
-              // Indicate that the textbox is now empty
-              setTextboxEmpty(true);
-            } else {
-              // Get the new value by removing the last character from the user input
-              const newValue = userInput.slice(0, -1);
-              // Update the user input with the new value
-              setUserInput(newValue);
-              // Filter the options based on the new value
-              const newFilteredOptions = filterOptions(newValue);
-              // Update the filtered options
-              setFilteredOptions(newFilteredOptions);
-              // If there are new filtered options
-              if (newFilteredOptions.length > 0) {
-                // Select the first option
-                setSelectedIndex(0);
-                // Set the predictive text to the first option
-                setPredictiveText(newFilteredOptions[0]);
-              } else {
-                // Reset the selected index
-                setSelectedIndex(-1);
-                // Clear the predictive text
-                setPredictiveText("");
-              }
-            }
-          }
-          break;
+  if (userInput !== "") {
+    event.preventDefault();
+    if (userInput.length === 1) {
+      setUserInput("");
+      setPredictiveText("");
+      setFilteredOptions([...townsAndCities]);
+      setSelectedIndex(-1);
+      setTextboxEmpty(true);
+    } else {
+      const newValue = userInput.slice(0, -1);
+      setUserInput(newValue);
+      const newFilteredOptions = filterOptions(newValue);
+      setFilteredOptions(newFilteredOptions);
+      if (newFilteredOptions.length > 0) {
+        setSelectedIndex(0); // set selectedIndex to 0 when new options are found
+        setPredictiveText(newFilteredOptions[0]);
+      } else {
+        setSelectedIndex(-1); // set selectedIndex to -1 when no options are found
+        setPredictiveText("");
+      }
+    }
+  }
+  break;
       default:
         break;
     }
