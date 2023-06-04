@@ -11,7 +11,7 @@ The HTML Details/Summary component provides users with a collapsible content are
 HTML Details/Summary is a native way to create collapsible sections on a web page. It uses the \`<details>\` and \`<summary>\` elements to provide a clickable area that can show or hide content within the details element. It's a straightforward solution for simpler use cases.
 
 ### Download build files
-- **[Development files](https://github.com/YourGithubUsername/Accessible_Components/tree/main/stories/ReactDetailsDisclosure)
+- **[Development files](https://github.com/LaurenceRLewis/Accessible_Components/tree/main/stories/ReactDetailsDisclosure)
 
 ## Props
 
