@@ -50,7 +50,7 @@ const ReactCombobox = ({ showHelpText = false }) => {
   const handleInputChange = (event) => {
     const { value } = event.target;
     setInputValue(value);
-    if (isTechnology === "HTML" || value === "") {
+    if (value === "") {
       setShowOptions(false);
       setOptions(townsAndCities);
       setResultCount(townsAndCities.length);
