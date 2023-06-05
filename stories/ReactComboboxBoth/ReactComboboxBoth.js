@@ -232,6 +232,7 @@ const ReactComboboxBoth = ({ showHelpText = false }) => {
             autoComplete="off"
             role="combobox"
             aria-autocomplete="both"
+            aria-expanded={listboxVisible}
             onKeyDown={onKeydown}
             onInput={onInput}
             onBlur={onBlur}
