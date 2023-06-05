@@ -37,49 +37,49 @@ const ReactComboboxBoth = ({ showHelpText = false }) => {
   };
 
   // Function to select an option
-const selectOption = (index) => {
-  if (index >= 0 && index < filteredOptions.length) {
-    const selectedOption = filteredOptions[index];
-    setUserInput(selectedOption);
-    setPredictiveText(selectedOption);
-    hideOptions();
-    setSelectedIndex(-1);
-    inputRef.current.focus();
-    inputRef.current.setSelectionRange(userInput.length, userInput.length);
-    ariaAnnounce(`Option ${selectedOption} selected.`);
-  }
-};
-
-const onInput = (event) => {
-  const newValue = event.target.value;
-  setUserInput(newValue);
-
-  const newFilteredOptions = filterOptions(newValue);
-  setFilteredOptions(newFilteredOptions);
-
-  if (newValue === "") {
-    setTextboxEmpty(true); 
-    setPredictiveText("");
-    setPredictiveIndex(-1);
-    setSelectedIndex(-1); // set selectedIndex to -1 when textbox is empty
-  } else {
-    setTextboxEmpty(false); 
-    showOptions();
-    if (newFilteredOptions.length > 0) {
-      setSelectedIndex(0); // set selectedIndex to 0 when new options are found
-      const selectedOption = newFilteredOptions[0];
+  const selectOption = (index) => {
+    if (index >= 0 && index < filteredOptions.length) {
+      const selectedOption = filteredOptions[index];
+      setUserInput(selectedOption);
       setPredictiveText(selectedOption);
-      setPredictiveIndex(0);
-      inputRef.current.setSelectionRange(
-        newValue.length,
-        selectedOption.length
-      );
-    } else {
-      setSelectedIndex(-1); // set selectedIndex to -1 when no options are found
-      setPredictiveIndex(-1);
+      hideOptions();
+      setSelectedIndex(-1);
+      inputRef.current.focus();
+      inputRef.current.setSelectionRange(userInput.length, userInput.length);
+      ariaAnnounce(`Option ${selectedOption} selected.`);
     }
-  }
-};
+  };
+
+  const onInput = (event) => {
+    const newValue = event.target.value;
+    setUserInput(newValue);
+
+    const newFilteredOptions = filterOptions(newValue);
+    setFilteredOptions(newFilteredOptions);
+
+    if (newValue === "") {
+      setTextboxEmpty(true);
+      setPredictiveText("");
+      setPredictiveIndex(-1);
+      setSelectedIndex(-1); // set selectedIndex to -1 when textbox is empty
+    } else {
+      setTextboxEmpty(false);
+      showOptions();
+      if (newFilteredOptions.length > 0) {
+        setSelectedIndex(0); // set selectedIndex to 0 when new options are found
+        const selectedOption = newFilteredOptions[0];
+        setPredictiveText(selectedOption);
+        setPredictiveIndex(0);
+        inputRef.current.setSelectionRange(
+          newValue.length,
+          selectedOption.length
+        );
+      } else {
+        setSelectedIndex(-1); // set selectedIndex to -1 when no options are found
+        setPredictiveIndex(-1);
+      }
+    }
+  };
 
   const onKeydown = (event) => {
     switch (event.key) {
@@ -99,74 +99,79 @@ const onInput = (event) => {
           );
         }
         break;
-        case 'Enter':
-  // Prevent the default 'Enter' key behavior
-  event.preventDefault();
+      case "Enter":
+        // Prevent the default 'Enter' key behavior
+        event.preventDefault();
 
-  // If a valid option is selected
-  if (selectedIndex >= 0) {
-    // Get the selected option based on selectedIndex
-    const selectedOption = filteredOptions[selectedIndex];
-    // Set the userInput value as the selected option
-    setUserInput(selectedOption);
-    // Also set the predictive text to be the same as the selected option
-    // This sets the full text of the selected option as the userInput and the predictiveText
-    setPredictiveText(selectedOption);
-    // Hide the options list, as we've made a selection
-    hideOptions();
-    // Reset the selectedIndex as we've made a selection
-    setSelectedIndex(-1);
-    // Set the focus back to the input
-    // This is done to ensure the input stays in focus after the selection
-    inputRef.current.focus();
-    // Set the cursor (caret) at the end of the input
-    // This is done so that further typing happens after the selected option text
-    inputRef.current.setSelectionRange(selectedOption.length, selectedOption.length);
-    // Announce the selection to the user (using the ARIA live region)
-    // This is for accessibility purposes, to let the user know what option was selected
-    ariaAnnounce(`Option ${selectedOption} selected.`);
-    // Check if caret is positioned before the predictive text
-    if (inputRef.current.selectionStart < userInput.length) {
-      // Caret is before predictive text
-      console.log("Caret is positioned before predictive text");
-      // Perform desired action
-    } else {
-      // Caret is positioned at the end of the set text (after pressing Enter)
-      console.log("Caret is positioned at the end of the set text (after pressing Enter)");
-      // Perform desired action
-    }
-  }
-  break;
+        // If a valid option is selected
+        if (selectedIndex >= 0) {
+          // Get the selected option based on selectedIndex
+          const selectedOption = filteredOptions[selectedIndex];
+          // Set the userInput value as the selected option
+          setUserInput(selectedOption);
+          // Also set the predictive text to be the same as the selected option
+          // This sets the full text of the selected option as the userInput and the predictiveText
+          setPredictiveText(selectedOption);
+          // Hide the options list, as we've made a selection
+          hideOptions();
+          // Reset the selectedIndex as we've made a selection
+          setSelectedIndex(-1);
+          // Set the focus back to the input
+          // This is done to ensure the input stays in focus after the selection
+          inputRef.current.focus();
+          // Set the cursor (caret) at the end of the input
+          // This is done so that further typing happens after the selected option text
+          inputRef.current.setSelectionRange(
+            selectedOption.length,
+            selectedOption.length
+          );
+          // Announce the selection to the user (using the ARIA live region)
+          // This is for accessibility purposes, to let the user know what option was selected
+          ariaAnnounce(`Option ${selectedOption} selected.`);
+          // Check if caret is positioned before the predictive text
+          if (inputRef.current.selectionStart < userInput.length) {
+            // Caret is before predictive text
+            console.log("Caret is positioned before predictive text");
+            // Perform desired action
+          } else {
+            // Caret is positioned at the end of the set text (after pressing Enter)
+            console.log(
+              "Caret is positioned at the end of the set text (after pressing Enter)"
+            );
+            // Perform desired action
+          }
+        }
+        break;
       case "Escape":
         hideOptions();
         setSelectedIndex(-1);
         setUserInput(inputRef.current.value);
         setPredictiveText("");
         break;
-        case "Backspace":
-  if (userInput !== "") {
-    event.preventDefault();
-    if (userInput.length === 1) {
-      setUserInput("");
-      setPredictiveText("");
-      setFilteredOptions([...townsAndCities]);
-      setSelectedIndex(-1);
-      setTextboxEmpty(true);
-    } else {
-      const newValue = userInput.slice(0, -1);
-      setUserInput(newValue);
-      const newFilteredOptions = filterOptions(newValue);
-      setFilteredOptions(newFilteredOptions);
-      if (newFilteredOptions.length > 0) {
-        setSelectedIndex(0); // set selectedIndex to 0 when new options are found
-        setPredictiveText(newFilteredOptions[0]);
-      } else {
-        setSelectedIndex(-1); // set selectedIndex to -1 when no options are found
-        setPredictiveText("");
-      }
-    }
-  }
-  break;
+      case "Backspace":
+        if (userInput !== "") {
+          event.preventDefault();
+          if (userInput.length === 1) {
+            setUserInput("");
+            setPredictiveText("");
+            setFilteredOptions([...townsAndCities]);
+            setSelectedIndex(-1);
+            setTextboxEmpty(true);
+          } else {
+            const newValue = userInput.slice(0, -1);
+            setUserInput(newValue);
+            const newFilteredOptions = filterOptions(newValue);
+            setFilteredOptions(newFilteredOptions);
+            if (newFilteredOptions.length > 0) {
+              setSelectedIndex(0); // set selectedIndex to 0 when new options are found
+              setPredictiveText(newFilteredOptions[0]);
+            } else {
+              setSelectedIndex(-1); // set selectedIndex to -1 when no options are found
+              setPredictiveText("");
+            }
+          }
+        }
+        break;
       default:
         break;
     }
