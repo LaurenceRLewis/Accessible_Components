@@ -3,7 +3,9 @@ body {
   line-height:1.5;
 }
 
-.sliderContainer {
+.sliderContainer{
+  width:40em;
+  margin-left:1em;
   position: relative;
 }
 

@@ -4,7 +4,7 @@ import HtmlSlider from './HtmlSlider';
 import ReactHtmlSliderDescription from './ReactHtmlSliderDescription';
 
 export default {
-  title: 'Native HTML Components/HTML Slider',
+  title: 'Native HTML Components/React HTML Slider',
   component: HtmlSlider,
   parameters: {
     docs: {
@@ -41,6 +41,7 @@ export default {
 const Template = (args) => <HtmlSlider {...args} />;
 
 export const Slider = Template.bind({});
+
 Slider.args = {
   min: 0,
   max: 10,

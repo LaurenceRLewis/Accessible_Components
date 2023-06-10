@@ -4,7 +4,7 @@ import AriaSlider from './AriaSlider';
 import ReactAriaSliderDescription from './ReactAriaSliderDescription';
 
 export default {
-  title: 'Components/ARIA Slider',
+  title: 'Components/React ARIA Slider',
   component: AriaSlider,
   parameters: {
     docs: {

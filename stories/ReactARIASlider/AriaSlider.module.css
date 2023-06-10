@@ -4,6 +4,11 @@ body {
   line-height: 1.5;
 }
 
+.sliderContainer{
+  width:40em;
+  margin-left:1em;
+}
+
 .ariaSlider {
   position: relative;
   width: 100%;

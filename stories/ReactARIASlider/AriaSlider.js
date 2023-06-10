@@ -130,7 +130,7 @@ const AriaSlider = ({ min, max, step, onChange, ariaValueText, useAriaValueText 
   }, [handleTouchInteraction]);
 
   return (
-    <div>
+    <div className={styles.sliderContainer}>
       <h2 id="ariaSlider88967" className={styles.sliderHeading}>ARIA Slider</h2>
       <p className={styles.sliderParagraph}>
         The ARIA slider allows you to select a value within a range using the
