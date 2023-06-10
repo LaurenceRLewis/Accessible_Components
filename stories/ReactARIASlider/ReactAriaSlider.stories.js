@@ -1,27 +1,20 @@
 //ReactSlider.stories.css
 import React from 'react';
-import HtmlSlider from './HtmlSlider';
 import AriaSlider from './AriaSlider';
-import ReactSliderDescription from './ReactSliderDescription';
+import ReactAriaSliderDescription from './ReactAriaSliderDescription';
 
 export default {
-  title: 'Components/React Slider',
-  component: HtmlSlider,
+  title: 'Components/ARIA Slider',
+  component: AriaSlider,
   parameters: {
     docs: {
       description: {
-        component: ReactSliderDescription,
+        component: ReactAriaSliderDescription,
       },
     },
     docsOnly: true,
   },
   argTypes: {
-    SliderModel: {
-      control: { type: "select" },
-      options: ["HTML", "ARIA"],
-      defaultValue: 'HTML',
-      description: 'Choose the technology type for the slider: HTML or ARIA',
-    },
     min: {
       control: 'number',
       defaultValue: 0,
@@ -53,10 +46,6 @@ export default {
   },  
 };
 
-const Template = (args) => {
-  return args.SliderModel === 'ARIA' 
-  ? <AriaSlider min={0} max={10} step={1} {...args} /> 
-  : <HtmlSlider min={0} max={10} step={1} value={0} {...args} />
-};
+const Template = (args) => <AriaSlider min={0} max={10} step={1} {...args} />;
 
 export const Slider = Template.bind({});
