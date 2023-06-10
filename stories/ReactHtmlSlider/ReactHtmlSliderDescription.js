@@ -14,6 +14,10 @@ The HTML range input type automatically supports keyboard interactions, such as 
 ### Download build files
 - **[Development files](https://github.com/LaurenceRLewis/Accessible_Components/tree/main/stories/ReactHtmlSlider)
 
+### Can I Use
+"Can I use" provides up-to-date browser support tables for support of front-end web technologies on desktop and mobile web browsers.
+- **[Range input type](https://caniuse.com/?search=type%3Drange)
+
 ## Props
 
 | Prop Name         | Type       | Description                                                     |

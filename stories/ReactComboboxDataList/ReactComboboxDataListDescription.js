@@ -14,6 +14,10 @@ HTML Datalist is a simple and native way to add autocomplete functionality to an
 ### Download build files
 - **[Development files](https://github.com/LaurenceRLewis/Accessible_Components/tree/main/stories/ReactComboboxDataList)
 
+### Can I Use
+"Can I use" provides up-to-date browser support tables for support of front-end web technologies on desktop and mobile web browsers.
+- **[Datalist element](https://caniuse.com/?search=datalist)
+
 ## Props
 
 | Prop Name     | Type      | Description                                        |
