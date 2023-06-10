@@ -1,7 +1,7 @@
 import React from "react";
 import "./styles.css";
 
-const ReactTableCheckbox = () => {
+const ReactTableCheckbox = ({ disabledCheckboxes = "" }) => {
   const rows = [
     {
       id: 0,
@@ -40,16 +40,17 @@ const ReactTableCheckbox = () => {
     },
   ];
 
+  // parse disabledCheckboxes string into an array of numbers
+  const disabledCheckboxesArray = disabledCheckboxes
+    ? disabledCheckboxes.split(",").map(Number)
+    : [];
+
   return (
     <table>
       <thead>
         <tr>
           <th id="select-header">
             Select Row
-            {/* <br />
-            <span className="help-text">
-              Checking the checkbox will select the row
-            </span> */}
           </th>
           <th id="status-header">Status</th>
           <th>DOB</th>
@@ -62,9 +63,11 @@ const ReactTableCheckbox = () => {
           <tr key={row.id}>
             <td>
               <input
+                key={`${row.id}-${disabledCheckboxesArray.includes(row.id)}`} 
                 type="checkbox"
                 id={`checkbox-${row.id}`}
                 aria-labelledby={`select-header status-${row.id} org-${row.id}`}
+                disabled={disabledCheckboxesArray.includes(row.id)}
               />
             </td>
             <td id={`status-${row.id}`}>{row.email}</td>

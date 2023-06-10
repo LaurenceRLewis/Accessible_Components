@@ -13,9 +13,14 @@ export default {
     },
     docsOnly: true,
   },
+  argTypes: {
+    disabledCheckboxes: { control: 'text' }
+  }
 };
 
 const Template = (args) => <ReactTableCheckbox {...args} />;
 
 export const TableWithCheckbox = Template.bind({});
-TableWithCheckbox.args = {};
+TableWithCheckbox.args = {
+  disabledCheckboxes: "1", // disable checkboxes with these ids
+};
