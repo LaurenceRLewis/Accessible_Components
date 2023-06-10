@@ -1,5 +1,5 @@
 const description = `
-React Slider is a custom slider component that allows users to select a value within a specified range. It provides a user-friendly interface for controlling numeric input.
+Slider is a custom component that allows users to select a value within a specified range. It provides a user-friendly interface for controlling numeric input.
 
 ## Features
 
@@ -11,7 +11,7 @@ React Slider is a custom slider component that allows users to select a value wi
 
 ## Keyboard Accessibility
 
-The React Slider component ensures keyboard accessibility for easy control and interaction. Users can navigate and adjust the slider value using the following keyboard controls:
+The Slider component ensures keyboard accessibility for easy control and interaction. Users can navigate and adjust the slider value using the following keyboard controls:
 
 - **Left Arrow**: Decreases the value by one step.
 - **Right Arrow**: Increases the value by one step.
@@ -20,10 +20,10 @@ The React Slider component ensures keyboard accessibility for easy control and i
 - **Page Up**: Increases the value by a larger increment.
 - **Page Down**: Decreases the value by a larger increment.
 
-The React Slider component provides a user-friendly and accessible way to select values within a specified range.
+The Slider component provides a user-friendly and accessible way to select values within a specified range.
 
 ### Download build files
-- **[Development files](https://github.com/LaurenceRLewis/Accessible_Components/tree/main/stories/ReactSlider)
+- **[Development files](https://github.com/LaurenceRLewis/Accessible_Components/tree/main/stories/ReactARIASlider)
 
 ## Props
 
@@ -34,7 +34,6 @@ The React Slider component provides a user-friendly and accessible way to select
 | \`step\`          | \`number\` | The increment value for each step of the slider.                 |
 | \`defaultValue\`  | \`number\` | The default value of the slider.                                 |
 | \`onChange\`      | \`function\` | A callback function triggered when the slider value changes.     |
-| \`SliderModel\`  | \`select\` | Specifies whether to use the ARIA or HTML version of the slider.     |
 
 ## ARIA Slider Props
 
@@ -47,18 +46,6 @@ The ARIA Slider component accepts the following additional props:
 | \`ariaStep\`      | \`number\` | The increment value for each step of the ARIA slider.            |
 | \`ariaDefaultValue\`  | \`number\` | The default value of the ARIA slider from aria-valuenow.      |
 | \`getAriaValueText\` | \`function\` | A function that returns a custom string for the aria-valuetext. Format is 'min of max [aria-valuetext]' |
-
-
-## HTML Slider Props
-
-The HTML Slider component accepts the following additional props:
-
-| Prop Name         | Type       | Description                                                     |
-| ----------------- | ---------- | --------------------------------------------------------------- |
-| \`htmlMin\`       | \`number\` | The minimum allowed value for the HTML slider.                   |
-| \`htmlMax\`       | \`number\` | The maximum allowed value for the HTML slider.                   |
-| \`htmlStep\`      | \`number\` | The increment value for each step of the HTML slider.            |
-| \`htmlDefaultValue\`  | \`number\` | The default value of the HTML slider.                            |
 
 ## Methods
 
@@ -74,7 +61,7 @@ The HTML Slider component accepts the following additional props:
 
 ## Touch and Mouse Interaction
 
-The React Slider component supports both touch and mouse interactions for seamless user experience across devices. Here's how it behaves with touch and mouse input:
+The Slider component supports both touch and mouse interactions for seamless user experience across devices. Here's how it behaves with touch and mouse input:
 
 - **Touchmove**: Sliding your finger across the slider updates the value in real-time.
 - **Touchend**: Releasing your finger after sliding sets the final value of the slider.
@@ -83,7 +70,7 @@ The React Slider component supports both touch and mouse interactions for seamle
 - **Mousemove**: Moving the mouse while holding the button updates the value in real-time.
 - **Mouseup**: Releasing the mouse button after moving sets the final value of the slider.
 
-The React Slider component ensures a seamless user experience for both keyboard, touch, and mouse interactions, making it accessible and easy to use across different devices.
+The Slider component ensures a seamless user experience for both keyboard, touch, and mouse interactions, making it accessible and easy to use across different devices.
 
 `;
 

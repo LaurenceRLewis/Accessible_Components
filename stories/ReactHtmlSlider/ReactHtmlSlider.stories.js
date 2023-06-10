@@ -1,15 +1,15 @@
 //ReactSlider.stories.css
 import React from 'react';
-import AriaSlider from './AriaSlider';
-import ReactAriaSliderDescription from './ReactAriaSliderDescription';
+import HtmlSlider from './HtmlSlider';
+import ReactHtmlSliderDescription from './ReactHtmlSliderDescription';
 
 export default {
-  title: 'Components/ARIA Slider',
-  component: AriaSlider,
+  title: 'Native HTML Components/HTML Slider',
+  component: HtmlSlider,
   parameters: {
     docs: {
       description: {
-        component: ReactAriaSliderDescription,
+        component: ReactHtmlSliderDescription,
       },
     },
     docsOnly: true,
@@ -35,18 +35,10 @@ export default {
       defaultValue: 5,
       description: 'The current value of the slider',
     },
-    useAriaValueText: {
-      control: 'boolean',
-      description: 'Should the slider use the custom aria-valuetext',
-    },
-    ariaValueText: {
-      control: 'text',
-      description: 'The custom aria-valuetext for the slider',
-    },
   },  
 };
 
-const Template = (args) => <AriaSlider {...args} />;
+const Template = (args) => <HtmlSlider {...args} />;
 
 export const Slider = Template.bind({});
 Slider.args = {
@@ -54,6 +46,4 @@ Slider.args = {
   max: 10,
   step: 1,
   now: 5,
-  useAriaValueText: "false",
-  ariaValueText: "",
 };
