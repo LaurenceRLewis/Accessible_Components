@@ -15,16 +15,12 @@
   }
   
   [role="grid"] {
-    display: flex;
-    flex-direction: column;
     color: var(--white);
     background-color: var(--purple-100);
-    width: 100%;
+    width: auto;
   }
   
   [role="grid"] tr {
-    display: flex;
-    justify-content: space-between;
     color: var(--black);
   }
   

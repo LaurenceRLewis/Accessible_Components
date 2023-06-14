@@ -120,6 +120,8 @@ const ReactGrid = () => {
 
   return (
     <>
+    <h2>Bugs to fix</h2>
+    <p>When focus moves outside the grid, the grid is not updaing to refeive focus</p>
     <h2 id="caption">HTML GRID</h2>
     <table role="grid" aria-labelledby="caption">
       <thead>

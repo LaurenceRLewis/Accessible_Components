@@ -3,7 +3,7 @@ import ReactGrid from './ReactGrid';
 import ReactGridDescription from './ReactGridDescription';
 
 export default {
-  title: 'Work in progress/ReactGrid',
+  title: 'Work in progress/React Grid',
   component: ReactGrid,
   parameters: {
     docs: {
