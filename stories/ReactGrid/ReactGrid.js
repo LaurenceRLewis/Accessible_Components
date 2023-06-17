@@ -20,7 +20,9 @@ const employeesData = [
 
 const TableCell = ({ type, cellData, setCellData, id, focusedCell, setFocusedCell }) => {
   const cellRef = useRef(null);
-
+  
+  const tabIndex = (id.row === focusedCell.row && id.col === focusedCell.col) ? 0 : -1;
+  
   useEffect(() => {
     if (cellRef.current && id.row === focusedCell.row && id.col === focusedCell.col) {
       cellRef.current.focus();
@@ -28,6 +30,10 @@ const TableCell = ({ type, cellData, setCellData, id, focusedCell, setFocusedCel
   }, [focusedCell]);
 
   const handleKeyDown = (e) => {
+    // Update the tabIndex to 0 when this cell is focused
+    if (cellRef.current) {
+      cellRef.current.tabIndex = 0;
+    }
     if (e.key === 'Escape') {
       if (e.target.tagName === 'INPUT') {
         e.target.setAttribute('tabindex', '-1');
@@ -61,17 +67,16 @@ const TableCell = ({ type, cellData, setCellData, id, focusedCell, setFocusedCel
           break;
         default:
           break;
-      }
+    }
     }
   };
 
   if (type === 'checkbox') {
     return (
       <td
-        role="gridcell"
         ref={cellRef}
         onKeyDown={handleKeyDown}
-        tabIndex={-1}
+        tabIndex={tabIndex}
       >
         <input
           type="checkbox"
@@ -86,10 +91,9 @@ const TableCell = ({ type, cellData, setCellData, id, focusedCell, setFocusedCel
   if (type === 'email' || type === 'tel') {
     return (
       <td
-        role="gridcell"
         ref={cellRef}
         onKeyDown={handleKeyDown}
-        tabIndex={-1}
+        tabIndex={tabIndex}
       >
         <input
           type={type}
@@ -104,10 +108,9 @@ const TableCell = ({ type, cellData, setCellData, id, focusedCell, setFocusedCel
   // for normal cells
   return (
     <td
-      role="gridcell"
       ref={cellRef}
       onKeyDown={handleKeyDown}
-      tabIndex={-1}
+      tabIndex={tabIndex}
     >
       {cellData}
     </td>
@@ -120,8 +123,6 @@ const ReactGrid = () => {
 
   return (
     <>
-    <h2>Bugs to fix</h2>
-    <p>When focus moves outside the grid, the grid is not updaing to refeive focus</p>
     <h2 id="caption">HTML GRID</h2>
     <table role="grid" aria-labelledby="caption">
       <thead>
