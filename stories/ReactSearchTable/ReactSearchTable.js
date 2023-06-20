@@ -3,7 +3,7 @@ import styles from './ReactSearchTable.module.css';
 import ReactSearchTableData from './ReactSearchTableData';
 import ariaAnnounce from '../../.storybook/utils/ariaAnnounce';
 
-const ReactSearchTable = () => {
+const ReactSearchTable = ({ version = 'ARIA' }) => {
   const [searchText, setSearchText] = useState('');
   const [searchResults, setSearchResults] = useState(ReactSearchTableData);
 
@@ -12,7 +12,6 @@ const ReactSearchTable = () => {
       (item) => item.id.includes(searchText)
     );
     setSearchResults(filteredResults);
-    //const message = `Showing ${filteredResults.length} results.`;
     const message = `Showing ${filteredResults.length} of ${ReactSearchTableData.length} results.`
     ariaAnnounce(message);
   };
@@ -36,19 +35,19 @@ const ReactSearchTable = () => {
 
   return (
     <div className={styles.container}>
-      <div role="search" className={styles.searchContainer}>
+      <div role={version === 'ARIA' ? "search" : undefined} className={styles.searchContainer}>
         <label htmlFor="searchInput" className={styles.label}>
           Search table
         </label>
         <input
-          type="text"
+          type={version === 'ARIA' ? "text" : "search"}
           id="searchInput"
           autocomplete="off"
           className={styles.input}
           value={searchText}
           onChange={handleSearchInputChange}
           onKeyPress={handleKeyPress}
-          role="searchbox"
+          role={version === 'ARIA' ? "searchbox" : undefined}
           aria-describedby="helpText"
         />
         <button className={`${styles.button} ${styles.searchButton}`} onClick={handleSearch}>

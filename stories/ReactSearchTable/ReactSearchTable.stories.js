@@ -13,6 +13,21 @@ export default {
     },
     docsOnly: true,
   },
+  argTypes: {
+    version: {
+      control: { type: "select" },
+      options: {
+        'HTML': 'HTML',
+        'ARIA': "ARIA",
+      },
+      defaultValue: "ARIA",
+    },
+  },
 };
 
-export const TableWithSearchFunction = () => <ReactSearchTable />;
+const Template = (args) => <ReactSearchTable {...args} />;
+
+export const SearchTable = Template.bind({});
+SearchTable.args = {
+  version: 'ARIA',
+};
