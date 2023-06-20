@@ -35,7 +35,7 @@ export default {
       defaultValue: 5,
       description: 'The current value of the slider',
     },
-    useAriaValueText: {
+    updateAriaValueText: {
       control: 'boolean',
       description: 'Should the slider use the custom aria-valuetext',
     },
@@ -54,6 +54,6 @@ Slider.args = {
   max: 10,
   step: 1,
   now: 5,
-  useAriaValueText: "false",
+  updateAriaValueText: "false",
   ariaValueText: "",
 };

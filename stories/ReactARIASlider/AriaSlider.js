@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import styles from "./AriaSlider.module.css";
 
-const AriaSlider = ({ min, max, step, onChange, ariaValueText, useAriaValueText }) => {
+const AriaSlider = ({ min, max, step, onChange, ariaValueText, updateAriaValueText }) => {
   const [value, setValue] = useState(min);
   const [isDragging, setIsDragging] = useState(false);
   const sliderRef = useRef(null);
@@ -145,7 +145,7 @@ const AriaSlider = ({ min, max, step, onChange, ariaValueText, useAriaValueText 
         aria-valuemin={min}
         aria-valuemax={max}
         aria-valuenow={value}
-        aria-valuetext={useAriaValueText ? ariaValueNow : undefined} 
+        aria-valuetext={updateAriaValueText ? ariaValueNow : undefined} 
         onKeyDown={handleKeyDown}
         onMouseDown={handleMouseDown}
         onTouchStart={handleMouseDown}
@@ -170,6 +170,9 @@ const AriaSlider = ({ min, max, step, onChange, ariaValueText, useAriaValueText 
           <div className={styles.rangeNumber}>{max}</div>
         </div>
       </div>
+      <div className={styles.ariaValueNowText}>
+      {`${value} of ${max} ${ariaValueText}`}
+    </div>
     </div>
   );
 };

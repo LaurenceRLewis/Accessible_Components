@@ -70,3 +70,10 @@ body {
   font-weight: bold;
   top: 40px;
 }
+
+.ariaValueNowText {
+  font-size: 2rem;
+  color: #333;
+  margin-top: 3em;
+  text-align: center;
+}
