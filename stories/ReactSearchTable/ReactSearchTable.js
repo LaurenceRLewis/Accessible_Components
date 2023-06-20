@@ -16,7 +16,7 @@ const ReactSearchTable = ({
       (item) => item.id.includes(searchText)
     );
     setSearchResults(filteredResults);
-    const message = `Showing ${filteredResults.length} of ${ReactSearchTableData.length} results.`
+    const message = `Showing ${filteredResults.length} of ${ReactSearchTableData.length} table rows.`
     ariaAnnounce(message);
   };
 
@@ -33,7 +33,7 @@ const ReactSearchTable = ({
   const handleClear = () => {
     setSearchText('');
     setSearchResults(ReactSearchTableData);
-    const message = `Showing all ${ReactSearchTableData.length} results.`;
+    const message = `Showing all ${ReactSearchTableData.length} table rows.`;
     ariaAnnounce(message);
   };
 
@@ -65,7 +65,7 @@ const ReactSearchTable = ({
         Enter partial or full ID to search, then press Enter or click the Search button to activate.
       </p>
       <p className={styles.resultText}>
-        {`Showing ${searchResults.length} of ${ReactSearchTableData.length} results.`}
+        {`Showing ${searchResults.length} of ${ReactSearchTableData.length} table rows.`}
       </p>
       <table className={`${styles.table} ${styles.searchTable}`}>
         <thead>
