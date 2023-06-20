@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import styles from './ReactSearchTable.module.css';
 import ReactSearchTableData from './ReactSearchTableData';
 import ariaAnnounce from '../../.storybook/utils/ariaAnnounce';
@@ -10,8 +10,32 @@ const ReactSearchTable = ({
 }) => {
   const [searchText, setSearchText] = useState('');
   const [searchResults, setSearchResults] = useState(ReactSearchTableData);
+  const [isInputEmpty, setIsInputEmpty] = useState(false);
+  const [isInputNumeric, setIsInputNumeric] = useState(true);
+  const searchInputRef = useRef(null);
+
+  useEffect(() => {
+    if (isInputEmpty || !isInputNumeric) {
+      searchInputRef.current.focus();
+    }
+  }, [isInputEmpty, isInputNumeric]);
 
   const handleSearch = () => {
+    if (searchText.trim() === '') {
+      setIsInputEmpty(true);
+      setIsInputNumeric(true);  // Resetting other error state
+      return;
+    }
+    
+    if (isNaN(searchText)) {
+      setIsInputNumeric(false);
+      setIsInputEmpty(false);  // Resetting other error state
+      return;
+    }
+    
+    setIsInputEmpty(false);  // Resetting error state
+    setIsInputNumeric(true);  // Resetting error state
+
     const filteredResults = ReactSearchTableData.filter(
       (item) => item.id.includes(searchText)
     );
@@ -33,6 +57,8 @@ const ReactSearchTable = ({
   const handleClear = () => {
     setSearchText('');
     setSearchResults(ReactSearchTableData);
+    setIsInputEmpty(false);  // Resetting error state
+    setIsInputNumeric(true);  // Resetting error state
     const message = `Showing all ${ReactSearchTableData.length} table rows.`;
     ariaAnnounce(message);
   };
@@ -46,13 +72,14 @@ const ReactSearchTable = ({
         <input
           type={inputType}
           id="searchInput"
+          ref={searchInputRef}
           autocomplete="off"
           className={styles.input}
           value={searchText}
           onChange={handleSearchInputChange}
           onKeyDown={handleKeyPress}
           {...(inputRole ? { role: inputRole } : {})}
-          aria-describedby="helpText"
+          aria-describedby="errorText helpText "
         />
         <button className={`${styles.button} ${styles.searchButton}`} onClick={handleSearch}>
           Search
@@ -64,6 +91,10 @@ const ReactSearchTable = ({
       <p id="helpText" className={styles.helpText}>
         Enter partial or full ID to search, then press Enter or click the Search button to activate.
       </p>
+      <div id="errorText">
+        {isInputEmpty && <p className={styles.errorText}>Error: Input cannot be empty.</p>}
+        {!isInputNumeric && <p className={styles.errorText}>Error: Input must be numeric.</p>}
+      </div>
       <p className={styles.resultText}>
         {`Showing ${searchResults.length} of ${ReactSearchTableData.length} table rows.`}
       </p>
