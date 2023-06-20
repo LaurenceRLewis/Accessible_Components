@@ -3,7 +3,11 @@ import styles from './ReactSearchTable.module.css';
 import ReactSearchTableData from './ReactSearchTableData';
 import ariaAnnounce from '../../.storybook/utils/ariaAnnounce';
 
-const ReactSearchTable = ({ version = 'ARIA' }) => {
+const ReactSearchTable = ({ 
+  containerRole = undefined,
+  inputType = 'search',
+  inputRole = undefined,
+}) => {
   const [searchText, setSearchText] = useState('');
   const [searchResults, setSearchResults] = useState(ReactSearchTableData);
 
@@ -35,19 +39,19 @@ const ReactSearchTable = ({ version = 'ARIA' }) => {
 
   return (
     <div className={styles.container}>
-      <div role={version === 'ARIA' ? "search" : undefined} className={styles.searchContainer}>
+      <div {...(containerRole ? { role: containerRole } : {})} className={styles.searchContainer}>
         <label htmlFor="searchInput" className={styles.label}>
           Search table
         </label>
         <input
-          type={version === 'ARIA' ? "text" : "search"}
+          type={inputType}
           id="searchInput"
           autocomplete="off"
           className={styles.input}
           value={searchText}
           onChange={handleSearchInputChange}
-          onKeyPress={handleKeyPress}
-          role={version === 'ARIA' ? "searchbox" : undefined}
+          onKeyDown={handleKeyPress}
+          {...(inputRole ? { role: inputRole } : {})}
           aria-describedby="helpText"
         />
         <button className={`${styles.button} ${styles.searchButton}`} onClick={handleSearch}>
@@ -58,7 +62,7 @@ const ReactSearchTable = ({ version = 'ARIA' }) => {
         </button>
       </div>
       <p id="helpText" className={styles.helpText}>
-      Enter partial or full ID to search, then press Enter or click the Search button to activate.
+        Enter partial or full ID to search, then press Enter or click the Search button to activate.
       </p>
       <p className={styles.resultText}>
         {`Showing ${searchResults.length} of ${ReactSearchTableData.length} results.`}

@@ -1,5 +1,12 @@
 const description = `
-ReactSearchTable is a component that displays a table of data and includes a search box allowing users to filter the table based on their search query. The table search widget is robust and includes features such as keyboard accessibility and ARIA announcements for improved usability and accessibility.
+React Search Table is a table that can be filtered using search. This allows users to filter the table based on their search query. The table search widget is robust and includes features such as keyboard accessibility and ARIA announcements for improved usability and accessibility. 
+
+The component now also allows you to control ARIA properties via props, thus enabling more fine-grained accessibility configurations.
+
+The default configuration is using the ARIA search role on the container, the input type of search and the role searchbox is not inplemented in the default.
+
+type=search is exactly the same as type=text. type=search is for styling the search differently to other input types on a page.
+role=searchbox is not recommended if role search is implemented on the container.
 
 ## Features
 
@@ -8,10 +15,11 @@ ReactSearchTable is a component that displays a table of data and includes a sea
 - Clear search function that resets the search field and shows all data.
 - ARIA live region announcement for search results.
 - Keyboard accessibility for activating search and clear functions.
+- Configurable ARIA roles and input type through props.
 
 ## Keyboard Accessibility
 
-ReactSearchTable component provides keyboard accessibility. The search field listens for 'Enter' keypress events and activates the search function when the 'Enter' key is pressed.
+ReactSearchTable component provides keyboard accessibility. The search field listens for 'Enter' key press events and activates the search function when the 'Enter' key is pressed.
 
 ## ARIA Announcements
 
@@ -23,7 +31,11 @@ ReactSearchTable uses the \`ariaAnnounce\` function to create an ARIA live regio
 
 ## Props
 
-ReactSearchTable does not accept any props. It uses internal state for handling the search input and search results.
+ReactSearchTable accepts several props:
+
+- \`containerRole\`: Defines the ARIA role for the search container. Defaults to 'search'.
+- \`inputType\`: Determines the type of the search input field. Defaults to 'text'.
+- \`inputRole\`: Defines the ARIA role for the search input field. Defaults to 'searchbox'.
 
 ## Methods
 
@@ -31,7 +43,7 @@ ReactSearchTable does not accept any props. It uses internal state for handling 
 | ---------------------- | -------------------------------------------------------------- |
 | \`handleSearch\`       | A method that handles the search function.                     |
 | \`handleClear\`        | A method that handles the clearing of the search field.        |
-| \`handleKeyPress\`     | A method that listens for 'Enter' keypress in the search field.|
+| \`handleKeyPress\`     | A method that listens for 'Enter' key press in the search field. |
 | \`handleSearchInputChange\` | A method that updates the search input state.              |
 
 ReactSearchTable provides a seamless and accessible user experience for both mouse and keyboard interactions, making it an essential widget for data-heavy applications.

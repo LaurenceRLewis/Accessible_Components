@@ -14,20 +14,39 @@ export default {
     docsOnly: true,
   },
   argTypes: {
-    version: {
-      control: { type: "select" },
+    containerRole: {
+      control: { type: 'select' },
       options: {
-        'HTML': 'HTML',
-        'ARIA': "ARIA",
+        '(HTML) No role': undefined,
+        '(ARIA) Has role search': 'search',
       },
-      defaultValue: "ARIA",
+      defaultValue: 'search',
+    },
+    inputType: {
+      control: { type: 'select' },
+      options: {
+        'type=search': 'search',
+        'type=text': 'text',
+      },
+      defaultValue: 'search',
+    },
+    inputRole: {
+      control: { type: 'select' },
+      options: {
+        '(HTML) No role': undefined,
+        '(ARIA) Has role searchbox': 'searchbox',
+      },
+      defaultValue: undefined,
     },
   },
 };
 
+// export const TableWithSearchFunction = (args) => <ReactSearchTable {...args} />;
 const Template = (args) => <ReactSearchTable {...args} />;
 
-export const SearchTable = Template.bind({});
-SearchTable.args = {
-  version: 'ARIA',
+export const searchTable = Template.bind({});
+searchTable.args = {
+  inputType: 'search',
+  containerRole: 'search',
+  inputRole: undefined,
 };
