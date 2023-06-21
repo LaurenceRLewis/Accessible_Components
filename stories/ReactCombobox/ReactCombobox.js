@@ -63,7 +63,7 @@ const ReactCombobox = ({ showHelpText = false }) => {
       setShowOptions(true);
     }
   };
-  
+
   const [shouldFocusOnOption, setShouldFocusOnOption] = useState(false);
 
   useEffect(() => {
@@ -76,56 +76,84 @@ const ReactCombobox = ({ showHelpText = false }) => {
     }
   }, [showOptions, selectedIndex, shouldFocusOnOption]);
 
-const handleKeyPress = (e) => {
-  if (e.key === "ArrowDown") {
-    if (inputValue === "" && !showOptions) {
-      setShowOptions(true);
-      setSelectedIndex(0);
-      setShouldFocusOnOption(true);
-    }
-    else if (inputValue !== "" && !showOptions) {
-      setShowOptions(true);
-      setSelectedIndex(0);
-      setShouldFocusOnOption(true);
-    }
-    else if (showOptions && selectedIndex < options.length - 1) {
-      setSelectedIndex(prevIndex => prevIndex + 1);
-      setShouldFocusOnOption(true);
-    }
-  } else if (e.key === "ArrowUp") {
-    if (selectedIndex === -1 || selectedIndex === 0) {
-      if (!showOptions) {
+  const handleFocus = (e) => {
+    e.target.setSelectionRange(e.target.value.length, e.target.value.length);
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === "Backspace") {
+      if (inputValue !== "") {
+        e.preventDefault();
+        const newValue = inputValue.slice(0, -1);
+        setInputValue(newValue);
+
+        const filteredOptions = townsAndCities.filter((city) =>
+          city.toLowerCase().startsWith(newValue.toLowerCase())
+        );
+        setOptions(filteredOptions);
+        setResultCount(filteredOptions.length);
         setShowOptions(true);
-        setShouldFocusOnOption(false);
+
+        if (filteredOptions.length > 0) {
+          setSelectedIndex(0);
+          setShouldFocusOnOption(true);
+        } else {
+          setInputValue("");
+          setShowOptions(false);
+        }
       }
-      setSelectedIndex(options.length - 1);
-    } else if (selectedIndex > 0) {
-      setSelectedIndex(selectedIndex - 1);
-      setShouldFocusOnOption(true);
     }
-  } else if (e.key === "Enter" && selectedIndex !== -1) {
-    setInputValue(options[selectedIndex]);
-    setSelectedIndex(-1);
-    setShowOptions(false);
-    setShouldFocusOnOption(false);
-  } else if (e.key === "Escape") {
-    setShowOptions(false);
-    setSelectedIndex(-1);
-    setShouldFocusOnOption(false);
-  } else if (e.key === "Home") {
-    if (inputRef.current) {
-      inputRef.current.setSelectionRange(0, 0);
+
+    if (e.key === "ArrowDown") {
+      if (inputValue === "" && !showOptions) {
+        setShowOptions(true);
+        setSelectedIndex(0);
+        setShouldFocusOnOption(true);
+      } else if (inputValue !== "" && !showOptions) {
+        setShowOptions(true);
+        setSelectedIndex(0);
+        setShouldFocusOnOption(true);
+      } else if (showOptions && selectedIndex < options.length - 1) {
+        setSelectedIndex((prevIndex) => prevIndex + 1);
+        setShouldFocusOnOption(true);
+      }
+    } else if (e.key === "ArrowUp") {
+      if (selectedIndex === -1 || selectedIndex === 0) {
+        if (!showOptions) {
+          setShowOptions(true);
+          setShouldFocusOnOption(false);
+        }
+        setSelectedIndex(options.length - 1);
+      } else if (selectedIndex > 0) {
+        setSelectedIndex(selectedIndex - 1);
+        setShouldFocusOnOption(true);
+      }
+    } else if (e.key === "Enter" && selectedIndex !== -1) {
+      setInputValue(options[selectedIndex]);
+      setSelectedIndex(-1);
+      setShowOptions(false);
+      setShouldFocusOnOption(false);
+    } else if (e.key === "Escape") {
+      setShowOptions(false);
+      setSelectedIndex(-1);
+      setShouldFocusOnOption(false);
+    } else if (e.key === "Home") {
+      if (inputRef.current) {
+        inputRef.current.setSelectionRange(0, 0);
+      }
+    } else if (e.key === "End") {
+      if (inputRef.current) {
+        inputRef.current.setSelectionRange(
+          inputValue.length,
+          inputValue.length
+        );
+      }
+    } else if (e.key === "Tab") {
+      setShowOptions(false);
+      setShouldFocusOnOption(false);
     }
-  } else if (e.key === "End") {
-    if (inputRef.current) {
-      inputRef.current.setSelectionRange(inputValue.length, inputValue.length);
-    }
-  } else if (e.key === "Tab") {
-    setShowOptions(false);
-    setShouldFocusOnOption(false);
-  }
-};         
-  
+  };
+
   const ChevronDown = () => (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -161,9 +189,7 @@ const handleKeyPress = (e) => {
   return (
     <>
       <h1>ARIA Combobox (List)</h1>
-      <p>
-        The version uses the aria-autocomplete list methid.
-      </p>
+      <p>The version uses the aria-autocomplete list methid.</p>
       <div className={styles["comboboxContainer"]}>
         <label id="combobox-label" htmlFor="combobox-input">
           Australian cities and towns
@@ -200,6 +226,7 @@ const handleKeyPress = (e) => {
             value={inputValue}
             onChange={handleInputChange}
             onKeyDown={handleKeyPress}
+            onFocus={handleFocus}
           />
           <button
             id="toggle-button"
