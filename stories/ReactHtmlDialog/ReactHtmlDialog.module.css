@@ -1,0 +1,6 @@
+.dialog {
+    background: #e9e7e7;
+  }
+  .dialog::backdrop {
+    background: rgba(0,0,0,0.5);
+  }  
