@@ -1,7 +1,8 @@
+// ReactHtmlDialog.js
 import React, { useEffect, useRef } from 'react';
 import styles from './ReactHtmlDialog.module.css';
 
-function ReactHtmlDialog({ open, showModal, heading, children }) {
+function ReactHtmlDialog({ open, showModal, heading, children, ariaHidden, inert }) {
   const dialogRef = useRef();
   const headingRef = useRef();
 
@@ -13,6 +14,32 @@ function ReactHtmlDialog({ open, showModal, heading, children }) {
       dialogRef.current.close();
     }
   }, [open, showModal]);
+
+  useEffect(() => {
+    const dialogSiblingElements = Array.from(document.body.children).filter((child) => child !== dialogRef.current);
+  
+    dialogSiblingElements.forEach((siblingElement) => {
+      if (open) {
+        if (ariaHidden === 'true') {
+          siblingElement.setAttribute('aria-hidden', 'true');
+        } else if (ariaHidden === 'false') {
+          siblingElement.setAttribute('aria-hidden', 'false');
+        }
+  
+        if (inert === 'Yes') {
+          siblingElement.setAttribute('inert', '');
+        }
+      } 
+  
+      if (ariaHidden === 'remove') {
+        siblingElement.removeAttribute('aria-hidden');
+      }
+  
+      if (inert === 'No') {
+        siblingElement.removeAttribute('inert');
+      }
+    });
+  }, [ariaHidden, inert, open]);  
 
   return (
     <dialog ref={dialogRef} className={styles.dialog} aria-modal={showModal === 'Yes'}>
