@@ -1,17 +1,4 @@
-:root {
-  --purple-900: #4338ca;
-  --purple-700: #5941a9;
-  --purple-500: #7b61c4;
-  --purple-300: #a886e5;
-  --purple-100: #d3beff;
-  --white: #ffffff;
-  --black: #262626;
-}
-
-body {
-  font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-  line-height: 1.5;
-}
+@import "../../.storybook/utils/global.css";
 
 .dialog {
   border: none;
@@ -47,8 +34,9 @@ button.openDialog {
 }
 
 button:focus {
-  outline: none;
-  box-shadow: 0 0 0 2px var(--purple-700);
+  box-shadow: 0 0 0 2px var(--purple-700), 0 0 0 4px white;
+  outline: 2px solid white;
+  outline-offset: -2px;
 }
 
 button.closeButton {
@@ -60,6 +48,6 @@ button.closeButton {
   font-size: 1rem;
   cursor: pointer;
   position: absolute;
-  bottom: 0.25em;
-  right: 0.25em;
+  bottom: 0.5em;
+  right: 0.5em;
 }

@@ -1,12 +1,4 @@
-:root {
-  --purple-900: #4338ca;
-  --purple-700: #5941a9;
-  --purple-500: #7b61c4;
-  --purple-300: #a886e5;
-  --purple-100: #d3beff;
-  --white: #ffffff;
-  --black: #262626;
-}
+@import "../../.storybook/utils/global.css";
 
 .detailsContainer {
   background-color: var(--purple-100);

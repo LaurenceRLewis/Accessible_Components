@@ -1,7 +1,4 @@
-body {
-  font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-  line-height: 1.5;
-}
+@import "../../.storybook/utils/global.css";
 
 .container {
   margin: 1.25em;

@@ -1,8 +1,7 @@
 import React from "react";
-import "./styles.css";
 import PropTypes from "prop-types";
+import styles from './ReactTableSubHeader.module.css';
 
-//Props
 const ReactTableSubHeader = ({
   colspan,
   subColspan,
@@ -13,13 +12,13 @@ const ReactTableSubHeader = ({
   tdFontWeight,
 }) => {
   return (
-    <table className="tl-container-table">
+    <table className={styles.containerTable}>
       <thead>
         <tr>
           {headers.map((header, index) => (
             <th
               key={index}
-              className="tl-header"
+              className={styles.header}
               id={header.id}
               colSpan={colspan[index] > 1 ? colspan[index] : undefined}
               style={{
@@ -36,7 +35,7 @@ const ReactTableSubHeader = ({
             subColspan[index] > 0 && colspan[index] !== 1 ? (
               <th
                 key={index}
-                className="tl-sub-header"
+                className={styles.subHeader}
                 headers={header.id}
                 colSpan={subColspan[index]}
               >
@@ -48,12 +47,11 @@ const ReactTableSubHeader = ({
       </thead>
       <tbody>
         {data.map((row, rowIndex) => (
-          <tr key={rowIndex} className="tl-raw-unfocus">
+          <tr key={rowIndex} className={styles.rawUnfocus}>
             {row.map((cell, cellIndex) => (
-              //Expression
               <td
                 key={cellIndex}
-                className="tl-data"
+                className={styles.data}
                 style={{ fontWeight: tdFontWeight }}
               >
                 {cell}

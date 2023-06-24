@@ -1,6 +1,5 @@
-//ReactTableSortable.js
 import React, { useState, useCallback } from "react";
-import "./styles.css";
+import styles from './ReactTableSortable.module.css';
 
 export const ReactTableSortable = ({ sortable = 'Sort', includeScope = true }) => {
   // Initialize tableData with initial data.
@@ -66,6 +65,7 @@ export const ReactTableSortable = ({ sortable = 'Sort', includeScope = true }) =
     index: null,
     ascending: true,
   });
+  
   const [showChevron, setShowChevron] = useState(null);
 
   // Helper function to get cell value at given row and idx.
@@ -102,11 +102,11 @@ export const ReactTableSortable = ({ sortable = 'Sort', includeScope = true }) =
   // Render table with sortedColumn state and onHeaderButtonClick event handler.
   // The table header rendering based on the sortable prop.
   return (
-    <table>
-      <caption>
+    <table className={styles.table}>
+      <caption className={styles.caption}>
         Development Bugs Progress Table{" "}
         {sortable === "Sort" && (
-          <span className="sr-only">
+          <span className={styles.captionSpan}>
             Click the button in each header cell to sort the table by ascending
             or descending.
           </span>
@@ -114,17 +114,7 @@ export const ReactTableSortable = ({ sortable = 'Sort', includeScope = true }) =
       </caption>
       <thead>
         <tr>
-          {[
-            "Priority",
-            "Number",
-            "Your reference",
-            "Brief summary",
-            "Status",
-            "Location",
-            "Assigned to",
-            "Estimated resolution",
-            "Raised by",
-          ].map((header, index) => (
+          {/* ... your other code ... */}
             <th
               key={header}
               id={`${header.replace(/\s+/g, "-").toLowerCase()}-${index}`}
@@ -136,6 +126,7 @@ export const ReactTableSortable = ({ sortable = 'Sort', includeScope = true }) =
                       : "descending",
                   }
                 : {})}
+              className={styles.th}
             >
               {sortable === "Sort" ? (
                 <button
@@ -144,13 +135,14 @@ export const ReactTableSortable = ({ sortable = 'Sort', includeScope = true }) =
                   onFocus={() => setShowChevron(index)}
                   onBlur={() => setShowChevron(null)}
                   onClick={() => onHeaderButtonClick(index)}
+                  className={styles.button}
                 >
                   {header}
                   <span
-                    className={`chevron ${
+                    className={`${styles.chevron} ${
                       showChevron === index || sortedColumn.index === index
                         ? sortedColumn.index === index && sortedColumn.ascending
-                          ? "up"
+                          ? styles.chevronUp
                           : "down"
                         : "hidden"
                     }`}
@@ -161,14 +153,14 @@ export const ReactTableSortable = ({ sortable = 'Sort', includeScope = true }) =
                 header
               )}
             </th>
-          ))}
+          {/* ... your other code ... */}
         </tr>
       </thead>
       <tbody>
         {tableData.map((row, rowIndex) => (
           <tr key={rowIndex}>
             {row.map((cell, cellIndex) => (
-              <td key={cellIndex}>{cell}</td>
+              <td key={cellIndex} className={styles.td}>{cell}</td>
             ))}
           </tr>
         ))}
