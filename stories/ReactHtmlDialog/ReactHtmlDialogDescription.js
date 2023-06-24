@@ -17,6 +17,7 @@ The ReactHtmlDialog is a customizable dialog component that utilizes the native 
 "Can I use" provides up-to-date browser support tables for support of front-end web technologies on desktop and mobile web browsers.
 - **[Dialog element](https://caniuse.com/dialog)
 - **[HTMLElement API: inert](https://caniuse.com/?search=inert)
+- **[Autofocus attribute](https://caniuse.com/?search=autofocus)
 
 ## Props
 
@@ -28,6 +29,8 @@ The ReactHtmlDialog is a customizable dialog component that utilizes the native 
 | \`children\`     | \`any\`     | The content of the dialog, displayed under the heading.     |
 | \`ariaHidden\`   | \`string\`  | Controls the aria-hidden attribute on elements outside the dialog. Options: 'true', 'false', 'remove'. The default is 'remove'. |
 | \`inertAttr\`    | \`string\`  | Controls the inert attribute on elements outside the dialog. Options: 'Yes', 'No'. The default is 'No'. |
+| \`ariaModal\`    | \`string\`  | Determines the value of the aria-modal attribute on the dialog. Options: 'true', 'false', 'remove'. The default is 'remove'. |
+
 
 ## Methods
 
@@ -35,6 +38,8 @@ The ReactHtmlDialog is a customizable dialog component that utilizes the native 
 - \`show()\` - Opens the dialog. This method does not make the dialog modal, so it does not prevent interaction with other elements.
 
 This component is part of a library of accessible, reusable, and composable React components. It is designed to be flexible and customizable to ensure it fits the needs of your project.
+
+Props ariaHidden, inertAttr and ariaModal are to test what attributes need to be added to HTML <dialog> to make it accessible across browsers and assistive technologies.
 `;
 
 export default description;
