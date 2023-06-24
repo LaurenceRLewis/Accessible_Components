@@ -3,10 +3,19 @@ import React from 'react';
 import { useState } from 'react';
 import ReactHtmlDialog from './ReactHtmlDialog';
 import styles from './ReactHtmlDialog.module.css';
+import ReactHtmlDialogDescription from './ReactHtmlDialogDescription';
 
 export default {
   title: 'Native HTML Components/React HTML Dialog',
   component: ReactHtmlDialog,
+  parameters: {
+    docs: {
+      description: {
+        component: ReactHtmlDialogDescription,
+      },
+    },
+    docsOnly: true,
+  },
   argTypes: {
     showModal: {
       options: ['Yes', 'No'],
