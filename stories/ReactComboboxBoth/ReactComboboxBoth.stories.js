@@ -3,7 +3,7 @@ import ReactComboboxBoth from './ReactComboboxBoth';
 import reactComboboxBothDescription from './ReactComboboxBothDescription';
 
 export default {
-  title: 'Work in progress/React Combobox (Both)',
+  title: 'Components/React Combobox (Both)',
   component: ReactComboboxBoth,
   parameters: {
       docs: {
