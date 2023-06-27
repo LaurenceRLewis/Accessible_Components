@@ -1,17 +1,19 @@
 const description = `
-ReactMultiSelect is a custom multi-select component that provides users with a dropdown list of options. Users can select one or more options, and the selected options are displayed at the top of the dropdown. It supports keyboard navigation for better accessibility and a customizable selection model.
+# ReactMultiSelect
+
+ReactMultiSelect is a custom multi-select component that provides users with a dropdown list of options. Users can select one or more options, and the selected options can be displayed either at the top or at the bottom of the dropdown. It supports keyboard navigation for better accessibility and offers a customisable selection model.
 
 ## Features
 
-- Multiple option selection support.
-- Dropdown list for displaying available options.
-- Selection model can be default or alternative.
-- Utilizes keyboard navigation for easy control and interaction.
-- Utilizes ARIA live regions to announce changes to the user.
+- Supports multiple option selections.
+- Offers a dropdown list for displaying available options.
+- The selection model can be default or alternative.
+- Ensures keyboard navigation for easy control and interaction.
+- Uses ARIA live regions to announce changes to the user.
 
 ## Keyboard Accessibility
 
-ReactMultiSelect component ensures keyboard accessibility for easy control and interaction. Users can navigate and interact with the list of options using keyboard controls.
+The ReactMultiSelect component ensures keyboard accessibility for easy control and interaction. Users can navigate and interact with the list of options using keyboard controls.
 
 ## ARIA Announcements
 
@@ -28,6 +30,7 @@ In the case of ReactMultiSelect, \`ariaAnnounce\` is used to communicate the sel
 | Prop Name          | Type       | Description                                                 |
 | ------------------ | ---------- | ----------------------------------------------------------- |
 | \`selectionModel\` | \`string\` | Choose the selection model for the listbox. Can be 'default' or 'alternative'. |
+| \`buttonsPosition\` | \`string\` | Position the selected options buttons either at 'top' or 'bottom'. Default is 'bottom'. |
 
 ## Methods
 

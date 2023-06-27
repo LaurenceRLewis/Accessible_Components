@@ -39,7 +39,7 @@ const ReactMultiSelect = ({ selectionModel, buttonsPosition }) => {
         : [...selectedOptions, option];
     }
     setSelectedOptions(newSelectedOptions);
-    ariaAnnounce(`You have ${newSelectedOptions.length} ingredients selected.`);
+    ariaAnnounce(`You have ${newSelectedOptions.length} items selected.`);
   };
 
   const handleKeyDown = useKeyboardNavigation(
