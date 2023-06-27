@@ -23,6 +23,14 @@ export default {
       defaultValue: 'default',
       description: 'Choose the selection model for the listbox',
     },
+    buttonsPosition: {
+      control: {
+        type: 'radio',
+        options: ['top', 'bottom']
+      },
+      defaultValue: 'bottom',
+      description: 'Choose the position for the buttons',
+    },
   },
 };
 
