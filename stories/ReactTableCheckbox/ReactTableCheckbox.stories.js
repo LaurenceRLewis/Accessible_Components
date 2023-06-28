@@ -23,6 +23,6 @@ const Template = (args) => <ReactTableCheckbox {...args} />;
 
 export const TableWithCheckbox = Template.bind({});
 TableWithCheckbox.args = {
-  disabledCheckboxes: "1", // disable checkboxes with these ids
-  defaultCheckedBoxes: "1,2" // set checkboxes with these ids as checked by default
+  disabledCheckboxes: "", // disable checkboxes with these ids
+  defaultCheckedBoxes: "" // set checkboxes with these ids as checked by default
 };

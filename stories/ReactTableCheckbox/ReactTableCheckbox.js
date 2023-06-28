@@ -47,8 +47,14 @@ const ReactTableCheckbox = ({ disabledCheckboxes = "", defaultCheckedBoxes = "" 
   const defaultCheckedBoxesArray = defaultCheckedBoxes ? defaultCheckedBoxes.split(",").map(Number) : [];
 
   useEffect(() => {
-    setCheckedState(rows.map(row => defaultCheckedBoxesArray.includes(row.id)));
-  }, []);
+    setCheckedState(rows.map((row) => {
+        if (defaultCheckedBoxesArray.includes(row.id)) {
+            return true;
+        } else {
+            return false;
+        }
+    }));
+}, [defaultCheckedBoxesArray, rows]);
 
   useEffect(() => {
     if (selectAll) {
@@ -89,11 +95,11 @@ const ReactTableCheckbox = ({ disabledCheckboxes = "", defaultCheckedBoxes = "" 
         </tr>
       </thead>
       <tbody>
-        {rows.map((row, idx) => (
-          <tr key={row.id}>
-            <td className={styles.td}>
-              <input
-                 className={styles.input}
+      {rows.map((row, idx) => (
+    <tr key={row.id}>
+        <td className={styles.td}>
+            <input
+                className={styles.input}
                 key={`${row.id}-${disabledCheckboxesArray.includes(row.id)}`}
                 type="checkbox"
                 id={`checkbox-${row.id}`}
@@ -101,14 +107,14 @@ const ReactTableCheckbox = ({ disabledCheckboxes = "", defaultCheckedBoxes = "" 
                 disabled={disabledCheckboxesArray.includes(row.id)}
                 checked={checkedState[idx]}
                 onChange={e => handleSingleCheckboxChange(idx, e.target.checked)}
-              />
-            </td>
-            <td className={styles.td} id={`name-${row.id}`} scope="row">{row.name}</td>
-            <td className={styles.td}>{row.email}</td>
-            <td className={styles.td}>{row.dob}</td>
-            <td className={styles.td} id={`employeeID-${row.id}`}>{row.employeeID}</td>
-          </tr>
-        ))}
+            />
+        </td>
+        <th className={styles.td} id={`name-${row.id}`} scope="row">{row.name}</th>
+        <td className={styles.td}>{row.email}</td>
+        <td className={styles.td}>{row.dob}</td>
+        <td className={styles.td} id={`employeeID-${row.id}`}>{row.employeeID}</td>
+    </tr>
+))}
       </tbody>
     </table>
   );
