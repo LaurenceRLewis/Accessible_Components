@@ -6,9 +6,6 @@ const ReactCombobox = ({ showHelpText = 'No' }) => {
   return (
     <>
       <h1>HTML Datalist</h1>
-      <p>
-        The datalist element has good support across modern browsers and assistive technology.
-      </p>
       <div className={styles["comboboxContainer"]}>
         <label id="combobox-label" htmlFor="combobox-input">
           Australian cities and towns
