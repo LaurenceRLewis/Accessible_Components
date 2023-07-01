@@ -51,34 +51,34 @@ const AriaSlider = ({ min, max, step, onChange, ariaValueText, updateAriaValueTe
   );
 
   const handleMouseInteraction = useCallback(
-    (event) => {
-      if (event.buttons !== 1) return;
+  (event) => {
+    if (event.buttons !== 1) return;
 
-      const sliderRect = sliderRef.current.getBoundingClientRect();
-      const sliderWidth = sliderRect.width;
-      const clickPosition = event.clientX - sliderRect.left;
-      const clickPercentage = clickPosition / sliderWidth;
-      const newValue = min + clickPercentage * (max - min);
+    const sliderRect = sliderRef.current.getBoundingClientRect();
+    const sliderWidth = sliderRect.width;
+    const clickPosition = event.clientX - sliderRect.left;
+    const clickPercentage = clickPosition / sliderWidth;
+    const newValue = Math.round(min + clickPercentage * (max - min));
 
-      setValue(newValue);
-      onChange && onChange(newValue);
-    },
-    [min, max, onChange]
-  );
+    setValue(newValue);
+    onChange && onChange(newValue);
+  },
+  [min, max, onChange]
+);
 
-  const handleTouchInteraction = useCallback(
-    (event) => {
-      const sliderRect = sliderRef.current.getBoundingClientRect();
-      const sliderWidth = sliderRect.width;
-      const touchPosition = event.touches[0].clientX - sliderRect.left;
-      const touchPercentage = touchPosition / sliderWidth;
-      const newValue = min + touchPercentage * (max - min);
+const handleTouchInteraction = useCallback(
+  (event) => {
+    const sliderRect = sliderRef.current.getBoundingClientRect();
+    const sliderWidth = sliderRect.width;
+    const touchPosition = event.touches[0].clientX - sliderRect.left;
+    const touchPercentage = touchPosition / sliderWidth;
+    const newValue = Math.round(min + touchPercentage * (max - min));
 
-      setValue(newValue);
-      onChange && onChange(newValue);
-    },
-    [min, max, onChange]
-  );
+    setValue(newValue);
+    onChange && onChange(newValue);
+  },
+  [min, max, onChange]
+);
 
   const handleMouseDown = useCallback(() => {
     setIsDragging(true);
