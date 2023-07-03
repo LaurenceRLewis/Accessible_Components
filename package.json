@@ -38,7 +38,6 @@
   },
   "dependencies": {
     "@storybook/addon-a11y": "^7.0.20",
-    "caniuse-lite": "^1.0.30001507",
     "classnames": "^2.3.2"
   }
 }

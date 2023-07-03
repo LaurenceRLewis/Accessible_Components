@@ -8,13 +8,14 @@ Slider is a custom component that allows users to select a value within a specif
 - Incremental step size for fine-grained control.
 - Optional default value for initial selection.
 - Callback function for handling value changes.
+- Accessibility improvements with increment and decrement buttons.
 
-## Keyboard Accessibility
+## Keyboard and Button Accessibility
 
-The Slider component ensures keyboard accessibility for easy control and interaction. Users can navigate and adjust the slider value using the following keyboard controls:
+The Slider component ensures keyboard accessibility for easy control and interaction. Users can navigate and adjust the slider value using the following keyboard controls and buttons:
 
-- **Left Arrow**: Decreases the value by one step.
-- **Right Arrow**: Increases the value by one step.
+- **Left Arrow or Minus Button**: Decreases the value by one step.
+- **Right Arrow or Plus Button**: Increases the value by one step.
 - **Home**: Sets the value to the minimum.
 - **End**: Sets the value to the maximum.
 - **Page Up**: Increases the value by a larger increment.
@@ -58,6 +59,8 @@ The ARIA Slider component accepts the following additional props:
 | \`handleMouseDown\` | A method that handles the mousedown event for mouse interaction. |
 | \`handleMouseMove\` | A method that handles the mousemove event for mouse interaction. |
 | \`handleMouseUp\`   | A method that handles the mouseup event for mouse interaction.   |
+| \`handleIncrement\` | A method that handles the increment button press, increasing the value by the step size. |
+| \`handleDecrement\` | A method that handles the decrement button press, decreasing the value by the step size. |
 
 ## Touch and Mouse Interaction
 
@@ -69,6 +72,8 @@ The Slider component supports both touch and mouse interactions for seamless use
 - **Mousedown**: Clicking and holding the mouse button on the slider starts the mouse interaction.
 - **Mousemove**: Moving the mouse while holding the button updates the value in real-time.
 - **Mouseup**: Releasing the mouse button after moving sets the final value of the slider.
+
+Additionally, users can increment and decrement the value with the plus and minus buttons to meet [WCAG 2.2 2.5.7 Dragging Movements (AA)](https://www.w3.org/WAI/WCAG22/Understanding/dragging-movements).
 
 The Slider component ensures a seamless user experience for both keyboard, touch, and mouse interactions, making it accessible and easy to use across different devices.
 

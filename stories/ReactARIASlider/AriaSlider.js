@@ -13,6 +13,18 @@ const AriaSlider = ({ min, max, step, onChange, ariaValueText, updateAriaValueTe
     sliderRef.current.focus();
   }, []);
 
+  const handleDecrement = () => {
+    let newValue = Math.max(value - step, min);
+    setValue(newValue);
+    onChange && onChange(newValue);
+  };
+
+  const handleIncrement = () => {
+    let newValue = Math.min(value + step, max);
+    setValue(newValue);
+    onChange && onChange(newValue);
+  };
+
   const handleKeyDown = useCallback(
     (event) => {
       let newValue = value;
@@ -130,7 +142,7 @@ const handleTouchInteraction = useCallback(
   }, [handleTouchInteraction]);
 
   return (
-    <div className={styles.sliderContainer}>
+    <>
       <h2 id="ariaSlider88967" className={styles.sliderHeading}>ARIA Slider</h2>
       <p className={styles.sliderParagraph}>
         The ARIA slider allows you to select a value within a range using the
@@ -138,6 +150,8 @@ const handleTouchInteraction = useCallback(
         'max' attributes, and the 'step' attribute sets the increment between
         values.
       </p>
+      <div className={styles.sliderContainer}>
+      <button className={styles.minusBtn} aria-label="Minus" onClick={handleDecrement}>-</button>
       <div
         role="slider"
         tabIndex={0}
@@ -152,6 +166,7 @@ const handleTouchInteraction = useCallback(
         className={styles.ariaSlider}
         aria-labelledby="ariaSlider88967"
       >
+        <button className={styles.plusBtn} aria-label="plus" onClick={handleIncrement}>+</button>
         <div className={styles.ariaSliderTrack}>
           <div
             className={styles.ariaSliderThumb}
@@ -174,6 +189,7 @@ const handleTouchInteraction = useCallback(
       {`${value} of ${max} ${ariaValueText}`}
     </div>
     </div>
+    </>
   );
 };
 

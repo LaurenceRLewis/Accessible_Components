@@ -3,11 +3,22 @@
 .sliderContainer{
   width:40em;
   margin-left:1em;
+  position:relative;
 }
 
 .ariaSlider {
+  margin-left: 3em;
   position: relative;
   width: 100%;
+}
+
+.minusBtn{
+  position:absolute;
+}
+
+.plusBtn{
+  position:absolute;
+  right: -3em;
 }
 
 .ariaSliderTrack {
