@@ -22,7 +22,7 @@ export default {
     },
     max: {
       control: 'number',
-      defaultValue: 10,
+      defaultValue: 50,
       description: 'The maximum allowed value for the slider',
     },
     step: {
@@ -51,7 +51,7 @@ const Template = (args) => <AriaSlider {...args} />;
 export const Slider = Template.bind({});
 Slider.args = {
   min: 0,
-  max: 10,
+  max: 50,
   step: 1,
   now: 5,
   updateAriaValueText: "false",

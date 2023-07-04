@@ -151,7 +151,6 @@ const handleTouchInteraction = useCallback(
         values.
       </p>
       <div className={styles.sliderContainer}>
-      <button className={styles.minusBtn} aria-label="Minus" onClick={handleDecrement}>-</button>
       <div
         role="slider"
         tabIndex={0}
@@ -166,7 +165,6 @@ const handleTouchInteraction = useCallback(
         className={styles.ariaSlider}
         aria-labelledby="ariaSlider88967"
       >
-        <button className={styles.plusBtn} aria-label="plus" onClick={handleIncrement}>+</button>
         <div className={styles.ariaSliderTrack}>
           <div
             className={styles.ariaSliderThumb}
@@ -179,14 +177,16 @@ const handleTouchInteraction = useCallback(
         </div>
         <div className={styles.rangeContainer}>
           <div className={styles.rangeNumber}>{min}</div>
-          <div aria-hidden="true" className={styles.nowValue}>
+          {/* <div aria-hidden="true" className={styles.nowValue}>
             {Math.floor(value)}
-          </div>
+          </div> */}
           <div className={styles.rangeNumber}>{max}</div>
         </div>
       </div>
-      <div className={styles.ariaValueNowText}>
-      {`${value} of ${max} ${ariaValueText}`}
+      <div className={styles.ariaValueNowGroup}>
+      <button className={styles.minusBtn} aria-label="Minus" onClick={handleDecrement}>-</button>
+      <div className={styles.ariaValueNowText}>{`${value} of ${max} ${ariaValueText}`}</div>
+       <button className={styles.plusBtn} aria-label="plus" onClick={handleIncrement}>+</button>
     </div>
     </div>
     </>

@@ -1,24 +1,15 @@
 @import "../../.storybook/utils/global.css";
 
 .sliderContainer{
-  width:40em;
-  margin-left:1em;
   position:relative;
+  margin: 0 auto;
+  max-width:40em;
+  width:auto;
 }
 
 .ariaSlider {
-  margin-left: 3em;
   position: relative;
   width: 100%;
-}
-
-.minusBtn{
-  position:absolute;
-}
-
-.plusBtn{
-  position:absolute;
-  right: -3em;
 }
 
 .ariaSliderTrack {
@@ -78,9 +69,38 @@
   top: 40px;
 }
 
-.ariaValueNowText {
+.ariaValueNowGroup {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  margin-top:3em;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5em;
+}
+
+.minusBtn{
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  font-size: 2.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.plusBtn{
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  font-size: 2.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ariaValueNowText{
   font-size: 2rem;
-  color: #333;
-  margin-top: 3em;
-  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 }
