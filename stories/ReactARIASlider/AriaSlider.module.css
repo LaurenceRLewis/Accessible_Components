@@ -43,6 +43,11 @@
   border: 2px solid white;
 }
 
+.ariaSlider:hover .ariaSliderThumb {
+  box-shadow: 0 0 0 2px white, 0 0 0 4px rgba(0, 0, 0, 0.5);
+  border: 2px solid white;
+}
+
 .rangeContainer {
   position: relative;
   display: flex;
@@ -81,7 +86,7 @@
 .minusBtn{
   width: 48px;
   height: 48px;
-  border-radius: 50%;
+  border-radius: 30%;
   font-size: 2.5rem;
   display: flex;
   justify-content: center;
@@ -91,7 +96,7 @@
 .plusBtn{
   width: 48px;
   height: 48px;
-  border-radius: 50%;
+  border-radius: 30%;
   font-size: 2.5rem;
   display: flex;
   justify-content: center;
@@ -99,8 +104,19 @@
 }
 
 .ariaValueNowText{
-  font-size: 2rem;
+  font-size: 1.5rem;
   display: flex;
   justify-content: space-between;
   width: 100%;
+}
+
+.minusBtn:focus-visible,
+.plusBtn:focus-visible {
+  box-shadow: 0 0 0 2px white, 0 0 0 4px rgba(0, 0, 0, 0.5);
+  border: 2px solid white;
+}
+
+.minusBtn:hover,
+.plusBtn:hover {
+  outline: 4px solid var(--purple-900);
 }
