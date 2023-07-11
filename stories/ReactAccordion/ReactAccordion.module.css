@@ -18,7 +18,6 @@ h3 {
   align-items: center;
   background: #f2ebf7;
   padding: 1rem;
-  cursor: pointer;
   font-size: 1.2rem;
   font-weight: 600;
   margin-bottom: 0;
@@ -49,7 +48,7 @@ h3 {
 }
 
 .title:focus-visible {
-  outline: 2px solid #8a63d2;
+  outline: 2px solid var(--purple-500);
   outline-offset: 1px;
 }
 

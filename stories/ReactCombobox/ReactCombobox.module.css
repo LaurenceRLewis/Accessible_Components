@@ -19,7 +19,7 @@ label{
     width: 100%;
     height: 35px;
     padding: .3125em .625em;
-    border: .0625em solid #6a1b9a;
+    border: .0625em solid var(--purple-700);
     border-radius: .3125em;
     outline: none;
     box-sizing: border-box;
