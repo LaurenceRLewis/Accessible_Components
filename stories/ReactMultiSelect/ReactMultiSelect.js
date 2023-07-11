@@ -71,7 +71,7 @@ const ReactMultiSelect = ({ selectionModel, buttonsPosition }) => {
     <>
       <h2>Shopping List</h2>
       <div className={styles['multiSelectContainer']}>
-  {buttonsPosition === 'top' && (
+  {buttonsPosition === 'top' && selectedOptions.length > 0 && (
     <>
       <p className={styles['HelpText']}>Remove items from your shopping cart by clicking on the buttons below.</p>
       {selectedOptions.map((option, index) => (
@@ -118,7 +118,7 @@ const ReactMultiSelect = ({ selectionModel, buttonsPosition }) => {
       ))}
     </ul>
   )}
-  {buttonsPosition === 'bottom' && (
+  {buttonsPosition === 'bottom' && selectedOptions.length > 0 && (
     <>
     <p className={styles['HelpText']}>Remove items from your shopping cart by clicking on the buttons below.</p>
       {selectedOptions.map((option, index) => (
