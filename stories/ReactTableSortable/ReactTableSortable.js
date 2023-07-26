@@ -99,6 +99,18 @@ export const ReactTableSortable = ({ sortable = 'Sort', includeScope = true }) =
     [sortable]
   );
 
+  const headers = [
+    "Priority",
+    "Ticket ID",
+    "Project",
+    "Description",
+    "Status",
+    "Location",
+    "Assigned To",
+    "Due Date",
+    "Manager",
+  ];
+
   // Render table with sortedColumn state and onHeaderButtonClick event handler.
   // The table header rendering based on the sortable prop.
   return (
@@ -114,7 +126,7 @@ export const ReactTableSortable = ({ sortable = 'Sort', includeScope = true }) =
       </caption>
       <thead>
         <tr>
-          {/* ... your other code ... */}
+          {headers.map((header, index) => (
             <th
               key={header}
               id={`${header.replace(/\s+/g, "-").toLowerCase()}-${index}`}
@@ -153,7 +165,7 @@ export const ReactTableSortable = ({ sortable = 'Sort', includeScope = true }) =
                 header
               )}
             </th>
-          {/* ... your other code ... */}
+          ))}
         </tr>
       </thead>
       <tbody>
