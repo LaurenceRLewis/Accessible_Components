@@ -61,12 +61,12 @@
     box-shadow: 0 0 0 .1875em #D1C4E9;
   }
   
-  span {
+  /* span {
     position: absolute;
     left: 5px;
     top: 5px;
     color: #aaa;
-  }
+  } */
   
   #toggle-button {
     margin-left: 0.5em;

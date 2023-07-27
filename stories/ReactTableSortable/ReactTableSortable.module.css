@@ -9,8 +9,11 @@
   text-align: left;
   margin-bottom: 0.5em;
 }
-.captionSpan{
-  font-size: 0.875em;
+.caption > .captionSpan{
+  font-size: 0.875rem;
+  color: #383838;
+  margin-bottom: 1em;
+  display: block;
 }
 .th,
 .td {
