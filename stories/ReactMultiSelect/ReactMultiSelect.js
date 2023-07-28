@@ -32,12 +32,12 @@ const ReactMultiSelect = ({ buttonsPosition, interactionMode }) => {
 
   const handleSelectOption = (option) => {
     let newSelectedOptions;
-  
+
     if (interactionMode === "Remove selected from list") {
       const available = availableOptions.filter(
         (ingredient) => !selectedOptions.includes(ingredient)
       );
-  
+
       if (available.includes(option)) {
         newSelectedOptions = [...selectedOptions, option];
         setAvailableOptions(availableOptions.filter((item) => item !== option)); // remove option from available options
@@ -50,11 +50,11 @@ const ReactMultiSelect = ({ buttonsPosition, interactionMode }) => {
         ? selectedOptions.filter((item) => item !== option)
         : [...selectedOptions, option];
     }
-  
+
     setSelectedOptions(newSelectedOptions);
     ariaAnnounce(`You have ${newSelectedOptions.length} items selected.`);
   };
-  
+
   const handleDismissOption = (option) => {
     const newSelectedOptions = selectedOptions.filter(
       (item) => item !== option
@@ -71,7 +71,7 @@ const ReactMultiSelect = ({ buttonsPosition, interactionMode }) => {
     } else {
       firstButtonRef.current.focus();
     }
-  };  
+  };
 
   const handleKeyDown = useKeyboardNavigation(
     isListboxOpen,
@@ -84,11 +84,14 @@ const ReactMultiSelect = ({ buttonsPosition, interactionMode }) => {
     <>
       <h2>Shopping List</h2>
       <div className={styles.multiSelectContainer}>
-        {buttonsPosition === 'top' && selectedOptions.length > 0 && (
+        {buttonsPosition === "top" && selectedOptions.length > 0 && (
           <>
-            <p className={styles.HelpText}>Remove items from your shopping cart by clicking on the buttons below.</p>
+            <p className={styles.HelpText}>
+              Remove items from your shopping cart by clicking on the buttons
+              below.
+            </p>
             {selectedOptions.map((option, index) => (
-              <button 
+              <button
                 key={index}
                 ref={index === 0 ? firstButtonRef : null}
                 className={styles.selectedOptionButton}
@@ -100,16 +103,21 @@ const ReactMultiSelect = ({ buttonsPosition, interactionMode }) => {
             ))}
           </>
         )}
-        <p className={styles.SrOnly}>You have {selectedOptions.length} items in your cart.</p>
-        <div>
-          <button 
+        <p className={styles.SrOnly}>
+          You have {selectedOptions.length} items in your cart.
+        </p>
+          <button
             ref={triggerButtonRef}
             className={styles.listboxToggleButton}
-            onClick={() => setListboxOpen(!isListboxOpen)}>Groceries
+            onClick={() => setListboxOpen(!isListboxOpen)}
+            aria-expanded={isListboxOpen}
+            aria-controls="ingredientsListbox"
+          >
+            Groceries
           </button>
-        </div>
         {isListboxOpen && (
           <ul
+            id="ingredientsListbox"
             ref={listboxRef}
             className={styles.listbox}
             role="listbox"
@@ -122,7 +130,9 @@ const ReactMultiSelect = ({ buttonsPosition, interactionMode }) => {
                 key={index}
                 role="option"
                 aria-selected={selectedOptions.includes(option)}
-                className={classNames(styles.listboxOption, { [styles.selected]: selectedOptions.includes(option) })}
+                className={classNames(styles.listboxOption, {
+                  [styles.selected]: selectedOptions.includes(option),
+                })}
                 onClick={() => handleSelectOption(option)}
                 tabIndex="-1"
               >
@@ -131,11 +141,14 @@ const ReactMultiSelect = ({ buttonsPosition, interactionMode }) => {
             ))}
           </ul>
         )}
-        {buttonsPosition === 'bottom' && selectedOptions.length > 0 && (
+        {buttonsPosition === "bottom" && selectedOptions.length > 0 && (
           <>
-            <p className={styles.HelpText}>Remove items from your shopping cart by clicking on the buttons below.</p>
+            <p className={styles.HelpText}>
+              Remove items from your shopping cart by clicking on the buttons
+              below.
+            </p>
             {selectedOptions.map((option, index) => (
-              <button 
+              <button
                 key={index}
                 ref={index === 0 ? firstButtonRef : null}
                 className={styles.selectedOptionButton}
@@ -154,7 +167,10 @@ const ReactMultiSelect = ({ buttonsPosition, interactionMode }) => {
 
 ReactMultiSelect.propTypes = {
   buttonsPosition: PropTypes.oneOf(["top", "bottom"]),
-  interactionMode: PropTypes.oneOf(["Keep selected in list", "Remove selected from list"]),
+  interactionMode: PropTypes.oneOf([
+    "Keep selected in list",
+    "Remove selected from list",
+  ]),
 };
 
 ReactMultiSelect.defaultProps = {

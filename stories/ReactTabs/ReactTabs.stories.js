@@ -3,7 +3,7 @@ import { ReactTabs } from "./ReactTabs";
 import reactTabsDescription from './ReactTabsDescription';
 
 export default {
-  title: "Components/React Tabs",
+  title: "Components/Tabs (Segmented Controls)",
   component: ReactTabs,
   parameters: {
     docs: {

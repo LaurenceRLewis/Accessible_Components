@@ -1,10 +1,10 @@
 import React from 'react';
-import ReactCombobox from './ReactCombobox';
+import ReactComboboxList from './ReactCombobox';
 import reactComboboxDescription from './ReactComboboxDescription';
 
 export default {
-    title: 'Components/React Combobox (List)',
-    component: ReactCombobox,
+    title: 'Components/Combobox (List)',
+    component: ReactComboboxList,
     parameters: {
         docs: {
             description: {
@@ -21,10 +21,10 @@ export default {
     }
 };
 
-const Template = (args) => <ReactCombobox {...args} />;
+const Template = (args) => <ReactComboboxList {...args} />;
 
-export const ARIACombobox = Template.bind({});
-ARIACombobox.storyName = "Combobox";
-ARIACombobox.args = {
+export const ComboboxList = Template.bind({});
+ComboboxList.storyName = "Combobox (List)";
+ComboboxList.args = {
     showHelpText: 'No', 
 };

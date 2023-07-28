@@ -3,7 +3,7 @@ import ReactComboboxDataList from './ReactComboboxDataList';
 import reactComboboxDataListDescription from './ReactComboboxDataListDescription';
 
 export default {
-    title: 'Native HTML Components/React Combobox (HTML Datalist)',
+    title: 'Native HTML Components/Combobox (HTML Datalist)',
     component: ReactComboboxDataList,
     parameters: {
         docs: {

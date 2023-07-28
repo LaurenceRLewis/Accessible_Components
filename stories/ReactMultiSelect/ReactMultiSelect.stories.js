@@ -3,7 +3,7 @@ import ReactMultiSelect from './ReactMultiSelect';
 import reactMultiSelectDescription from './ReactMultiSelectDescription';
 
 export default {
-  title: 'Components/React Multi-Select',
+  title: 'Components/Multi-Select Listbox',
   component: ReactMultiSelect,
   parameters: {
     docs: {
@@ -37,8 +37,8 @@ export default {
 
 const Template = (args) => <ReactMultiSelect {...args} />;
 
-export const MultiSelect = Template.bind({});
-MultiSelect.args = {
+export const MultiSelectListbox = Template.bind({});
+MultiSelectListbox.args = {
   buttonsPosition: 'bottom',
   interactionMode: 'Keep selected in list',
 };

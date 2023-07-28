@@ -3,7 +3,7 @@ import ReactDetailsDisclosure from './ReactDetailsDisclosure';
 import ReactDetailsDisclosureDescription from './ReactDetailsDisclosureDescription';
 
 export default {
-  title: 'Native HTML Components/React Disclosure (HTML Details-Summary)',
+  title: 'Native HTML Components/Disclosure (HTML Details-Summary)',
   component: ReactDetailsDisclosure,
   parameters: {
     docs: {

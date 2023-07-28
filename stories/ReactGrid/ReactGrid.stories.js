@@ -3,7 +3,7 @@ import ReactGrid from './ReactGrid';
 import ReactGridDescription from './ReactGridDescription';
 
 export default {
-  title: 'Components/React Grid',
+  title: 'Components/Grid',
   component: ReactGrid,
   parameters: {
     docs: {
@@ -17,7 +17,7 @@ export default {
 
 const Template = (args) => <ReactGrid {...args} />;
 
-export const Default = Template.bind({});
-Default.args = {
+export const Grid = Template.bind({});
+Grid.args = {
   // Pass default props to your component here if any
 };

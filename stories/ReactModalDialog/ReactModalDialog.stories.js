@@ -3,7 +3,7 @@ import ReactModalDialog from './ReactModalDialog';
 import reactModalDialogDescription from './ReactModalDialogDescription';
 
 export default {
-  title: 'Components/React Modal Dialog',
+  title: 'Components/Modal Dialog (ARIA)',
   component: ReactModalDialog,
   parameters: {
     docs: {

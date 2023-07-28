@@ -1,10 +1,10 @@
 import React from "react";
-import Accordion from "./ReactAccordion";
+import AccordionBuild from "./ReactAccordion";
 import reactAccordionDescription from './ReactAccordionDescription';
 
 export default {
-  title: "Components/React Accordion",
-  component: Accordion,
+  title: "Components/Accordion",
+  component: AccordionBuild,
   parameters: {
     docs: {
       description: {
@@ -57,14 +57,14 @@ const Template = (args) => {
       <h2 id={`${args.groupName}-heading`}>
         {args.groupName.charAt(0).toUpperCase() + args.groupName.slice(1)}
       </h2>
-      <Accordion {...args} />
+      <AccordionBuild {...args} />
     </div>
   );
 };
 
-export const AccordionExample = Template.bind({});
+export const Accordion = Template.bind({});
 
-AccordionExample.args = {
+Accordion.args = {
   items: [
     {
       title: "Persian",

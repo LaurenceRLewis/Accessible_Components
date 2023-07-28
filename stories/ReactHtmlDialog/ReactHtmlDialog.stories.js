@@ -6,7 +6,7 @@ import ReactHtmlDialogDescription from "./ReactHtmlDialogDescription";
 
 // Storybook configuration
 export default {
-  title: "Native HTML Components/React HTML Dialog",
+  title: "Native HTML Components/Modal Dialog (HTML)",
   component: ReactHtmlDialog,
   parameters: {
     docs: {

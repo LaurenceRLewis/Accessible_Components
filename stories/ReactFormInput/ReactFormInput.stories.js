@@ -3,7 +3,7 @@ import ReactFormInput from "./ReactFormInput";
 import reactFormInput from "./ReactFormInputDescription";
 
 export default {
-  title: "Building Blocks/React Text Input",
+  title: "Building Blocks/Text Input",
   component: ReactFormInput,
   parameters: {
     docs: {

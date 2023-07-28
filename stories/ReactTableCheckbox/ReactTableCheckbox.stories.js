@@ -3,7 +3,7 @@ import ReactTableCheckbox from "./ReactTableCheckbox";
 import reactTableCheckboxDescription from './ReactTableCheckboxDescription';
 
 export default {
-  title: "Tables/React Table with Checkbox",
+  title: "Tables/Table (Checkboxs in cells)",
   component: ReactTableCheckbox,
   parameters: {
     docs: {

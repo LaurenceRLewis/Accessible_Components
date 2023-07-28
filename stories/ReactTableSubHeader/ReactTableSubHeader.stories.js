@@ -18,7 +18,7 @@ const lighterColorMap = {
 };
 
 export default {
-  title: 'Tables/React Table with SubHeader',
+  title: 'Tables/Table (SubHeader)',
   component: ReactTableSubheaderControl,
   parameters: {
     docs: {

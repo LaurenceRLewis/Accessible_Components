@@ -16,7 +16,7 @@ const ChevronDown = () => (
 );
 
 // Define Accordion component
-const Accordion = ({ items, groupName, multiExpand, CustomIcon, chevronPosition = "right" }) => {
+const AccordionBuild = ({ items, groupName, multiExpand, CustomIcon, chevronPosition = "right" }) => {
   const [activeIndices, setActiveIndices] = useState([]);
     
   // Handle title click event
@@ -99,4 +99,4 @@ const Accordion = ({ items, groupName, multiExpand, CustomIcon, chevronPosition 
   return <div className={styles.accordion}>{renderedItems}</div>;
 };
 
-export default Accordion;
+export default AccordionBuild;

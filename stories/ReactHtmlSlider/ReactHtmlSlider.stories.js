@@ -4,7 +4,7 @@ import HtmlSlider from './HtmlSlider';
 import ReactHtmlSliderDescription from './ReactHtmlSliderDescription';
 
 export default {
-  title: 'Native HTML Components/React HTML Slider',
+  title: 'Native HTML Components/Slider (HTML)',
   component: HtmlSlider,
   parameters: {
     docs: {
