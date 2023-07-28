@@ -5,7 +5,7 @@ import ariaAnnounce from "../../.storybook/utils/ariaAnnounce";
 import useKeyboardNavigation from "./keyboardNavigation";
 import styles from "./ReactMultiSelect.module.css";
 
-const veganIngredients = [
+const initialIngredients = [
   "Tofu",
   "Almond Milk",
   "Avocado",
@@ -14,8 +14,9 @@ const veganIngredients = [
   "Lentils",
 ];
 
-const ReactMultiSelect = ({ selectionModel, buttonsPosition }) => {
+const ReactMultiSelect = ({ buttonsPosition, interactionMode }) => {
   const [selectedOptions, setSelectedOptions] = useState([]);
+  const [availableOptions, setAvailableOptions] = useState(initialIngredients);
   const [isListboxOpen, setListboxOpen] = useState(false);
   const listboxRef = useRef(null);
   const triggerButtonRef = useRef(null);
@@ -31,122 +32,134 @@ const ReactMultiSelect = ({ selectionModel, buttonsPosition }) => {
 
   const handleSelectOption = (option) => {
     let newSelectedOptions;
-    if (selectionModel === "alternative") {
-      newSelectedOptions = [option];
+  
+    if (interactionMode === "Remove selected from list") {
+      const available = availableOptions.filter(
+        (ingredient) => !selectedOptions.includes(ingredient)
+      );
+  
+      if (available.includes(option)) {
+        newSelectedOptions = [...selectedOptions, option];
+        setAvailableOptions(availableOptions.filter((item) => item !== option)); // remove option from available options
+      } else {
+        newSelectedOptions = selectedOptions.filter((item) => item !== option);
+        setAvailableOptions([...availableOptions, option]); // add option back to available options
+      }
     } else {
       newSelectedOptions = selectedOptions.includes(option)
         ? selectedOptions.filter((item) => item !== option)
         : [...selectedOptions, option];
     }
+  
     setSelectedOptions(newSelectedOptions);
     ariaAnnounce(`You have ${newSelectedOptions.length} items selected.`);
   };
-
-  const handleKeyDown = useKeyboardNavigation(
-    isListboxOpen,
-    listboxRef,
-    handleSelectOption,
-    setListboxOpen,
-    selectionModel
-  );
-
+  
   const handleDismissOption = (option) => {
     const newSelectedOptions = selectedOptions.filter(
       (item) => item !== option
     );
     setSelectedOptions(newSelectedOptions);
+    if (interactionMode === "Remove selected from list") {
+      setAvailableOptions([...availableOptions, option]); // add option back to available options
+    }
     ariaAnnounce(
       `Removed ${option}. ${newSelectedOptions.length} items remaining.`
     );
     if (newSelectedOptions.length === 0) {
-      // If there are no more buttons, focus on the "Ingredients" button
       triggerButtonRef.current.focus();
     } else {
-      // Otherwise, focus on the first button in the list
       firstButtonRef.current.focus();
     }
-  };
+  };  
+
+  const handleKeyDown = useKeyboardNavigation(
+    isListboxOpen,
+    listboxRef,
+    handleSelectOption,
+    setListboxOpen
+  );
 
   return (
     <>
       <h2>Shopping List</h2>
-      <div className={styles['multiSelectContainer']}>
-  {buttonsPosition === 'top' && selectedOptions.length > 0 && (
-    <>
-      <p className={styles['HelpText']}>Remove items from your shopping cart by clicking on the buttons below.</p>
-      {selectedOptions.map((option, index) => (
-        <button 
-          key={index}
-          ref={index === 0 ? firstButtonRef : null}
-          className={styles['selectedOptionButton']}
-          onClick={() => handleDismissOption(option)}
-          aria-label={`Remove ${option}`}
-        >
-          {option} &times;
-        </button>
-      ))}
-    </>
-  )}
-  <p className={styles['SrOnly']} >You have {selectedOptions.length} items in your cart.</p>
- <div>
-  <button 
-    ref={triggerButtonRef}
-    className={styles['listboxToggleButton']} 
-    onClick={() => setListboxOpen(!isListboxOpen)}>Groceries
-  </button>
-  </div>
-  {isListboxOpen && (
-    <ul
-      ref={listboxRef}
-      className={styles['listbox']}
-      role="listbox"
-      aria-label="Ingredients"
-      tabIndex="0"
-      onKeyDown={handleKeyDown}
-    >
-      {veganIngredients.map((option, index) => (
-        <li
-          key={index}
-          role="option"
-          aria-selected={selectedOptions.includes(option)}
-          className={classNames(styles['listboxOption'], { [styles['selected']]: selectedOptions.includes(option) })}
-          onClick={() => handleSelectOption(option)}
-          tabIndex="-1" // Ensure list items can receive focus
-        >
-          {option}
-        </li>
-      ))}
-    </ul>
-  )}
-  {buttonsPosition === 'bottom' && selectedOptions.length > 0 && (
-    <>
-    <p className={styles['HelpText']}>Remove items from your shopping cart by clicking on the buttons below.</p>
-      {selectedOptions.map((option, index) => (
-        <button 
-          key={index}
-          ref={index === 0 ? firstButtonRef : null}
-          className={styles['selectedOptionButton']}
-          onClick={() => handleDismissOption(option)}
-          aria-label={`Remove ${option}`}
-        >
-          {option} &times;
-        </button>
-      ))}
-    </>
-  )}
-</div>
+      <div className={styles.multiSelectContainer}>
+        {buttonsPosition === 'top' && selectedOptions.length > 0 && (
+          <>
+            <p className={styles.HelpText}>Remove items from your shopping cart by clicking on the buttons below.</p>
+            {selectedOptions.map((option, index) => (
+              <button 
+                key={index}
+                ref={index === 0 ? firstButtonRef : null}
+                className={styles.selectedOptionButton}
+                onClick={() => handleDismissOption(option)}
+                aria-label={`Remove ${option}`}
+              >
+                {option} &times;
+              </button>
+            ))}
+          </>
+        )}
+        <p className={styles.SrOnly}>You have {selectedOptions.length} items in your cart.</p>
+        <div>
+          <button 
+            ref={triggerButtonRef}
+            className={styles.listboxToggleButton}
+            onClick={() => setListboxOpen(!isListboxOpen)}>Groceries
+          </button>
+        </div>
+        {isListboxOpen && (
+          <ul
+            ref={listboxRef}
+            className={styles.listbox}
+            role="listbox"
+            aria-label="Ingredients"
+            tabIndex="0"
+            onKeyDown={handleKeyDown}
+          >
+            {availableOptions.map((option, index) => (
+              <li
+                key={index}
+                role="option"
+                aria-selected={selectedOptions.includes(option)}
+                className={classNames(styles.listboxOption, { [styles.selected]: selectedOptions.includes(option) })}
+                onClick={() => handleSelectOption(option)}
+                tabIndex="-1"
+              >
+                {option}
+              </li>
+            ))}
+          </ul>
+        )}
+        {buttonsPosition === 'bottom' && selectedOptions.length > 0 && (
+          <>
+            <p className={styles.HelpText}>Remove items from your shopping cart by clicking on the buttons below.</p>
+            {selectedOptions.map((option, index) => (
+              <button 
+                key={index}
+                ref={index === 0 ? firstButtonRef : null}
+                className={styles.selectedOptionButton}
+                onClick={() => handleDismissOption(option)}
+                aria-label={`Remove ${option}`}
+              >
+                {option} &times;
+              </button>
+            ))}
+          </>
+        )}
+      </div>
     </>
   );
 };
 
 ReactMultiSelect.propTypes = {
-  selectionModel: PropTypes.oneOf(["default", "alternative"]),
   buttonsPosition: PropTypes.oneOf(["top", "bottom"]),
+  interactionMode: PropTypes.oneOf(["Keep selected in list", "Remove selected from list"]),
 };
 
 ReactMultiSelect.defaultProps = {
-  selectionModel: "default",
   buttonsPosition: "bottom",
+  interactionMode: "Keep selected in list",
 };
 
 export default ReactMultiSelect;

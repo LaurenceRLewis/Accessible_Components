@@ -1,7 +1,7 @@
 const description = `
 # ReactMultiSelect
 
-ReactMultiSelect is a custom multi-select component that provides users with a dropdown list of options. Users can select one or more options, and the selected options can be displayed either at the top or at the bottom of the dropdown. It supports keyboard navigation for better accessibility and offers a customisable selection model.
+ReactMultiSelect is a custom multi-select component that provides users with a dropdown list of options. Users can select one or more options, and the selected options can be displayed either at the top or at the bottom of the dropdown. It supports keyboard navigation for better accessibility and offers a customizable selection model.
 
 ## Features
 
@@ -27,10 +27,10 @@ In the case of ReactMultiSelect, \`ariaAnnounce\` is used to communicate the sel
 
 ## Props
 
-| Prop Name          | Type       | Description                                                 |
-| ------------------ | ---------- | ----------------------------------------------------------- |
-| \`selectionModel\` | \`string\` | Choose the selection model for the listbox. Can be 'default' or 'alternative'. |
-| \`buttonsPosition\` | \`string\` | Position the selected options buttons either at 'top' or 'bottom'. Default is 'bottom'. |
+| Prop Name            | Type       | Description                                                 |
+| -------------------- | ---------- | ----------------------------------------------------------- |
+| \`buttonsPosition\`  | \`string\` | Position the selected options buttons either at 'top' or 'bottom'. Default is 'bottom'. |
+| \`interactionMode\`  | \`string\` | Choose the interaction mode for the listbox. Can be 'Keep selected in list' or 'Remove selected from list'. |
 
 ## Methods
 

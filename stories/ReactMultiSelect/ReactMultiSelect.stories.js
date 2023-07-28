@@ -1,5 +1,4 @@
 import React from 'react';
-//import { Description } from '@storybook/addon-docs/blocks';
 import ReactMultiSelect from './ReactMultiSelect';
 import reactMultiSelectDescription from './ReactMultiSelectDescription';
 
@@ -15,15 +14,8 @@ export default {
     docsOnly: true,
   },
   argTypes: {
-    selectionModel: {
-      control: {
-        type: 'radio',
-        options: ['default', 'alternative']
-      },
-      defaultValue: 'default',
-      description: 'Choose the selection model for the listbox',
-    },
     buttonsPosition: {
+      name: 'Buttons Position',
       control: {
         type: 'radio',
         options: ['top', 'bottom']
@@ -31,9 +23,22 @@ export default {
       defaultValue: 'bottom',
       description: 'Choose the position for the buttons',
     },
+    interactionMode: {
+      name: 'Keep or Remove from list',
+      control: {
+        type: 'radio',
+        options: ['Retain selected in list', 'Remove selected from list']
+      },
+      defaultValue: 'Keep selected in list',
+      description: 'Choose the interaction mode for the options',
+    },
   },
 };
 
 const Template = (args) => <ReactMultiSelect {...args} />;
 
 export const MultiSelect = Template.bind({});
+MultiSelect.args = {
+  buttonsPosition: 'bottom',
+  interactionMode: 'Keep selected in list',
+};
