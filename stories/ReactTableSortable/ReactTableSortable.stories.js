@@ -26,15 +26,22 @@ export default {
     },
     includeScope: {
       control: { type: 'boolean' },
-      description: 'Include scope="col" attribute on header cells',
+      description: 'Include scope for table headers',
       defaultValue: true,
       table: {
         type: { summary: 'boolean' },
         defaultValue: { summary: true },
       },
     },
-    tabs: {
-      table: { disable: true },
+    iconVisibility: {
+      control: { type: 'select' },
+      options: ['Show icons', 'Show on hover / focus'],
+      description: 'Control visibility of the sorting icons',
+      defaultValue: 'Show on hover / focus',
+      table: {
+        type: { summary: 'string' },
+        defaultValue: { summary: 'Show on hover / focus' },
+      },
     },
   },
 };
@@ -46,4 +53,5 @@ export const SortableTableColumns = Template.bind({});
 SortableTableColumns.args = {
   sortable: 'Sort',
   includeScope: true,
+  iconVisibility: 'Show on hover / focus',
 };

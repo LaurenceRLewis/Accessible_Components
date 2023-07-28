@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from "react";
 import styles from './ReactTableSortable.module.css';
 
-export const ReactTableSortable = ({ sortable = 'Sort', includeScope = true }) => {
+export const ReactTableSortable = ({ sortable = 'Sort', includeScope = true, iconVisibility = 'Show on hover / focus' }) => {
   // Initialize tableData with initial data.
   const [tableData, setTableData] = useState([
     [
@@ -60,16 +60,18 @@ export const ReactTableSortable = ({ sortable = 'Sort', includeScope = true }) =
       "William Wilson",
     ],
   ]);
+  
   // Initialize sortedColumn state with a default sorting configuration.
   const [sortedColumn, setSortedColumn] = useState({
     index: null,
     ascending: true,
   });
-  
+
   const [showChevron, setShowChevron] = useState(null);
 
   // Helper function to get cell value at given row and idx.
   const getCellValue = (row, idx) => row[idx];
+  
   // Function factory to generate a comparer function for sorting table data.
   const comparer = (idx, asc) => (a, b) =>
     ((v1, v2) =>
@@ -116,13 +118,7 @@ export const ReactTableSortable = ({ sortable = 'Sort', includeScope = true }) =
   return (
     <table className={styles.table}>
       <caption className={styles.caption}>
-        Development Bugs Progress Table{" "}
-        {sortable === "Sort" && (
-          <span className={styles.captionSpan}>
-            Click the button in each header cell to sort the table by ascending
-            or descending.
-          </span>
-        )}
+        Development Progress Table{" "}
       </caption>
       <thead>
         <tr>
@@ -151,13 +147,16 @@ export const ReactTableSortable = ({ sortable = 'Sort', includeScope = true }) =
                 >
                   {header}
                   <span
-                    className={`${styles.chevron} ${
-                      showChevron === index || sortedColumn.index === index
-                        ? sortedColumn.index === index && sortedColumn.ascending
-                          ? styles.chevronUp
-                          : "down"
+                    className={`
+                      ${styles.chevron} 
+                      ${iconVisibility === 'Show icons' ? styles.chevronIsVisible : ''} 
+                      ${iconVisibility === 'Show on hover / focus' ? styles.chevronHoverFocus : ''} 
+                      ${showChevron === index || sortedColumn.index === index 
+                        ? sortedColumn.index === index && sortedColumn.ascending 
+                          ? styles.chevronUp 
+                          : "down" 
                         : "hidden"
-                    }`}
+                      }`}
                     aria-hidden="true"
                   />
                 </button>

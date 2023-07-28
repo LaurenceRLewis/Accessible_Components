@@ -9,12 +9,6 @@
   text-align: left;
   margin-bottom: 0.5em;
 }
-.caption > .captionSpan{
-  font-size: 0.875rem;
-  color: #383838;
-  margin-bottom: 1em;
-  display: block;
-}
 .th,
 .td {
   padding: 1em;
@@ -49,11 +43,21 @@
   border-bottom: 6px solid currentColor;
   margin-left: 5px;
 }
-.button:hover .chevron,
-.button:focus .chevron,
+
+.button:hover .chevronHoverFocus,
+.button:focus .chevronHoverFocus,
 .chevron.sorted {
   display: inline-block;
+  position: absolute;
+  top: 1.3em;
 }
+
+.chevronIsVisible{
+  display: inline-block;
+  position: absolute;
+  top: 1.3em;
+}
+
 .chevronUp {
   transform: scaleY(-1);
 }
