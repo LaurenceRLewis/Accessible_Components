@@ -15,6 +15,7 @@ export default {
   },
   argTypes: {
     containerRole: {
+      name: "Set role on container",
       control: { type: 'select' },
       options: {
         '(HTML) No role': undefined,
@@ -23,6 +24,7 @@ export default {
       defaultValue: 'search',
     },
     inputType: {
+      name: "Set type value",
       control: { type: 'select' },
       options: {
         'type=search': 'search',
@@ -31,6 +33,7 @@ export default {
       defaultValue: 'search',
     },
     inputRole: {
+      name: "Set role on input",
       control: { type: 'select' },
       options: {
         '(HTML) No role': undefined,

@@ -14,8 +14,8 @@ export default {
     docsOnly: true,
   },
   argTypes: {
-    disabledCheckboxes: { control: 'text' },
-    defaultCheckedBoxes: { control: 'text' }
+    disabledCheckboxes: { name: "Set checkbox as disabled (starts at position 0)", control: 'text' },
+    defaultCheckedBoxes: { name: "Set checkbox as checked (starts at position 0)", control: 'text' }
   }
 };
 

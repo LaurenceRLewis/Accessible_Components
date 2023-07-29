@@ -15,12 +15,14 @@ export default {
   },
   argTypes: {
     modal: {
+      name: 'Modal or Non-modal',
       control: {
         type: 'boolean',
       },
       defaultValue: true,
     },
     dialogType: {
+      name: 'Standard modal or side sheet',
       control: { type: "select" },
       options: {
         'Standard Modal Dialog': 'standard',

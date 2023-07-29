@@ -21,7 +21,7 @@ const AccordionBuild = ({ items, groupName, multiExpand, CustomIcon, chevronPosi
     
   // Handle title click event
   const onTitleClick = (index) => {
-    if (multiExpand) {
+    if (multiExpand === 'Multiple') {
       setActiveIndices((prevIndices) =>
         prevIndices.includes(index)
           ? prevIndices.filter((i) => i !== index)

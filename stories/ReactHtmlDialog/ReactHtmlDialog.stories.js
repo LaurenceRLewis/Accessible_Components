@@ -18,18 +18,22 @@ export default {
   },
   argTypes: {
     showModal: {
+      name: "Modal or non-modal",
       options: ["Yes", "No"],
       control: { type: "radio" },
     },
     ariaModal: {
+      name: "Use aria-modal true",
       options: ["true", "false", "remove"],
       control: { type: "radio" },
     },
     ariaHidden: {
+      name: "Set aria-hidden true on background elements",
       options: ["true", "false", "remove"],
       control: { type: "radio" },
     },
     inert: {
+      name:"Set inert on background elements",
       options: ["Yes", "No"],
       control: { type: "radio" },
     },
@@ -37,7 +41,7 @@ export default {
 };
 
 // Default story
-export const Default = ({ showModal, ariaModal, ariaHidden, inert }) => {
+export const Dialog = ({ showModal, ariaModal, ariaHidden, inert }) => {
   const [open, setOpen] = useState(false);
 
   // Event handler for opening the dialog
@@ -71,7 +75,7 @@ export const Default = ({ showModal, ariaModal, ariaHidden, inert }) => {
 };
 
 // Default story arguments
-Default.args = {
+Dialog.args = {
   showModal: "Yes",
   ariaModal: "remove",
   ariaHidden: "remove",

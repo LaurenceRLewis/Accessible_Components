@@ -15,6 +15,7 @@ export default {
   },
   argTypes: {
     sortable: {
+      name: "Enable column sorting",
       control: { type: 'select' },
       options: ['Sort', "Don't Sort"],
       description: 'Enable or disable sorting for columns',
@@ -25,6 +26,7 @@ export default {
       },
     },
     includeScope: {
+      name: "Set scope attribute",
       control: { type: 'boolean' },
       description: 'Include scope for table headers',
       defaultValue: true,
@@ -34,6 +36,7 @@ export default {
       },
     },
     iconVisibility: {
+      name: "Persistent sort icon or on hover/focus",
       control: { type: 'select' },
       options: ['Show icons', 'Show on hover / focus'],
       description: 'Control visibility of the sorting icons',

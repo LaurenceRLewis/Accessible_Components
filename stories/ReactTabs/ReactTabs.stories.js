@@ -15,23 +15,29 @@ export default {
   },
   argTypes: {
     tabPanelTabindex: {
+      name: 'Add tabindex 0 to Tabpanel',
       control: { type: "boolean" },
     },
     textColor: {
+      name: 'Text colour',
       table: { disable: true },
     },
     tabBackground: { 
+      name: 'Table background colour',
       table: { disable: true },
     },
     selectedTabBackground: { 
+      name: 'Selected table background colour',
       table: { disable: true },
     },
     triggerActivation: {
+      name: 'Manual or automated activation',
       control: { type: "select" },
       options: { automated: "automated", manual: "manual" },
       defaultValue: "manual",
     },
     viewportThreshold: {
+      name: 'Change the viewport width to simulate smaller screens',
       control: { type: "number" },
       defaultValue: 400,
     },

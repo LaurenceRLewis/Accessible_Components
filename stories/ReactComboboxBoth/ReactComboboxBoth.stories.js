@@ -14,11 +14,14 @@ export default {
       docsOnly: true,
   },
   argTypes: {
-      showHelpText: {
-          options: ['Yes', 'No'],
-          control: { type: 'radio' }
+    showHelpText: {
+        name: 'Show help text',
+        control: "radio",
+        options: ['Yes', 'No'],
+        defaultValue: 'No',
+        description: "Display help text",
       },
-  }
+}
 };
 
 const Template = (args) => <ReactComboboxBoth {...args} />;

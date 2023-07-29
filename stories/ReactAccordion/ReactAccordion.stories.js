@@ -15,11 +15,14 @@ export default {
   },
   argTypes: {
     multiExpand: {
-      control: "boolean",
+      name: 'Open single or multiple sections',
+      control: "radio",
+      options: ['Single', 'Multiple'],
+      defaultValue: 'Single',
       description: "Allow multiple accordions to be open at once",
-      defaultValue: false,
     },
     chevronPosition: {
+      name: 'Icon position',
       control: "radio",
       options: ['left', 'right'],
       defaultValue: 'right',
@@ -88,7 +91,7 @@ Accordion.args = {
     },
   ],
   groupName: "cats",
-  multiExpand: false,
+  multiExpand: 'Single',
   chevronPosition: 'right',
   NamedRegionContainer: "Contained in a named landmark region",
 };

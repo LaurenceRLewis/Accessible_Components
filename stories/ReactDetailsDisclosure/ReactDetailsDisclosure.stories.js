@@ -13,12 +13,24 @@ export default {
     },
     docsOnly: true,
   },
+  argTypes: {
+    isOpen: {
+      name: 'Expanded or collapsed',
+      control: "radio",
+      options: ['Collapsed', 'Expanded'],
+      defaultValue: 'Collapsed',
+      description: "Controls whether the Details Disclosure is Expanded or collapsed when the page loads.",
+    },
+  },
 };
 
-const Template = (args) => <ReactDetailsDisclosure {...args} />;
+const Template = (args) => {
+  const isOpen = args.isOpen === 'Expanded' ? true : false;
+  return <ReactDetailsDisclosure isOpen={isOpen} />;
+};
 
 export const DetailsDisclosure = Template.bind({});
 DetailsDisclosure.storyName = "Details Disclosure";
 DetailsDisclosure.args = {
-  isOpen: false,
+  isOpen: "Collapsed",
 };

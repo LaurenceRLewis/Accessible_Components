@@ -28,7 +28,7 @@ const args = {
 
 // Loop to dynamically add labels for each radio button in the group based on the specified count
 for (let i = 0; i < numberOfRadioButtons; i++) {
-  const key = `labelText${i + 1}`;
+  const key = `Radio button label ${i + 1}`;
   argTypes[key] = {
     control: { type: 'text' },
     defaultValue: i < 2 ? `Label ${i + 1}` : '',
@@ -56,7 +56,7 @@ export default {
 // Template function to create a new instance of the RadioButtonGroup with the props from args.
 const Template = (args) => {
   // Creates an array of labels based on the number of radio buttons.
-  const labelTexts = Array.from({ length: numberOfRadioButtons }, (_, i) => args[`labelText${i + 1}`]);
+  const labelTexts = Array.from({ length: numberOfRadioButtons }, (_, i) => args[`Radio button label ${i + 1}`]);
   // Makes a copy of the args object. This includes all properties, including those used for the labelTexts.
 const { ...restArgs } = args;
   // Filters out any undefined or empty labels.

@@ -15,6 +15,7 @@ export default {
     },
     argTypes: {
         showHelpText: {
+            name: "Help text",
             options: ['Yes', 'No'],
             control: { type: 'radio' }
         },
