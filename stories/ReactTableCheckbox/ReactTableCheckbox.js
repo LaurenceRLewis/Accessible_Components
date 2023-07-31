@@ -115,7 +115,7 @@ const ReactTableCheckbox = ({
                 key={`${row.id}-${row.disabled}`}
                 type="checkbox"
                 id={`checkbox-${row.id}`}
-                aria-labelledby={`name-${row.id} employeeID-${row.id}`}
+                aria-labelledby={`name-${row.id}`}
                 disabled={row.disabled}
                 checked={row.checked}
                 onChange={(e) =>
