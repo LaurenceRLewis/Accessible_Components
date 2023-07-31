@@ -122,6 +122,7 @@ const ReactMultiSelect = ({ buttonsPosition, interactionMode }) => {
             className={styles.listbox}
             role="listbox"
             aria-label="Ingredients"
+            aria-multiselectable="true"
             tabIndex="0"
             onKeyDown={handleKeyDown}
           >
