@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
-import styles from './ReactTableCheckbox.module.css';
+import styles from "./ReactTableCheckbox.module.css";
 
-const ReactTableCheckbox = ({ disabledCheckboxes = "", defaultCheckedBoxes = "" }) => {
-  const rows = [
+const ReactTableCheckbox = ({
+  disabledCheckboxes = "",
+  defaultCheckedBoxes = "",
+}) => {
+  const initialRows = [
     {
       id: 0,
       name: "John Doe",
@@ -40,35 +43,38 @@ const ReactTableCheckbox = ({ disabledCheckboxes = "", defaultCheckedBoxes = "" 
     },
   ];
 
-  const [selectAll, setSelectAll] = useState(false);
-  const [checkedState, setCheckedState] = useState([]);
+  const disabledCheckboxesArray = disabledCheckboxes
+    ? disabledCheckboxes.split(",").map(Number)
+    : [];
+  const defaultCheckedBoxesArray = defaultCheckedBoxes
+    ? defaultCheckedBoxes.split(",").map(Number)
+    : [];
 
-  const disabledCheckboxesArray = disabledCheckboxes ? disabledCheckboxes.split(",").map(Number) : [];
-  const defaultCheckedBoxesArray = defaultCheckedBoxes ? defaultCheckedBoxes.split(",").map(Number) : [];
+  const [rows, setRows] = useState(
+    initialRows.map((row) => ({
+      ...row,
+      checked:
+        defaultCheckedBoxesArray.includes(row.id) &&
+        !disabledCheckboxesArray.includes(row.id),
+      disabled: disabledCheckboxesArray.includes(row.id),
+    }))
+  );
 
-  useEffect(() => {
-    setCheckedState(rows.map((row) => {
-        if (defaultCheckedBoxesArray.includes(row.id)) {
-            return true;
-        } else {
-            return false;
-        }
-    }));
-}, [defaultCheckedBoxesArray, rows]);
+  const allChecked = rows.every((row) => row.checked || row.disabled);
 
-  useEffect(() => {
-    if (selectAll) {
-      setCheckedState(rows.map(row => !disabledCheckboxesArray.includes(row.id)));
-    } else {
-      setCheckedState(checkedState.map(item => false));
-    }
-  }, [selectAll]);
+  const handleSelectAllChange = (e) => {
+    setRows(
+      rows.map((row) => ({
+        ...row,
+        checked: !row.disabled && e.target.checked,
+      }))
+    );
+  };
 
   const handleSingleCheckboxChange = (id, value) => {
-    setCheckedState(checkedState.map((item, idx) => (idx === id ? value : item)));
-    if (!value) {
-      setSelectAll(false);
-    }
+    setRows(
+      rows.map((row) => (row.id === id ? { ...row, checked: value } : row))
+    );
   };
 
   return (
@@ -80,41 +86,53 @@ const ReactTableCheckbox = ({ disabledCheckboxes = "", defaultCheckedBoxes = "" 
         <tr>
           <th id="selectAll" className={styles.th}>
             <input
-               className={styles.input}
+              className={styles.input}
               type="checkbox"
               aria-label="Select all rows"
-              onChange={e => setSelectAll(e.target.checked)}
-              checked={selectAll}
-            /> 
-              <span aria-hidden="true" className={styles.spacing}>Select all</span>
+              onChange={handleSelectAllChange}
+              checked={allChecked}
+            />
+            <span aria-hidden="true" className={styles.spacing}>
+              Select all
+            </span>
           </th>
-          <th id="nameColumn" className={styles.th}>Name</th>
+          <th id="nameColumn" className={styles.th}>
+            Name
+          </th>
           <th className={styles.th}>Email</th>
           <th className={styles.th}>DOB</th>
-          <th id="employeeIDColumn" className={styles.th}>Employee ID</th>
+          <th id="employeeIDColumn" className={styles.th}>
+            Employee ID
+          </th>
         </tr>
       </thead>
       <tbody>
-      {rows.map((row, idx) => (
-    <tr key={row.id}>
-        <td className={styles.td}>
-            <input
+        {rows.map((row, idx) => (
+          <tr key={row.id}>
+            <td className={styles.td}>
+              <input
                 className={styles.input}
-                key={`${row.id}-${disabledCheckboxesArray.includes(row.id)}`}
+                key={`${row.id}-${row.disabled}`}
                 type="checkbox"
                 id={`checkbox-${row.id}`}
                 aria-labelledby={`name-${row.id} employeeID-${row.id}`}
-                disabled={disabledCheckboxesArray.includes(row.id)}
-                checked={checkedState[idx]}
-                onChange={e => handleSingleCheckboxChange(idx, e.target.checked)}
-            />
-        </td>
-        <th className={styles.td} id={`name-${row.id}`} scope="row">{row.name}</th>
-        <td className={styles.td}>{row.email}</td>
-        <td className={styles.td}>{row.dob}</td>
-        <td className={styles.td} id={`employeeID-${row.id}`}>{row.employeeID}</td>
-    </tr>
-))}
+                disabled={row.disabled}
+                checked={row.checked}
+                onChange={(e) =>
+                  handleSingleCheckboxChange(row.id, e.target.checked)
+                }
+              />
+            </td>
+            <th className={styles.td} id={`name-${row.id}`} scope="row">
+              {row.name}
+            </th>
+            <td className={styles.td}>{row.email}</td>
+            <td className={styles.td}>{row.dob}</td>
+            <td className={styles.td} id={`employeeID-${row.id}`}>
+              {row.employeeID}
+            </td>
+          </tr>
+        ))}
       </tbody>
     </table>
   );

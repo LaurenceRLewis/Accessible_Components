@@ -1,5 +1,6 @@
 const description = `
-/*... the previous part of your description ...*/
+
+The ReactTableCheckbox component is a customizable, easy-to-use component that displays a data table with checkboxes. This component provides a 'Select All' checkbox functionality, allowing users to select or deselect all rows with a single click. In addition, individual checkboxes can be initialized as checked or disabled based on the component's props.
 
 ## Props
 
@@ -28,9 +29,14 @@ const MyComponent = () => {
     <ReactTableCheckbox data={data} disabledCheckboxes="0" defaultCheckedBoxes="1,2" />
   );
 };
-\`\`\`
 
-/*... the remaining part of your description ...*/
+const MyComponent = () => (
+  <ReactTableCheckbox 
+      disabledCheckboxes="0,2" 
+      defaultCheckedBoxes="1,3"
+  />
+);
+\`\`\`
 
 `;
 
