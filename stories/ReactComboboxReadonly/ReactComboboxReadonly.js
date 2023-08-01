@@ -27,7 +27,7 @@ const ReactComboboxReadonly = ({
   const firstButtonRef = useRef(null);
 
   useEffect(() => {
-    if (isListboxOpen && listboxRef.current.children.length > 0) {
+    if (isListboxOpen && listboxRef.current && listboxRef.current.children.length > 0) {
       listboxRef.current.children[0].setAttribute("aria-selected", "true");
       listboxRef.current.children[0].setAttribute("tabindex", "0");
     }
@@ -39,15 +39,15 @@ const ReactComboboxReadonly = ({
     }
   }, [isListboxOpen]);
 
-  const handleSelectOption = (option) => {
+  const handleSelectOption = (option, isSelected) => {
     let newSelectedOptions;
-
+  
     if (interactionMode === "Remove selected from list") {
       const available = availableOptions.filter(
         (ingredient) => !selectedOptions.includes(ingredient)
       );
-
-      if (available.includes(option)) {
+  
+      if (isSelected) {
         newSelectedOptions = [...selectedOptions, option];
         setAvailableOptions(availableOptions.filter((item) => item !== option)); // remove option from available options
       } else {
@@ -55,11 +55,13 @@ const ReactComboboxReadonly = ({
         setAvailableOptions([...availableOptions, option]); // add option back to available options
       }
     } else {
-      newSelectedOptions = selectedOptions.includes(option)
-        ? selectedOptions.filter((item) => item !== option)
-        : [...selectedOptions, option];
+      if (isSelected) {
+        newSelectedOptions = [...selectedOptions, option];
+      } else {
+        newSelectedOptions = selectedOptions.filter((item) => item !== option);
+      }
     }
-
+  
     setSelectedOptions(newSelectedOptions);
     ariaAnnounce(`You have ${newSelectedOptions.length} items selected.`);
   };
@@ -124,7 +126,7 @@ const ReactComboboxReadonly = ({
           role="combobox"
           aria-expanded={isListboxOpen}
           aria-controls="ingredientsListbox"
-          aria-activedescendant={isListboxOpen ? activeDescendantId.current : ""}
+          aria-activedescendant={isListboxOpen && activeDescendantId.current ? activeDescendantId.current : ""}
           readOnly
           ref={triggerButtonRef}
           className={styles.listboxToggleButton}
