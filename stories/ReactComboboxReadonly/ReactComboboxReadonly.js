@@ -124,7 +124,7 @@ const ReactComboboxReadonly = ({
           role="combobox"
           aria-expanded={isListboxOpen}
           aria-controls="ingredientsListbox"
-          aria-activedescendant={activeDescendantId}
+          aria-activedescendant={isListboxOpen ? activeDescendantId.current : ""}
           readOnly
           ref={triggerButtonRef}
           className={styles.listboxToggleButton}
