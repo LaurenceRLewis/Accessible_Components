@@ -3,11 +3,37 @@
 .multiSelectContainer {
   width: 300px;
   font-family: Arial, sans-serif;
+  position: relative;
 }
 
 .multiSelectContainer h2 {
   color: #6200ee;
   margin-bottom: 10px;
+}
+
+.comboboxContainer {
+  position: relative;
+}
+
+.comboboxLabel {
+  font-size: 1rem;
+  position: absolute;
+  pointer-events: none;
+  left: 17px;
+  top: 35px;
+  transition: 0.2s ease all;
+  color: #322b2b;
+}
+
+.comboboxInput {
+  padding-left: 5px;
+}
+
+.comboboxInput:focus ~ .comboboxLabel,
+.comboboxInput:valid ~ .comboboxLabel {
+  top: -20px;
+  font-size: 14px;
+  color: #5264ae;
 }
 
 .selectedOptions {
@@ -22,7 +48,6 @@
   margin: 5px;
   padding: 5px 10px;
   border: none;
-  border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
   width:auto;
@@ -42,18 +67,33 @@
 
 .listboxToggleButton:focus-visible,
 .selectedOptionButton:focus-visible {
-  outline: 3px solid #03dac5;
+  outline: 2px solid #6200ee;
+  outline-offset: 5px; 
 }
 
 .listboxToggleButton:hover,
 .selectedOptionButton:hover {
-  background-color: #3700b3;
+  outline: 2px solid #6200ee;
+  outline-offset: 5px; 
+}
+
+.listboxToggleButton {
+  display: block;
+  width: 100%;
+  margin:0;
+  padding: 0.5em 1em;
+  border: 1px solid #6200ee;
+  background: #fff url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="4" height="5" viewBox="0 0 4 5"><path fill="%23666" d="M2 0L0 2h4zm0 5L0 3h4z"/></svg>') no-repeat right 0.75em center/8px 10px;
+  color: #333;
+  appearance: none;
+  cursor: pointer;
 }
 
 .listbox {
   border: 1px solid #6200ee;
   padding: 0;
   margin: 0;
+  min-width: 326px;
   list-style-type: none;
   max-height: 150px;
   overflow-y: auto;

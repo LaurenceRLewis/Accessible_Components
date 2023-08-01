@@ -2,8 +2,8 @@ import React, { useEffect, useState, useRef } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import ariaAnnounce from "../../.storybook/utils/ariaAnnounce";
-import useKeyboardNavigation from "./keyboardNavigation";
-import styles from "./ReactMultiSelect.module.css";
+import useKeyboardNavigation from "./ReactComboboxReadonlyNavigation";
+import styles from "./ReactComboboxReadonly.module.css";
 
 const initialIngredients = [
   "Tofu",
@@ -14,7 +14,11 @@ const initialIngredients = [
   "Lentils",
 ];
 
-const ReactMultiSelect = ({ buttonsPosition, interactionMode }) => {
+const ReactComboboxReadonly = ({
+  buttonsPosition,
+  interactionMode,
+  ariaMultiselectable,
+}) => {
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [availableOptions, setAvailableOptions] = useState(initialIngredients);
   const [isListboxOpen, setListboxOpen] = useState(false);
@@ -28,6 +32,12 @@ const ReactMultiSelect = ({ buttonsPosition, interactionMode }) => {
       listboxRef.current.children[0].setAttribute("tabindex", "0");
     }
   }, [isListboxOpen, listboxRef]);
+
+  useEffect(() => {
+    if (!isListboxOpen && triggerButtonRef.current) {
+      triggerButtonRef.current.focus();
+    }
+  }, [isListboxOpen]);
 
   const handleSelectOption = (option) => {
     let newSelectedOptions;
@@ -72,7 +82,7 @@ const ReactMultiSelect = ({ buttonsPosition, interactionMode }) => {
     }
   };
 
-  const handleKeyDown = useKeyboardNavigation(
+  const { handleKeyDown, activeDescendantId } = useKeyboardNavigation(
     isListboxOpen,
     listboxRef,
     handleSelectOption,
@@ -105,15 +115,29 @@ const ReactMultiSelect = ({ buttonsPosition, interactionMode }) => {
         <p className={styles.numItemsInCart}>
           You have {selectedOptions.length} items in your cart.
         </p>
-          <button
-            ref={triggerButtonRef}
-            className={styles.listboxToggleButton}
-            onClick={() => setListboxOpen(!isListboxOpen)}
-            aria-expanded={isListboxOpen}
-            aria-controls="ingredientsListbox"
-          >
-            Groceries
-          </button>
+        <label htmlFor="combobox01" className={styles.comboboxLabel}>
+          {selectedOptions.length > 0 ? `${selectedOptions.length} ` : ""}Select
+          ingredients...
+        </label>
+        <input
+          id="combobox01"
+          role="combobox"
+          aria-expanded={isListboxOpen}
+          aria-controls="ingredientsListbox"
+          aria-activedescendant={activeDescendantId}
+          readOnly
+          ref={triggerButtonRef}
+          className={styles.listboxToggleButton}
+          onClick={() => setListboxOpen(!isListboxOpen)}
+          onKeyDown={(event) => {
+            if (event.key === "Enter" || event.key === " ") {
+              event.preventDefault();
+              setListboxOpen(!isListboxOpen);
+            } else {
+              handleKeyDown(event);
+            }
+          }}
+        />
         {isListboxOpen && (
           <ul
             id="ingredientsListbox"
@@ -121,13 +145,14 @@ const ReactMultiSelect = ({ buttonsPosition, interactionMode }) => {
             className={styles.listbox}
             role="listbox"
             aria-label="Ingredients"
-            aria-multiselectable="true"
+            aria-multiselectable={ariaMultiselectable}
             tabIndex="0"
             onKeyDown={handleKeyDown}
           >
             {availableOptions.map((option, index) => (
               <li
                 key={index}
+                id={`option-${index}`}
                 role="option"
                 aria-selected={selectedOptions.includes(option)}
                 className={classNames(styles.listboxOption, {
@@ -165,7 +190,7 @@ const ReactMultiSelect = ({ buttonsPosition, interactionMode }) => {
   );
 };
 
-ReactMultiSelect.propTypes = {
+ReactComboboxReadonly.propTypes = {
   buttonsPosition: PropTypes.oneOf(["top", "bottom"]),
   interactionMode: PropTypes.oneOf([
     "Keep selected in list",
@@ -173,9 +198,10 @@ ReactMultiSelect.propTypes = {
   ]),
 };
 
-ReactMultiSelect.defaultProps = {
+ReactComboboxReadonly.defaultProps = {
   buttonsPosition: "bottom",
   interactionMode: "Keep selected in list",
+  ariaMultiselectable: true,
 };
 
-export default ReactMultiSelect;
+export default ReactComboboxReadonly;
