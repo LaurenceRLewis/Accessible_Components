@@ -3,7 +3,7 @@ import ReactComboboxReadonly from './ReactComboboxReadonly';
 import ReactComboboxReadonlyDescription from './ReactComboboxReadonlyDescription';
 
 export default {
-  title: 'Components/Combobox (Readonly)',
+  title: 'Experimental/Combobox (Readonly)',
   component: ReactComboboxReadonly,
   parameters: {
     docs: {
