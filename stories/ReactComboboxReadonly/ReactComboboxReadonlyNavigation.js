@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 
-const useKeyboardNavigation = (isListboxOpen, listboxRef, handleSelectOption, setListboxOpen) => {
+const useKeyboardNavigation = (isListboxOpen, listboxRef, handleSelectOption, setListboxOpen, ariaMultiselectable) => {
   const [focusedOptionIndex, setFocusedOptionIndex] = useState(0);
   const [activeDescendantId, setActiveDescendantId] = useState(null);
   useEffect(() => {
@@ -70,11 +70,14 @@ const useKeyboardNavigation = (isListboxOpen, listboxRef, handleSelectOption, se
       break;
 
       case 'Enter':
-        case ' ':
-          event.preventDefault();
-          handleSelectOption(options[focusedOptionIndex].textContent);
-          // don't close the listbox after selection for a multiselectable combobox
-          break;
+      case ' ':
+        event.preventDefault();
+        handleSelectOption(options[focusedOptionIndex].textContent);
+        // If 'ariaMultiselectable' is false and one item is already selected, close the listbox
+        if (!ariaMultiselectable && selectedOptions.length > 0) {
+          setListboxOpen(false);
+        }
+        break;
 
     case 'Escape':
       event.preventDefault();

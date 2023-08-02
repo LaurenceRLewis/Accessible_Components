@@ -22,6 +22,7 @@ const ReactComboboxReadonly = ({
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [availableOptions, setAvailableOptions] = useState(initialIngredients);
   const [isListboxOpen, setListboxOpen] = useState(false);
+  const [singleSelectMessage, setSingleSelectMessage] = useState("");
   const listboxRef = useRef(null);
   const triggerButtonRef = useRef(null);
   const firstButtonRef = useRef(null);
@@ -39,29 +40,52 @@ const ReactComboboxReadonly = ({
     }
   }, [isListboxOpen]);
 
+  useEffect(() => {
+    if (!ariaMultiselectable) {
+      const message =
+        "Only one option can be selected, to select multiple, set aria-multiselect to true in the controls";
+      setSingleSelectMessage(message);
+    }
+  }, [ariaMultiselectable]);
+
   const handleSelectOption = (option) => {
     let newSelectedOptions;
 
-    if (interactionMode === "Remove selected from list") {
-      const available = availableOptions.filter(
-        (ingredient) => !selectedOptions.includes(ingredient)
-      );
+    if (ariaMultiselectable) {
+      if (interactionMode === "Remove selected from list") {
+        const available = availableOptions.filter(
+          (ingredient) => !selectedOptions.includes(ingredient)
+        );
 
-      if (available.includes(option)) {
-        newSelectedOptions = [...selectedOptions, option];
-        setAvailableOptions(availableOptions.filter((item) => item !== option)); // remove option from available options
+        if (available.includes(option)) {
+          newSelectedOptions = [...selectedOptions, option];
+          setAvailableOptions(
+            availableOptions.filter((item) => item !== option)
+          ); // remove option from available options
+        } else {
+          newSelectedOptions = selectedOptions.filter(
+            (item) => item !== option
+          );
+          setAvailableOptions([...availableOptions, option]); // add option back to available options
+        }
       } else {
-        newSelectedOptions = selectedOptions.filter((item) => item !== option);
-        setAvailableOptions([...availableOptions, option]); // add option back to available options
+        newSelectedOptions = selectedOptions.includes(option)
+          ? selectedOptions.filter((item) => item !== option)
+          : [...selectedOptions, option];
       }
+      setSelectedOptions(newSelectedOptions);
+      ariaAnnounce(`You have ${newSelectedOptions.length} items selected.`);
     } else {
-      newSelectedOptions = selectedOptions.includes(option)
-        ? selectedOptions.filter((item) => item !== option)
-        : [...selectedOptions, option];
+      // If 'ariaMultiselectable' is false, only allow single selection
+      if (selectedOptions.length === 0 || selectedOptions.includes(option)) {
+        newSelectedOptions = [option];
+        setSelectedOptions(newSelectedOptions);
+        ariaAnnounce(`You have ${newSelectedOptions.length} items selected.`);
+      } else {
+        setListboxOpen(false);
+        return;
+      }
     }
-
-    setSelectedOptions(newSelectedOptions);
-    ariaAnnounce(`You have ${newSelectedOptions.length} items selected.`);
   };
 
   const handleDismissOption = (option) => {
@@ -92,6 +116,9 @@ const ReactComboboxReadonly = ({
   return (
     <>
       <h2>Shopping List</h2>
+      {!ariaMultiselectable && singleSelectMessage && (
+        <div className={styles.singleSelectMessage}>{singleSelectMessage}</div>
+      )}
       <div className={styles.multiSelectContainer}>
         {buttonsPosition === "top" && selectedOptions.length > 0 && (
           <>
@@ -140,7 +167,6 @@ const ReactComboboxReadonly = ({
             } else if (event.key === "ArrowUp") {
               event.preventDefault();
               setListboxOpen(true);
-              // Here we simulate the 'End' key to focus the last option when the listbox is opened
               if (isListboxOpen) {
                 const fakeEndEvent = { key: "End", preventDefault: () => {} };
                 handleKeyDown(fakeEndEvent);
@@ -157,7 +183,7 @@ const ReactComboboxReadonly = ({
             className={styles.listbox}
             role="listbox"
             aria-label="Ingredients"
-            aria-multiselectable={ariaMultiselectable}
+            {...(ariaMultiselectable ? { "aria-multiselectable": "true" } : {})}
             tabIndex="0"
             onKeyDown={handleKeyDown}
           >
