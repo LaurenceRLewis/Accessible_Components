@@ -2,7 +2,12 @@ import { useEffect, useState, useRef } from 'react';
 
 const useKeyboardNavigation = (isListboxOpen, listboxRef, handleSelectOption, setListboxOpen) => {
   const [focusedOptionIndex, setFocusedOptionIndex] = useState(0);
-  const activeDescendantId = useRef("");
+  const [activeDescendantId, setActiveDescendantId] = useState(null);
+  useEffect(() => {
+    if (isListboxOpen) {
+      listboxRef.current.focus();
+    }
+  }, [isListboxOpen, listboxRef]);
 
   const handleKeyDown = (event) => {
     const { key } = event;
@@ -16,7 +21,7 @@ const useKeyboardNavigation = (isListboxOpen, listboxRef, handleSelectOption, se
         options[focusedOptionIndex].setAttribute("aria-selected", "false");  
         options[newIndex].focus();
         options[newIndex].setAttribute("aria-selected", "true");
-        activeDescendantId.current = options[newIndex].id;
+        setActiveDescendantId(options[newIndex].id);
         setFocusedOptionIndex(newIndex);
         break;
       
@@ -26,32 +31,30 @@ const useKeyboardNavigation = (isListboxOpen, listboxRef, handleSelectOption, se
         options[focusedOptionIndex].setAttribute("aria-selected", "false");  
         options[newIndex].focus();
         options[newIndex].setAttribute("aria-selected", "true");
-        activeDescendantId.current = options[newIndex].id;
+        setActiveDescendantId(options[newIndex].id);
         setFocusedOptionIndex(newIndex);
         break;
         
       case 'Home':
         event.preventDefault();
         options[0].focus();
-        activeDescendantId.current = options[newIndex].id;
+        setActiveDescendantId(options[newIndex].id);
         setFocusedOptionIndex(0);
         break;
         
       case 'End':
         event.preventDefault();
         options[options.length - 1].focus();
-        activeDescendantId.current = options[newIndex].id;
+        setActiveDescendantId(options[newIndex].id);
         setFocusedOptionIndex(options.length - 1);
         break;
         
       case ' ':
-        case 'Enter':
-          event.preventDefault();
-          const option = options[focusedOptionIndex];
-          const isSelected = option.getAttribute("aria-selected") === "true";
-          option.setAttribute("aria-selected", !isSelected);
-          handleSelectOption(option.textContent, !isSelected);
-          break;
+      case 'Enter':
+        event.preventDefault();
+        handleSelectOption(options[focusedOptionIndex].textContent);
+        setActiveDescendantId(options[newIndex].id);
+        break;
   
       case 'Escape':
         event.preventDefault();

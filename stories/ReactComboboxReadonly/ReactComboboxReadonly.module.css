@@ -105,8 +105,7 @@
 }
 
 .listboxOption:hover {
-  background-color: #3700b3;
-  color: #fff;
+  background-color: #beb3d6;
 }
 
 .listboxOption:focus-visible {
@@ -115,8 +114,8 @@
 
 .listboxOption.selected,
 [aria-selected="true"] {
-  background-color: #6200ee;
-  color: #fff;
+  background-color: #ece8f3;
+  color:#3f3434;
 }
 .HelpText{
   font-size:0.8rem;
