@@ -49,4 +49,5 @@ export const ComboboxReadonly = Template.bind({});
 ComboboxReadonly.args = {
   buttonsPosition: 'bottom',
   interactionMode: 'Keep selected in list',
+  ariaMultiselectable: true
 };
