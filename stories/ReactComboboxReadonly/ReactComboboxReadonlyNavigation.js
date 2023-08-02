@@ -9,62 +9,95 @@ const useKeyboardNavigation = (isListboxOpen, listboxRef, handleSelectOption, se
     }
   }, [isListboxOpen, listboxRef]);
 
-  const handleKeyDown = (event) => {
-    const { key } = event;
-    const options = Array.from(listboxRef.current.children);
-    let newIndex;
-  
-    switch (key) {
-      case 'ArrowUp':
-        event.preventDefault();
-        newIndex = focusedOptionIndex - 1 >= 0 ? focusedOptionIndex - 1 : options.length - 1;
-        options[focusedOptionIndex].setAttribute("aria-selected", "false");  
-        options[newIndex].focus();
-        options[newIndex].setAttribute("aria-selected", "true");
-        setActiveDescendantId(options[newIndex].id);
-        setFocusedOptionIndex(newIndex);
-        break;
-      
-      case 'ArrowDown':
-        event.preventDefault();
-        newIndex = focusedOptionIndex + 1 < options.length ? focusedOptionIndex + 1 : 0;
-        options[focusedOptionIndex].setAttribute("aria-selected", "false");  
-        options[newIndex].focus();
-        options[newIndex].setAttribute("aria-selected", "true");
-        setActiveDescendantId(options[newIndex].id);
-        setFocusedOptionIndex(newIndex);
-        break;
-        
-      case 'Home':
-        event.preventDefault();
-        options[0].focus();
-        setActiveDescendantId(options[newIndex].id);
-        setFocusedOptionIndex(0);
-        break;
-        
-      case 'End':
-        event.preventDefault();
-        options[options.length - 1].focus();
-        setActiveDescendantId(options[newIndex].id);
-        setFocusedOptionIndex(options.length - 1);
-        break;
-        
-      case ' ':
+ const handleKeyDown = (event) => {
+  const { key } = event;
+  const options = Array.from(listboxRef.current.children);
+  let newIndex;
+
+  switch (key) {
+    case 'ArrowUp':
+      event.preventDefault();
+      newIndex = focusedOptionIndex - 1 >= 0 ? focusedOptionIndex - 1 : 0;
+      options[focusedOptionIndex].setAttribute("aria-selected", "false");  
+      options[newIndex].focus();
+      options[newIndex].setAttribute("aria-selected", "true");
+      setActiveDescendantId(options[newIndex].id);
+      setFocusedOptionIndex(newIndex);
+      break;
+
+    case 'ArrowDown':
+      event.preventDefault();
+      newIndex = focusedOptionIndex + 1 < options.length ? focusedOptionIndex + 1 : focusedOptionIndex;
+      options[focusedOptionIndex].setAttribute("aria-selected", "false");  
+      options[newIndex].focus();
+      options[newIndex].setAttribute("aria-selected", "true");
+      setActiveDescendantId(options[newIndex].id);
+      setFocusedOptionIndex(newIndex);
+      break;
+
+    case 'Home':
+      event.preventDefault();
+      options[0].focus();
+      setActiveDescendantId(options[0].id);
+      setFocusedOptionIndex(0);
+      break;
+
+    case 'End':
+      event.preventDefault();
+      options[options.length - 1].focus();
+      setActiveDescendantId(options[options.length - 1].id);
+      setFocusedOptionIndex(options.length - 1);
+      break;
+
+    case 'PageUp':
+      event.preventDefault();
+      newIndex = focusedOptionIndex - 10 >= 0 ? focusedOptionIndex - 10 : 0;
+      options[focusedOptionIndex].setAttribute("aria-selected", "false");  
+      options[newIndex].focus();
+      options[newIndex].setAttribute("aria-selected", "true");
+      setActiveDescendantId(options[newIndex].id);
+      setFocusedOptionIndex(newIndex);
+      break;
+
+    case 'PageDown':
+      event.preventDefault();
+      newIndex = focusedOptionIndex + 10 < options.length ? focusedOptionIndex + 10 : options.length - 1;
+      options[focusedOptionIndex].setAttribute("aria-selected", "false");  
+      options[newIndex].focus();
+      options[newIndex].setAttribute("aria-selected", "true");
+      setActiveDescendantId(options[newIndex].id);
+      setFocusedOptionIndex(newIndex);
+      break;
+
       case 'Enter':
+        case ' ':
+          event.preventDefault();
+          handleSelectOption(options[focusedOptionIndex].textContent);
+          // don't close the listbox after selection for a multiselectable combobox
+          break;
+
+    case 'Escape':
+      event.preventDefault();
+      setListboxOpen(false);
+      break;
+
+      case 'Tab':
         event.preventDefault();
         handleSelectOption(options[focusedOptionIndex].textContent);
-        setActiveDescendantId(options[newIndex].id);
-        break;
-  
-      case 'Escape':
-        event.preventDefault();
         setListboxOpen(false);
+        // let the browser handle the default tabbing behavior
         break;
-  
-      default:
-        break;
-    }
-  };
+
+    case 'Alt+ArrowUp':
+      event.preventDefault();
+      handleSelectOption(options[focusedOptionIndex].textContent);
+      setListboxOpen(false);
+      break;
+
+    default:
+      break;
+  }
+};
 
   return { handleKeyDown, activeDescendantId };
 };

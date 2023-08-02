@@ -130,9 +130,21 @@ const ReactComboboxReadonly = ({
           className={styles.listboxToggleButton}
           onClick={() => setListboxOpen(!isListboxOpen)}
           onKeyDown={(event) => {
-            if (event.key === "Enter" || event.key === " ") {
+            if (
+              event.key === "Enter" ||
+              event.key === " " ||
+              event.key === "ArrowDown"
+            ) {
               event.preventDefault();
-              setListboxOpen(!isListboxOpen);
+              setListboxOpen(true);
+            } else if (event.key === "ArrowUp") {
+              event.preventDefault();
+              setListboxOpen(true);
+              // Here we simulate the 'End' key to focus the last option when the listbox is opened
+              if (isListboxOpen) {
+                const fakeEndEvent = { key: "End", preventDefault: () => {} };
+                handleKeyDown(fakeEndEvent);
+              }
             } else {
               handleKeyDown(event);
             }
