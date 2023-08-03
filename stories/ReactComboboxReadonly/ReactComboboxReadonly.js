@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import ariaAnnounce from "../../.storybook/utils/ariaAnnounce";
+import useKeyboardNavigation from "./ReactComboboxReadonlyNavigation";
 import styles from "./ReactComboboxReadonly.module.css";
 
 const initialIngredients = [
@@ -12,134 +13,6 @@ const initialIngredients = [
   "Kale",
   "Lentils",
 ];
-
-const useKeyboardNavigation = (
-  isListboxOpen,
-  listboxRef,
-  handleSelectOption,
-  setListboxOpen,
-  ariaMultiselectable,
-  availableOptions,
-  triggerButtonRef
-) => {
-  const [focusedOptionIndex, setFocusedOptionIndex] = useState(0);
-  const [activeDescendantId, setActiveDescendantId] = useState(null);
-  
-  useEffect(() => {
-    if (isListboxOpen) {
-      listboxRef.current.focus();
-    }
-  }, [isListboxOpen, listboxRef]);
-
-  const handleKeyDown = (event) => {
-    const { key } = event;
-    const options = Array.from(listboxRef.current.children);
-    let newIndex;
-
-    switch (key) {
-      case "ArrowUp":
-        event.preventDefault();
-        newIndex = focusedOptionIndex - 1 >= 0 ? focusedOptionIndex - 1 : 0;
-        options[focusedOptionIndex].setAttribute("aria-selected", "false");
-        options[newIndex].focus();
-        options[newIndex].setAttribute("aria-selected", "true");
-        setActiveDescendantId(options[newIndex].id);
-        setFocusedOptionIndex(newIndex);
-        triggerButtonRef.current.setAttribute(
-          "aria-activedescendant",
-          options[newIndex].id
-        );
-        break;
-
-      case "ArrowDown":
-        event.preventDefault();
-        newIndex =
-          focusedOptionIndex + 1 < options.length
-            ? focusedOptionIndex + 1
-            : focusedOptionIndex;
-        options[focusedOptionIndex].setAttribute("aria-selected", "false");
-        options[newIndex].focus();
-        options[newIndex].setAttribute("aria-selected", "true");
-        setActiveDescendantId(options[newIndex].id);
-        setFocusedOptionIndex(newIndex);
-        triggerButtonRef.current.setAttribute(
-          "aria-activedescendant",
-          options[newIndex].id
-        );
-        break;
-
-      case "Home":
-        event.preventDefault();
-        options[0].focus();
-        setActiveDescendantId(options[0].id);
-        setFocusedOptionIndex(0);
-        break;
-
-      case "End":
-        event.preventDefault();
-        options[options.length - 1].focus();
-        setActiveDescendantId(options[options.length - 1].id);
-        setFocusedOptionIndex(options.length - 1);
-        break;
-
-      case "PageUp":
-        event.preventDefault();
-        newIndex = focusedOptionIndex - 10 >= 0 ? focusedOptionIndex - 10 : 0;
-        options[focusedOptionIndex].setAttribute("aria-selected", "false");
-        options[newIndex].focus();
-        options[newIndex].setAttribute("aria-selected", "true");
-        setActiveDescendantId(options[newIndex].id);
-        setFocusedOptionIndex(newIndex);
-        break;
-
-      case "PageDown":
-        event.preventDefault();
-        newIndex =
-          focusedOptionIndex + 10 < options.length
-            ? focusedOptionIndex + 10
-            : options.length - 1;
-        options[focusedOptionIndex].setAttribute("aria-selected", "false");
-        options[newIndex].focus();
-        options[newIndex].setAttribute("aria-selected", "true");
-        setActiveDescendantId(options[newIndex].id);
-        setFocusedOptionIndex(newIndex);
-        break;
-
-      case "Enter":
-      case " ":
-        event.preventDefault();
-        handleSelectOption(options[focusedOptionIndex].textContent);
-        // If 'ariaMultiselectable' is false and one item is already selected, close the listbox
-        if (!ariaMultiselectable && selectedOptions.length > 0) {
-          setListboxOpen(false);
-        }
-        break;
-
-      case "Escape":
-        event.preventDefault();
-        setListboxOpen(false);
-        break;
-
-      case "Tab":
-        event.preventDefault();
-        handleSelectOption(options[focusedOptionIndex].textContent);
-        setListboxOpen(false);
-        // let the browser handle the default tabbing behavior
-        break;
-
-      case "Alt+ArrowUp":
-        event.preventDefault();
-        handleSelectOption(options[focusedOptionIndex].textContent);
-        setListboxOpen(false);
-        break;
-
-      default:
-        break;
-    }
-  };
-
-  return { handleKeyDown, activeDescendantId };
-};
 
 const ReactComboboxReadonly = ({
   buttonsPosition,
@@ -155,10 +28,11 @@ const ReactComboboxReadonly = ({
   const firstButtonRef = useRef(null);
 
   useEffect(() => {
-    if (isListboxOpen) {
-      triggerButtonRef.current.focus();
+    if (isListboxOpen && listboxRef.current.children.length > 0) {
+      listboxRef.current.children[0].setAttribute("aria-selected", "true");
+      listboxRef.current.children[0].setAttribute("tabindex", "0");
     }
-  }, [isListboxOpen]);
+  }, [isListboxOpen, listboxRef]);
 
   useEffect(() => {
     if (!isListboxOpen && triggerButtonRef.current) {
@@ -187,41 +61,56 @@ const ReactComboboxReadonly = ({
           newSelectedOptions = [...selectedOptions, option];
           setAvailableOptions(
             availableOptions.filter((item) => item !== option)
-          ); // remove the selected item from the available options
+          ); // remove option from available options
+        } else {
+          newSelectedOptions = selectedOptions.filter(
+            (item) => item !== option
+          );
+          setAvailableOptions([...availableOptions, option]); // add option back to available options
         }
       } else {
-        newSelectedOptions = [...selectedOptions, option];
+        newSelectedOptions = selectedOptions.includes(option)
+          ? selectedOptions.filter((item) => item !== option)
+          : [...selectedOptions, option];
       }
-
       setSelectedOptions(newSelectedOptions);
-      ariaAnnounce(`${option} selected`);
+      ariaAnnounce(`You have ${newSelectedOptions.length} items selected.`);
     } else {
-      newSelectedOptions = [option];
-      setSelectedOptions(newSelectedOptions);
-      setSingleSelectMessage(`${option} selected`);
+      // If 'ariaMultiselectable' is false, only allow single selection
+      if (selectedOptions.length === 0 || selectedOptions.includes(option)) {
+        newSelectedOptions = [option];
+        setSelectedOptions(newSelectedOptions);
+        ariaAnnounce(`You have ${newSelectedOptions.length} items selected.`);
+      } else {
+        setListboxOpen(false);
+        return;
+      }
     }
   };
 
-  const handleClearAll = () => {
-    setSelectedOptions([]);
-    setAvailableOptions(initialIngredients);
+  const handleDismissOption = (option) => {
+    const newSelectedOptions = selectedOptions.filter(
+      (item) => item !== option
+    );
+    setSelectedOptions(newSelectedOptions);
+    if (interactionMode === "Remove selected from list") {
+      setAvailableOptions([...availableOptions, option]); // add option back to available options
+    }
+    ariaAnnounce(
+      `Removed ${option}. ${newSelectedOptions.length} items remaining.`
+    );
+    if (newSelectedOptions.length === 0) {
+      triggerButtonRef.current.focus();
+    } else {
+      firstButtonRef.current.focus();
+    }
   };
 
-  const handleListboxToggle = () => {
-    setListboxOpen(!isListboxOpen);
-  };
-
-  const {
-    handleKeyDown,
-    activeDescendantId,
-  } = useKeyboardNavigation(
+  const { handleKeyDown, activeDescendantId } = useKeyboardNavigation(
     isListboxOpen,
     listboxRef,
     handleSelectOption,
-    setListboxOpen,
-    ariaMultiselectable,
-    availableOptions,
-    triggerButtonRef
+    setListboxOpen
   );
 
   return (
@@ -345,7 +234,6 @@ ReactComboboxReadonly.propTypes = {
     "Keep selected in list",
     "Remove selected from list",
   ]),
-  ariaMultiselectable: PropTypes.bool,
 };
 
 ReactComboboxReadonly.defaultProps = {
