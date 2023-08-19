@@ -50,6 +50,7 @@
 
   .tabPanel h3{
     margin-top:0;
+    margin-bottom:1em;
   }
   
 /* Accordion view styles */
@@ -79,4 +80,9 @@
   
   .accordionButton[aria-expanded="true"]:focus-visible {
     border-color: blue;
+  }
+
+  .catImage{
+    max-width:400px;
+    height: auto;
   }
