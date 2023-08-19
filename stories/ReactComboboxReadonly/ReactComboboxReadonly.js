@@ -23,16 +23,19 @@ const ReactComboboxReadonly = ({
   const [availableOptions, setAvailableOptions] = useState(initialIngredients);
   const [isListboxOpen, setListboxOpen] = useState(false);
   const [singleSelectMessage, setSingleSelectMessage] = useState("");
+  const [focusedOptionIndex, setFocusedOptionIndex] = useState(0);
   const listboxRef = useRef(null);
   const triggerButtonRef = useRef(null);
   const firstButtonRef = useRef(null);
 
   useEffect(() => {
     if (isListboxOpen && listboxRef.current.children.length > 0) {
-      listboxRef.current.children[0].setAttribute("aria-selected", "true");
-      listboxRef.current.children[0].setAttribute("tabindex", "0");
+      listboxRef.current.children[focusedOptionIndex].setAttribute(
+        "aria-selected",
+        "true"
+      );
     }
-  }, [isListboxOpen, listboxRef]);
+  }, [isListboxOpen, listboxRef, focusedOptionIndex]);
 
   useEffect(() => {
     if (!isListboxOpen && triggerButtonRef.current) {
@@ -61,12 +64,12 @@ const ReactComboboxReadonly = ({
           newSelectedOptions = [...selectedOptions, option];
           setAvailableOptions(
             availableOptions.filter((item) => item !== option)
-          ); // remove option from available options
+          );
         } else {
           newSelectedOptions = selectedOptions.filter(
             (item) => item !== option
           );
-          setAvailableOptions([...availableOptions, option]); // add option back to available options
+          setAvailableOptions([...availableOptions, option]);
         }
       } else {
         newSelectedOptions = selectedOptions.includes(option)
@@ -76,7 +79,6 @@ const ReactComboboxReadonly = ({
       setSelectedOptions(newSelectedOptions);
       ariaAnnounce(`You have ${newSelectedOptions.length} items selected.`);
     } else {
-      // If 'ariaMultiselectable' is false, only allow single selection
       if (selectedOptions.length === 0 || selectedOptions.includes(option)) {
         newSelectedOptions = [option];
         setSelectedOptions(newSelectedOptions);
@@ -94,7 +96,7 @@ const ReactComboboxReadonly = ({
     );
     setSelectedOptions(newSelectedOptions);
     if (interactionMode === "Remove selected from list") {
-      setAvailableOptions([...availableOptions, option]); // add option back to available options
+      setAvailableOptions([...availableOptions, option]);
     }
     ariaAnnounce(
       `Removed ${option}. ${newSelectedOptions.length} items remaining.`
@@ -110,7 +112,12 @@ const ReactComboboxReadonly = ({
     isListboxOpen,
     listboxRef,
     handleSelectOption,
-    setListboxOpen
+    setListboxOpen,
+    ariaMultiselectable,
+    availableOptions,
+    triggerButtonRef,
+    focusedOptionIndex,
+    setFocusedOptionIndex
   );
 
   return (
@@ -151,28 +158,66 @@ const ReactComboboxReadonly = ({
           role="combobox"
           aria-expanded={isListboxOpen}
           aria-controls="ingredientsListbox"
-          aria-activedescendant={activeDescendantId}
+          aria-activedescendant={isListboxOpen ? activeDescendantId : undefined}
           readOnly
           ref={triggerButtonRef}
           className={styles.listboxToggleButton}
           onClick={() => setListboxOpen(!isListboxOpen)}
           onKeyDown={(event) => {
-            if (
-              event.key === "Enter" ||
-              event.key === " " ||
-              event.key === "ArrowDown"
-            ) {
-              event.preventDefault();
-              setListboxOpen(true);
-            } else if (event.key === "ArrowUp") {
-              event.preventDefault();
-              setListboxOpen(true);
-              if (isListboxOpen) {
-                const fakeEndEvent = { key: "End", preventDefault: () => {} };
-                handleKeyDown(fakeEndEvent);
-              }
-            } else {
-              handleKeyDown(event);
+            switch (event.key) {
+              case "ArrowDown":
+              case "Alt + ArrowDown":
+                event.preventDefault();
+                if (!isListboxOpen) {
+                  setListboxOpen(true);
+                } else {
+                  setFocusedOptionIndex(
+                    (focusedOptionIndex + 1) % availableOptions.length
+                  );
+                  handleKeyDown(event, isListboxOpen);
+                }
+                break;
+              case "ArrowUp":
+                event.preventDefault();
+                if (!isListboxOpen) {
+                  setListboxOpen(true);
+                } else {
+                  setFocusedOptionIndex(
+                    (focusedOptionIndex - 1 + availableOptions.length) %
+                      availableOptions.length
+                  );
+                  handleKeyDown(event, isListboxOpen);
+                }
+                break;
+              case "Enter":
+              case " ":
+                event.preventDefault();
+                if (isListboxOpen) {
+                  handleSelectOption(availableOptions[focusedOptionIndex]);
+                  setListboxOpen(false);
+                } else {
+                  setListboxOpen(true);
+                }
+                break;
+              case "Escape":
+                event.preventDefault();
+                setListboxOpen(false);
+                break;
+              case "Tab":
+                event.preventDefault();
+                handleSelectOption(availableOptions[focusedOptionIndex]);
+                setListboxOpen(false);
+                break;
+              case "Home":
+              case "End":
+                if (isListboxOpen) {
+                  handleKeyDown(event, isListboxOpen);
+                }
+                break;
+              default:
+                if (isListboxOpen) {
+                  handleKeyDown(event, isListboxOpen);
+                }
             }
           }}
         />
@@ -184,7 +229,6 @@ const ReactComboboxReadonly = ({
             role="listbox"
             aria-label="Ingredients"
             {...(ariaMultiselectable ? { "aria-multiselectable": "true" } : {})}
-            tabIndex="0"
             onKeyDown={handleKeyDown}
           >
             {availableOptions.map((option, index) => (
