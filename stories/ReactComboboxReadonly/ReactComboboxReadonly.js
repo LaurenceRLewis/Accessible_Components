@@ -150,8 +150,8 @@ const ReactComboboxReadonly = ({
           You have {selectedOptions.length} items in your cart.
         </p>
         <label htmlFor="combobox01" className={styles.comboboxLabel}>
-          {selectedOptions.length > 0 ? `${selectedOptions.length} ` : ""}Select
-          ingredients...
+        Select
+          ingredients... {selectedOptions.length > 0 ? `${selectedOptions.length} selected ` : ""}
         </label>
         <input
           id="combobox01"
