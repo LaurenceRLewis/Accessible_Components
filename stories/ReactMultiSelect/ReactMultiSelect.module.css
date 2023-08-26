@@ -7,34 +7,33 @@
 
 .multiSelectContainer h2 {
   color: #6200ee;
-  margin-bottom: 10px;
+  margin-bottom: 1em;
 }
 
 .selectedOptions {
   display: flex;
   flex-wrap: wrap;
-  margin-bottom: 10px;
-}
-
-.listboxToggleButton {
-  background-color: #6200ee;
-  color: #fff;
-  margin: 5px;
-  padding: 5px 10px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  width:auto;
+  margin-bottom: 1em;
 }
 
 .selectedOptionButton {
   background-color: #9d2aa8;
   color: #fff;
-  margin: 5px;
-  padding: 5px 10px;
+  margin: 0.5em;
+  padding: 0.5em 1em;
   border: none;
-  border-radius: 5px;
+  border-radius: 0.5em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width:auto;
+}
+
+.listboxToggleButton {
+  background-color: #6200ee;
+  color: #fff;
+  margin: 0.5em;
+  padding: 0.5em 1em;
+  border: none;
   cursor: pointer;
   transition: background-color 0.3s ease;
   width:auto;
@@ -42,12 +41,26 @@
 
 .listboxToggleButton:focus-visible,
 .selectedOptionButton:focus-visible {
-  outline: 3px solid #03dac5;
+  outline: 2px solid #6200ee;
+  outline-offset: 5px; 
 }
 
 .listboxToggleButton:hover,
 .selectedOptionButton:hover {
-  background-color: #3700b3;
+  outline: 2px solid #6200ee;
+  outline-offset: 5px; 
+}
+
+.listboxToggleButton {
+  display: block;
+  width: 100%;
+  margin:0;
+  padding: 0.5em 1em;
+  border: 1px solid #6200ee;
+  background: #fff url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="4" height="5" viewBox="0 0 4 5"><path fill="%23666" d="M2 0L0 2h4zm0 5L0 3h4z"/></svg>') no-repeat right 0.75em center/8px 10px;
+  color: #333;
+  appearance: none;
+  cursor: pointer;
 }
 
 .listbox {
@@ -60,7 +73,7 @@
 }
 
 .listboxOption {
-  padding: 10px;
+  padding: 1em;
   cursor: pointer;
 }
 
@@ -73,11 +86,25 @@
   outline: 3px solid #03dac5;
 }
 
-.listboxOption.selected,
 [aria-selected="true"] {
   background-color: #6200ee;
   color: #fff;
 }
+
+.listboxOption.selected {
+  background: url(../../.storybook/utils/images/checkbox-simple.svg);
+  background-repeat: no-repeat;
+  background-position: right 1em center;
+  margin-right: 0.3em;
+  font-weight: 700;
+  color: var(--purple-900);
+}
+
+.listboxOption.selected:focus-visible {
+  background-color: #6200ee;
+  color: #fff;
+}
+
 .HelpText{
   font-size:0.8rem;
   color: #5a5656;

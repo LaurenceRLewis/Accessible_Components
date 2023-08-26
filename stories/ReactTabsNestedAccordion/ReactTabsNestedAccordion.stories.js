@@ -8,7 +8,7 @@ import louieImage from './images/Louie.jpg';
 import murphyImage from './images/Murphy.jpg';
 
 export default {
-  title: "Experimental/Tabs (nested accordion)",
+  title: "Combined Components/Tabs (with a nested accordion)",
   component: ReactTabsNestedAccordion,
   parameters: {
     docs: {

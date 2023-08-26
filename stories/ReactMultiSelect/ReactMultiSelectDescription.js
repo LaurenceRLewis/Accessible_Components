@@ -9,11 +9,12 @@ ReactMultiSelect is a custom multi-select component that provides users with a d
 - Offers a dropdown list for displaying available options.
 - The selection model can be default or alternative.
 - Ensures keyboard navigation for easy control and interaction.
+- New! Toggle selection state with Space or Enter keys without changing other selections.
 - Uses ARIA live regions to announce changes to the user.
 
 ## Keyboard Accessibility
 
-The ReactMultiSelect component ensures keyboard accessibility for easy control and interaction. Users can navigate and interact with the list of options using keyboard controls.
+The ReactMultiSelect component ensures keyboard accessibility for easy control and interaction. Users can navigate and interact with the list of options using keyboard controls. The new update allows users to toggle the selection state of options using the Space or Enter keys. Once selected, the 'aria-selected' attribute will remain unchanged for that option until toggled off again, providing a more intuitive keyboard interaction.
 
 ## ARIA Announcements
 
@@ -38,7 +39,7 @@ In the case of ReactMultiSelect, \`ariaAnnounce\` is used to communicate the sel
 | ---------------------- | -------------------------------------------------------------- |
 | \`handleSelectOption\` | A method that handles the selection of an option.              |
 | \`handleDismissOption\`| A method that handles the dismissal of a selected option.      |
-| \`handleKeyDown\`      | A method that handles the keydown event in the list of options.|
+| \`handleKeyDown\`      | A method that handles the keydown event in the list of options, including the new toggle selection functionality.|
 
 The ReactMultiSelect component ensures a seamless user experience for both mouse and keyboard interactions, making it accessible and easy to use.
 

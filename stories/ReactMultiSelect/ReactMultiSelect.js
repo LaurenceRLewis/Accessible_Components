@@ -105,15 +105,22 @@ const ReactMultiSelect = ({ buttonsPosition, interactionMode }) => {
         <p className={styles.numItemsInCart}>
           You have {selectedOptions.length} items in your cart.
         </p>
-          <button
-            ref={triggerButtonRef}
-            className={styles.listboxToggleButton}
-            onClick={() => setListboxOpen(!isListboxOpen)}
-            aria-expanded={isListboxOpen}
-            aria-controls="ingredientsListbox"
-          >
-            Groceries
-          </button>
+        <div
+          ref={triggerButtonRef}
+          className={styles.listboxToggleButton}
+          onClick={() => setListboxOpen(!isListboxOpen)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              // Check for Enter or Space key press
+              setListboxOpen(!isListboxOpen);
+            }
+          }}
+          aria-expanded={isListboxOpen}
+          aria-controls="ingredientsListbox"
+          tabIndex="0"
+        >
+          Groceries
+        </div>
         {isListboxOpen && (
           <ul
             id="ingredientsListbox"
@@ -122,7 +129,7 @@ const ReactMultiSelect = ({ buttonsPosition, interactionMode }) => {
             role="listbox"
             aria-label="Ingredients"
             aria-multiselectable="true"
-            tabIndex="0"
+            tabIndex="-1"
             onKeyDown={handleKeyDown}
           >
             {availableOptions.map((option, index) => (
