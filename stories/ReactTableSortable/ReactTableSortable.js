@@ -4,6 +4,7 @@ import styles from "./ReactTableSortable.module.css";
 export const ReactTableSortable = ({
   sortable = "Sort",
   includeScope = true,
+  addRoleStatus = false,
   iconVisibility = "Show on hover / focus",
   customCaptionText = "Table sorted by, ",
   initialSortColumnID = 1,
@@ -133,7 +134,7 @@ export const ReactTableSortable = ({
   // Updating the caption dynamically based on sorted column
   const sortCaptionText = (
     <>
-      Sorted by <strong>{headers[sortedColumn.index]}</strong> {""}
+      <strong>{headers[sortedColumn.index]}</strong> {""}
       {sortedColumn.ascending ? "ascending" : "descending"}
     </>
   );
@@ -144,7 +145,10 @@ export const ReactTableSortable = ({
     <table className={styles.table}>
       <caption className={styles.caption}>
         Development Progress Table
-        <span className={styles.captionText}>
+        <span
+          className={styles.captionText}
+          {...(addRoleStatus === "Status Role" ? { role: "status" } : {})}
+        >
           {customCaptionText} {sortCaptionText}
         </span>
       </caption>

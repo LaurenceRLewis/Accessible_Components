@@ -51,7 +51,6 @@ export default {
       control: { type: 'text' },
       description: 'Optional text to be included in table caption',
       defaultValue: 'Table sorted by, ',
-      defaultValue: null,
       table: {
         type: { summary: 'Table sorted by, ' },
         defaultValue: { summary: null },
@@ -67,6 +66,17 @@ export default {
         defaultValue: { summary: 1 },
       },
     },
+    addRoleStatus: {
+      name: "Add role=status to span",
+      control: { type: 'select' },
+      options: ['Status Role', 'No Role'],
+      description: 'Add role attribute to span',
+      defaultValue: 'No role',
+      table: {
+        type: { summary: 'string' },
+        defaultValue: { summary: 'No role' },
+      },
+    },
   },
 };
 
@@ -78,4 +88,5 @@ SortableTableColumns.args = {
   sortable: 'Sort',
   includeScope: true,
   iconVisibility: 'Show on hover / focus',
+  addRoleStatus: 'No role'
 };
