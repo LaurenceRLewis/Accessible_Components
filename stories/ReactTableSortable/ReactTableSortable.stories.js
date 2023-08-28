@@ -40,10 +40,10 @@ export default {
       control: { type: 'select' },
       options: ['Show icons', 'Show on hover / focus'],
       description: 'Control visibility of the sorting icons',
-      defaultValue: 'Show icons',
+      defaultValue: 'Show on hover / focus',
       table: {
         type: { summary: 'string' },
-        defaultValue: { summary: 'Show icons' },
+        defaultValue: { summary: 'Show on hover / focus' },
       },
     },
     captionText: {
@@ -66,5 +66,5 @@ export const SortableTableColumns = Template.bind({});
 SortableTableColumns.args = {
   sortable: 'Sort',
   includeScope: true,
-  iconVisibility: 'Show icons',
+  iconVisibility: 'Show on hover / focus',
 };

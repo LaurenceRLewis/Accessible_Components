@@ -1,7 +1,12 @@
 import React, { useState, useCallback } from "react";
-import styles from './ReactTableSortable.module.css';
+import styles from "./ReactTableSortable.module.css";
 
-export const ReactTableSortable = ({ sortable = 'Sort', includeScope = true, iconVisibility = 'Show icons', captionText = null }) => {
+export const ReactTableSortable = ({
+  sortable = "Sort",
+  includeScope = true,
+  iconVisibility = "Show on hover / focus",
+  captionText = null,
+}) => {
   // Initialize tableData with initial data.
   const [tableData, setTableData] = useState([
     [
@@ -60,18 +65,18 @@ export const ReactTableSortable = ({ sortable = 'Sort', includeScope = true, ico
       "William Wilson",
     ],
   ]);
-  
+
   // Initialize sortedColumn state with a default sorting configuration.
   const [sortedColumn, setSortedColumn] = useState({
-    index: null,
+    index: 1,
     ascending: true,
   });
 
-  const [showChevron, setShowChevron] = useState(null);
+  const [showChevron, setShowChevron] = useState(1);
 
   // Helper function to get cell value at given row and idx.
   const getCellValue = (row, idx) => row[idx];
-  
+
   // Function factory to generate a comparer function for sorting table data.
   const comparer = (idx, asc) => (a, b) =>
     ((v1, v2) =>
@@ -94,6 +99,7 @@ export const ReactTableSortable = ({ sortable = 'Sort', includeScope = true, ico
           setTableData((prevData) =>
             [...prevData].sort(comparer(index, ascending))
           );
+          setShowChevron(index);
           return { index, ascending };
         });
       }
@@ -119,7 +125,10 @@ export const ReactTableSortable = ({ sortable = 'Sort', includeScope = true, ico
     <table className={styles.table}>
       <caption className={styles.caption}>
         Development Progress Table{" "}
-        {captionText && <span className={styles.captionText}>{captionText}</span>}  {/* Conditionally render the <span> */}
+        {captionText && (
+          <span className={styles.captionText}>{captionText}</span>
+        )}{" "}
+        {/* Conditionally render the <span> */}
       </caption>
       <thead>
         <tr>
@@ -128,11 +137,15 @@ export const ReactTableSortable = ({ sortable = 'Sort', includeScope = true, ico
               key={header}
               id={`${header.replace(/\s+/g, "-").toLowerCase()}-${index}`}
               {...(includeScope ? { scope: "col" } : {})}
-              {...(sortedColumn.index === index && sortable === "Sort"
+              {...(sortedColumn.index === index ||
+              (index === 1 && sortedColumn.index === null)
                 ? {
-                    "aria-sort": sortedColumn.ascending
-                      ? "ascending"
-                      : "descending",
+                    "aria-sort":
+                      sortedColumn.index === index
+                        ? sortedColumn.ascending
+                          ? "ascending"
+                          : "descending"
+                        : "ascending",
                   }
                 : {})}
               className={styles.th}
@@ -140,24 +153,33 @@ export const ReactTableSortable = ({ sortable = 'Sort', includeScope = true, ico
               {sortable === "Sort" ? (
                 <button
                   onMouseEnter={() => setShowChevron(index)}
-                  onMouseLeave={() => setShowChevron(null)}
+                  onMouseLeave={() => setShowChevron(sortedColumn.index)}
                   onFocus={() => setShowChevron(index)}
-                  onBlur={() => setShowChevron(null)}
+                  onBlur={() => setShowChevron(sortedColumn.index)}
                   onClick={() => onHeaderButtonClick(index)}
                   className={styles.button}
                 >
                   {header}
                   <span
                     className={`
-                      ${styles.chevron} 
-                      ${iconVisibility === 'Show icons' ? styles.chevronIsVisible : ''} 
-                      ${iconVisibility === 'Show on hover / focus' ? styles.chevronHoverFocus : ''} 
-                      ${showChevron === index || sortedColumn.index === index 
-                        ? sortedColumn.index === index && sortedColumn.ascending 
-                          ? styles.chevronUp 
-                          : "down" 
-                        : "hidden"
-                      }`}
+                  ${styles.chevron} 
+                  ${
+                    iconVisibility === "Show icons" ||
+                    sortedColumn.index === index ||
+                    (index === 1 && sortedColumn.index === null)
+                      ? styles.chevronIsVisible
+                      : ""
+                  } 
+                  ${
+                    iconVisibility === "Show on hover / focus" ? styles.chevronHoverFocus : ""
+                  } 
+                  ${
+                    showChevron === index || sortedColumn.index === index
+                      ? sortedColumn.index === index && sortedColumn.ascending
+                        ? styles.chevronUp
+                        : styles.chevronDown // Add the correct class for pointing down
+                      : "hidden"
+                  }`}
                     aria-hidden="true"
                   />
                 </button>
@@ -172,7 +194,9 @@ export const ReactTableSortable = ({ sortable = 'Sort', includeScope = true, ico
         {tableData.map((row, rowIndex) => (
           <tr key={rowIndex}>
             {row.map((cell, cellIndex) => (
-              <td key={cellIndex} className={styles.td}>{cell}</td>
+              <td key={cellIndex} className={styles.td}>
+                {cell}
+              </td>
             ))}
           </tr>
         ))}
