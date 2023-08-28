@@ -1,11 +1,12 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import styles from "./ReactTableSortable.module.css";
 
 export const ReactTableSortable = ({
   sortable = "Sort",
   includeScope = true,
   iconVisibility = "Show on hover / focus",
-  captionText = null,
+  customCaptionText = "Table sorted by, ",
+  initialSortColumnID = 1,
 }) => {
   // Initialize tableData with initial data.
   const [tableData, setTableData] = useState([
@@ -68,7 +69,7 @@ export const ReactTableSortable = ({
 
   // Initialize sortedColumn state with a default sorting configuration.
   const [sortedColumn, setSortedColumn] = useState({
-    index: 1,
+    index: initialSortColumnID,
     ascending: true,
   });
 
@@ -86,6 +87,16 @@ export const ReactTableSortable = ({
       getCellValue(asc ? a : b, idx),
       getCellValue(asc ? b : a, idx)
     );
+
+  useEffect(() => {
+    // Perform initial sorting based on initialSortColumnID
+    const initialIndex = initialSortColumnID;
+    const initialAscending = true; // Or false based on your needs
+    setTableData((prevData) =>
+      [...prevData].sort(comparer(initialIndex, initialAscending))
+    );
+    setSortedColumn({ index: initialIndex, ascending: initialAscending });
+  }, [initialSortColumnID]);
 
   // Function wrapped in useCallback that handles header button click to sort table.
   const onHeaderButtonClick = useCallback(
@@ -119,16 +130,23 @@ export const ReactTableSortable = ({
     "Manager",
   ];
 
+  // Updating the caption dynamically based on sorted column
+  const sortCaptionText = (
+    <>
+      Sorted by <strong>{headers[sortedColumn.index]}</strong> {""}
+      {sortedColumn.ascending ? "ascending" : "descending"}
+    </>
+  );
+
   // Render table with sortedColumn state and onHeaderButtonClick event handler.
   // The table header rendering based on the sortable prop.
   return (
     <table className={styles.table}>
       <caption className={styles.caption}>
-        Development Progress Table{" "}
-        {captionText && (
-          <span className={styles.captionText}>{captionText}</span>
-        )}{" "}
-        {/* Conditionally render the <span> */}
+        Development Progress Table
+        <span className={styles.captionText}>
+          {customCaptionText} {sortCaptionText}
+        </span>
       </caption>
       <thead>
         <tr>
@@ -171,7 +189,9 @@ export const ReactTableSortable = ({
                       : ""
                   } 
                   ${
-                    iconVisibility === "Show on hover / focus" ? styles.chevronHoverFocus : ""
+                    iconVisibility === "Show on hover / focus"
+                      ? styles.chevronHoverFocus
+                      : ""
                   } 
                   ${
                     showChevron === index || sortedColumn.index === index

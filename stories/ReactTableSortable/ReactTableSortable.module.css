@@ -9,6 +9,10 @@
   text-align: left;
   margin-bottom: 0.5em;
 }
+.captionText{
+  display:block;
+  font-size:1rem;
+}
 .th,
 .td {
   padding: 1em;
@@ -71,9 +75,4 @@
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
-}
-
-.captionText{
-  display:block;
-  font-size:1rem;
 }

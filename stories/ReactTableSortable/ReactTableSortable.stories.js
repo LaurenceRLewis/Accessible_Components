@@ -46,14 +46,25 @@ export default {
         defaultValue: { summary: 'Show on hover / focus' },
       },
     },
-    captionText: {
+    customCaptionText: {
       name: "Caption Text",
       control: { type: 'text' },
       description: 'Optional text to be included in table caption',
+      defaultValue: 'Table sorted by, ',
       defaultValue: null,
       table: {
-        type: { summary: 'string or null' },
+        type: { summary: 'Table sorted by, ' },
         defaultValue: { summary: null },
+      },
+    },
+    initialSortColumnID: {
+      name: "Initial Sort Column ID",
+      control: { type: 'number' },
+      description: 'Default column to sort',
+      defaultValue: 1,
+      table: {
+        type: { summary: 'number' },
+        defaultValue: { summary: 1 },
       },
     },
   },
