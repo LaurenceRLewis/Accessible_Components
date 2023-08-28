@@ -72,3 +72,8 @@
   white-space: nowrap;
   border: 0;
 }
+
+.captionText{
+  display:block;
+  font-size:1rem;
+}

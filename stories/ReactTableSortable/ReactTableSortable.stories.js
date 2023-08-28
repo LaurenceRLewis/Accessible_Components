@@ -40,10 +40,20 @@ export default {
       control: { type: 'select' },
       options: ['Show icons', 'Show on hover / focus'],
       description: 'Control visibility of the sorting icons',
-      defaultValue: 'Show on hover / focus',
+      defaultValue: 'Show icons',
       table: {
         type: { summary: 'string' },
-        defaultValue: { summary: 'Show on hover / focus' },
+        defaultValue: { summary: 'Show icons' },
+      },
+    },
+    captionText: {
+      name: "Caption Text",
+      control: { type: 'text' },
+      description: 'Optional text to be included in table caption',
+      defaultValue: null,
+      table: {
+        type: { summary: 'string or null' },
+        defaultValue: { summary: null },
       },
     },
   },
@@ -56,5 +66,5 @@ export const SortableTableColumns = Template.bind({});
 SortableTableColumns.args = {
   sortable: 'Sort',
   includeScope: true,
-  iconVisibility: 'Show on hover / focus',
+  iconVisibility: 'Show icons',
 };

@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from "react";
 import styles from './ReactTableSortable.module.css';
 
-export const ReactTableSortable = ({ sortable = 'Sort', includeScope = true, iconVisibility = 'Show on hover / focus' }) => {
+export const ReactTableSortable = ({ sortable = 'Sort', includeScope = true, iconVisibility = 'Show icons', captionText = null }) => {
   // Initialize tableData with initial data.
   const [tableData, setTableData] = useState([
     [
@@ -119,6 +119,7 @@ export const ReactTableSortable = ({ sortable = 'Sort', includeScope = true, ico
     <table className={styles.table}>
       <caption className={styles.caption}>
         Development Progress Table{" "}
+        {captionText && <span className={styles.captionText}>{captionText}</span>}  {/* Conditionally render the <span> */}
       </caption>
       <thead>
         <tr>
