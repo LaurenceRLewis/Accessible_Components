@@ -36,10 +36,12 @@ export default {
       description: 'The current value of the slider',
     },
     updateAriaValueText: {
+      name: "Insert the aria-valuetext attribute",
       control: 'boolean',
-      description: 'Should the slider use the custom aria-valuetext',
+      description: 'Sets value to current number of total number',
     },
     ariaValueText: {
+      name: "Set the text for aria-valuetext",
       control: 'text',
       description: 'The custom aria-valuetext for the slider',
     },

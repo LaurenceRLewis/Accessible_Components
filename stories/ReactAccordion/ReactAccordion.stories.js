@@ -32,6 +32,7 @@ export default {
       table: { disable: true },
     },
     NamedRegionContainer: {
+      name: "Option to wrap accordion in a named region",
       control: { type: "select" },
       options: [
         "Contained in a named landmark region",
