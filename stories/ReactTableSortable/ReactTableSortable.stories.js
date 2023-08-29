@@ -47,7 +47,7 @@ export default {
       },
     },
     customCaptionText: {
-      name: "Caption Text",
+      name: "Caption help text",
       control: { type: 'text' },
       description: 'Optional text to be included in table caption',
       defaultValue: 'Table sorted by, ',
@@ -67,7 +67,7 @@ export default {
       },
     },
     addRoleStatus: {
-      name: "Add role=status to span",
+      name: "Add the Status Role to the Caption help text.",
       control: { type: 'select' },
       options: ['Status Role', 'No Role'],
       description: 'Add role attribute to span',
