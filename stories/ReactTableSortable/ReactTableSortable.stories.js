@@ -16,66 +16,42 @@ export default {
   argTypes: {
     sortable: {
       name: "Enable column sorting",
-      control: { type: 'select' },
+      control: 'select',
       options: ['Sort', "Don't Sort"],
       description: 'Enable or disable sorting for columns',
-      defaultValue: 'Sort',
-      table: {
-        type: { summary: 'string' },
-        defaultValue: { summary: 'Sort' },
-      },
+      value: "Sort"
     },
     includeScope: {
       name: "Set scope attribute",
-      control: { type: 'boolean' },
+      control: 'boolean',
       description: 'Include scope for table headers',
-      defaultValue: true,
-      table: {
-        type: { summary: 'boolean' },
-        defaultValue: { summary: true },
-      },
+      value: true,
     },
     iconVisibility: {
       name: "Persistent sort icon or on hover/focus",
-      control: { type: 'select' },
+      control: 'select',
       options: ['Show icons', 'Show on hover / focus'],
       description: 'Control visibility of the sorting icons',
-      defaultValue: 'Show on hover / focus',
-      table: {
-        type: { summary: 'string' },
-        defaultValue: { summary: 'Show on hover / focus' },
-      },
+      value: 'Show on hover / focus',
     },
     customCaptionText: {
       name: "Caption help text",
-      control: { type: 'text' },
+      control: 'text',
       description: 'Optional text to be included in table caption',
-      defaultValue: 'Table sorted by, ',
-      table: {
-        type: { summary: 'Table sorted by, ' },
-        defaultValue: { summary: null },
-      },
+      value: 'Table sorted by, ',
     },
     initialSortColumnID: {
       name: "Initial Sort Column ID",
-      control: { type: 'number' },
+      control: 'number',
       description: 'Default column to sort',
-      defaultValue: 1,
-      table: {
-        type: { summary: 'number' },
-        defaultValue: { summary: 1 },
-      },
+      value: 1,
     },
     addRoleStatus: {
       name: "Add the Status Role to the Caption help text.",
-      control: { type: 'select' },
+      control: 'select',
       options: ['Status Role', 'No Role'],
       description: 'Add role attribute to span',
-      defaultValue: 'No role',
-      table: {
-        type: { summary: 'string' },
-        defaultValue: { summary: 'No role' },
-      },
+      value: 'No role',
     },
   },
 };
