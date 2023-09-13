@@ -30,7 +30,13 @@ export default {
       },
       defaultValue: "standard",
     },
-    
+    backgroundAttribute: {
+      name: "aria-label or inert",
+      options: ['aria-hidden', 'inert'],
+      control: { type: 'radio' },
+      defaultValue: 'aria-hidden',
+      description: 'Choose method to hide background elements from screen reader users',
+  },
   },
 };
 
@@ -40,4 +46,5 @@ export const ModalDialog = Template.bind({});
 ModalDialog.args = {
   modal: true,
   dialogType: 'standard',
+  backgroundAttribute: 'aria-hidden',
 };
