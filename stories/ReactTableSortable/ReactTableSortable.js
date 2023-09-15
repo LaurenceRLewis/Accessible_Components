@@ -156,22 +156,20 @@ export const ReactTableSortable = ({
         <tr>
           {headers.map((header, index) => (
             <th
-              key={header}
-              id={`${header.replace(/\s+/g, "-").toLowerCase()}-${index}`}
-              {...(includeScope ? { scope: "col" } : {})}
-              {...(sortedColumn.index === index ||
-              (index === 1 && sortedColumn.index === null)
-                ? {
-                    "aria-sort":
-                      sortedColumn.index === index
-                        ? sortedColumn.ascending
-                          ? "ascending"
-                          : "descending"
-                        : "ascending",
-                  }
-                : {})}
-              className={styles.th}
-            >
+            key={header}
+            id={`${header.replace(/\s+/g, "-").toLowerCase()}-${index}`}
+            {...(includeScope ? { scope: "col" } : {})}
+            aria-sort={
+              sortedColumn.index === index
+                ? sortedColumn.ascending
+                  ? "ascending"
+                  : "descending"
+                : "none"  // <-- This will set 'aria-sort' to 'none' for unsorted columns
+            }
+            className={`${styles.th} ${
+              sortedColumn.index === index ? '' : styles.sortNone
+            }`} // <- This line applies the 'sortNone' class when the column is unsorted
+          >
               {sortable === "Sort" ? (
                 <button
                   onMouseEnter={() => setShowChevron(index)}
