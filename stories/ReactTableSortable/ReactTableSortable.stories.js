@@ -44,7 +44,7 @@ export default {
       name: "Initial Sort Column ID",
       control: 'number',
       description: 'Default column to sort',
-      value: 1,
+      value: 0,
     },
     addRoleStatus: {
       name: "Add the Status Role to the Caption help text.",

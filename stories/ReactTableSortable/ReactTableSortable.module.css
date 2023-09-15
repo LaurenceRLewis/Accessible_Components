@@ -40,31 +40,49 @@
 }
 .chevron {
   display: none;
-  width: 0;
-  height: 0;
-  border-left: 4px solid transparent;
-  border-right: 4px solid transparent;
-  border-bottom: 6px solid currentColor;
-  margin-left: 5px;
+  margin-left: 4px;
 }
 
-.button:hover .chevronHoverFocus,
+/* .button:hover .chevronHoverFocus,
 .button:focus .chevronHoverFocus,
 .chevron.sorted {
   display: inline-block;
   position: absolute;
-  top: 1.3em;
-}
+} */
 
 .chevronIsVisible{
   display: inline-block;
   position: absolute;
-  top: 1.3em;
+  top: 14px;
 }
 
-.chevronUp {
-  transform: scaleY(-1);
+.chevron.chevronUp {
+    background-image: url('./images/chevronUp.svg');
+    background-size: cover;
+    display: inline-block;
+    width: 16px; /* Adjust to your desired size */
+    height: 16px; /* Adjust to your desired size */
 }
+
+.chevron.chevronDown {
+  background-image: url('./images/chevronDown.svg');
+  background-size: cover;
+  display: inline-block;
+  width: 16px; /* Adjust to your desired size */
+  height: 16px; /* Adjust to your desired size */
+}
+
+.chevron.sortNone {
+  background-image: url('./images/chevronBoth.svg');
+  background-size: cover;
+  display: inline-block;
+  width: 14px; /* Adjust to your desired size */
+  height: 14px; /* Adjust to your desired size */
+  position: absolute;
+  top: 14px;
+  opacity: .5;
+}
+
 .srOnly {
   position: absolute;
   width: 1px;
