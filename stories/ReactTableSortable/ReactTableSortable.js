@@ -7,7 +7,7 @@ export const ReactTableSortable = ({
   addRoleStatus = false,
   iconVisibility = "Show on hover / focus",
   customCaptionText = "Table sorted by, ",
-  initialSortColumnID = 1,
+  initialSortColumnID = null,
 }) => {
   // Initialize tableData with initial data.
   const [tableData, setTableData] = useState([
@@ -89,14 +89,15 @@ export const ReactTableSortable = ({
       getCellValue(asc ? b : a, idx)
     );
 
-  useEffect(() => {
-    // Perform initial sorting based on initialSortColumnID
-    const initialIndex = initialSortColumnID;
-    const initialAscending = true; // Or false based on your needs
-    setTableData((prevData) =>
-      [...prevData].sort(comparer(initialIndex, initialAscending))
-    );
-    setSortedColumn({ index: initialIndex, ascending: initialAscending });
+    useEffect(() => {
+      if (initialSortColumnID !== null) {  // Check added here
+          const initialIndex = initialSortColumnID;
+          const initialAscending = true;
+          setTableData((prevData) =>
+              [...prevData].sort(comparer(initialIndex, initialAscending))
+          );
+          setSortedColumn({ index: initialIndex, ascending: initialAscending });
+      }
   }, [initialSortColumnID]);
 
   // Function wrapped in useCallback that handles header button click to sort table.
@@ -156,20 +157,18 @@ export const ReactTableSortable = ({
         <tr>
           {headers.map((header, index) => (
             <th
-            key={header}
-            id={`${header.replace(/\s+/g, "-").toLowerCase()}-${index}`}
-            {...(includeScope ? { scope: "col" } : {})}
-            aria-sort={
-              sortedColumn.index === index
-                ? sortedColumn.ascending
-                  ? "ascending"
-                  : "descending"
-                : "none"  // <-- This will set 'aria-sort' to 'none' for unsorted columns
-            }
-            className={`${styles.th} ${
-              sortedColumn.index === index ? '' : styles.sortNone
-            }`} // <- This line applies the 'sortNone' class when the column is unsorted
-          >
+              key={header}
+              id={`${header.replace(/\s+/g, "-").toLowerCase()}-${index}`}
+              {...(includeScope ? { scope: "col" } : {})}
+              className={styles.th}
+              aria-sort={
+                sortedColumn.index === index
+                  ? sortedColumn.ascending
+                    ? "ascending"
+                    : "descending"
+                  : "none"
+              }
+            >
               {sortable === "Sort" ? (
                 <button
                   onMouseEnter={() => setShowChevron(index)}
@@ -182,26 +181,28 @@ export const ReactTableSortable = ({
                   {header}
                   <span
                     className={`
-                  ${styles.chevron} 
-                  ${
-                    iconVisibility === "Show icons" ||
-                    sortedColumn.index === index ||
-                    (index === 1 && sortedColumn.index === null)
-                      ? styles.chevronIsVisible
-                      : ""
-                  } 
-                  ${
-                    iconVisibility === "Show on hover / focus"
-                      ? styles.chevronHoverFocus
-                      : ""
-                  } 
-                  ${
-                    showChevron === index || sortedColumn.index === index
-                      ? sortedColumn.index === index && sortedColumn.ascending
-                        ? styles.chevronUp
-                        : styles.chevronDown // Add the correct class for pointing down
-                      : "hidden"
-                  }`}
+        ${styles.chevron}
+        ${sortedColumn.index !== index ? styles.sortNone : ""} 
+        ${
+          iconVisibility === "Show icons" ||
+          sortedColumn.index === index ||
+          (index === 1 && sortedColumn.index === null)
+            ? styles.chevronIsVisible
+            : ""
+        } 
+        ${
+          iconVisibility === "Show on hover / focus"
+            ? styles.chevronHoverFocus
+            : ""
+        } 
+        ${
+          showChevron === index || sortedColumn.index === index
+            ? sortedColumn.index === index && sortedColumn.ascending
+              ? styles.chevronUp
+              : styles.chevronDown
+            : "hidden"
+        }
+    `}
                     aria-hidden="true"
                   />
                 </button>
