@@ -11,42 +11,40 @@ const ReactSearchTable = ({
   const [searchText, setSearchText] = useState('');
   const [searchResults, setSearchResults] = useState(ReactSearchTableData);
   const [isInputEmpty, setIsInputEmpty] = useState(false);
-  const [isInputNumeric, setIsInputNumeric] = useState(true);
   const searchInputRef = useRef(null);
 
   useEffect(() => {
-    if (isInputEmpty || !isInputNumeric) {
+    if (isInputEmpty) {
       searchInputRef.current.focus();
     }
-  }, [isInputEmpty, isInputNumeric]);
+  }, [isInputEmpty]);
 
   const handleSearch = () => {
     if (searchText.trim() === '') {
       setIsInputEmpty(true);
-      setIsInputNumeric(true);  // Resetting other error state
-      return;
+      return; 
     }
-    
-    if (isNaN(searchText)) {
-      setIsInputNumeric(false);
-      setIsInputEmpty(false);  // Resetting other error state
-      return;
-    }
-    
+  
     setIsInputEmpty(false);  // Resetting error state
-    setIsInputNumeric(true);  // Resetting error state
-
+  
     const filteredResults = ReactSearchTableData.filter(
-      (item) => item.id.includes(searchText)
+      (item) => 
+        item.id.includes(searchText) ||
+        item.givenName.toLowerCase().includes(searchText.toLowerCase()) ||
+        item.lastName.toLowerCase().includes(searchText.toLowerCase())
     );
+
     setSearchResults(filteredResults);
-    const message = `Showing ${filteredResults.length} of ${ReactSearchTableData.length} table rows.`
+    const message = `Showing ${filteredResults.length} of ${ReactSearchTableData.length} table rows.`;
     ariaAnnounce(message);
   };
 
   const handleSearchInputChange = (event) => {
     setSearchText(event.target.value);
-  };
+    if (event.target.value.trim() === '') {
+        setSearchResults(ReactSearchTableData);
+    }
+};
 
   const handleKeyPress = (event) => {
     if (event.key === 'Enter') {
@@ -58,7 +56,6 @@ const ReactSearchTable = ({
     setSearchText('');
     setSearchResults(ReactSearchTableData);
     setIsInputEmpty(false);  // Resetting error state
-    setIsInputNumeric(true);  // Resetting error state
     const message = `Showing all ${ReactSearchTableData.length} table rows.`;
     ariaAnnounce(message);
   };
@@ -67,13 +64,13 @@ const ReactSearchTable = ({
     <div className={styles.container}>
       <div {...(containerRole ? { role: containerRole } : {})} className={styles.searchContainer}>
         <label htmlFor="searchInput" className={styles.label}>
-          Search table
+          Filter table
         </label>
         <input
           type={inputType}
           id="searchInput"
           ref={searchInputRef}
-          autocomplete="off"
+          autoComplete="off"
           className={styles.input}
           value={searchText}
           onChange={handleSearchInputChange}
@@ -89,11 +86,10 @@ const ReactSearchTable = ({
         </button>
       </div>
       <p id="helpText" className={styles.helpText}>
-        Enter partial or full ID to search, then press Enter or click the Search button to activate.
+        Press Enter or click the Search button to activate.
       </p>
       <div id="errorText">
         {isInputEmpty && <p className={styles.errorText}>Error: Input cannot be empty.</p>}
-        {!isInputNumeric && <p className={styles.errorText}>Error: Input must be numeric.</p>}
       </div>
       <p className={styles.resultText}>
         {`Showing ${searchResults.length} of ${ReactSearchTableData.length} table rows.`}
