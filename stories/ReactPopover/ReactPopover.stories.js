@@ -32,26 +32,26 @@ export default {
     dismissOnClickOutside: {
       name: 'Dismiss on outside click',
       control: "boolean",
-      defaultValue: false,
+      defaultValue: true,
     },
-    contentType: { // New prop
+    contentType: {
       name: 'Content Type',
-      control: "select",  // Dropdown select control
-      options: [  // These options will appear in the dropdown
+      control: "select",
+      options: [
         'ActiveContentOnly',
         'HelpWithReferenceLink',
         'StaticContentOnly'
       ],
-      defaultValue: 'ActiveContentOnly',  // Default value
+      defaultValue: 'HelpWithReferenceLink',
     }
   },
 };
 
 const Template = (args) => <Popover {...args} />;
 
-export const DefaultPopover = Template.bind({});
+export const PopoverComponent = Template.bind({});
 
-DefaultPopover.args = {
+PopoverComponent.args = {
   withRole: false,
   ariaLabel: "",
   useArrowKeys: false,
