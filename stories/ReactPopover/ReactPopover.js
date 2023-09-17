@@ -52,7 +52,7 @@ const Popover = ({
   const handleArrowKeyNavigation = (event) => {
     if (
       useArrowKeys &&
-      contentType === "ActiveContentOnly" &&
+      contentType === "Menu" &&
       popoverRef.current.contains(document.activeElement) &&
       (event.key === "ArrowUp" ||
         event.key === "ArrowDown" ||
@@ -110,7 +110,7 @@ const Popover = ({
   }, [dismissOnClickOutside]);
 
   useEffect(() => {
-    if (isOpen && useArrowKeys && contentType === "ActiveContentOnly") {
+    if (isOpen && useArrowKeys && contentType === "Menu") {
       activeElementsRef.current = Array.from(
         popoverRef.current.querySelectorAll("button, a")
       );
@@ -119,24 +119,33 @@ const Popover = ({
     }
   }, [isOpen, useArrowKeys, contentType]);
 
+  const classMap = {
+    "Help with Reference link": styles.helpWithReferenceLink,
+    "Content only (tooltip)": styles.contentOnly,
+    "Menu": styles.menu,
+  };
+  let popoverClass = styles.popoverContent;
+
   let popoverContent;
   switch (contentType) {
-    case "ActiveContentOnly":
+    case "Menu":
+      popoverClass += ` ${classMap[contentType] || ''}`;
       popoverContent = (
         <ul>
           <li>
-            <button>Button 1</button>
+            <button>Menu 1</button>
           </li>
           <li>
-            <button>Button 2</button>
+            <button>Menu 2</button>
           </li>
           <li>
-            <a href="#link1">Link 1</a>
+            <a href="#link1">Menu 3</a>
           </li>
         </ul>
       );
       break;
-    case "HelpWithReferenceLink":
+    case "Help with Reference link":
+      popoverClass += ` ${classMap[contentType] || ''}`;
       popoverContent = (
         <div>
           <h3>Help Heading</h3>
@@ -147,7 +156,8 @@ const Popover = ({
         </div>
       );
       break;
-    case "StaticContentOnly":
+    case "Content only (tooltip)":
+      popoverClass += ` ${classMap[contentType] || ''}`;
       popoverContent = (
         <div>
           <h3>How to use</h3>
@@ -178,14 +188,14 @@ const Popover = ({
         </button>
         {isOpen && (
           <div
-            ref={popoverRef}
-            id="popover-content"
-            className={styles.popoverContent}
-            role={withRole ? "region" : null}
-            aria-label={ariaLabel || null}
-          >
-            {popoverContent}
-          </div>
+          ref={popoverRef}
+          id="popover-content"
+          className={popoverClass}
+          role={withRole ? "region" : null}
+          aria-label={ariaLabel || null}
+        >
+          {popoverContent}
+        </div>
         )}
       </div>
       <p>The HTML Living Standard have a PopOver API, <a href="https://html.spec.whatwg.org/multipage/popover.html">6.11 The popover attribute</a>,  which is currently an experimental technology. The PopOver API refers to the content container that pops up and can be applied to elements with the most relevant semantics.</p>
