@@ -39,23 +39,9 @@ const Popover = ({
   };
 
   const handleEscKey = (event) => {
-    if (event.key === "Escape" && popoverRef.current.contains(event.target)) {
+    if (event.key === "Escape" && (popoverRef.current.contains(event.target) || event.target === buttonRef.current)) {
       setIsOpen(false);
-    }
-  };
-
-  const handleArrowKeys = (event) => {
-    if (["ArrowUp", "ArrowDown"].includes(event.key)) {
-      if (event.key === "ArrowUp") {
-        focusIndex.current =
-          (focusIndex.current - 1 + activeElementsRef.current.length) %
-          activeElementsRef.current.length;
-      } else {
-        focusIndex.current =
-          (focusIndex.current + 1) % activeElementsRef.current.length;
-      }
-      activeElementsRef.current[focusIndex.current].focus();
-      event.preventDefault();
+      buttonRef.current.focus();
     }
   };
 
