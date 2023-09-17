@@ -38,11 +38,11 @@ export default {
       name: 'Content Type',
       control: "select",
       options: [
-        'ActiveContentOnly',
-        'HelpWithReferenceLink',
-        'StaticContentOnly'
+        'Menu',
+        'Help with Reference link',
+        'Content only (tooltip)'
       ],
-      defaultValue: 'HelpWithReferenceLink',
+      defaultValue: 'Help with Reference link',
     }
   },
 };
@@ -56,5 +56,5 @@ PopoverComponent.args = {
   ariaLabel: "",
   useArrowKeys: false,
   dismissOnClickOutside: true,
-  contentType: 'HelpWithReferenceLink',  // Default value
+  contentType: 'Help with Reference link',  // Default value
 };
