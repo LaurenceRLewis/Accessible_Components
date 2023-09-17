@@ -22,7 +22,7 @@ Popover component supports keyboard accessibility, such as:
 Popover sets appropriate ARIA roles and properties based on its state and type. If set, it will have a role of 'region' and can also have an 'aria-label' attribute, ensuring that screen readers can interpret the Popover's content correctly.
 
 ### Additional Resources
-- **[Component Source](https://github.com/your-repository/PopoverComponent)**
+- **[Development files](https://github.com/LaurenceRLewis/Accessible_Components/tree/main/stories/ReactPopover)**
 
 ## Props
 
