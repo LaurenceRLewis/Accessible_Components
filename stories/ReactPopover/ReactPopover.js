@@ -44,6 +44,8 @@ const Popover = ({
       buttonRef.current.focus();
     }
   };
+    }
+  };
 
   const handleArrowKeyNavigation = (event) => {
     if (
