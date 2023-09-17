@@ -38,6 +38,13 @@ const Popover = ({
     }, 0);
   };
 
+  const handleEscKey = (event) => {
+    if (event.key === "Escape" && (popoverRef.current.contains(event.target) || event.target === buttonRef.current)) {
+      setIsOpen(false);
+      buttonRef.current.focus();
+    }
+  };
+
   const handleArrowKeyNavigation = (event) => {
     if (
       useArrowKeys &&
