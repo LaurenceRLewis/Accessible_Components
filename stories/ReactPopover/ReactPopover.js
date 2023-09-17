@@ -39,7 +39,11 @@ const Popover = ({
   };
 
   const handleEscKey = (event) => {
-    if (event.key === "Escape" && (popoverRef.current.contains(event.target) || event.target === buttonRef.current)) {
+    if (
+      event.key === "Escape" &&
+      (popoverRef.current.contains(event.target) ||
+        event.target === buttonRef.current)
+    ) {
       setIsOpen(false);
       buttonRef.current.focus();
     }
@@ -156,27 +160,36 @@ const Popover = ({
   }
 
   return (
-    <div className={styles.popoverWrapper}>
-      <button
-        ref={buttonRef}
-        onClick={() => setIsOpen(!isOpen)}
-        aria-expanded={isOpen}
-        aria-controls="popover-content"
-      >
-        Popover
-      </button>
-      {isOpen && (
-        <div
-          ref={popoverRef}
-          id="popover-content"
-          className={styles.popoverContent}
-          role={withRole ? "region" : null}
-          aria-label={ariaLabel || null}
+    <>
+      <h1>Popover Component</h1>
+      <p>
+        A Popover is a widely-adopted component widget designed to present content on top of other content. A popover might be used to show a menu of choices or extra details about a specific item on a page or for drawing the user's attention to important information, instructional help, or necessary actions.
+      </p>
+      <p>A Popover should always be non-modal. Popovers are most effective when used to showcase supplementary information or options without disrupting the user's ongoing tasks.</p>
+
+      <div className={styles.popoverWrapper}>
+        <button
+          ref={buttonRef}
+          onClick={() => setIsOpen(!isOpen)}
+          aria-expanded={isOpen}
+          aria-controls="popover-content"
         >
-          {popoverContent}
-        </div>
-      )}
-    </div>
+          Popover
+        </button>
+        {isOpen && (
+          <div
+            ref={popoverRef}
+            id="popover-content"
+            className={styles.popoverContent}
+            role={withRole ? "region" : null}
+            aria-label={ariaLabel || null}
+          >
+            {popoverContent}
+          </div>
+        )}
+      </div>
+      <p>The HTML Living Standard have a PopOver API, <a href="https://html.spec.whatwg.org/multipage/popover.html">6.11 The popover attribute</a>,  which is currently an experimental technology. The PopOver API refers to the content container that pops up and can be applied to elements with the most relevant semantics.</p>
+    </>
   );
 };
 
