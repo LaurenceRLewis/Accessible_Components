@@ -61,8 +61,9 @@ const ReactSearchTable = ({
   };
 
   return (
+    <>
     <div className={styles.container}>
-      <div {...(containerRole ? { role: containerRole } : {})} className={styles.searchContainer}>
+      <search {...(containerRole ? { role: containerRole } : {})} className={styles.searchContainer}>
         <label htmlFor="searchInput" className={styles.label}>
           Filter table
         </label>
@@ -84,7 +85,7 @@ const ReactSearchTable = ({
         <button className={`${styles.button} ${styles.clearButton}`} onClick={handleClear}>
           Clear
         </button>
-      </div>
+      </search>
       <p id="helpText" className={styles.helpText}>
         Press Enter or click the Search button to activate.
       </p>
@@ -115,6 +116,9 @@ const ReactSearchTable = ({
         </tbody>
       </table>
     </div>
+    <h3>The new HTML &lt;search&gt; element</h3>
+    <p>In browsers that lack support for the search element, the element will still be recognised, along with any attached attributes such as roles, IDs, and classes. It will act as a generic element, akin to a &lt;div&gt;. For this reason, it's advisable to append an ARIA search role to the &lt;search&gt; element for the moment. By employing &lt;search role="search"&gt;, you ensure that every user has the experience as intended. When all browsers eventually provide support, the ARIA search role can be removed.</p>
+    </>
   );
 };
 
