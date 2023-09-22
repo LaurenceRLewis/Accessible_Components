@@ -4,6 +4,7 @@ import styles from "./ReactPopover.module.css";
 const Popover = ({
   withRole,
   ariaLabel,
+  nameAriaLabelledBy = false,
   useArrowKeys,
   dismissOnClickOutside,
   contentType,
@@ -13,6 +14,14 @@ const Popover = ({
   const buttonRef = useRef(null);
   const activeElementsRef = useRef([]);
   const focusIndex = useRef(0);
+
+  // Validate that both aria-label and aria-labelledby aren't set
+  if (ariaLabel && nameAriaLabelledBy) {
+    console.error('Only one of ariaLabel or nameAriaLabelledBy should be set.');
+    return null;
+  }
+
+  const idForLabelledBy = nameAriaLabelledBy ? "popover-button-id" : null;
 
   const handleClickOutside = (event) => {
     if (
@@ -180,6 +189,7 @@ const Popover = ({
       <div className={styles.popoverWrapper}>
         <button
           ref={buttonRef}
+          id={idForLabelledBy} // Setting the ID of the button to nameAriaLabelledBy prop
           onClick={() => setIsOpen(!isOpen)}
           aria-expanded={isOpen}
           aria-controls="popover-content"
@@ -192,7 +202,8 @@ const Popover = ({
           id="popover-content"
           className={popoverClass}
           role={withRole ? "region" : null}
-          aria-label={ariaLabel || null}
+          aria-label={withRole && ariaLabel ? ariaLabel : null}  // Set aria-label only if withRole is true
+          aria-labelledby={withRole && idForLabelledBy ? idForLabelledBy : null}  // Set aria-labelledby only if withRole is true
         >
           {popoverContent}
         </div>

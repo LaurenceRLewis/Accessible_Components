@@ -24,6 +24,11 @@ export default {
       control: "text",
       defaultValue: "",
     },
+    nameAriaLabelledBy: {
+      name: 'Aria-labelledby enabled',
+      control: "boolean",
+      defaultValue: false,
+    },
     useArrowKeys: {
       name: 'Use arrow key navigation',
       control: "boolean",
@@ -54,6 +59,7 @@ export const PopoverComponent = Template.bind({});
 PopoverComponent.args = {
   withRole: false,
   ariaLabel: "",
+  nameAriaLabelledBy: false,
   useArrowKeys: false,
   dismissOnClickOutside: true,
   contentType: 'Help with Reference link',  // Default value
