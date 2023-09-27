@@ -89,16 +89,19 @@ export const ReactTableSortable = ({
       getCellValue(asc ? b : a, idx)
     );
 
-    useEffect(() => {
-      if (initialSortColumnID !== null) {  // Check added here
-          const initialIndex = initialSortColumnID;
-          const initialAscending = true;
-          setTableData((prevData) =>
-              [...prevData].sort(comparer(initialIndex, initialAscending))
-          );
-          setSortedColumn({ index: initialIndex, ascending: initialAscending });
-      }
+  useEffect(() => {
+    if (initialSortColumnID !== null) {
+      // Check added here
+      const initialIndex = initialSortColumnID;
+      const initialAscending = true;
+      setTableData((prevData) =>
+        [...prevData].sort(comparer(initialIndex, initialAscending))
+      );
+      setSortedColumn({ index: initialIndex, ascending: initialAscending });
+    }
   }, [initialSortColumnID]);
+
+  const [isTableSorted, setIsTableSorted] = useState(false);
 
   // Function wrapped in useCallback that handles header button click to sort table.
   const onHeaderButtonClick = useCallback(
@@ -115,6 +118,8 @@ export const ReactTableSortable = ({
           setShowChevron(index);
           return { index, ascending };
         });
+        // Mark the table as sorted manually.
+        setIsTableSorted(true);
       }
     },
     [sortable]
@@ -146,12 +151,20 @@ export const ReactTableSortable = ({
     <table className={styles.table}>
       <caption className={styles.caption}>
         Development Progress Table
-        <span
-          className={styles.captionText}
-          {...(addRoleStatus === "Status Role" ? { role: "status" } : {})}
-        >
-          {customCaptionText} {sortCaptionText}
-        </span>
+          <span
+            className={styles.captionText}
+            {...(addRoleStatus === "Status Role" ? { role: "status" } : {})}
+          >
+            {isTableSorted ? (
+              <>
+                {customCaptionText}{" "}
+                <strong>{headers[sortedColumn.index]}</strong>{" "}
+                {sortedColumn.ascending ? "ascending" : "descending"}
+              </>
+            ) : (
+              "Sort table data by column header name"
+            )}
+          </span>
       </caption>
       <thead>
         <tr>
