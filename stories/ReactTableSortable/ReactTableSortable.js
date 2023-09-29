@@ -151,20 +151,19 @@ export const ReactTableSortable = ({
     <table className={styles.table}>
       <caption className={styles.caption}>
         Development Progress Table
-          <span
-            className={styles.captionText}
-            {...(addRoleStatus === "Status Role" ? { role: "status" } : {})}
-          >
-            {isTableSorted ? (
-              <>
-                {customCaptionText}{" "}
-                <strong>{headers[sortedColumn.index]}</strong>{" "}
-                {sortedColumn.ascending ? "ascending" : "descending"}
-              </>
-            ) : (
-              "Sort table data by column header name"
-            )}
-          </span>
+        <span
+          className={styles.captionText}
+          {...(addRoleStatus === "Status Role" ? { role: "status" } : {})}
+        >
+          {isTableSorted ? (
+            <>
+              {customCaptionText} <strong>{headers[sortedColumn.index]}</strong>{" "}
+              {sortedColumn.ascending ? "ascending" : "descending"}
+            </>
+          ) : (
+            "Sort table data by column header name"
+          )}
+        </span>
       </caption>
       <thead>
         <tr>
@@ -190,6 +189,7 @@ export const ReactTableSortable = ({
                   onBlur={() => setShowChevron(sortedColumn.index)}
                   onClick={() => onHeaderButtonClick(index)}
                   className={styles.button}
+                  aria-pressed={sortedColumn.index === index}
                 >
                   {header}
                   <span
