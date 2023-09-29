@@ -10,6 +10,7 @@ ReactTableSortable is a table component that displays data in a sortable format.
 - Accessible and keyboard-friendly interaction.
 - Option to include \`scope="col"\` attribute on header cells.
 - Configurable visibility of sorting icons.
+- Optional inclusion of \`aria-pressed\` attribute to enhance accessibility.
 
 ## Usage
 
@@ -20,15 +21,16 @@ The ReactTableSortable component receives the data to be displayed in the table 
 ReactTableSortable accepts the following props:
 
 - \`sortable\` (string, default: 'Sort'): Determines whether sorting is enabled or disabled for the columns. Possible values are 'Sort' and "Don't Sort".
-- \`includeScope\` (boolean, default: true): Determines whether to include \`scope="col"\` attribute on header cells. 
+- \`includeScope\` (boolean, default: true): Determines whether to include \`scope="col"\` attribute on header cells.
 - \`iconVisibility\` (string, default: 'Show on hover / focus'): Determines the visibility of the sort icons. Possible values are 'Show icons' and 'Show on hover / focus'.
+- \`ariaPressed\` (string, default: 'Yes'): Determines whether to include \`aria-pressed\` attribute for the sorting buttons. Possible values are 'Yes' and 'No'.
 
 ## Accessibility
 
-The ReactTableSortable component ensures accessibility by providing proper ARIA attributes and visual indicators for the sorting functionality. The header buttons have accessible labels and ARIA attributes to indicate the sorting order (ascending or descending). This allows screen readers and assistive technologies to provide accurate information about the table sorting.
+The ReactTableSortable component ensures accessibility by providing proper ARIA attributes and visual indicators for the sorting functionality. The header buttons have accessible labels and ARIA attributes to indicate the sorting order (ascending or descending). When \`ariaPressed\` is set to 'Yes', the buttons will also include the \`aria-pressed\` attribute to signify their state to assistive technologies.
 
 ## Download build files
-- **[Development files](https://github.com/LaurenceRLewis/Accessible_Components/tree/main/stories/ReactTableSortable)
+- **[Development files](https://github.com/LaurenceRLewis/Accessible_Components/tree/main/stories/ReactTableSortable)**
 
 ## Example
 
@@ -42,7 +44,7 @@ const MyComponent = () => {
   ];
 
   return (
-    <ReactTableSortable sortable="Sort" includeScope={true} iconVisibility="Show on hover / focus" tableData={tableData} />
+    <ReactTableSortable sortable="Sort" includeScope={true} iconVisibility="Show on hover / focus" ariaPressed="Yes" tableData={tableData} />
   );
 };
 \`\`\`

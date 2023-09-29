@@ -8,6 +8,7 @@ export const ReactTableSortable = ({
   iconVisibility = "Show on hover / focus",
   customCaptionText = "Table sorted by, ",
   initialSortColumnID = null,
+  ariaPressed = true,
 }) => {
   // Initialize tableData with initial data.
   const [tableData, setTableData] = useState([
@@ -75,6 +76,7 @@ export const ReactTableSortable = ({
   });
 
   const [showChevron, setShowChevron] = useState(1);
+  const [ariaPressedState, setAriaPressedState] = useState({});
 
   // Helper function to get cell value at given row and idx.
   const getCellValue = (row, idx) => row[idx];
@@ -106,24 +108,41 @@ export const ReactTableSortable = ({
   // Function wrapped in useCallback that handles header button click to sort table.
   const onHeaderButtonClick = useCallback(
     (index) => {
-      if (sortable === "Sort") {
-        // Update sortedColumn state and sort tableData based on new sorting configuration.
-        setSortedColumn((prevSortedColumn) => {
-          // Logic to determine if the same column is clicked or a different one.
-          const isSameColumn = prevSortedColumn.index === index;
-          const ascending = isSameColumn ? !prevSortedColumn.ascending : true;
-          setTableData((prevData) =>
-            [...prevData].sort(comparer(index, ascending))
-          );
-          setShowChevron(index);
-          return { index, ascending };
+      setSortedColumn((prevSortedColumn) => {
+        const isSameColumn = prevSortedColumn.index === index;
+        const ascending = isSameColumn ? !prevSortedColumn.ascending : true;
+  
+        setTableData((prevData) =>
+          [...prevData].sort((a, b) => {
+            if (a[index] < b[index]) {
+              return ascending ? -1 : 1;
+            }
+            if (a[index] > b[index]) {
+              return ascending ? 1 : -1;
+            }
+            return 0;
+          })
+        );
+  
+        setShowChevron(index);
+  
+        setAriaPressedState((prev) => {
+          if (ariaPressed) { // Only proceed if ariaPressed prop is true
+            const newState = { ...prev };
+            Object.keys(newState).forEach((key) => {
+              newState[key] = undefined;
+            });
+            newState[index] = !ascending;
+            return newState;
+          }
+          return prev; // If ariaPressed is false, return the previous state
         });
-        // Mark the table as sorted manually.
-        setIsTableSorted(true);
-      }
+  
+        return { index, ascending };
+      });
     },
     [sortable]
-  );
+  );    
 
   const headers = [
     "Priority",
@@ -151,20 +170,19 @@ export const ReactTableSortable = ({
     <table className={styles.table}>
       <caption className={styles.caption}>
         Development Progress Table
-          <span
-            className={styles.captionText}
-            {...(addRoleStatus === "Status Role" ? { role: "status" } : {})}
-          >
-            {isTableSorted ? (
-              <>
-                {customCaptionText}{" "}
-                <strong>{headers[sortedColumn.index]}</strong>{" "}
-                {sortedColumn.ascending ? "ascending" : "descending"}
-              </>
-            ) : (
-              "Sort table data by column header name"
-            )}
-          </span>
+        <span
+          className={styles.captionText}
+          {...(addRoleStatus === "Status Role" ? { role: "status" } : {})}
+        >
+          {isTableSorted ? (
+            <>
+              {customCaptionText} <strong>{headers[sortedColumn.index]}</strong>{" "}
+              {sortedColumn.ascending ? "ascending" : "descending"}
+            </>
+          ) : (
+            "Sort table data by column header name"
+          )}
+        </span>
       </caption>
       <thead>
         <tr>
@@ -184,13 +202,15 @@ export const ReactTableSortable = ({
             >
               {sortable === "Sort" ? (
                 <button
-                  onMouseEnter={() => setShowChevron(index)}
-                  onMouseLeave={() => setShowChevron(sortedColumn.index)}
-                  onFocus={() => setShowChevron(index)}
-                  onBlur={() => setShowChevron(sortedColumn.index)}
-                  onClick={() => onHeaderButtonClick(index)}
-                  className={styles.button}
-                >
+                onMouseEnter={() => setShowChevron(index)}
+                onMouseLeave={() => setShowChevron(sortedColumn.index)}
+                onFocus={() => setShowChevron(index)}
+                onBlur={() => setShowChevron(sortedColumn.index)}
+                onClick={() => onHeaderButtonClick(index)}
+                className={styles.button}
+                {...(ariaPressed === 'Yes' && ariaPressedState[index] !== undefined ? { 'aria-pressed': ariaPressedState[index].toString() } : {})}
+
+              >
                   {header}
                   <span
                     className={`
