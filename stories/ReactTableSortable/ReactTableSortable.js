@@ -183,6 +183,19 @@ export const ReactTableSortable = ({
             "Sort table data by column header name"
           )}
         </span>
+        <span
+          className={styles.captionText}
+          {...(addRoleStatus === "Status Role" ? { role: "status" } : {})}
+        >
+          {isTableSorted ? (
+            <>
+              {customCaptionText} <strong>{headers[sortedColumn.index]}</strong>{" "}
+              {sortedColumn.ascending ? "ascending" : "descending"}
+            </>
+          ) : (
+            "Sort table data by column header name"
+          )}
+        </span>
       </caption>
       <thead>
         <tr>
@@ -202,15 +215,13 @@ export const ReactTableSortable = ({
             >
               {sortable === "Sort" ? (
                 <button
-                onMouseEnter={() => setShowChevron(index)}
-                onMouseLeave={() => setShowChevron(sortedColumn.index)}
-                onFocus={() => setShowChevron(index)}
-                onBlur={() => setShowChevron(sortedColumn.index)}
-                onClick={() => onHeaderButtonClick(index)}
-                className={styles.button}
-                {...(ariaPressed === 'Yes' && ariaPressedState[index] !== undefined ? { 'aria-pressed': ariaPressedState[index].toString() } : {})}
-
-              >
+                  onMouseEnter={() => setShowChevron(index)}
+                  onMouseLeave={() => setShowChevron(sortedColumn.index)}
+                  onFocus={() => setShowChevron(index)}
+                  onBlur={() => setShowChevron(sortedColumn.index)}
+                  onClick={() => onHeaderButtonClick(index)}
+                  className={styles.button}
+                >
                   {header}
                   <span
                     className={`
