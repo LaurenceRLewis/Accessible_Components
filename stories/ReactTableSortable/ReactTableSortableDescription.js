@@ -44,12 +44,15 @@ const MyComponent = () => {
   ];
 
   return (
-    <ReactTableSortable sortable="Sort" includeScope={true} iconVisibility="Show on hover / focus" ariaPressed="Yes" tableData={tableData} />
+    <ReactTableSortable sortable="Sort" includeScope={true} iconVisibility="Show on hover / focus" ariaPressed="No" tableData={tableData} />
   );
 };
 \`\`\`
 
-The ReactTableSortable component provides a flexible and user-friendly way to display and sort tabular data, enhancing the usability and organization of the information.
+The Sortable Table component provides a flexible and user-friendly way to display and sort tabular data, enhancing the usability and organization of the information.
+
+## Resources
+- **[Consider adding aria-pressed to the aria-sort button #2817](https://github.com/LaurenceRLewis/Accessible_Components/tree/main/stories/ReactTableSortablehttps://github.com/w3c/aria-practices/issues/2817)**
 `;
 
 export default description;

@@ -58,7 +58,7 @@ export default {
       control: 'radio',
       options: ['Yes', 'No'],
       description: 'Enable or disable aria-pressed for sorting buttons',
-      value: 'Yes',
+      value: 'No',
     },
   },
 };
@@ -72,5 +72,5 @@ SortableTableColumns.args = {
   includeScope: true,
   iconVisibility: 'Show on hover / focus',
   addRoleStatus: 'No role',
-  ariaPressed: 'Yes'
+  ariaPressed: 'No'
 };

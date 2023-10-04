@@ -8,7 +8,7 @@ export const ReactTableSortable = ({
   iconVisibility = "Show on hover / focus",
   customCaptionText = "Table sorted by, ",
   initialSortColumnID = null,
-  ariaPressed = true,
+  ariaPressed = "No",
 }) => {
   // Initialize tableData with initial data.
   const [tableData, setTableData] = useState([
@@ -119,15 +119,20 @@ export const ReactTableSortable = ({
         setShowChevron(index);
   
         setAriaPressedState((prev) => {
-          if (ariaPressed) { // Only proceed if ariaPressed prop is true
-            const newState = { ...prev };
+          const newState = { ...prev };
+          
+          if (ariaPressed === "Yes") { 
             Object.keys(newState).forEach((key) => {
               newState[key] = undefined;
             });
             newState[index] = !ascending;
-            return newState;
+          } else if (ariaPressed === "No") {
+            Object.keys(newState).forEach((key) => {
+              newState[key] = undefined;
+            });
           }
-          return prev; // If ariaPressed is false, return the previous state
+        
+          return newState;
         });
   
         return { index, ascending };
@@ -175,19 +180,6 @@ export const ReactTableSortable = ({
             "Sort table data by column header name"
           )}
         </span>
-        <span
-          className={styles.captionText}
-          {...(addRoleStatus === "Status Role" ? { role: "status" } : {})}
-        >
-          {isTableSorted ? (
-            <>
-              {customCaptionText} <strong>{headers[sortedColumn.index]}</strong>{" "}
-              {sortedColumn.ascending ? "ascending" : "descending"}
-            </>
-          ) : (
-            "Sort table data by column header name"
-          )}
-        </span>
       </caption>
       <thead>
         <tr>
@@ -207,7 +199,7 @@ export const ReactTableSortable = ({
             >
               {sortable === "Sort" ? (
                 <button
-                aria-pressed={ariaPressedState[index]}
+                aria-pressed={ariaPressed === "Yes" ? ariaPressedState[index] : undefined}
                 onMouseEnter={() => setShowChevron(index)}
                 onMouseLeave={() => setShowChevron(sortedColumn.index)}
                 onFocus={() => setShowChevron(index)}
