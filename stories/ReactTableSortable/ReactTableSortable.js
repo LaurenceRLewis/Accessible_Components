@@ -113,15 +113,7 @@ export const ReactTableSortable = ({
         const ascending = isSameColumn ? !prevSortedColumn.ascending : true;
   
         setTableData((prevData) =>
-          [...prevData].sort((a, b) => {
-            if (a[index] < b[index]) {
-              return ascending ? -1 : 1;
-            }
-            if (a[index] > b[index]) {
-              return ascending ? 1 : -1;
-            }
-            return 0;
-          })
+          [...prevData].sort(comparer(index, ascending))
         );
   
         setShowChevron(index);
@@ -141,8 +133,8 @@ export const ReactTableSortable = ({
         return { index, ascending };
       });
     },
-    [sortable]
-  );    
+    [ariaPressed]
+  );   
 
   const headers = [
     "Priority",
@@ -215,13 +207,14 @@ export const ReactTableSortable = ({
             >
               {sortable === "Sort" ? (
                 <button
-                  onMouseEnter={() => setShowChevron(index)}
-                  onMouseLeave={() => setShowChevron(sortedColumn.index)}
-                  onFocus={() => setShowChevron(index)}
-                  onBlur={() => setShowChevron(sortedColumn.index)}
-                  onClick={() => onHeaderButtonClick(index)}
-                  className={styles.button}
-                >
+                aria-pressed={ariaPressedState[index]}
+                onMouseEnter={() => setShowChevron(index)}
+                onMouseLeave={() => setShowChevron(sortedColumn.index)}
+                onFocus={() => setShowChevron(index)}
+                onBlur={() => setShowChevron(sortedColumn.index)}
+                onClick={() => onHeaderButtonClick(index)}
+                className={styles.button}
+              >
                   {header}
                   <span
                     className={`
