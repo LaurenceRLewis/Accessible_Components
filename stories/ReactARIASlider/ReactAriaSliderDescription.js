@@ -7,6 +7,8 @@ Slider is a custom component that allows users to select a value within a specif
 - Customizable minimum and maximum values.
 - Incremental step size for fine-grained control.
 - Optional default value for initial selection.
+- Direct input through a number field for precise control.
+- Error handling for out-of-range values.
 - Callback function for handling value changes.
 - Accessibility improvements with increment and decrement buttons.
 
@@ -47,6 +49,7 @@ The ARIA Slider component accepts the following additional props:
 | \`ariaStep\`      | \`number\` | The increment value for each step of the ARIA slider.            |
 | \`ariaDefaultValue\`  | \`number\` | The default value of the ARIA slider from aria-valuenow.      |
 | \`getAriaValueText\` | \`function\` | A function that returns a custom string for the aria-valuetext. Format is 'min of max [aria-valuetext]' |
+| \`inputError\`    | \`string\` | Error message displayed when the value entered is out of the defined range. |
 
 ## Methods
 

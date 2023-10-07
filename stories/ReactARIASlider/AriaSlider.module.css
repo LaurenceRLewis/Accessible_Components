@@ -1,10 +1,60 @@
 @import "../../.storybook/utils/global.css";
 
-.sliderContainer{
-  position:relative;
+.sliderContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* centers children horizontally */
+  justify-content: center; /* centers children vertically */
   margin: 0 auto;
-  max-width:40em;
-  width:auto;
+  max-width: 40em;
+  width: auto;
+}
+
+.sliderContainer > div:first-child {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* centers the label and input horizontally */
+  margin-bottom: 20px; /* space between the input and the slider, adjust as needed */
+}
+
+/* Styling for the label */
+.sliderContainer > div:first-child > label {
+  display: block;
+  font-weight: 600; /* Making it bold for emphasis */
+  margin-bottom: 5px; /* Spacing between the label and input */
+  text-transform: uppercase; /* Uppercase for a modern look */
+  font-size: 0.85em; /* Slightly smaller font size */
+  color: var(--purple-500); /* Making it the same color as the slider for consistency */
+}
+
+/* Styling for the input */
+.sliderInput {
+  width: 60px; /* Fixed width, but can be adjusted */
+  padding: 7px 12px;
+  border: 1px solid var(--purple-500); /* Border color consistent with slider */
+  border-radius: 5px; /* Rounded corners */
+  text-align: center;
+  font-size: 1em;
+  color: var(--purple-500);
+  background-color: #f4f4f4; /* Light background for contrast */
+  transition: border 0.3s, box-shadow 0.3s; /* Smooth transitions for hover/focus effects */
+}
+
+.sliderInput:hover {
+  border: 1px solid var(--purple-700); /* Darker border on hover */
+}
+
+.sliderInput:focus {
+  outline: none;
+  border: 1px solid var(--purple-900); /* Even darker border on focus */
+  box-shadow: 0 0 0 3px rgba(128, 0, 128, 0.1); /* Purple glow around the input for accessibility */
+}
+
+.error {
+  color: red;
+  font-size: 0.85em;
+  margin-top: 5px;
+  font-weight: 500;
 }
 
 .ariaSlider {
