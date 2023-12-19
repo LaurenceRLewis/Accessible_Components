@@ -6,6 +6,7 @@ import AccordionBuild from "../ReactAccordion/ReactAccordion";
 import scottyImage from './images/Scotty.jpg';
 import louieImage from './images/Louie.jpg';
 import murphyImage from './images/Murphy.jpg';
+import phoebeImage from './images/Phoebe.jpg';
 
 export default {
   title: "Combined Components/Tabs (with a nested accordion)",
@@ -64,7 +65,7 @@ nestedTabs.args = {
         title: "Our cats",
         content: (
           <>
-            <h3>Louie, Murphy and Scotty</h3>
+            <h3>Louie, Murphy, Scotty and Phoebe</h3>
             <AccordionBuild
               items={[
                 {
@@ -91,6 +92,15 @@ nestedTabs.args = {
                       <>
                         <h3>About Scotty</h3>
                         <img className={styles.catImage} src={scottyImage} alt="Picture of Scotty" />
+                      </>
+                    ),
+                  },
+                  {
+                    title: "Phoebe",
+                    content: (
+                      <>
+                        <h3>About Phoebe</h3>
+                        <img className={styles.catImage} src={phoebeImage} alt="Picture of Phoebe" />
                       </>
                     ),
                   },
