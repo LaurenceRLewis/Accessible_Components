@@ -1,6 +1,6 @@
 # Welcome to Accessible Components
 
-This experimental personal project by Laurence Lewis is a set of React-based storybook components designed with accessibility in mind, adhering to the Web Content Accessibility Guidelines (WCAG) 2.1. Please note that these components should not be used in production without thorough testing first. The testing should be done using a screen reader, keyboard navigation, and running an automated testing tool.
+This experimental personal project by Laurence Lewis is a set of React-based storybook components designed with accessibility in mind, adhering to the Web Content Accessibility Guidelines (WCAG) 2.1. Please note that these components are for testing purposses and should not be used in production without thorough testing first. The testing should be done using a screen reader, keyboard navigation, and running an automated testing tool.
 
 ## Storybook examples
 - [Accessible Components](https://react-accessible-component-project.netlify.app/?path=/docs/accessiblecomponents-introduction--docs)

@@ -134,6 +134,8 @@ export const ReactTableSortable = ({
         
           return newState;
         });
+
+        setIsTableSorted(true);
   
         return { index, ascending };
       });
@@ -199,7 +201,7 @@ export const ReactTableSortable = ({
             >
               {sortable === "Sort" ? (
                 <button
-                aria-pressed={ariaPressed === "Yes" ? ariaPressedState[index] : undefined}
+                //aria-pressed={ariaPressed === "Yes" ? ariaPressedState[index] : undefined}
                 onMouseEnter={() => setShowChevron(index)}
                 onMouseLeave={() => setShowChevron(sortedColumn.index)}
                 onFocus={() => setShowChevron(index)}

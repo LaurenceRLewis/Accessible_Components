@@ -53,13 +53,13 @@ export default {
       description: 'Add role attribute to span',
       value: 'No role',
     },
-    ariaPressed: {
-      name: "Enable aria-pressed",
-      control: 'radio',
-      options: ['Yes', 'No'],
-      description: 'Enable or disable aria-pressed for sorting buttons',
-      value: 'No',
-    },
+    // ariaPressed: {
+    //   name: "Enable aria-pressed",
+    //   control: 'radio',
+    //   options: ['Yes', 'No'],
+    //   description: 'Enable or disable aria-pressed for sorting buttons',
+    //   value: 'No',
+    // },
   },
 };
 
@@ -72,5 +72,5 @@ SortableTableColumns.args = {
   includeScope: true,
   iconVisibility: 'Show on hover / focus',
   addRoleStatus: 'No role',
-  ariaPressed: 'No'
+  //ariaPressed: 'No'
 };

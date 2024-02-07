@@ -21,6 +21,12 @@ export default {
             defaultValue: 'No',
             description: "Display help text",
           },
+          showToggleButton: {
+            name: 'Show toggle button',
+            control: 'boolean',
+            defaultValue: true,
+            description: "Toggle the visibility of the button",
+        },
     }
 };
 
@@ -30,4 +36,5 @@ export const ComboboxList = Template.bind({});
 ComboboxList.storyName = "Combobox (List)";
 ComboboxList.args = {
     showHelpText: 'No', 
+    showToggleButton: true,
 };

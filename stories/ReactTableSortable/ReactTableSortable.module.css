@@ -51,6 +51,15 @@
   position: absolute;
 } */
 
+.chevronHoverFocus {
+  visibility: hidden; /* Hide icon by default */
+}
+
+.button:hover .chevronHoverFocus,
+.button:focus .chevronHoverFocus {
+  visibility: visible; /* Show icon on hover/focus */
+}
+
 .chevronIsVisible{
   display: inline-block;
   position: absolute;

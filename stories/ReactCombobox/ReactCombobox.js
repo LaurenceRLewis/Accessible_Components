@@ -3,7 +3,7 @@ import ariaAnnounce from "../../.storybook/utils/ariaAnnounce";
 import { townsAndCities } from "./ReactComboboxData";
 import styles from "./ReactCombobox.module.css";
 
-const ReactCombobox = ({ showHelpText = false }) => {
+const ReactCombobox = ({ showHelpText = false, showToggleButton = true }) => {
   const [inputValue, setInputValue] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const [showOptions, setShowOptions] = useState(false);
@@ -228,18 +228,20 @@ const ReactCombobox = ({ showHelpText = false }) => {
             onKeyDown={handleKeyPress}
             onFocus={handleFocus}
           />
-          <button
-            id="toggle-button"
-            aria-label="Australian towns and cities"
-            aria-controls={showOptions ? "combobox-listbox" : ""}
-            aria-expanded={showOptions}
-            role="button"
-            tabIndex="-1"
-            className={styles["toggleButton"]}
-            onClick={toggleOptions}
-          >
-            {showOptions ? <ChevronUp /> : <ChevronDown />}
-          </button>
+          {showToggleButton && (
+                    <button
+                        id="toggle-button"
+                        aria-label="Australian towns and cities"
+                        aria-controls={showOptions ? "combobox-listbox" : ""}
+                        aria-expanded={showOptions}
+                        role="button"
+                        tabIndex="-1"
+                        className={styles["toggleButton"]}
+                        onClick={toggleOptions}
+                    >
+                        {showOptions ? <ChevronUp /> : <ChevronDown />}
+                    </button>
+                )}
         </div>
         {showOptions && (
           <ul
