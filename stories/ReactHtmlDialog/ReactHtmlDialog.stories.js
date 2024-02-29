@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useRef } from 'react';
 import ReactHtmlDialog from "./ReactHtmlDialog";
 import styles from "./ReactHtmlDialog.module.css";
 import ReactHtmlDialogDescription from "./ReactHtmlDialogDescription";
@@ -23,7 +23,7 @@ export default {
       control: { type: "radio" },
     },
     ariaModal: {
-      name: "Use aria-modal true",
+      name: "Use aria-modal",
       options: ["true", "false", "remove"],
       control: { type: "radio" },
     },
@@ -33,50 +33,61 @@ export default {
       control: { type: "radio" },
     },
     inert: {
-      name:"Set inert on background elements",
+      name: "Set inert on background elements",
       options: ["Yes", "No"],
       control: { type: "radio" },
+    },
+    focusManagement: {
+      name: "Focus Management",
+      options: ["Focus is not set", "focus is set to the new div container", "focus is set to the dialog heading", "focus is set to the first focusable element inside the dialog"],
+      control: { type: "select" },
+      table: {
+        disable: false,
+      }
+    },
+    useAutoFocus: {
+      name: "Use Autofocus Attribute",
+      options: [true, false],
+      control: { type: "boolean" },
+      table: {
+        disable: false,
+      }
     },
   },
 };
 
-// Default story
-export const Dialog = ({ showModal, ariaModal, ariaHidden, inert }) => {
+export const Dialog = ({ showModal, ariaModal, ariaHidden, inert, focusManagement, useAutoFocus }) => {
   const [open, setOpen] = useState(false);
-
-  // Event handler for opening the dialog
-  const handleOpenDialog = () => {
-    setOpen(true);
-  };
-
-  // Event handler for closing the dialog
-  const handleCloseDialog = () => {
-    setOpen(false);
-  };
+  const triggerButtonRef = useRef(null); // Add this line
 
   return (
-    <>
-      <button onClick={handleOpenDialog} className={styles.openDialog}>Open Dialog</button>
-      <ReactHtmlDialog
-        open={open}
-        showModal={showModal}
-        heading="Dialog Heading"
-        ariaModal={ariaModal}
-        ariaHidden={ariaHidden}
-        inert={inert}
-      >
-        Dialog content here
-          <button className={styles.closeButton} onClick={handleCloseDialog}>
-            Close
+      <>
+          <button ref={triggerButtonRef} onClick={() => setOpen(true)} className={styles.openDialog}>
+              Open Dialog
           </button>
-      </ReactHtmlDialog>
-    </>
+          <ReactHtmlDialog
+              open={open}
+              setOpen={setOpen}
+              showModal={showModal}
+              heading="Dialog Heading"
+              ariaModal={ariaModal}
+              ariaHidden={ariaHidden}
+              inert={inert}
+              focusManagement={focusManagement}
+              useAutoFocus={useAutoFocus}
+              triggerButtonRef={triggerButtonRef} // Pass the ref here
+          >
+              Dialog content here
+          </ReactHtmlDialog>
+      </>
   );
 };
 
 // Default story arguments
 Dialog.args = {
   showModal: "Yes",
+  focusManagement: "Focus is not set", 
+  useAutoFocus: false,
   ariaModal: "remove",
   ariaHidden: "remove",
   inert: "No",

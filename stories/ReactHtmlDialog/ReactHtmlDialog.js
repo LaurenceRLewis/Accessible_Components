@@ -1,74 +1,77 @@
 import React, { useEffect, useRef } from 'react';
 import styles from './ReactHtmlDialog.module.css';
 
-function ReactHtmlDialog({ open, showModal, heading, children, ariaHidden, inert, ariaModal }) {
-  const dialogRef = useRef();
-  const headingRef = useRef();
+function ReactHtmlDialog({ open, setOpen, showModal, heading, children, ariaHidden, inert, ariaModal, focusManagement, useAutoFocus }) {
+    const dialogRef = useRef();
+    const headingRef = useRef();
+    const contentRef = useRef(); // Ref for the div container
 
-  useEffect(() => {
-    // Open or close the dialog based on the 'open' prop
-    if (open) {
-      if (showModal === 'Yes') {
-        // Use showModal() method to open the dialog as a modal dialog
-        dialogRef.current.showModal();
-      } else {
-        // Use show() method to open the dialog
-        dialogRef.current.show();
-      }
-      // Set focus on the heading when the dialog opens. This should not be needed using autofocus.
-      //The autofocus attribute applies to all elements, not just to form controls. However I can't get this to work so reverting to the programmatic method.
-      headingRef.current.focus();
-    } else if (dialogRef.current.open) {
-      // Close the dialog if it is already open
-      dialogRef.current.close();
-    }
-  }, [open, showModal]);
-
-  useEffect(() => {
-    const dialogSiblingElements = Array.from(document.body.children).filter((child) => child !== dialogRef.current);
-
-    dialogSiblingElements.forEach((siblingElement) => {
-      if (open) {
-        if (ariaHidden === 'true') {
-          // Set aria-hidden attribute to 'true' on sibling elements when the dialog is open
-          siblingElement.setAttribute('aria-hidden', 'true');
-        } else if (ariaHidden === 'false') {
-          // Set aria-hidden attribute to 'false' on sibling elements when the dialog is open
-          siblingElement.setAttribute('aria-hidden', 'false');
+    useEffect(() => {
+        if (open) {
+            showModal === 'Yes' ? dialogRef.current.showModal() : dialogRef.current.show();
+        } else {
+            dialogRef.current.close();
         }
+    }, [open, showModal]);
 
-        if (inert === 'Yes') {
-          // Set inert attribute on sibling elements when the dialog is open
-          siblingElement.setAttribute('inert', '');
+    useEffect(() => {
+        if (open) {
+            // Set tabIndex to -1 for heading and container div by default
+            headingRef.current?.setAttribute('tabIndex', '-1');
+            contentRef.current?.setAttribute('tabIndex', '-1');
+
+            if (useAutoFocus) {
+                // Clear previous autoFocus attributes when dialog opens
+                headingRef.current?.removeAttribute('autoFocus');
+                contentRef.current?.removeAttribute('autoFocus');
+                const firstFocusable = dialogRef.current?.querySelector('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+                firstFocusable?.removeAttribute('autoFocus');
+
+                // Swap the application of autoFocus based on the corrected focusManagement setting
+                switch (focusManagement) {
+                    case 'focus is set to the new div container': // This was 'focus is set to the dialog heading' before
+                        headingRef.current?.setAttribute('autoFocus', '');
+                        break;
+                    case 'focus is set to the dialog heading': // This was 'focus is set to the new div container' before
+                        contentRef.current?.setAttribute('autoFocus', '');
+                        break;
+                    case 'focus is set to the first focusable element inside the dialog':
+                        if (firstFocusable) {
+                            firstFocusable.setAttribute('autoFocus', '');
+                        }
+                        break;
+                }
+            } else {
+                // Apply tabIndex and manual focus based on the corrected focusManagement setting
+                switch (focusManagement) {
+                    case 'focus is set to the new div container': // This was 'focus is set to the dialog heading' before
+                        headingRef.current?.focus();
+                        break;
+                    case 'focus is set to the dialog heading': // This was 'focus is set to the new div container' before
+                        contentRef.current?.focus();
+                        break;
+                    case 'focus is set to the first focusable element inside the dialog':
+                        const firstFocusable = dialogRef.current?.querySelector('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+                        if (firstFocusable) {
+                            firstFocusable.focus();
+                        }
+                        break;
+                }
+            }
         }
-      } else {
-        // Remove aria-hidden and inert attributes from sibling elements when the dialog is closed
-        siblingElement.removeAttribute('aria-hidden');
-        siblingElement.removeAttribute('inert');
-      }
-    });
-  }, [ariaHidden, inert, open]);
+    }, [open, focusManagement, useAutoFocus]);
 
-  useEffect(() => {
-    // Set the value of the aria-modal attribute on the dialog based on the 'ariaModal' prop
-    if (ariaModal === 'true') {
-      dialogRef.current.setAttribute('aria-modal', 'true');
-    } else if (ariaModal === 'false') {
-      dialogRef.current.setAttribute('aria-modal', 'false');
-    } else if (ariaModal === 'remove') {
-      // Remove the aria-modal attribute from the dialog
-      dialogRef.current.removeAttribute('aria-modal');
-    }
-  }, [ariaModal]);
-
-  return (
-    <dialog ref={dialogRef} className={styles.dialog} autoFocus>
-      <h2 ref={headingRef} tabindex="-1">
-        {heading}
-      </h2>
-      <p>{children}</p>
-    </dialog>
-  );
+    return (
+        <dialog ref={dialogRef} className={styles.dialog}>
+            <div ref={contentRef} tabIndex="-1" className={styles.containerDiv}>
+                <h2 ref={headingRef} tabIndex="-1">
+                    {heading}
+                </h2>
+                {children}
+                <button type="button" onClick={() => setOpen(false)} className={styles.closeButton}>Close</button>
+            </div>
+        </dialog>
+    );
 }
 
 export default ReactHtmlDialog;

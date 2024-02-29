@@ -82,10 +82,10 @@ const ReactSearchTable = ({
             {...(inputRole ? { role: inputRole } : {})}
             aria-describedby="errorText helpText"
           />
-          <button className={`${styles.button} ${styles.searchButton}`} onClick={handleSearch}>
+          <button type="submit" className={`${styles.button} ${styles.searchButton}`} onClick={handleSearch}>
             Search
           </button>
-          <button className={`${styles.button} ${styles.clearButton}`} onClick={handleClear}>
+          <button type="reset" className={`${styles.button} ${styles.clearButton}`} onClick={handleClear}>
             Clear
           </button>
         </div>
