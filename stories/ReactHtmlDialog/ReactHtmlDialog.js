@@ -4,7 +4,9 @@ import styles from './ReactHtmlDialog.module.css';
 function ReactHtmlDialog({ open, setOpen, showModal, heading, children, ariaHidden, inert, ariaModal, focusManagement, useAutoFocus }) {
     const dialogRef = useRef();
     const headingRef = useRef();
-    const contentRef = useRef(); // Ref for the div container
+    const contentRef = useRef();
+    const fakeLinkRef = useRef();
+    const closeButtonRef = useRef();
 
     useEffect(() => {
         if (open) {
@@ -35,6 +37,12 @@ function ReactHtmlDialog({ open, setOpen, showModal, heading, children, ariaHidd
                     case 'focus is set to the dialog heading': // This was 'focus is set to the new div container' before
                         contentRef.current?.setAttribute('autoFocus', '');
                         break;
+                    case 'focus is set to the fake link':
+                            fakeLinkRef.current?.focus();
+                            break;
+                    case 'focus is set to the close button':
+                                closeButtonRef.current?.focus();
+                                break;
                     case 'focus is set to the first focusable element inside the dialog':
                         if (firstFocusable) {
                             firstFocusable.setAttribute('autoFocus', '');
@@ -50,6 +58,9 @@ function ReactHtmlDialog({ open, setOpen, showModal, heading, children, ariaHidd
                     case 'focus is set to the dialog heading': // This was 'focus is set to the new div container' before
                         contentRef.current?.focus();
                         break;
+                    case 'focus is set to the fake link':
+                            fakeLinkRef.current?.focus();
+                            break;
                     case 'focus is set to the first focusable element inside the dialog':
                         const firstFocusable = dialogRef.current?.querySelector('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
                         if (firstFocusable) {
@@ -61,6 +72,12 @@ function ReactHtmlDialog({ open, setOpen, showModal, heading, children, ariaHidd
         }
     }, [open, focusManagement, useAutoFocus]);
 
+    // Fake hyperlink handler
+    const handleFakeLinkClick = (e) => {
+        e.preventDefault();
+
+    };
+
     return (
         <dialog ref={dialogRef} className={styles.dialog}>
             <div ref={contentRef} tabIndex="-1" className={styles.containerDiv}>
@@ -68,7 +85,9 @@ function ReactHtmlDialog({ open, setOpen, showModal, heading, children, ariaHidd
                     {heading}
                 </h2>
                 {children}
-                <button type="button" onClick={() => setOpen(false)} className={styles.closeButton}>Close</button>
+                <p>Testing variations of the HTML dialog using Props.</p>
+                <p>This is a <a href="#" onClick={handleFakeLinkClick} ref={fakeLinkRef}>Fake Link</a></p>
+                <button type="button" onClick={() => setOpen(false)} ref={closeButtonRef} className={styles.closeButton}>Close</button>
             </div>
         </dialog>
     );

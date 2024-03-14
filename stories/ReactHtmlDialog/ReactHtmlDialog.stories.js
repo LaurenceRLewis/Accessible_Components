@@ -39,12 +39,15 @@ export default {
     },
     focusManagement: {
       name: "Focus Management",
-      options: ["Focus is not set", "focus is set to the new div container", "focus is set to the dialog heading", "focus is set to the first focusable element inside the dialog"],
+      options: [
+        "Focus is not set", 
+        "focus is set to the new div container", 
+        "focus is set to the dialog heading", 
+        "focus is set to the fake link",
+        "focus is set to the close button"
+      ],
       control: { type: "select" },
-      table: {
-        disable: false,
-      }
-    },
+    },    
     useAutoFocus: {
       name: "Use Autofocus Attribute",
       options: [true, false],
@@ -58,7 +61,7 @@ export default {
 
 export const Dialog = ({ showModal, ariaModal, ariaHidden, inert, focusManagement, useAutoFocus }) => {
   const [open, setOpen] = useState(false);
-  const triggerButtonRef = useRef(null); // Add this line
+  const triggerButtonRef = useRef(null);
 
   return (
       <>
@@ -75,7 +78,7 @@ export const Dialog = ({ showModal, ariaModal, ariaHidden, inert, focusManagemen
               inert={inert}
               focusManagement={focusManagement}
               useAutoFocus={useAutoFocus}
-              triggerButtonRef={triggerButtonRef} // Pass the ref here
+              triggerButtonRef={triggerButtonRef}
           >
               Dialog content here
           </ReactHtmlDialog>
@@ -83,7 +86,6 @@ export const Dialog = ({ showModal, ariaModal, ariaHidden, inert, focusManagemen
   );
 };
 
-// Default story arguments
 Dialog.args = {
   showModal: "Yes",
   focusManagement: "Focus is not set", 

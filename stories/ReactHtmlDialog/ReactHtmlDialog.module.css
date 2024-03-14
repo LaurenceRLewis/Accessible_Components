@@ -2,7 +2,7 @@
 
 .dialog {
   border: 2px solid var(--purple-700);
-  height: 100px;
+  min-height: 200px;
   padding: 1em 1em 2em;
   position: relative;
   z-index: 1000;
