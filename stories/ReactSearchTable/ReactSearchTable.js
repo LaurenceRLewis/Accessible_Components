@@ -66,7 +66,7 @@ const ReactSearchTable = ({
   return (
     <>
       <div className={styles.container}>
-        <div {...(containerRole ? { role: containerRole } : {})} className={styles.searchContainer}>
+        <search {...(containerRole ? { role: containerRole } : {})} className={styles.searchContainer}>
           <label htmlFor="searchInput" className={styles.label}>
             Filter table
           </label>
@@ -88,7 +88,7 @@ const ReactSearchTable = ({
           <button type="reset" className={`${styles.button} ${styles.clearButton}`} onClick={handleClear}>
             Clear
           </button>
-        </div>
+        </search>
         <p id="helpText" className={styles.helpText}>
           Press Enter or click the Search button to activate.
         </p>

@@ -188,18 +188,20 @@ const Popover = ({
 
       <div className={styles.popoverWrapper}>
         <button
+          type="button" 
           ref={buttonRef}
           id={idForLabelledBy} // Setting the ID of the button to nameAriaLabelledBy prop
           onClick={() => setIsOpen(!isOpen)}
           aria-expanded={isOpen}
           aria-controls="popover-content"
+          className={styles.popoverButton}
         >
           Popover
         </button>
         {isOpen && (
           <div
           ref={popoverRef}
-          id="popover-content"
+          id="popover-content" 
           className={popoverClass}
           role={withRole ? "region" : null}
           aria-label={withRole && ariaLabel ? ariaLabel : null}  // Set aria-label only if withRole is true

@@ -4,7 +4,7 @@
   position: relative;
 }
 
-button {
+button.popoverButton {
   padding: 0.5rem 1rem;
   font-size: 1rem;
   color: white;
@@ -14,13 +14,13 @@ button {
   transition: background-color 0.3s;
 }
 
-button:hover {
+button.popoverButton:hover {
   background-color: var(--purple-700);
 }
 
-button:focus-visible {
-  outline: 2px solid var(--purple-500);
-  outline-offset: 1px;
+button.popoverButton:focus-visible {
+  outline: 3px solid var(--purple-500);
+  outline-offset: 3px;
 }
 
 .popoverContent {

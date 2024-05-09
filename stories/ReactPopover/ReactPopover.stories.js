@@ -57,9 +57,9 @@ const Template = (args) => <Popover {...args} />;
 export const PopoverComponent = Template.bind({});
 
 PopoverComponent.args = {
-  withRole: false,
+  withRole: true,
   ariaLabel: "",
-  nameAriaLabelledBy: false,
+  nameAriaLabelledBy: true,
   useArrowKeys: false,
   dismissOnClickOutside: true,
   contentType: 'Help with Reference link',  // Default value
