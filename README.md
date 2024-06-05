@@ -10,3 +10,8 @@ This experimental personal project by Laurence Lewis is a set of React-based sto
 - **ARIA 1.2 Specification** Accessible Rich Internet Applications 1.2: https://www.w3.org/TR/wai-aria-1.2/
 - **ARIA APG** ARIA Authoring Practices Guide: https://www.w3.org/TR/wai-aria-practices-1.2/
 - **HTML Living Standard (Multipage)** The living standard for HTML: https://html.spec.whatwg.org/multipage/
+
+## Instructions
+ - npm run build-storybook
+ - cd storybook-static
+ - netlify deploy --prod

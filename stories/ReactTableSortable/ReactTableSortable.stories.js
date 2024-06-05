@@ -70,7 +70,7 @@ export const SortableTableColumns = Template.bind({});
 SortableTableColumns.args = {
   sortable: 'Sort',
   includeScope: true,
-  iconVisibility: 'Show on hover / focus',
+  iconVisibility: 'Show icons',
   addRoleStatus: 'No role',
   //ariaPressed: 'No'
 };

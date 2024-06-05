@@ -6,29 +6,23 @@ import StandardDialogContent from "./StandardDialogContent";
 import styles from "./ReactModalDialog.module.css";
 
 function ReactModalDialog(props) {
-  // Declare state variable for sheet/dialog open state
   const [open, setOpen] = useState(false);
-  // Destructure the modal and dialogType props
-  const { modal, dialogType } = props;
+  const { modal, dialogType, backgroundAttribute } = props;
 
-  // Function to open the sheet/dialog
   const openSheet = () => {
     setOpen(true);
   };
 
-  // Function to close the sheet/dialog
   const closeSheet = () => {
     setOpen(false);
   };
 
-  //Esc key closes modal and non-modal
   const handleEscKey = (event) => {
     if (event.key === "Escape" && open) {
       closeSheet();
     }
   };
 
-  // Add an effect to remove tabindex from the modal content container when sheet/dialog is closed
   useEffect(() => {
     if (!open) {
       const modalContentContainer = document.querySelector(
@@ -41,11 +35,8 @@ function ReactModalDialog(props) {
   }, [open]);
 
   const isStandardDialog = dialogType === "standard";
-  // Determine the sheet class based on the open state
   const sheetOpenClass = open ? styles.open : "";
-  // Determine if the overlay should be displayed
   const overlayClass = open && modal;
-  // Combine sheet classes based on the dialog type
   const sheetStyle = classNames(
     styles.sheet,
     {
@@ -56,23 +47,28 @@ function ReactModalDialog(props) {
     sheetOpenClass
   );
 
-  // Function to apply or remove 'aria-hidden' attribute on elements outside the dialog
-  const setAriaHiddenOnSiblings = (isOpen) => {
-    const rootNode = ReactDOM.findDOMNode(props.rootNode || document.body);
+  const setAriaHiddenOrInertOnSiblings = (isOpen) => {
+    const rootNode = props.rootNode || document.body;
     const siblings = Array.from(rootNode.children).filter(
       (child) => child !== rootNode && child.id !== "storybook-root"
     );
 
     siblings.forEach((sibling) => {
       if (modal && isOpen) {
-        sibling.setAttribute("aria-hidden", "true");
+        if (backgroundAttribute === "aria-hidden") {
+          sibling.setAttribute("aria-hidden", "true");
+          sibling.removeAttribute("inert");
+        } else if (backgroundAttribute === "inert") {
+          sibling.setAttribute("inert", "");
+          sibling.removeAttribute("aria-hidden");
+        }
       } else {
         sibling.removeAttribute("aria-hidden");
+        sibling.removeAttribute("inert");
       }
     });
   };
 
-  // Add event listener for keydown events to handle Esc key press
   useEffect(() => {
     window.addEventListener("keydown", handleEscKey);
     return () => {
@@ -80,14 +76,12 @@ function ReactModalDialog(props) {
     };
   }, [handleEscKey]);
 
-  // Set focus on the sheet heading when the sheet/dialog opens
   useEffect(() => {
     if (open) {
       document.getElementById("sheet-heading").focus();
     }
   }, [open]);
 
-  // Add an effect to return focus to the triggering button when sheet/dialog is closed
   useEffect(() => {
     if (!open) {
       const sideSheetButton = document.getElementById("side-sheet-button");
@@ -97,49 +91,38 @@ function ReactModalDialog(props) {
     }
   }, [open]);
 
-  // Apply or remove 'aria-hidden' attribute on elements outside the dialog when the modal is open or closed
   useEffect(() => {
-    setAriaHiddenOnSiblings(open);
-  }, [modal, open]);
+    setAriaHiddenOrInertOnSiblings(open);
+  }, [modal, open, backgroundAttribute]);
 
-  // Exit early if the sheet is closed or not a modal
   const trapFocus = (event) => {
     if (!open || !modal) {
       return;
     }
 
-    // Check if the Tab key was pressed
     const isTabPressed = event.key === "Tab" || event.keyCode === 9;
 
-    // Exit early if the pressed key is not Tab
     if (!isTabPressed) {
       return;
     }
 
-    // Define the CSS selectors for focusable elements
     const focusableElements =
       'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
     const modalContent = document.querySelector(`.${styles.sheet}`);
     const focusableContent = modalContent.querySelectorAll(focusableElements);
 
-    // Filter out any hidden elements from the list of focusable elements
     const trapElements = Array.from(focusableContent).filter(
       (el) => el.offsetParent !== null
     );
 
-    // Identify the first and last focusable elements within the modal
     const firstTrapEl = trapElements[0];
     const lastTrapEl = trapElements[trapElements.length - 1];
 
-    // Trap focus by moving focus to the last focusable element when
-    // the Shift key is held down and the first element is focused
     if (event.shiftKey) {
       if (document.activeElement === firstTrapEl) {
         lastTrapEl.focus();
         event.preventDefault();
       }
-      // Trap focus by moving focus to the first focusable element when
-      // the last element is focused without the Shift key held down
     } else {
       if (document.activeElement === lastTrapEl) {
         firstTrapEl.focus();
