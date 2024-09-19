@@ -53,13 +53,18 @@ export default {
       description: 'Add role attribute to span',
       value: 'No role',
     },
-    // ariaPressed: {
-    //   name: "Enable aria-pressed",
-    //   control: 'radio',
-    //   options: ['Yes', 'No'],
-    //   description: 'Enable or disable aria-pressed for sorting buttons',
-    //   value: 'No',
-    // },
+    ariaDescription: {
+      name: "Aria description for sortable columns",
+      control: 'text',
+      description: 'Description of sortable table columns for screen readers',
+      value: 'Sortable column',
+    },
+    includeAriaDescription: {
+      name: "Include aria-description",
+      control: 'boolean',
+      description: 'Toggle whether to include aria-description on sortable buttons',
+      value: true, // Default to true
+    }
   },
 };
 
@@ -72,5 +77,6 @@ SortableTableColumns.args = {
   includeScope: true,
   iconVisibility: 'Show icons',
   addRoleStatus: 'No role',
-  //ariaPressed: 'No'
+  ariaDescription: 'Sortable column',
+  includeAriaDescription: true,  // Set default to true
 };

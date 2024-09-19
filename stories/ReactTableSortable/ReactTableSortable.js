@@ -8,7 +8,8 @@ export const ReactTableSortable = ({
   iconVisibility = "Show on hover / focus",
   customCaptionText = "Table sorted by, ",
   initialSortColumnID = null,
-  ariaPressed = "No",
+  ariaDescription = "Sortable column",
+  includeAriaDescription = false,  // New boolean prop added
 }) => {
   // Initialize tableData with initial data.
   const [tableData, setTableData] = useState([
@@ -76,7 +77,6 @@ export const ReactTableSortable = ({
   });
 
   const [showChevron, setShowChevron] = useState(1);
-  const [ariaPressedState, setAriaPressedState] = useState({});
 
   // Helper function to get cell value at given row and idx.
   const getCellValue = (row, idx) => row[idx];
@@ -93,7 +93,6 @@ export const ReactTableSortable = ({
 
   useEffect(() => {
     if (initialSortColumnID !== null) {
-      // Check added here
       const initialIndex = initialSortColumnID;
       const initialAscending = true;
       setTableData((prevData) =>
@@ -106,42 +105,22 @@ export const ReactTableSortable = ({
   const [isTableSorted, setIsTableSorted] = useState(false);
 
   // Function wrapped in useCallback that handles header button click to sort table.
-  const onHeaderButtonClick = useCallback(
-    (index) => {
-      setSortedColumn((prevSortedColumn) => {
-        const isSameColumn = prevSortedColumn.index === index;
-        const ascending = isSameColumn ? !prevSortedColumn.ascending : true;
-  
-        setTableData((prevData) =>
-          [...prevData].sort(comparer(index, ascending))
-        );
-  
-        setShowChevron(index);
-  
-        setAriaPressedState((prev) => {
-          const newState = { ...prev };
-          
-          if (ariaPressed === "Yes") { 
-            Object.keys(newState).forEach((key) => {
-              newState[key] = undefined;
-            });
-            newState[index] = !ascending;
-          } else if (ariaPressed === "No") {
-            Object.keys(newState).forEach((key) => {
-              newState[key] = undefined;
-            });
-          }
-        
-          return newState;
-        });
+  const onHeaderButtonClick = useCallback((index) => {
+    setSortedColumn((prevSortedColumn) => {
+      const isSameColumn = prevSortedColumn.index === index;
+      const ascending = isSameColumn ? !prevSortedColumn.ascending : true;
 
-        setIsTableSorted(true);
-  
-        return { index, ascending };
-      });
-    },
-    [ariaPressed]
-  );   
+      setTableData((prevData) =>
+        [...prevData].sort(comparer(index, ascending))
+      );
+
+      setShowChevron(index);
+
+      setIsTableSorted(true);
+
+      return { index, ascending };
+    });
+  }, []);
 
   const headers = [
     "Priority",
@@ -164,7 +143,6 @@ export const ReactTableSortable = ({
   );
 
   // Render table with sortedColumn state and onHeaderButtonClick event handler.
-  // The table header rendering based on the sortable prop.
   return (
     <table className={styles.table}>
       <caption className={styles.caption}>
@@ -201,39 +179,37 @@ export const ReactTableSortable = ({
             >
               {sortable === "Sort" ? (
                 <button
-                //aria-pressed={ariaPressed === "Yes" ? ariaPressedState[index] : undefined}
-                onMouseEnter={() => setShowChevron(index)}
-                onMouseLeave={() => setShowChevron(sortedColumn.index)}
-                onFocus={() => setShowChevron(index)}
-                onBlur={() => setShowChevron(sortedColumn.index)}
-                onClick={() => onHeaderButtonClick(index)}
-                className={styles.button}
-              >
+                  {...(includeAriaDescription && { "aria-description": ariaDescription })} // Conditionally apply aria-description
+                  onMouseEnter={() => setShowChevron(index)}
+                  onMouseLeave={() => setShowChevron(sortedColumn.index)}
+                  onFocus={() => setShowChevron(index)}
+                  onBlur={() => setShowChevron(sortedColumn.index)}
+                  onClick={() => onHeaderButtonClick(index)}
+                  className={styles.button}
+                >
                   {header}
                   <span
-                    className={`
-        ${styles.chevron}
-        ${sortedColumn.index !== index ? styles.sortNone : ""} 
-        ${
-          iconVisibility === "Show icons" ||
-          sortedColumn.index === index ||
-          (index === 1 && sortedColumn.index === null)
-            ? styles.chevronIsVisible
-            : ""
-        } 
-        ${
-          iconVisibility === "Show on hover / focus"
-            ? styles.chevronHoverFocus
-            : ""
-        } 
-        ${
-          showChevron === index || sortedColumn.index === index
-            ? sortedColumn.index === index && sortedColumn.ascending
-              ? styles.chevronUp
-              : styles.chevronDown
-            : "hidden"
-        }
-    `}
+                    className={`${
+                      styles.chevron
+                    } ${
+                      sortedColumn.index !== index ? styles.sortNone : ""
+                    } ${
+                      iconVisibility === "Show icons" ||
+                      sortedColumn.index === index ||
+                      (index === 1 && sortedColumn.index === null)
+                        ? styles.chevronIsVisible
+                        : ""
+                    } ${
+                      iconVisibility === "Show on hover / focus"
+                        ? styles.chevronHoverFocus
+                        : ""
+                    } ${
+                      showChevron === index || sortedColumn.index === index
+                        ? sortedColumn.index === index && sortedColumn.ascending
+                          ? styles.chevronUp
+                          : styles.chevronDown
+                        : "hidden"
+                    }`}
                     aria-hidden="true"
                   />
                 </button>
