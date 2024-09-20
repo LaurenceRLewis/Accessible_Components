@@ -64,7 +64,14 @@ export default {
       control: 'boolean',
       description: 'Toggle whether to include aria-description on sortable buttons',
       value: true, // Default to true
-    }
+    },
+    showDescriptionAll: {
+      name: "Show description for all sorting states",
+      control: 'select',
+      options: ['Yes', 'No'],
+      description: 'Control whether aria-description is applied only when aria-sort is none or for all sorting actions',
+      value: 'No', // Default to "No"
+    },
   },
 };
 
@@ -78,5 +85,6 @@ SortableTableColumns.args = {
   iconVisibility: 'Show icons',
   addRoleStatus: 'No role',
   ariaDescription: 'Sortable column',
-  includeAriaDescription: true,  // Set default to true
+  includeAriaDescription: true,
+  showDescriptionAll: 'No',  // Set default to "No"
 };

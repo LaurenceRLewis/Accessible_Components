@@ -9,7 +9,8 @@ export const ReactTableSortable = ({
   customCaptionText = "Table sorted by, ",
   initialSortColumnID = null,
   ariaDescription = "Sortable column",
-  includeAriaDescription = false,  // New boolean prop added
+  includeAriaDescription = false,
+  showDescriptionAll = "No", // New prop added with default set to "No"
 }) => {
   // Initialize tableData with initial data.
   const [tableData, setTableData] = useState([
@@ -179,7 +180,10 @@ export const ReactTableSortable = ({
             >
               {sortable === "Sort" ? (
                 <button
-                  {...(includeAriaDescription && { "aria-description": ariaDescription })} // Conditionally apply aria-description
+                  {...(includeAriaDescription &&
+                  (showDescriptionAll === "Yes" || sortedColumn.index !== index
+                    ? { "aria-description": ariaDescription }
+                    : {}))} // Conditionally apply aria-description based on prop
                   onMouseEnter={() => setShowChevron(index)}
                   onMouseLeave={() => setShowChevron(sortedColumn.index)}
                   onFocus={() => setShowChevron(index)}
