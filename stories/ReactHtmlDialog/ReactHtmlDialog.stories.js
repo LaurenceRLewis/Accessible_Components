@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useRef } from 'react';
+import { useState, useRef } from "react";
 import ReactHtmlDialog from "./ReactHtmlDialog";
 import styles from "./ReactHtmlDialog.module.css";
 import ReactHtmlDialogDescription from "./ReactHtmlDialogDescription";
@@ -40,55 +40,66 @@ export default {
     focusManagement: {
       name: "Focus Management",
       options: [
-        "Focus is not set", 
-        "focus is set to the new div container", 
-        "focus is set to the dialog heading", 
+        "Focus is not set",
+        "focus is set to the new div container",
+        "focus is set to the dialog heading",
         "focus is set to the fake link",
-        "focus is set to the close button"
+        "focus is set to the close button",
       ],
       control: { type: "select" },
-    },    
+    },
     useAutoFocus: {
       name: "Use Autofocus Attribute",
       options: [true, false],
       control: { type: "boolean" },
       table: {
         disable: false,
-      }
+      },
     },
   },
 };
 
-export const Dialog = ({ showModal, ariaModal, ariaHidden, inert, focusManagement, useAutoFocus }) => {
+export const Dialog = ({
+  showModal,
+  ariaModal,
+  ariaHidden,
+  inert,
+  focusManagement,
+  useAutoFocus,
+}) => {
   const [open, setOpen] = useState(false);
   const triggerButtonRef = useRef(null);
 
   return (
-      <>
-          <button ref={triggerButtonRef} onClick={() => setOpen(true)} className={styles.openDialog}>
-              Open Dialog
-          </button>
-          <ReactHtmlDialog
-              open={open}
-              setOpen={setOpen}
-              showModal={showModal}
-              heading="Dialog Heading"
-              ariaModal={ariaModal}
-              ariaHidden={ariaHidden}
-              inert={inert}
-              focusManagement={focusManagement}
-              useAutoFocus={useAutoFocus}
-              triggerButtonRef={triggerButtonRef}
-          >
-              Dialog content here
-          </ReactHtmlDialog>
-      </>
+    <>
+      <button
+        ref={triggerButtonRef}
+        onClick={() => setOpen(true)}
+        className={styles.openDialog}
+      >
+        Open Dialog
+      </button>
+      <ReactHtmlDialog
+        open={open}
+        setOpen={setOpen}
+        showModal={showModal}
+        heading="Dialog Heading"
+        ariaModal={ariaModal}
+        ariaHidden={ariaHidden}
+        inert={inert}
+        focusManagement={focusManagement}
+        useAutoFocus={useAutoFocus}
+        triggerButtonRef={triggerButtonRef}
+      >
+        Dialog content here
+      </ReactHtmlDialog>
+    </>
   );
 };
 
 Dialog.args = {
   showModal: "Yes",
-  focusManagement: "Focus is not set", 
+  focusManagement: "Focus is not set",
   useAutoFocus: false,
   ariaModal: "remove",
   ariaHidden: "remove",

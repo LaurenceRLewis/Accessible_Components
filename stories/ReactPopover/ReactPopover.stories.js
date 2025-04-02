@@ -1,6 +1,6 @@
 import React from "react";
 import Popover from "./ReactPopover";
-import popoverDescription from './ReactPopover.Description';
+import popoverDescription from "./ReactPopover.Description";
 
 export default {
   title: "Components/Popover",
@@ -20,35 +20,31 @@ export default {
       defaultValue: false,
     },
     ariaLabel: {
-      name: 'Aria-label value',
+      name: "Aria-label value",
       control: "text",
       defaultValue: "",
     },
     nameAriaLabelledBy: {
-      name: 'Aria-labelledby enabled',
+      name: "Aria-labelledby enabled",
       control: "boolean",
       defaultValue: false,
     },
     useArrowKeys: {
-      name: 'Use arrow key navigation',
+      name: "Use arrow key navigation",
       control: "boolean",
       defaultValue: false,
     },
     dismissOnClickOutside: {
-      name: 'Dismiss on outside click',
+      name: "Dismiss on outside click",
       control: "boolean",
       defaultValue: true,
     },
     contentType: {
-      name: 'Content Type',
+      name: "Content Type",
       control: "select",
-      options: [
-        'Menu',
-        'Help with Reference link',
-        'Content only (tooltip)'
-      ],
-      defaultValue: 'Help with Reference link',
-    }
+      options: ["Menu", "Help with Reference link", "Content only (tooltip)"],
+      defaultValue: "Help with Reference link",
+    },
   },
 };
 
@@ -62,5 +58,5 @@ PopoverComponent.args = {
   nameAriaLabelledBy: true,
   useArrowKeys: false,
   dismissOnClickOutside: true,
-  contentType: 'Help with Reference link',  // Default value
+  contentType: "Help with Reference link", // Default value
 };

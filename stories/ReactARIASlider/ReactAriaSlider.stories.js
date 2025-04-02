@@ -1,10 +1,10 @@
 //ReactSlider.stories.css
-import React from 'react';
-import AriaSlider from './AriaSlider';
-import ReactAriaSliderDescription from './ReactAriaSliderDescription';
+import React from "react";
+import AriaSlider from "./AriaSlider";
+import ReactAriaSliderDescription from "./ReactAriaSliderDescription";
 
 export default {
-  title: 'Components/Slider (ARIA)',
+  title: "Components/Slider (ARIA)",
   component: AriaSlider,
   parameters: {
     docs: {
@@ -16,36 +16,36 @@ export default {
   },
   argTypes: {
     min: {
-      control: 'number',
+      control: "number",
       defaultValue: 0,
-      description: 'The minimum allowed value for the slider',
+      description: "The minimum allowed value for the slider",
     },
     max: {
-      control: 'number',
+      control: "number",
       defaultValue: 50,
-      description: 'The maximum allowed value for the slider',
+      description: "The maximum allowed value for the slider",
     },
     step: {
-      control: 'number',
+      control: "number",
       defaultValue: 1,
-      description: 'The increment value for each step of the slider',
+      description: "The increment value for each step of the slider",
     },
     now: {
-      control: 'number',
+      control: "number",
       defaultValue: 5,
-      description: 'The current value of the slider',
+      description: "The current value of the slider",
     },
     updateAriaValueText: {
       name: "Insert the aria-valuetext attribute",
-      control: 'boolean',
-      description: 'Sets value to current number of total number',
+      control: "boolean",
+      description: "Sets value to current number of total number",
     },
     ariaValueText: {
       name: "Set the text for aria-valuetext",
-      control: 'text',
-      description: 'The custom aria-valuetext for the slider',
+      control: "text",
+      description: "The custom aria-valuetext for the slider",
     },
-  },  
+  },
 };
 
 const Template = (args) => <AriaSlider {...args} />;

@@ -1,9 +1,9 @@
-import React from 'react';
-import ReactComboboxReadonly from './ReactComboboxReadonly';
-import ReactComboboxReadonlyDescription from './ReactComboboxReadonlyDescription';
+import React from "react";
+import ReactComboboxReadonly from "./ReactComboboxReadonly";
+import ReactComboboxReadonlyDescription from "./ReactComboboxReadonlyDescription";
 
 export default {
-  title: 'Experimental/Combobox (Readonly)',
+  title: "Experimental/Combobox (Readonly)",
   component: ReactComboboxReadonly,
   parameters: {
     docs: {
@@ -15,39 +15,44 @@ export default {
   },
   argTypes: {
     buttonsPosition: {
-      name: 'Buttons Position',
+      name: "Buttons Position",
       control: {
-        type: 'radio',
-        options: ['top', 'bottom']
+        type: "radio",
+        options: ["top", "bottom"],
       },
-      defaultValue: 'bottom',
-      description: 'Choose the position for the buttons',
+      defaultValue: "bottom",
+      description: "Choose the position for the buttons",
     },
     interactionMode: {
-      name: 'Keep or Remove from list',
+      name: "Keep or Remove from list",
       control: {
-        type: 'radio',
-        options: ['Retain selected in list', 'Remove selected from list']
+        type: "radio",
+        options: ["Retain selected in list", "Remove selected from list"],
       },
-      defaultValue: 'Keep selected in list',
-      description: 'Choose the interaction mode for the options',
+      defaultValue: "Keep selected in list",
+      description: "Choose the interaction mode for the options",
     },
     ariaMultiselectable: {
-      name: 'Multiselectable',
+      name: "Multiselectable",
       control: {
-        type: 'boolean'
+        type: "boolean",
       },
       defaultValue: true,
-      description: 'Allow multiple options to be selected at once',
+      description: "Allow multiple options to be selected at once",
     },
   },
 };
 
-const Template = (args) => <ReactComboboxReadonly {...args} ariaMultiselectable={args.ariaMultiselectable} />;
+const Template = (args) => (
+  <ReactComboboxReadonly
+    {...args}
+    ariaMultiselectable={args.ariaMultiselectable}
+  />
+);
 
 export const ComboboxReadonly = Template.bind({});
 ComboboxReadonly.args = {
-  buttonsPosition: 'bottom',
-  interactionMode: 'Keep selected in list',
-  ariaMultiselectable: true
+  buttonsPosition: "bottom",
+  interactionMode: "Keep selected in list",
+  ariaMultiselectable: true,
 };

@@ -1,0 +1,248 @@
+🔎 checking possible migrations..
+
+🔎 found a 'remove-jest-testing-library' migration:
+╭ Automigration detected ───────────────────────────────────────────────────────────────────────────────╮
+│                                                                                                       │
+│   Attention: We've detected that you're using the following packages which are known to be            │
+│   incompatible since Storybook 8:                                                                     │
+│                                                                                                       │
+│   - @storybook/testing-library                                                                        │
+│                                                                                                       │
+│   We will uninstall them for you and install @storybook/test instead.                                 │
+│                                                                                                       │
+│   Also, we can help you migrate your stories to use the new package.                                  │
+│                                                                                                       │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────╯
+? Do you want to run the 'remove-jest-testing-library' migration on your project? » (Y/n)√ Do you want to run the 'remove-jest-testing-library' migration on your project? ... yes
+? Please enter the glob for your stories to migrate to @storybook/test » ./src/**/*.stories.*? Please enter the glob for your stories to migrate to @storybook/test » .? Please enter the glob for your stories to migrate to @storybook/test » ./? Please enter the glob for your stories to migrate to @storybook/test » ./s? Please enter the glob for your stories to migrate to @storybook/test » ./st? Please enter the glob for your stories to migrate to @storybook/test » ./sto? Please enter the glob for your stories to migrate to @storybook/test » ./stor? Please enter the glob for your stories to migrate to @storybook/test » ./stori? Please enter the glob for your stories to migrate to @storybook/test » ./storie? Please enter the glob for your stories to migrate to @storybook/test » ./stories? Please enter the glob for your stories to migrate to @storybook/test » ./stories/? Please enter the glob for your stories to migrate to @storybook/test » ./stories/*? Please enter the glob for your stories to migrate to @storybook/test » ./stories/**? Please enter the glob for your stories to migrate to @storybook/test » ./stories/**/? Please enter the glob for your stories to migrate to @storybook/test » ./stories/**/*? Please enter the glob for your stories to migrate to @storybook/test » ./stories/**/*.? Please enter the glob for your stories to migrate to @storybook/test » ./stories/**/*.s? Please enter the glob for your stories to migrate to @storybook/test » ./stories/**/*.st? Please enter the glob for your stories to migrate to @storybook/test » ./stories/**/*.sto? Please enter the glob for your stories to migrate to @storybook/test » ./stories/**/*.stor? Please enter the glob for your stories to migrate to @storybook/test » ./stories/**/*.stori? Please enter the glob for your stories to migrate to @storybook/test » ./stories/**/*.storie? Please enter the glob for your stories to migrate to @storybook/test » ./stories/**/*.stories? Please enter the glob for your stories to migrate to @storybook/test » ./stories/**/*.stories.? Please enter the glob for your stories to migrate to @storybook/test » ./stories/**/*.stories.@? Please enter the glob for your stories to migrate to @storybook/test » ./stories/**/*.stories.@(? Please enter the glob for your stories to migrate to @storybook/test » ./stories/**/*.stories.@(j? Please enter the glob for your stories to migrate to @storybook/test » ./stories/**/*.stories.@(js? Please enter the glob for your stories to migrate to @storybook/test » ./stories/**/*.stories.@(js|? Please enter the glob for your stories to migrate to @storybook/test » ./stories/**/*.stories.@(js|j? Please enter the glob for your stories to migrate to @storybook/test » ./stories/**/*.stories.@(js|js? Please enter the glob for your stories to migrate to @storybook/test » ./stories/**/*.stories.@(js|jsx? Please enter the glob for your stories to migrate to @storybook/test » ./stories/**/*.stories.@(js|jsx|? Please enter the glob for your stories to migrate to @storybook/test » ./stories/**/*.stories.@(js|jsx|m? Please enter the glob for your stories to migrate to @storybook/test » ./stories/**/*.stories.@(js|jsx|mj? Please enter the glob for your stories to migrate to @storybook/test » ./stories/**/*.stories.@(js|jsx|mjs? Please enter the glob for your stories to migrate to @storybook/test » ./stories/**/*.stories.@(js|jsx|mjs)√ Please enter the glob for your stories to migrate to @storybook/test ... ./stories/**/*.stories.@(js|jsx|mjs)
+=> Applying migrate-to-test-package: 25 files
+✅ ran remove-jest-testing-library migration
+
+🔎 found a 'remove-argtypes-regex' migration:
+╭ Manual migration detected ───────────────────────────────────────────────────────────────────╮
+│                                                                                              │
+│   Attention: We've detected that you're using argTypesRegex:                                 │
+│                                                                                              │
+│   .storybook\preview.js                                                                      │
+│     4 |                                                                                      │
+│     5 | export const parameters = {                                                          │
+│   > 6 |   actions: { argTypesRegex: "^on[A-Z].*" },                                          │
+│       |              ^^^^^^^^^^^^^                                                           │
+│     7 |   controls: {                                                                        │
+│     8 |     matchers: {                                                                      │
+│     9 |       color: /(background|color)$/i,                                                 │
+│                                                                                              │
+│   Storybook's play functions let you render your stories interactively.                      │
+│                                                                                              │
+│   In the past, play functions mocked action args implicitly by analyzing the argTypesRegex   │
+│   in your preview.js|ts file.                                                                │
+│                                                                                              │
+│   However, Storybook 8 changes this behavior, and we now recommend using the                 │
+│   (fn) function to mock your component's methods instead.                                    │
+│                                                                                              │
+│   Use the following command to check for implied mocked actions in your play functions:      │
+│   npx storybook migrate find-implicit-spies --glob="**/*.stories.@(js|jsx|ts|tsx)"           │
+│                                                                                              │
+│   Then, refer to our docs to migrate your play functions to Storybook 8:                     │
+│   https://storybook.js.org/docs/essentials/actions#via-storybooktest-fn-spy-function         │
+│                                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────────────────────╯
+
+? Select continue once you have made the required changes, or quit to exit the migration process » quit / continue? Select continue once you have made the required changes, or quit to exit the migration process » quit / continue? Select continue once you have made the required changes, or quit to exit the migration process » quit / continue? Select continue once you have made the required changes, or quit to exit the migration process » quit / continue? Select continue once you have made the required changes, or quit to exit the migration process » quit / continue? Select continue once you have made the required changes, or quit to exit the migration process » quit / continue? Select continue once you have made the required changes, or quit to exit the migration process » quit / continue? Select continue once you have made the required changes, or quit to exit the migration process » quit / continue? Select continue once you have made the required changes, or quit to exit the migration process » quit / continue? Select continue once you have made the required changes, or quit to exit the migration process » quit / continue? Select continue once you have made the required changes, or quit to exit the migration process » quit / continue? Select continue once you have made the required changes, or quit to exit the migration process » quit / continue? Select continue once you have made the required changes, or quit to exit the migration process » quit / continue√ Select continue once you have made the required changes, or quit to exit the migration process ... quit / continue
+
+🔎 found a 'react-docgen' migration:
+╭ Automigration detected ───────────────────────────────────────────────────────────────────────────────╮
+│                                                                                                       │
+│   Since Storybook 8.0, react-docgen is now the default for generating component controls, replacing   │
+│   react-docgen-typescript.                                                                            │
+│   This offers better performance and suits most cases.                                                │
+│   However, for complex TypeScript types or specific type features, the generated controls might not   │
+│   be as precise.                                                                                      │
+│                                                                                                       │
+│   For more on this change, check the migration guide:                                                 │
+│   https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#react-docgen-component-analysis-b   │
+│   y-default                                                                                           │
+│                                                                                                       │
+│   For known "react-docgen" limitations, see:                                                          │
+│   https://github.com/storybookjs/storybook/issues/26606                                               │
+│                                                                                                       │
+│   Press Y to revert to react-docgen-typescript, press N to use react-docgen                           │
+│                                                                                                       │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────╯
+? Do you want to run the 'react-docgen' migration on your project? » (Y/n)√ Do you want to run the 'react-docgen' migration on your project? ... yes
+✅ Setting typescript.reactDocgen
+✅ ran react-docgen migration
+
+🔎 found a 'webpack5-compiler-setup' migration:
+╭ Automigration detected ───────────────────────────────────────────────────────────────────────────────╮
+│                                                                                                       │
+│   We need to update your Storybook configuration for Webpack 5.                                       │
+│   The framework.options.builder.useSWC flag will be removed.                                          │
+│                                                                                                       │
+│   Storybook's Webpack5 builder is now compiler agnostic, meaning you have to install an additional    │
+│   addon to set up a compiler for Webpack5.                                                            │
+│                                                                                                       │
+│   We have detected, that you want to use SWC as the compiler for Webpack5.                            │
+│                                                                                                       │
+│   In the next step, Storybook will install @storybook/addon-webpack5-compiler-swc and will add it     │
+│   to your addons list in your Storybook config.                                                       │
+│                                                                                                       │
+│   After the migration, you can switch Webpack5 compilers by swapping the addon in your project.       │
+│   You can find more information here:                                                                 │
+│   https://storybook.js.org/docs/builders/webpack#compiler-support                                     │
+│                                                                                                       │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────╯
+? Do you want to run the 'webpack5-compiler-setup' migration on your project? » (Y/n)√ Do you want to run the 'webpack5-compiler-setup' migration on your project? ... yes
+Verifying @storybook/addon-webpack5-compiler-swc
+Installing @storybook/addon-webpack5-compiler-swc@^3.0.0
+Adding '@storybook/addon-webpack5-compiler-swc' to the "addons" field in .storybook\main.js
+✅ ran webpack5-compiler-setup migration
+
+🔎 found a 'upgradeStorybookRelatedDependencies' migration:
+╭ Automigration detected ───────────────────────────────────────────────────────────────────────────────╮
+│                                                                                                       │
+│   You're upgrading to the latest version of Storybook. We recommend upgrading the following           │
+│   packages:                                                                                           │
+│   - @storybook/addon-knobs: 7.0.2 => 8.0.1                                                            │
+│                                                                                                       │
+│   After upgrading, we will run the dedupe command, which could possibly have effects on               │
+│   dependencies that are not Storybook related.                                                        │
+│   see: https://docs.npmjs.com/cli/commands/npm-dedupe                                                 │
+│                                                                                                       │
+│   Do you want to proceed (upgrade the detected packages)?                                             │
+│                                                                                                       │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────╯
+? Do you want to run the 'upgradeStorybookRelatedDependencies' migration on your project? » (y/N)√ Do you want to run the 'upgradeStorybookRelatedDependencies' migration on your project? ... yes
+Installing dependencies...
+
+An error occurred while installing dependencies.
+❌ error when running upgradeStorybookRelatedDependencies migration
+HandledError: Error: Command failed with exit code 1: npm install
+    at er.installDependencies (C:\Users\laure\AppData\Local\npm-cache\_npx\a676d7340d712726\node_modules\@storybook\core\dist\common\index.cjs:18993:75)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Object.run (C:\Users\laure\AppData\Local\npm-cache\_npx\a676d7340d712726\node_modules\@storybook\cli\dist\bin\index.cjs:512:543)
+    ... 2 lines matching cause stack trace ...
+    at async doUpgrade (C:\Users\laure\AppData\Local\npm-cache\_npx\a676d7340d712726\node_modules\@storybook\cli\dist\bin\index.cjs:664:2133)
+    at async withTelemetry (C:\Users\laure\AppData\Local\npm-cache\_npx\a676d7340d712726\node_modules\@storybook\core\dist\core-server\index.cjs:35778:12)
+    at async upgrade (C:\Users\laure\AppData\Local\npm-cache\_npx\a676d7340d712726\node_modules\@storybook\cli\dist\bin\index.cjs:664:2640) {
+  handled: true,
+  cause: Error: Command failed with exit code 1: npm install
+      at makeError (C:\Users\laure\AppData\Local\npm-cache\_npx\a676d7340d712726\node_modules\@storybook\core\dist\common\index.cjs:18187:67)
+      at handlePromise (C:\Users\laure\AppData\Local\npm-cache\_npx\a676d7340d712726\node_modules\@storybook\core\dist\common\index.cjs:18805:16)
+      at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+      at async er.executeCommand (C:\Users\laure\AppData\Local\npm-cache\_npx\a676d7340d712726\node_modules\@storybook\core\dist\common\index.cjs:19254:15)
+      at async er.runInstall (C:\Users\laure\AppData\Local\npm-cache\_npx\a676d7340d712726\node_modules\@storybook\core\dist\common\index.cjs:19595:5)
+      at async er.installDependencies (C:\Users\laure\AppData\Local\npm-cache\_npx\a676d7340d712726\node_modules\@storybook\core\dist\common\index.cjs:18991:7)
+      at async Object.run (C:\Users\laure\AppData\Local\npm-cache\_npx\a676d7340d712726\node_modules\@storybook\cli\dist\bin\index.cjs:512:543)
+      at async runFixes (C:\Users\laure\AppData\Local\npm-cache\_npx\a676d7340d712726\node_modules\@storybook\cli\dist\bin\index.cjs:597:1801)
+      at async automigrate (C:\Users\laure\AppData\Local\npm-cache\_npx\a676d7340d712726\node_modules\@storybook\cli\dist\bin\index.cjs:595:1807)
+      at async doUpgrade (C:\Users\laure\AppData\Local\npm-cache\_npx\a676d7340d712726\node_modules\@storybook\cli\dist\bin\index.cjs:664:2133) {
+    shortMessage: 'Command failed with exit code 1: npm install',
+    command: 'npm install',
+    escapedCommand: 'npm install',
+    exitCode: 1,
+    signal: undefined,
+    signalDescription: undefined,
+    stdout: undefined,
+    stderr: undefined,
+    cwd: 'C:\\Users\\laure\\OneDrive\\Documents\\GitHub\\Accessible_Components',
+    failed: true,
+    timedOut: false,
+    isCanceled: false,
+    killed: false
+  }
+}
+
+
+🔎 found a 'visual-tests-addon' migration:
+╭ Automigration detected ───────────────────────────────────────────────────────────────────────────────╮
+│                                                                                                       │
+│   New to Storybook 8: Storybook's Visual Tests addon helps you catch unintentional changes/bugs in    │
+│   your stories. The addon is powered by Chromatic, a cloud-based testing tool developed by            │
+│   Storybook's core team.                                                                              │
+│                                                                                                       │
+│   Learn more: https://storybook.js.org/docs/writing-tests/visual-testing                              │
+│                                                                                                       │
+│   Install Visual Tests addon in your project?                                                         │
+│                                                                                                       │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────╯
+? Do you want to run the 'visual-tests-addon' migration on your project? » (Y/n)√ Do you want to run the 'visual-tests-addon' migration on your project? ... yes
+
+An error occurred while installing dependencies:
+NPM error ERESOLVE - Dependency resolution error.
+
+Please check the logfile generated at ./storybook.log for troubleshooting and try again.
+❌ error when running visual-tests-addon migration
+HandledError: Error: NPM error ERESOLVE - Dependency resolution error.
+
+Please check the logfile generated at ./storybook.log for troubleshooting and try again.
+    at er.addDependencies (C:\Users\laure\AppData\Local\npm-cache\_npx\a676d7340d712726\node_modules\@storybook\core\dist\common\index.cjs:19090:72)
+    at async Object.run (C:\Users\laure\AppData\Local\npm-cache\_npx\a676d7340d712726\node_modules\@storybook\cli\dist\bin\index.cjs:543:141)
+    ... 4 lines matching cause stack trace ...
+    at async upgrade (C:\Users\laure\AppData\Local\npm-cache\_npx\a676d7340d712726\node_modules\@storybook\cli\dist\bin\index.cjs:664:2640) {
+  handled: true,
+  cause: Error: NPM error ERESOLVE - Dependency resolution error.
+  
+  Please check the logfile generated at ./storybook.log for troubleshooting and try again.
+      at er.runAddDeps (C:\Users\laure\AppData\Local\npm-cache\_npx\a676d7340d712726\node_modules\@storybook\core\dist\common\index.cjs:19621:24)
+      at async er.addDependencies (C:\Users\laure\AppData\Local\npm-cache\_npx\a676d7340d712726\node_modules\@storybook\core\dist\common\index.cjs:19087:9)
+      at async Object.run (C:\Users\laure\AppData\Local\npm-cache\_npx\a676d7340d712726\node_modules\@storybook\cli\dist\bin\index.cjs:543:141)
+      at async runFixes (C:\Users\laure\AppData\Local\npm-cache\_npx\a676d7340d712726\node_modules\@storybook\cli\dist\bin\index.cjs:597:1801)
+      at async automigrate (C:\Users\laure\AppData\Local\npm-cache\_npx\a676d7340d712726\node_modules\@storybook\cli\dist\bin\index.cjs:595:1807)
+      at async doUpgrade (C:\Users\laure\AppData\Local\npm-cache\_npx\a676d7340d712726\node_modules\@storybook\cli\dist\bin\index.cjs:664:2133)
+      at async withTelemetry (C:\Users\laure\AppData\Local\npm-cache\_npx\a676d7340d712726\node_modules\@storybook\core\dist\core-server\index.cjs:35778:12)
+      at async upgrade (C:\Users\laure\AppData\Local\npm-cache\_npx\a676d7340d712726\node_modules\@storybook\cli\dist\bin\index.cjs:664:2640)
+}
+
+
+🔎 found a 'autodocs-tags' migration:
+╭ Automigration detected ───────────────────────────────────────────────────────────────────────────────╮
+│                                                                                                       │
+│   The docs.autodocs setting in .storybook\main.js is deprecated.                                      │
+│                                                                                                       │
+│   Learn more:                                                                                         │
+│   https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#mainjs-docsautodocs-is-deprecated   │
+│                                                                                                       │
+│   Remove docs.autodocs?                                                                               │
+│                                                                                                       │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────╯
+? Do you want to run the 'autodocs-tags' migration on your project? » (Y/n)√ Do you want to run the 'autodocs-tags' migration on your project? ... yes
+✅ Removing "docs.autodocs" from .storybook\main.js
+✅ ran autodocs-tags migration
+WARN An issue occurred while trying to find dependencies metadata using npm.
+
+╭ Migration check ran with failures ────────────────────────────────────────────────────────────────────╮
+│                                                                                                       │
+│   Successful migrations:                                                                              │
+│                                                                                                       │
+│   remove-jest-testing-library, react-docgen, webpack5-compiler-setup, autodocs-tags                   │
+│                                                                                                       │
+│   Failed migrations:                                                                                  │
+│                                                                                                       │
+│   upgradeStorybookRelatedDependencies:                                                                │
+│   Error: Command failed with exit code 1: npm install                                                 │
+│   visual-tests-addon:                                                                                 │
+│   Error: NPM error ERESOLVE - Dependency resolution error.                                            │
+│                                                                                                       │
+│   Please check the logfile generated at ./storybook.log for troubleshooting and try again.            │
+│                                                                                                       │
+│   You can find the full logs in                                                                       │
+│   C:\Users\laure\OneDrive\Documents\GitHub\Accessible_Components\migration-storybook.log              │
+│                                                                                                       │
+│   Manual migrations:                                                                                  │
+│                                                                                                       │
+│   remove-argtypes-regex                                                                               │
+│                                                                                                       │
+│   ─────────────────────────────────────────────────                                                   │
+│                                                                                                       │
+│   If you'd like to run the migrations again, you can do so by running 'npx storybook automigrate'     │
+│                                                                                                       │
+│   The automigrations try to migrate common patterns in your project, but might not contain            │
+│   everything needed to migrate to the latest version of Storybook.                                    │
+│                                                                                                       │
+│   Please check the changelog and migration guide for manual migrations and more information:          │
+│   https://storybook.js.org/docs/migration-guide                                                       │
+│   And reach out on Discord if you need help: https://discord.gg/storybook                             │
+│                                                                                                       │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────╯
+

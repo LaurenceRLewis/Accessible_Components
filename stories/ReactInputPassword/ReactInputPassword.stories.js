@@ -1,6 +1,6 @@
-import React from 'react';
-import ReactInputPassword from './ReactInputPassword';
-import ReactInputPasswordDescription from './ReactInputPasswordDescription';
+import React from "react";
+import ReactInputPassword from "./ReactInputPassword";
+import ReactInputPasswordDescription from "./ReactInputPasswordDescription";
 
 export default {
   title: "Building Blocks/React Password Input",
@@ -17,13 +17,13 @@ export default {
     //   name: 'Masking Method',
     //   control: "select",
     //   options: [
-    //     'password mask', 
+    //     'password mask',
     //     'css mask'
     //   ],
     //   defaultValue: 'password mask',
     // },
     includeAriaPressed: {
-      name: 'Include aria-pressed',
+      name: "Include aria-pressed",
       control: "boolean",
       defaultValue: true,
     },

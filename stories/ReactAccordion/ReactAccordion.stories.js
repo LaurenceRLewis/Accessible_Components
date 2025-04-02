@@ -1,6 +1,6 @@
 import React from "react";
 import AccordionBuild from "./ReactAccordion";
-import reactAccordionDescription from './ReactAccordionDescription';
+import reactAccordionDescription from "./ReactAccordionDescription";
 
 export default {
   title: "Components/Accordion",
@@ -15,18 +15,18 @@ export default {
   },
   argTypes: {
     multiExpand: {
-      name: 'Open single or multiple sections',
+      name: "Open single or multiple sections",
       control: "radio",
-      options: ['Single', 'Multiple'],
-      defaultValue: 'Single',
+      options: ["Single", "Multiple"],
+      defaultValue: "Single",
       description: "Allow multiple accordions to be open at once",
     },
     chevronPosition: {
-      name: 'Icon position',
+      name: "Icon position",
       control: "radio",
-      options: ['left', 'right'],
-      defaultValue: 'right',
-      description: "Position of the chevron"
+      options: ["left", "right"],
+      defaultValue: "right",
+      description: "Position of the chevron",
     },
     items: {
       table: { disable: true },
@@ -47,7 +47,8 @@ export default {
 };
 
 const Template = (args) => {
-  const isNamedRegion = args.NamedRegionContainer === "Contained in a named landmark region";
+  const isNamedRegion =
+    args.NamedRegionContainer === "Contained in a named landmark region";
 
   return (
     <div
@@ -92,7 +93,7 @@ Accordion.args = {
     },
   ],
   groupName: "cats",
-  multiExpand: 'Single',
-  chevronPosition: 'right',
+  multiExpand: "Single",
+  chevronPosition: "right",
   NamedRegionContainer: "Contained in a named landmark region",
 };

@@ -1,9 +1,9 @@
-import React from 'react';
-import ReactSearchTable from './ReactSearchTable';
-import reactSearchTableDescription from './ReactSearchTableDescription';
+import React from "react";
+import ReactSearchTable from "./ReactSearchTable";
+import reactSearchTableDescription from "./ReactSearchTableDescription";
 
 export default {
-  title: 'Tables/Table (Search function)',
+  title: "Tables/Table (Search function)",
   component: ReactSearchTable,
   parameters: {
     docs: {
@@ -16,28 +16,28 @@ export default {
   argTypes: {
     containerRole: {
       name: "Set role on container",
-      control: { type: 'select' },
+      control: { type: "select" },
       options: {
-        '(HTML) No role': undefined,
-        '(ARIA) Has role search': 'search',
+        "(HTML) No role": undefined,
+        "(ARIA) Has role search": "search",
       },
-      defaultValue: 'search',
+      defaultValue: "search",
     },
     inputType: {
       name: "Set type value",
-      control: { type: 'select' },
+      control: { type: "select" },
       options: {
-        'type=search': 'search',
-        'type=text': 'text',
+        "type=search": "search",
+        "type=text": "text",
       },
-      defaultValue: 'search',
+      defaultValue: "search",
     },
     inputRole: {
       name: "Set role on input",
-      control: { type: 'select' },
+      control: { type: "select" },
       options: {
-        '(HTML) No role': undefined,
-        '(ARIA) Has role searchbox': 'searchbox',
+        "(HTML) No role": undefined,
+        "(ARIA) Has role searchbox": "searchbox",
       },
       defaultValue: undefined,
     },
@@ -49,7 +49,7 @@ const Template = (args) => <ReactSearchTable {...args} />;
 
 export const searchTable = Template.bind({});
 searchTable.args = {
-  inputType: 'search',
-  containerRole: 'search',
+  inputType: "search",
+  containerRole: "search",
   inputRole: undefined,
 };

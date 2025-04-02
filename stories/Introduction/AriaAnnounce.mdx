@@ -1,54 +1,30 @@
-import { Meta } from '@storybook/addon-docs/blocks';
+import { Meta } from '@storybook/blocks';
 
-<Meta title="Accessible Components Library/ARIA Announce Live Region Technique explained" />
+<Meta title="Accessible Components Library/ARIA Announce" />
 
-<h1>Aria Announce</h1>
+# ARIA Announce Live Region Technique Explained
 
-<h2>Function Overview</h2>
-<p>
-  The <code>ariaAnnounce</code> function creates a dynamic <strong>"live region"</strong> in the Document Object Model (DOM). "Live regions" are used in Accessible Rich Internet Applications (ARIA) to make web content more accessible to people who use screen readers.
-</p>
+### Function Overview
 
-<h2>Functionality</h2>
-<ol>
-  <li>
-    <code>ariaAnnounce</code> is a JavaScript function that accepts a <code>message</code> parameter, which will be the text to announce.
-  </li>
-  <li>
-    It first creates a <code>div</code> element, setting various CSS properties to make the div effectively invisible on the page.
-  </li>
-  <li>
-    It then sets three ARIA attributes on this element: <code>aria-live</code>, <code>aria-atomic</code>, and <code>role</code>.
-    <ul>
-      <li>
-        <code>aria-live="assertive"</code>: This means the screen reader will interrupt whatever it's doing to read this message. If you wanted the message to wait until the screen reader has finished its current task, you could use "polite" instead.
-      </li>
-      <li>
-        <code>aria-atomic="true"</code>: This means that the entire contents of the live region should be considered as a single atomic unit, and that changes anywhere in the region should result in the entire contents being presented to the user again.
-      </li>
-      <li>
-        <code>role="status"</code>: This role is a type of live region and is used to present status or log information. Content within this role is prioritised as "polite" by default, but the <code>aria-live="assertive"</code> attribute will override this.
-      </li>
-    </ul>
-  </li>
-  <li>
-    This <code>div</code> is then appended to the body of the document.
-  </li>
-  <li>
-    After a brief delay (50ms, to allow for the div to be rendered and recognised by the screen reader), the provided message is set as the innerText of the <code>div</code>, triggering the screen reader to read it.
-  </li>
-  <li>
-    After a longer delay (7000ms, or 7 seconds), the <code>div</code> is removed from the document.
-  </li>
-</ol>
+The `ariaAnnounce` function creates a dynamic **"live region"** in the Document Object Model (DOM). Live regions are used in Accessible Rich Internet Applications (ARIA) to make web content more accessible to people who use screen readers.
 
-<h2>Usage</h2>
-<p>
-  This function can be used to make important announcements to the user that are not otherwise apparent through screen reader technology, like the results of an AJAX operation or other changes to page status that occur after the initial page load. The usage is straightforward: just call <code>ariaAnnounce('Message')</code> with the message you want to announce.
-</p>
+### Functionality
 
-<h3>Acknowledgements</h3>
-<ul>
-<li>The Aria Announce method was originally created by <a href="https://www.linkedin.com/in/bgaraventa/">Bryan Garavents (LinkedIn Profile)</a>.</li>
-<li>The Github repository for the vanilla JavaScript version '<a href="https://github.com/WhatSock/aria-announce">Unobtrusive Announce method</a>'.</li>
-</ul>
+1. `ariaAnnounce` is a JavaScript function that accepts a `message` parameter, which will be the text to announce.  
+2. It first creates a `div` element, setting various CSS properties to make the div effectively invisible on the page.  
+3. It then sets three ARIA attributes on this element:
+   - `aria-live="assertive"`: The screen reader will interrupt whatever it's doing to read this message.
+   - `aria-atomic="true"`: Ensures the entire contents are announced, not just a delta.
+   - `role="status"`: Used to present status/log information; polite by default, but overridden here.
+4. This `div` is then appended to the body of the document.  
+5. After a brief delay (50ms), the message is set as the `innerText` of the div, triggering the announcement.  
+6. After 7 seconds (7000ms), the `div` is removed from the DOM.
+
+### Usage
+
+You can use this function to make important announcements that wouldn’t otherwise be detected by screen readers, such as AJAX success messages or UI state changes.
+
+Example:
+
+```js
+ariaAnnounce('Form submitted successfully');

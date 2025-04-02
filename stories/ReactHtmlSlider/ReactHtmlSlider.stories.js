@@ -1,10 +1,10 @@
 //ReactSlider.stories.css
-import React from 'react';
-import HtmlSlider from './HtmlSlider';
-import ReactHtmlSliderDescription from './ReactHtmlSliderDescription';
+import React from "react";
+import HtmlSlider from "./HtmlSlider";
+import ReactHtmlSliderDescription from "./ReactHtmlSliderDescription";
 
 export default {
-  title: 'Native HTML Components/Slider (HTML)',
+  title: "Native HTML Components/Slider (HTML)",
   component: HtmlSlider,
   parameters: {
     docs: {
@@ -16,26 +16,26 @@ export default {
   },
   argTypes: {
     min: {
-      control: 'number',
+      control: "number",
       defaultValue: 0,
-      description: 'The minimum allowed value for the slider',
+      description: "The minimum allowed value for the slider",
     },
     max: {
-      control: 'number',
+      control: "number",
       defaultValue: 10,
-      description: 'The maximum allowed value for the slider',
+      description: "The maximum allowed value for the slider",
     },
     step: {
-      control: 'number',
+      control: "number",
       defaultValue: 1,
-      description: 'The increment value for each step of the slider',
+      description: "The increment value for each step of the slider",
     },
     now: {
-      control: 'number',
+      control: "number",
       defaultValue: 5,
-      description: 'The current value of the slider',
+      description: "The current value of the slider",
     },
-  },  
+  },
 };
 
 const Template = (args) => <HtmlSlider {...args} />;

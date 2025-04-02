@@ -1,9 +1,9 @@
-import React from 'react';
-import ReactGrid from './ReactGrid';
-import ReactGridDescription from './ReactGridDescription';
+import React from "react";
+import ReactGrid from "./ReactGrid";
+import ReactGridDescription from "./ReactGridDescription";
 
 export default {
-  title: 'Components/Grid',
+  title: "Components/Grid",
   component: ReactGrid,
   parameters: {
     docs: {

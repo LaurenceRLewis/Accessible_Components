@@ -15,7 +15,7 @@ export default {
   },
   argTypes: {
     labelName: {
-      name: 'Input label',
+      name: "Input label",
       control: {
         type: "text",
       },
@@ -23,9 +23,9 @@ export default {
       description: "The label for the input field.",
     },
     autoComplete: {
-      name: 'Change input type',
-      control: { 
-        type: "select" 
+      name: "Change input type",
+      control: {
+        type: "select",
       },
       options: {
         "": "",
@@ -72,9 +72,9 @@ export default {
       description: "The list of HTML autocomplete attribute values.",
     },
     inputType: {
-      name: 'Input type',
-      control: { 
-        type: "select" 
+      name: "Input type",
+      control: {
+        type: "select",
       },
       options: {
         Text: "text",
@@ -103,7 +103,7 @@ export default {
       description: "The type of the input field.",
     },
     helpText: {
-      name: 'Help text',
+      name: "Help text",
       control: {
         type: "text",
       },
