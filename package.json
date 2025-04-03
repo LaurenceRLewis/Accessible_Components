@@ -40,6 +40,8 @@
     "storybook-addon-react-docgen": "^1.2.44"
   },
   "dependencies": {
+    "@internationalized/date": "^3.7.0",
+    "@internationalized/number": "^3.6.0",
     "@storybook/addon-a11y": "^8.6.11",
     "classnames": "^2.3.2"
   }

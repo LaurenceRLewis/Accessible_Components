@@ -1,0 +1,133 @@
+/* NativeDatePicker.module.css */
+@import "../../.storybook/utils/global.css";
+
+.datePickerContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background-color: var(--white);
+  padding: 2em;
+  border: 1px solid var(--purple-300);
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2em;
+}
+
+label {
+  margin-bottom: 1em;
+  font-weight: bold;
+  color: var(--purple-900);
+}
+
+input[type="datetime-local"] {
+  padding: 1em;
+  border: 1px solid var(--purple-300);
+  border-radius: 4px;
+  width: 200px;
+  color: var(--black);
+  background-color: var(--white);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input[type="datetime-local"]:focus {
+  border-color: var(--purple-500);
+  box-shadow: 0 0 5px rgba(67, 56, 202, 0.5);
+  outline: none;
+}
+
+input[type="datetime-local"].error {
+  border-color: #ff0000;
+  box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+}
+
+.errorMessage {
+  color: #ff0000;
+  margin-top: 1em;
+}
+
+.errorMessage:empty {
+  display: none;
+}
+
+/* Optional: Time Zone Selector Styles (can be extracted later if unused) */
+select#timezone-select {
+  padding: 1em;
+  border: 1px solid var(--purple-300);
+  border-radius: 4px;
+  font-size: 16px;
+  color: var(--black);
+  background-color: var(--white);
+  margin-top: 1em;
+  margin-bottom: 2em;
+  width: 220px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+select#timezone-select:focus {
+  border-color: var(--purple-500);
+  box-shadow: 0 0 5px rgba(67, 56, 202, 0.5);
+  outline: none;
+}
+
+.infoSections {
+    display: flex;
+    gap: 2em;
+    margin-top: 2em;
+  }
+  
+  .keyboardControls {
+    background-color: var(--white);
+    border: 1px solid var(--purple-300);
+    border-radius: 5px;
+    padding: 2em;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+  }
+  
+  .keyboardControls h2 {
+    color: var(--purple-900);
+  }
+  
+  .keyboardControls ul {
+    list-style-type: none;
+    padding-left: 0;
+  }
+  
+  .keyboardControls li {
+    margin-bottom: 1em;
+  }
+  
+  .keyboardControls kbd {
+    background-color: var(--purple-100);
+    border: 2px solid var(--purple-700);
+    border-radius: 3px;
+    padding: 5px 10px;
+    font-family: monospace;
+  }  
+
+  .buttonGroup {
+    display: flex;
+    gap: 1em;
+    margin-top: 1em;
+  }
+  
+  .setButton {
+    color: var(--white);
+    background-color: var(--purple-700);
+    border: none;
+    border-radius: 1em;
+    padding: .5em 1em;
+    transition: background-color 0.3s;
+  }
+  
+  .setButton:hover {
+    background-color: var(--purple-500);
+  }
+  
+  .setButton:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--white), 0 0 0 5px var(--purple-300);
+  }
+  
