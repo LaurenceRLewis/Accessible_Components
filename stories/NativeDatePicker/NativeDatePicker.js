@@ -1,45 +1,77 @@
 import React, { useState, useRef } from "react";
+import { DateFormatter } from "@internationalized/date";
 import styles from "./NativeDatePicker.module.css";
 
-export default function NativeDatePicker() {
+export default function NativeDatePicker({ mode = "date" }) {
   const [date, setDate] = useState("");
   const [confirmationMessage, setConfirmationMessage] = useState("");
   const inputRef = useRef(null);
+
+  const isDateTime = mode === "datetime";
 
   const handleChange = (e) => {
     setDate(e.target.value);
     setConfirmationMessage("");
   };
 
-  const handleSetDate = () => {
-    if (!date) return;
+const handleSetDate = () => {
+  if (!date) return;
 
-    const [year, month, day] = date.split("-");
-    const formatted = `${day}/${month}/${year}`;
-    setConfirmationMessage(`You set the delivery time for ${formatted}`);
-  };
+  const [datePart, timePart] = date.split("T");
+  const [year, month, day] = datePart.split("-").map(Number);
+
+  // Determine locale from browser
+  let userLocale = navigator.language?.toLowerCase() || "en-au";
+
+  // Normalize "en" to "en-AU"
+  if (userLocale === "en") {
+    userLocale = "en-AU";
+  }
+
+  // Build a DateFormatter with AU-style formatting
+  const formatter = new DateFormatter(userLocale, {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+  });
+
+  const jsDate = new Date(year, month - 1, day);
+  const formattedDate = formatter.format(jsDate);
+
+  const message =
+    mode === "datetime" && timePart
+      ? `You set the delivery time for ${formattedDate} at ${timePart}`
+      : `You set the delivery time for ${formattedDate}`;
+
+  setConfirmationMessage(message);
+};   
 
   const handleResetDate = () => {
-    const today = new Date();
-    const yyyy = today.getFullYear();
-    const mm = String(today.getMonth() + 1).padStart(2, "0");
-    const dd = String(today.getDate()).padStart(2, "0");
-    const todayFormatted = `${yyyy}-${mm}-${dd}`;
+    const now = new Date();
+    const yyyy = now.getFullYear();
+    const mm = String(now.getMonth() + 1).padStart(2, "0");
+    const dd = String(now.getDate()).padStart(2, "0");
+    const hh = String(now.getHours()).padStart(2, "0");
+    const mi = String(now.getMinutes()).padStart(2, "0");
 
-    setDate(todayFormatted);
-    setConfirmationMessage(""); // Clear message on reset
+    const formatted = isDateTime
+      ? `${yyyy}-${mm}-${dd}T${hh}:${mi}`
+      : `${yyyy}-${mm}-${dd}`;
+
+    setDate(formatted);
+    setConfirmationMessage("");
   };
 
   return (
     <>
       <h1>HTML Datepicker</h1>
       <div className={styles.datePickerContainer}>
-        <label htmlFor="date-picker">Select a date:</label>
+        <label htmlFor="date-picker">Select a {isDateTime ? "date and time" : "date"}:</label>
         <input
           ref={inputRef}
-          type="date"
+          type={isDateTime ? "datetime-local" : "date"}
           id="date-picker"
-          aria-label="Date Picker. Displayed as dd/mm/yyyy in Australian locale."
+          aria-label={`Picker for ${isDateTime ? "date and time" : "date"}. Format: yyyy-mm-dd`}
           value={date}
           onChange={handleChange}
         />
