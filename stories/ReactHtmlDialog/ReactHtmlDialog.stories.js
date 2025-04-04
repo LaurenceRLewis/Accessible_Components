@@ -3,6 +3,13 @@ import { useState, useRef } from "react";
 import ReactHtmlDialog from "./ReactHtmlDialog";
 import styles from "./ReactHtmlDialog.module.css";
 import ReactHtmlDialogDescription from "./ReactHtmlDialogDescription";
+import {
+  Title,
+  Subtitle,
+  Description,
+  Primary,
+  ArgsTable,
+} from '@storybook/blocks';
 
 // Storybook configuration
 export default {
@@ -10,11 +17,16 @@ export default {
   component: ReactHtmlDialog,
   parameters: {
     docs: {
-      description: {
-        component: ReactHtmlDialogDescription,
-      },
+      page: () => (
+        <>
+          <Title />
+          <Subtitle>Subtitle if needed</Subtitle>
+          <Description markdown={ReactHtmlDialogDescription} />
+          <Primary />
+          <ArgsTable story="Modal Dialog (HTML)" />
+        </>
+      ),
     },
-    docsOnly: true,
   },
   argTypes: {
     showModal: {
@@ -105,3 +117,12 @@ Dialog.args = {
   ariaHidden: "remove",
   inert: "No",
 };
+
+// Standalone documentation page
+export const Documentation = () => <ReactHtmlDialogDescription />;
+Documentation.parameters = {
+  docsOnly: true,
+};
+
+// Rename the sidebar label for this story
+Dialog.storyName = "Modal Dialog (HTML) Build";

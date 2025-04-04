@@ -1,6 +1,13 @@
 import React from "react";
 import ReactRadioButtonGroup from "./ReactRadioButtonGroup";
 import ReactRadioButtonGroupDescription from "./ReactRadioButtonGroupDescription";
+import {
+  Title,
+  Subtitle,
+  Description,
+  Primary,
+  ArgsTable,
+} from '@storybook/blocks';
 
 // Defines the count of radio buttons that will be displayed in the Storybook UI
 const numberOfRadioButtons = 4;
@@ -43,13 +50,16 @@ export default {
   component: ReactRadioButtonGroup,
   parameters: {
     docs: {
-      // Component description pulled in from ReactRadioButtonGroupDescription.
-      description: {
-        component: ReactRadioButtonGroupDescription,
-      },
+      page: () => (
+        <>
+          <Title />
+          <Subtitle>Subtitle if needed</Subtitle>
+          <Description markdown={ReactRadioButtonGroupDescription} />
+          <Primary />
+          <ArgsTable story="Radio Button Group" />
+        </>
+      ),
     },
-    // Parameter that specifies this component should only appear in the docs panel.
-    docsOnly: true,
   },
   argTypes,
 };
@@ -73,3 +83,12 @@ const Template = (args) => {
 export const RadioButtonGroup = Template.bind({});
 // Sets initial arguments for this story, derived from the args object we constructed.
 RadioButtonGroup.args = args;
+
+// Standalone documentation page
+export const Documentation = () => <ReactRadioButtonGroupDescription />;
+Documentation.parameters = {
+  docsOnly: true,
+};
+
+// Rename the sidebar label for this story
+RadioButtonGroup.storyName = "Radio Button Group Build";

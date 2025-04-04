@@ -71,7 +71,6 @@ const handleSetDate = () => {
           ref={inputRef}
           type={isDateTime ? "datetime-local" : "date"}
           id="date-picker"
-          aria-label={`Picker for ${isDateTime ? "date and time" : "date"}. Format: yyyy-mm-dd`}
           value={date}
           onChange={handleChange}
         />

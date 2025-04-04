@@ -1,17 +1,29 @@
 import React from "react";
 import ReactTableCheckbox from "./ReactTableCheckbox";
-import reactTableCheckboxDescription from "./ReactTableCheckboxDescription";
+import ReactTableCheckboxDescription from "./ReactTableCheckboxDescription";
+import {
+  Title,
+  Subtitle,
+  Description,
+  Primary,
+  ArgsTable,
+} from '@storybook/blocks';
 
 export default {
   title: "Tables/Table (Checkboxs in cells)",
   component: ReactTableCheckbox,
   parameters: {
     docs: {
-      description: {
-        component: reactTableCheckboxDescription,
-      },
+      page: () => (
+        <>
+          <Title />
+          <Subtitle>Subtitle if needed</Subtitle>
+          <Description markdown={ReactTableCheckboxDescription} />
+          <Primary />
+          <ArgsTable story="Table (Checkboxs in cells)" />
+        </>
+      ),
     },
-    docsOnly: true,
   },
   argTypes: {
     disabledCheckboxes: {
@@ -32,3 +44,12 @@ TableWithCheckbox.args = {
   disabledCheckboxes: "", // disable checkboxes with these ids
   defaultCheckedBoxes: "", // set checkboxes with these ids as checked by default
 };
+
+// Standalone documentation page
+export const Documentation = () => <ReactTableCheckboxDescription />;
+Documentation.parameters = {
+  docsOnly: true,
+};
+
+// Rename the sidebar label for this story
+TableWithCheckbox.storyName = "Table (Checkboxs in cells) Build";

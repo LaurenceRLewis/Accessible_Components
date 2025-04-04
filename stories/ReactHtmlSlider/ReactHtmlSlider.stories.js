@@ -2,17 +2,29 @@
 import React from "react";
 import HtmlSlider from "./HtmlSlider";
 import ReactHtmlSliderDescription from "./ReactHtmlSliderDescription";
+import {
+  Title,
+  Subtitle,
+  Description,
+  Primary,
+  ArgsTable,
+} from '@storybook/blocks';
 
 export default {
   title: "Native HTML Components/Slider (HTML)",
   component: HtmlSlider,
   parameters: {
     docs: {
-      description: {
-        component: ReactHtmlSliderDescription,
-      },
+      page: () => (
+        <>
+          <Title />
+          <Subtitle>Subtitle if needed</Subtitle>
+          <Description markdown={ReactHtmlSliderDescription} />
+          <Primary />
+          <ArgsTable story="Modal Dialog (HTML)" />
+        </>
+      ),
     },
-    docsOnly: true,
   },
   argTypes: {
     min: {
@@ -48,3 +60,12 @@ Slider.args = {
   step: 1,
   now: 5,
 };
+
+// Standalone documentation page
+export const Documentation = () => <ReactHtmlSliderDescription />;
+Documentation.parameters = {
+  docsOnly: true,
+};
+
+// Rename the sidebar label for this story
+Slider.storyName = "Slider (HTML) Build";

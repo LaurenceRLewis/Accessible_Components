@@ -1,17 +1,29 @@
 import React from "react";
 import { ReactTabs } from "./ReactTabs";
-import reactTabsDescription from "./ReactTabsDescription";
+import ReactTabsDescription from "./ReactTabsDescription";
+import {
+  Title,
+  Subtitle,
+  Description,
+  Primary,
+  ArgsTable,
+} from '@storybook/blocks';
 
 export default {
   title: "Components/Tabs (Segmented Controls)",
   component: ReactTabs,
   parameters: {
     docs: {
-      description: {
-        component: reactTabsDescription,
-      },
+      page: () => (
+        <>
+          <Title />
+          <Subtitle>Subtitle if needed</Subtitle>
+          <Description markdown={ReactTabsDescription} />
+          <Primary />
+          <ArgsTable story="Tabs (Segmented Controls)" />
+        </>
+      ),
     },
-    docsOnly: true,
   },
   argTypes: {
     tabPanelTabindex: {
@@ -125,3 +137,12 @@ ResponsiveTabs.args = {
   tabBackground: "rgba(209, 203, 219, 1)",
   selectedTabBackground: "rgba(156, 39, 176, 1)",
 };
+
+// Standalone documentation page
+export const Documentation = () => <ReactTabsDescription />;
+Documentation.parameters = {
+  docsOnly: true,
+};
+
+// Rename the sidebar label for this story
+ResponsiveTabs.storyName = "Tabs (Segmented Controls) Build";

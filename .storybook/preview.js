@@ -1,5 +1,3 @@
-// .storybook/preview.js
-
 /** @type { import('@storybook/react').Preview } */
 
 export const parameters = {
@@ -12,7 +10,41 @@ export const parameters = {
   },
   options: {
     storySort: {
-      order: ['Accessible Components Library', 'Building Blocks', 'Components', 'Combined Components', 'Native HTML Components', 'Tables', 'Experimental'],
+      order: [
+        'Accessible Components Library',
+        'Building Blocks',
+        'Components',
+        'Combined Components',
+        'Native HTML Components',
+        'Tables',
+        'Experimental'
+      ],
     },
+  },
+  viewport: {
+    viewports: {
+      smallMobile: {
+        name: 'Small Mobile',
+        styles: {
+          width: '320px',
+          height: '568px',
+        },
+      },
+      tablet: {
+        name: 'Tablet',
+        styles: {
+          width: '768px',
+          height: '1024px',
+        },
+      },
+      desktopHD: {
+        name: 'HD Desktop',
+        styles: {
+          width: '1440px',
+          height: '900px',
+        },
+      },
+    },
+    defaultViewport: 'responsive',
   },
 };

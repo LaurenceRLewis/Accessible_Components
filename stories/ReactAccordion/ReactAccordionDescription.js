@@ -1,47 +1,98 @@
-const description = `
-React Accordion is a custom accordion component that allows users to expand and collapse content sections. It provides a user-friendly interface for toggling the visibility of the content.
+export default function ReactAccordionDescription() {
+  return (
+    <div>
+      <h1>React Accordion</h1>
+      <p>
+        <strong>React Accordion</strong> is a custom component that allows users to expand and collapse content sections.
+        It provides a user-friendly interface for toggling visibility of grouped content.
+      </p>
 
-## Features
+      <h2>Features</h2>
+      <ul>
+        <li>Support for multiple accordion items</li>
+        <li>Optional multi-expand behavior</li>
+        <li>Keyboard navigation for full accessibility</li>
+        <li>Customizable chevron position (left or right)</li>
+        <li>Optional inclusion in a named landmark region</li>
+      </ul>
 
-- Support for multiple accordion items.
-- Option to allow multiple items to be expanded at once.
-- Keyboard navigation for easy control and interaction.
-- Customizable chevron position to either left or right.
-- Option to contain accordion in a named landmark region.
+      <h2>Keyboard Accessibility</h2>
+      <p>Users can interact with the accordion using:</p>
+      <ul>
+        <li><kbd>Enter</kbd> / <kbd>Space</kbd> – Toggle expansion</li>
+        <li><kbd>Arrow Down</kbd> / <kbd>Arrow Up</kbd> – Navigate between items</li>
+        <li><kbd>Home</kbd> – Focus the first item</li>
+        <li><kbd>End</kbd> – Focus the last item</li>
+      </ul>
 
-## Keyboard Accessibility
+      <h2>Download Build Files</h2>
+      <p>
+        <a href="https://github.com/LaurenceRLewis/Accessible_Components/tree/main/stories/ReactAccordion" target="_blank" rel="noopener noreferrer">
+          Development files on GitHub
+        </a>
+      </p>
 
-The React Accordion component ensures keyboard accessibility for easy control and interaction. Users can navigate and interact with the accordion using the following keyboard controls:
+      <h2>Props</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Prop Name</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>items</code></td>
+            <td><code>array</code></td>
+            <td>An array of accordion items with title and content.</td>
+          </tr>
+          <tr>
+            <td><code>groupName</code></td>
+            <td><code>string</code></td>
+            <td>The group name of the accordion.</td>
+          </tr>
+          <tr>
+            <td><code>multiExpand</code></td>
+            <td><code>boolean</code></td>
+            <td>Allows multiple items to be expanded at once.</td>
+          </tr>
+          <tr>
+            <td><code>chevronPosition</code></td>
+            <td><code>string</code></td>
+            <td>Position of the chevron: 'left' or 'right'.</td>
+          </tr>
+          <tr>
+            <td><code>NamedRegionContainer</code></td>
+            <td><code>select</code></td>
+            <td>Wrap the accordion in a named landmark region.</td>
+          </tr>
+        </tbody>
+      </table>
 
-- **Enter/Space**: Toggles the expansion of the accordion item.
-- **Arrow Down/Up**: Moves focus to the next/previous accordion item.
-- **Home**: Moves focus to the first accordion item.
-- **End**: Moves focus to the last accordion item.
+      <h2>Methods</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Method Name</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>onTitleClick</code></td>
+            <td>Handles click events on accordion titles.</td>
+          </tr>
+          <tr>
+            <td><code>onTitleKeyDown</code></td>
+            <td>Handles keydown events for keyboard navigation.</td>
+          </tr>
+        </tbody>
+      </table>
 
-The React Accordion component provides a user-friendly and accessible way to manage multiple content sections in a compact view.
-
-### Download build files
-- **[Development files](https://github.com/LaurenceRLewis/Accessible_Components/tree/main/stories/ReactAccordion)
-
-## Props
-
-| Prop Name               | Type       | Description                                                       |
-| ----------------------- | ---------- | ----------------------------------------------------------------- |
-| \`items\`               | \`array\`  | An array of accordion items. Each item is an object with title and content. |
-| \`groupName\`           | \`string\` | The group name of the accordion.                                  |
-| \`multiExpand\`         | \`boolean\` | Determines if multiple accordion items can be open at once.       |
-| \`chevronPosition\`     | \`string\` | The position of the chevron. Can be 'left' or 'right'.           |
-| \`NamedRegionContainer\`| \`select\` | Specifies if the accordion is contained in a named landmark region. |
-
-## Methods
-
-| Method Name         | Description                                                   |
-| ------------------- | ------------------------------------------------------------- |
-| \`onTitleClick\`    | A method that handles the click event on the accordion title.   |
-| \`onTitleKeyDown\`  | A method that handles the keydown event on the accordion title. |
-
-The React Accordion component ensures a seamless user experience for keyboard interactions, making it accessible and easy to use.
-
-`;
-
-export default description;
+      <p>
+        This component ensures a seamless and accessible experience for keyboard users and supports advanced structural layout.
+      </p>
+    </div>
+  );
+}

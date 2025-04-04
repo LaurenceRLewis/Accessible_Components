@@ -13,4 +13,5 @@ This experimental personal project by Laurence Lewis is a set of React-based sto
 
 ## Instructions
  - npm run build-storybook
+ - npm run storybook -- --no-manager-cache
  - netlify deploy --prod --dir=storybook-static

@@ -1,17 +1,29 @@
 import React from "react";
 import Popover from "./ReactPopover";
-import popoverDescription from "./ReactPopover.Description";
+import ReactPopoverDescription from "./ReactPopoverDescription";
+import {
+  Title,
+  Subtitle,
+  Description,
+  Primary,
+  ArgsTable,
+} from '@storybook/blocks';
 
 export default {
   title: "Components/Popover",
   component: Popover,
   parameters: {
     docs: {
-      description: {
-        component: popoverDescription,
-      },
+      page: () => (
+        <>
+          <Title />
+          <Subtitle>Subtitle if needed</Subtitle>
+          <Description markdown={ReactPopoverDescription} />
+          <Primary />
+          <ArgsTable story="Popover" />
+        </>
+      ),
     },
-    docsOnly: true,
   },
   argTypes: {
     withRole: {
@@ -60,3 +72,12 @@ PopoverComponent.args = {
   dismissOnClickOutside: true,
   contentType: "Help with Reference link", // Default value
 };
+
+// Standalone documentation page
+export const Documentation = () => <ReactPopoverDescription />;
+Documentation.parameters = {
+  docsOnly: true,
+};
+
+// Rename the sidebar label for this story
+PopoverComponent.storyName = "Popover Build";

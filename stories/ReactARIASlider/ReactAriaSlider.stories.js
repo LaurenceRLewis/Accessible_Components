@@ -1,19 +1,30 @@
-//ReactSlider.stories.css
 import React from "react";
 import AriaSlider from "./AriaSlider";
 import ReactAriaSliderDescription from "./ReactAriaSliderDescription";
+import {
+  Title,
+  Subtitle,
+  Description,
+  Primary,
+  ArgsTable,
+} from '@storybook/blocks';
 
 export default {
   title: "Components/Slider (ARIA)",
   component: AriaSlider,
   parameters: {
-    docs: {
-      description: {
-        component: ReactAriaSliderDescription,
+        docs: {
+          page: () => (
+            <>
+              <Title />
+              <Subtitle>Subtitle if needed</Subtitle>
+              <Description markdown={ReactAccordionDescription} />
+              <Primary />
+              <ArgsTable story="ARIA Slider" />
+            </>
+          ),
+        },
       },
-    },
-    docsOnly: true,
-  },
   argTypes: {
     min: {
       control: "number",
@@ -59,3 +70,12 @@ Slider.args = {
   updateAriaValueText: "false",
   ariaValueText: "",
 };
+
+// Standalone documentation page
+export const Documentation = () => <ReactAriaSliderDescription />;
+Documentation.parameters = {
+  docsOnly: true,
+};
+
+// Rename the sidebar label for this story
+Slider.storyName = "Slider Build";

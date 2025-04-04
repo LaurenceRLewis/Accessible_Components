@@ -1,43 +1,81 @@
-const description = `
-The React Checkbox Group component renders a set of checkboxes within a fieldset with a specified legend.
+export default function ReactCheckboxGroupDescription() {
+  return (
+    <div>
+      <h1>React Checkbox Group</h1>
+      <p>
+        The <strong>React Checkbox Group</strong> component renders a set of checkboxes within a{' '}
+        <code>&lt;fieldset&gt;</code> with a specified legend.
+      </p>
 
-## Features
+      <h2>Features</h2>
+      <ul>
+        <li>Configurable group name (legend)</li>
+        <li>Dynamically generated checkbox labels</li>
+        <li>
+          Define the total number of checkboxes in the group through the Storybook <em>args</em>
+        </li>
+      </ul>
 
-- Configurable group name (legend) for the checkbox group.
-- Dynamically generated checkbox labels.
-- Capability to define the total number of checkboxes in the group through the story's args.
+      <h2>Props</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Prop Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Default</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>groupName</code></td>
+            <td><code>string</code></td>
+            <td>The name of the checkbox group (legend)</td>
+            <td><code>'Group Name'</code></td>
+          </tr>
+          <tr>
+            <td><code>labels</code></td>
+            <td><code>array</code></td>
+            <td>An array of labels for the checkboxes</td>
+            <td><code>['Label 1', 'Label 2']</code></td>
+          </tr>
+        </tbody>
+      </table>
 
-## Props
-
-| Prop Name               | Type     | Description                                                                                                     | Default           |
-| ----------------------- | -------- | --------------------------------------------------------------------------------------------------------------- | ----------------- |
-| \`groupName\`           | string   | The name of the checkbox group. This can be modified in the Storybook's Controls UI.                           | 'Group Name'      |
-| \`labels\`              | array    | An array of labels for the checkboxes. Each label corresponds to a checkbox in the group.                      | ['Label 1', 'Label 2'] |
-
-## Example
-
-\`\`\`jsx
-<ReactCheckboxGroup
+      <h2>Example</h2>
+      <pre style={{ background: '#f9f9f9', padding: '1rem', overflow: 'auto' }}>
+        <code>
+{`<ReactCheckboxGroup
   groupName="Example Group"
   labels={['Label 1', 'Label 2', 'Label 3']}
-/>
-\`\`\`
+/>`}
+        </code>
+      </pre>
+      <p>
+        This example demonstrates a checkbox group with a custom group name (legend){" "}
+        <strong>"Example Group"</strong>, and three checkboxes labeled <em>Label 1</em>,{" "}
+        <em>Label 2</em>, and <em>Label 3</em>.
+      </p>
+      <p>
+        To customize the number and labels of checkboxes, provide an array of labels via the{" "}
+        <code>labels</code> prop in Storybook's Controls UI.
+      </p>
 
-This example demonstrates a checkbox group with a custom group name (legend) "Example Group", and three checkboxes labeled "Label 1", "Label 2", and "Label 3". To customize the number and labels of checkboxes, provide an array of labels via the \`labels\` prop in the Storybook's Controls UI.
+      <h2>Adding More Checkboxes in Code</h2>
+      <p>
+        The number of checkboxes rendered in Storybook is typically controlled by a variable like:
+      </p>
+      <pre style={{ background: '#f9f9f9', padding: '1rem', overflow: 'auto' }}>
+        <code>{`const numberOfCheckboxes = 5;`}</code>
+      </pre>
+      <p>This will render five checkboxes. Their labels can then be set via the Storybook UI.</p>
 
-## Adding More Checkboxes in Code
-
-The number of checkboxes to be rendered by the Storybook is controlled by the \`numberOfCheckboxes\` constant. The labels for these checkboxes are dynamically created based on this number and can be further customized through the Storybook's Controls UI.
-
-\`\`\`jsx
-const numberOfCheckboxes = 5;
-\`\`\`
-
-This will prepare the Storybook to render a checkbox group with five checkboxes. The labels for these checkboxes can be individually updated via the Storybook's Controls UI.
-
-## Customizing Labels in the Storybook Controls UI
-
-Once the number of checkboxes is defined in your code, you can adjust the labels for these checkboxes directly via the Storybook Controls UI. Each checkbox added will render an editable text control for updating its label.
-`;
-
-export default description;
+      <h2>Customizing Labels in Storybook Controls</h2>
+      <p>
+        Once you've defined how many checkboxes to display, you can customize each one’s label
+        directly from Storybook's Controls panel. Each label is editable through the UI for easy
+        testing and review.
+      </p>
+    </div>
+  );
+}

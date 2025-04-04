@@ -1,6 +1,13 @@
 import React from "react";
 import { ReactTabsNestedAccordion } from "./ReactTabsNestedAccordion";
 import ReactTabsNestedAccordionDescription from "./ReactTabsNestedAccordionDescription";
+import {
+  Title,
+  Subtitle,
+  Description,
+  Primary,
+  ArgsTable,
+} from '@storybook/blocks';
 import styles from "./ReactTabsNestedAccordion.module.css";
 import AccordionBuild from "../ReactAccordion/ReactAccordion";
 import scottyImage from "./images/Scotty.jpg";
@@ -13,11 +20,16 @@ export default {
   component: ReactTabsNestedAccordion,
   parameters: {
     docs: {
-      description: {
-        component: ReactTabsNestedAccordionDescription,
-      },
+      page: () => (
+        <>
+          <Title />
+          <Subtitle>Subtitle if needed</Subtitle>
+          <Description markdown={ReactTabsNestedAccordionDescription} />
+          <Primary />
+          <ArgsTable story="Tabs (with a nested accordion)" />
+        </>
+      ),
     },
-    docsOnly: true,
   },
   argTypes: {
     tabPanelTabindex: {
@@ -156,3 +168,12 @@ nestedTabs.args = {
   tabBackground: "rgba(209, 203, 219, 1)",
   selectedTabBackground: "rgba(156, 39, 176, 1)",
 };
+
+// Standalone documentation page
+export const Documentation = () => <ReactTabsNestedAccordionDescription />;
+Documentation.parameters = {
+  docsOnly: true,
+};
+
+// Rename the sidebar label for this story
+nestedTabs.storyName = "Tabs (with a nested accordion) Build";

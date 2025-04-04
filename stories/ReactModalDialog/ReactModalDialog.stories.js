@@ -1,17 +1,29 @@
 import React from "react";
 import ReactModalDialog from "./ReactModalDialog";
-import reactModalDialogDescription from "./ReactModalDialogDescription";
+import ReactModalDialogDescription from "./ReactModalDialogDescription";
+import {
+  Title,
+  Subtitle,
+  Description,
+  Primary,
+  ArgsTable,
+} from '@storybook/blocks';
 
 export default {
   title: "Components/Modal Dialog (ARIA)",
   component: ReactModalDialog,
   parameters: {
     docs: {
-      description: {
-        component: reactModalDialogDescription,
-      },
+      page: () => (
+        <>
+          <Title />
+          <Subtitle>Subtitle if needed</Subtitle>
+          <Description markdown={ReactModalDialogDescription} />
+          <Primary />
+          <ArgsTable story="Modal Dialog (ARIA)" />
+        </>
+      ),
     },
-    docsOnly: true,
   },
   argTypes: {
     modal: {
@@ -49,3 +61,12 @@ ModalDialog.args = {
   dialogType: "standard",
   backgroundAttribute: "aria-hidden",
 };
+
+// Standalone documentation page
+export const Documentation = () => <ReactModalDialogDescription />;
+Documentation.parameters = {
+  docsOnly: true,
+};
+
+// Rename the sidebar label for this story
+ModalDialog.storyName = "Modal Dialog (ARIA) Build";

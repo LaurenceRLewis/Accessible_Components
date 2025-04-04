@@ -1,17 +1,29 @@
 import React from "react";
 import ReactSearchTable from "./ReactSearchTable";
 import reactSearchTableDescription from "./ReactSearchTableDescription";
+import {
+  Title,
+  Subtitle,
+  Description,
+  Primary,
+  ArgsTable,
+} from '@storybook/blocks';
 
 export default {
   title: "Tables/Table (Search function)",
   component: ReactSearchTable,
   parameters: {
     docs: {
-      description: {
-        component: reactSearchTableDescription,
-      },
+      page: () => (
+        <>
+          <Title />
+          <Subtitle>Subtitle if needed</Subtitle>
+          <Description markdown={ReactSearchTableDescription} />
+          <Primary />
+          <ArgsTable story="Table (Search function)" />
+        </>
+      ),
     },
-    docsOnly: true,
   },
   argTypes: {
     containerRole: {
@@ -53,3 +65,12 @@ searchTable.args = {
   containerRole: "search",
   inputRole: undefined,
 };
+
+// Standalone documentation page
+export const Documentation = () => <ReactSearchTableDescription />;
+Documentation.parameters = {
+  docsOnly: true,
+};
+
+// Rename the sidebar label for this story
+searchTable.storyName = "Table (Search function) Build";

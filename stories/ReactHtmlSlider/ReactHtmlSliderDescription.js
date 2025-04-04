@@ -1,52 +1,99 @@
-const description = `
-The HTML Slider (type="range") is a standard HTML input element that allows users to select a value within a specified range. This native HTML control is designed for entering numeric input and provides a user-friendly interface for controlling numeric input.
-
-The HTML range input type automatically supports keyboard interactions, such as the use of arrow keys to increment or decrement the value, Home/End keys to set the value to the min/max, and Page Up/Page Down for larger increments. This behavior is part of the HTML specification for the range input type and is supported across all modern browsers.
-
-## Features
-
-- Support for selecting a value within a range.
-- Customizable minimum and maximum values.
-- Incremental step size for fine-grained control.
-- Optional default value for initial selection.
-- Callback function for handling value changes.
-
-### Download build files
-- **[Development files](https://github.com/LaurenceRLewis/Accessible_Components/tree/main/stories/ReactHtmlSlider)
-
-### Can I Use
-"Can I use" provides up-to-date browser support tables for support of front-end web technologies on desktop and mobile web browsers.
-- **[Range input type](https://caniuse.com/?search=type%3Drange)
-
-## Props
-
-| Prop Name         | Type       | Description                                                     |
-| ----------------- | ---------- | --------------------------------------------------------------- |
-| \`min\`           | \`number\` | The minimum allowed value for the slider.                        |
-| \`max\`           | \`number\` | The maximum allowed value for the slider.                        |
-| \`step\`          | \`number\` | The increment value for each step of the slider.                 |
-| \`defaultValue\`  | \`number\` | The default value of the slider.                                 |
-| \`onChange\`      | \`function\` | A callback function triggered when the slider value changes.     |
-
-## HTML Slider Props
-
-The HTML Slider component accepts the following props:
-
-| Prop Name         | Type       | Description                                                     |
-| ----------------- | ---------- | --------------------------------------------------------------- |
-| \`htmlMin\`       | \`number\` | The minimum allowed value for the HTML slider.                   |
-| \`htmlMax\`       | \`number\` | The maximum allowed value for the HTML slider.                   |
-| \`htmlStep\`      | \`number\` | The increment value for each step of the HTML slider.            |
-| \`htmlDefaultValue\`  | \`number\` | The default value of the HTML slider.                            |
-
-## Methods
-
-| Method Name         | Description                                                   |
-| ------------------- | ------------------------------------------------------------- |
-| \`handleChange\`    | A method that handles the change event of the slider.          |
-
-The HTML Slider component ensures a seamless user experience for keyboard interactions, making it accessible and easy to use across different devices.
-
-`;
-
-export default description;
+export default function ReactHtmlSliderDescription() {
+    return (
+      <div>
+        <h1>HTML Slider (type="range")</h1>
+        <p>
+          The <strong>HTML Slider</strong> (<code>type="range"</code>) is a standard HTML input element
+          that allows users to select a value within a specified range. This native HTML control is designed
+          for entering numeric input and provides a user-friendly interface for controlling numeric input.
+        </p>
+        <p>
+          The HTML range input type automatically supports keyboard interactions, such as the use of arrow keys
+          to increment or decrement the value, <kbd>Home</kbd>/<kbd>End</kbd> keys to set the value to the min/max,
+          and <kbd>Page Up</kbd>/<kbd>Page Down</kbd> for larger increments. This behavior is part of the HTML specification
+          for the range input type and is supported across all modern browsers.
+        </p>
+  
+        <h2>Features</h2>
+        <ul>
+          <li>Support for selecting a value within a range.</li>
+          <li>Customizable minimum and maximum values.</li>
+          <li>Incremental step size for fine-grained control.</li>
+          <li>Optional default value for initial selection.</li>
+          <li>Callback function for handling value changes.</li>
+        </ul>
+  
+        <h3>Download Build Files</h3>
+        <ul>
+          <li>
+            <a href="https://github.com/LaurenceRLewis/Accessible_Components/tree/main/stories/ReactHtmlSlider" target="_blank" rel="noopener noreferrer">
+              Development files
+            </a>
+          </li>
+        </ul>
+  
+        <h3>Can I Use</h3>
+        <ul>
+          <li>
+            <a href="https://caniuse.com/?search=type%3Drange" target="_blank" rel="noopener noreferrer">
+              Range input type
+            </a>
+          </li>
+        </ul>
+  
+        <h2>Props</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Prop Name</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><code>min</code></td><td><code>number</code></td><td>The minimum allowed value for the slider.</td></tr>
+            <tr><td><code>max</code></td><td><code>number</code></td><td>The maximum allowed value for the slider.</td></tr>
+            <tr><td><code>step</code></td><td><code>number</code></td><td>The increment value for each step of the slider.</td></tr>
+            <tr><td><code>defaultValue</code></td><td><code>number</code></td><td>The default value of the slider.</td></tr>
+            <tr><td><code>onChange</code></td><td><code>function</code></td><td>A callback function triggered when the slider value changes.</td></tr>
+          </tbody>
+        </table>
+  
+        <h2>HTML Slider Props</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Prop Name</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><code>htmlMin</code></td><td><code>number</code></td><td>The minimum allowed value for the HTML slider.</td></tr>
+            <tr><td><code>htmlMax</code></td><td><code>number</code></td><td>The maximum allowed value for the HTML slider.</td></tr>
+            <tr><td><code>htmlStep</code></td><td><code>number</code></td><td>The increment value for each step of the HTML slider.</td></tr>
+            <tr><td><code>htmlDefaultValue</code></td><td><code>number</code></td><td>The default value of the HTML slider.</td></tr>
+          </tbody>
+        </table>
+  
+        <h2>Methods</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Method Name</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><code>handleChange</code></td><td>A method that handles the change event of the slider.</td></tr>
+          </tbody>
+        </table>
+  
+        <p>
+          The HTML Slider component ensures a seamless user experience for keyboard interactions, making it accessible
+          and easy to use across different devices.
+        </p>
+      </div>
+    );
+  }
+  

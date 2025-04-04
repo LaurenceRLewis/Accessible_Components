@@ -1,17 +1,30 @@
 import React from "react";
 import ReactFormInput from "./ReactFormInput";
-import reactFormInput from "./ReactFormInputDescription";
+import ReactFormInputDescription from "./ReactFormInputDescription";
+import {
+  Title,
+  Subtitle,
+  Description,
+  Primary,
+  ArgsTable,
+} from '@storybook/blocks';
+
 
 export default {
   title: "Building Blocks/Text Input",
   component: ReactFormInput,
   parameters: {
     docs: {
-      description: {
-        component: reactFormInput,
-      },
+      page: () => (
+        <>
+          <Title />
+          <Subtitle>Subtitle if needed</Subtitle>
+          <Description markdown={ReactFormInputDescription} />
+          <Primary />
+          <ArgsTable story="Disclosure (HTML Details-Summary)" />
+        </>
+      ),
     },
-    docsOnly: true,
   },
   argTypes: {
     labelName: {
@@ -123,3 +136,12 @@ TextInput.args = {
   inputType: "text",
   helpText: "",
 };
+
+// Standalone documentation page
+export const Documentation = () => <ReactFormInputDescription />;
+Documentation.parameters = {
+  docsOnly: true,
+};
+
+// Rename the sidebar label for this story
+TextInput.storyName = "Text Input Build";

@@ -1,17 +1,29 @@
 import React from "react";
 import ReactDetailsDisclosure from "./ReactDetailsDisclosure";
 import ReactDetailsDisclosureDescription from "./ReactDetailsDisclosureDescription";
+import {
+  Title,
+  Subtitle,
+  Description,
+  Primary,
+  ArgsTable,
+} from '@storybook/blocks';
 
 export default {
   title: "Native HTML Components/Disclosure (HTML Details-Summary)",
   component: ReactDetailsDisclosure,
   parameters: {
     docs: {
-      description: {
-        component: ReactDetailsDisclosureDescription,
-      },
+      page: () => (
+        <>
+          <Title />
+          <Subtitle>Subtitle if needed</Subtitle>
+          <Description markdown={ReactDetailsDisclosureDescription} />
+          <Primary />
+          <ArgsTable story="Disclosure (HTML Details-Summary)" />
+        </>
+      ),
     },
-    docsOnly: true,
   },
   argTypes: {
     isOpen: {
@@ -35,3 +47,12 @@ DetailsDisclosure.storyName = "Details Disclosure";
 DetailsDisclosure.args = {
   isOpen: "Collapsed",
 };
+
+// Standalone documentation page
+export const Documentation = () => <ReactDetailsDisclosureDescription />;
+Documentation.parameters = {
+  docsOnly: true,
+};
+
+// Rename the sidebar label for this story
+DetailsDisclosure.storyName = "Disclosure (HTML Details-Summary) Build";

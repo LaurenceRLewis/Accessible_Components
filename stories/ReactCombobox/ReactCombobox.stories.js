@@ -1,17 +1,29 @@
 import React from "react";
 import ReactComboboxList from "./ReactCombobox";
-import reactComboboxDescription from "./ReactComboboxDescription";
+import ReactComboboxDescription from "./ReactComboboxDescription";
+import {
+  Title,
+  Subtitle,
+  Description,
+  Primary,
+  ArgsTable,
+} from '@storybook/blocks';
 
 export default {
   title: "Components/Combobox (List)",
   component: ReactComboboxList,
   parameters: {
     docs: {
-      description: {
-        component: reactComboboxDescription,
-      },
+      page: () => (
+        <>
+          <Title />
+          <Subtitle>Subtitle if needed</Subtitle>
+          <Description markdown={ReactComboboxDescription} />
+          <Primary />
+          <ArgsTable story="Combobox (List)" />
+        </>
+      ),
     },
-    docsOnly: true,
   },
   argTypes: {
     showHelpText: {
@@ -38,3 +50,12 @@ ComboboxList.args = {
   showHelpText: "No",
   showToggleButton: true,
 };
+
+// Standalone documentation page
+export const Documentation = () => <ReactComboboxDescription />;
+Documentation.parameters = {
+  docsOnly: true,
+};
+
+// Rename the sidebar label for this story
+ComboboxList.storyName = "Combobox (List) Build";

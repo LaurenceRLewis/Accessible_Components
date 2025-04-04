@@ -1,17 +1,29 @@
 import React from "react";
 import ReactComboboxReadonly from "./ReactComboboxReadonly";
 import ReactComboboxReadonlyDescription from "./ReactComboboxReadonlyDescription";
+import {
+  Title,
+  Subtitle,
+  Description,
+  Primary,
+  ArgsTable,
+} from '@storybook/blocks';
 
 export default {
   title: "Experimental/Combobox (Readonly)",
   component: ReactComboboxReadonly,
   parameters: {
     docs: {
-      description: {
-        component: ReactComboboxReadonlyDescription,
-      },
+      page: () => (
+        <>
+          <Title />
+          <Subtitle>Subtitle if needed</Subtitle>
+          <Description markdown={ReactComboboxReadonlyDescription} />
+          <Primary />
+          <ArgsTable story="Combobox (Readonly)" />
+        </>
+      ),
     },
-    docsOnly: true,
   },
   argTypes: {
     buttonsPosition: {
@@ -56,3 +68,12 @@ ComboboxReadonly.args = {
   interactionMode: "Keep selected in list",
   ariaMultiselectable: true,
 };
+
+// Standalone documentation page
+export const Documentation = () => <ReactComboboxReadonlyDescription />;
+Documentation.parameters = {
+  docsOnly: true,
+};
+
+// Rename the sidebar label for this story
+ComboboxReadonly.storyName = "Combobox (Readonly) Build";

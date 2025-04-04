@@ -17,14 +17,17 @@
     "@babel/preset-typescript": "^7.21.4",
     "@mdx-js/loader": "^3.1.0",
     "@mdx-js/react": "^3.1.0",
+    "@storybook/addon-a11y": "^8.6.12",
     "@storybook/addon-controls": "^8.6.11",
+    "@storybook/addon-docs": "^8.6.12",
     "@storybook/addon-essentials": "^8.6.11",
     "@storybook/addon-interactions": "^8.6.11",
     "@storybook/addon-links": "^8.6.11",
     "@storybook/addon-mdx-gfm": "^8.6.11",
     "@storybook/addon-onboarding": "^8.6.11",
+    "@storybook/addon-viewport": "^8.6.12",
     "@storybook/addon-webpack5-compiler-swc": "^3.0.0",
-    "@storybook/blocks": "^8.6.11",
+    "@storybook/blocks": "^8.6.12",
     "@storybook/react": "^8.6.11",
     "@storybook/react-webpack5": "^8.6.11",
     "@storybook/test": "^8.6.11",
@@ -42,7 +45,6 @@
   "dependencies": {
     "@internationalized/date": "^3.7.0",
     "@internationalized/number": "^3.6.0",
-    "@storybook/addon-a11y": "^8.6.11",
     "classnames": "^2.3.2"
   }
 }

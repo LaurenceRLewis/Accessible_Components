@@ -1,18 +1,30 @@
 import React from "react";
 import AccordionBuild from "./ReactAccordion";
-import reactAccordionDescription from "./ReactAccordionDescription";
+import ReactAccordionDescription from "./ReactAccordionDescription";
+import {
+  Title,
+  Subtitle,
+  Description,
+  Primary,
+  ArgsTable,
+} from '@storybook/blocks';
 
 export default {
   title: "Components/Accordion",
   component: AccordionBuild,
   parameters: {
-    docs: {
-      description: {
-        component: reactAccordionDescription,
+      docs: {
+        page: () => (
+          <>
+            <Title />
+            <Subtitle>Subtitle if needed</Subtitle>
+            <Description markdown={ReactAccordionDescription} />
+            <Primary />
+            <ArgsTable story="Accordion" />
+          </>
+        ),
       },
     },
-    docsOnly: true,
-  },
   argTypes: {
     multiExpand: {
       name: "Open single or multiple sections",
@@ -97,3 +109,12 @@ Accordion.args = {
   chevronPosition: "right",
   NamedRegionContainer: "Contained in a named landmark region",
 };
+
+// Standalone documentation page
+export const Documentation = () => <ReactAccordionDescription />;
+Documentation.parameters = {
+  docsOnly: true,
+};
+
+// Rename the sidebar label for this story
+Accordion.storyName = "Accordion Build";

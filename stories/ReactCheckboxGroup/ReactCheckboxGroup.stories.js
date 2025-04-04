@@ -1,6 +1,13 @@
 import React from "react";
 import ReactCheckboxGroup from "./ReactCheckboxGroup";
 import ReactCheckboxGroupDescription from "./ReactCheckboxGroupDescription";
+import {
+  Title,
+  Subtitle,
+  Description,
+  Primary,
+  ArgsTable,
+} from '@storybook/blocks';
 
 // Defines the count of checkboxes that will be displayed in the Storybook UI
 const numberOfCheckboxes = 4;
@@ -43,13 +50,16 @@ export default {
   component: ReactCheckboxGroup,
   parameters: {
     docs: {
-      // Component description pulled in from ReactCheckboxGroupDescription.
-      description: {
-        component: ReactCheckboxGroupDescription,
-      },
+      page: () => (
+        <>
+          <Title />
+          <Subtitle>Subtitle if needed</Subtitle>
+          <Description markdown={ReactCheckboxGroupDescription} />
+          <Primary />
+          <ArgsTable story="ARIA Slider" />
+        </>
+      ),
     },
-    // Parameter that specifies this component should only appear in the docs panel.
-    docsOnly: true,
   },
   argTypes,
 };
@@ -74,3 +84,12 @@ const Template = (args) => {
 export const CheckboxGroup = Template.bind({});
 // Sets initial arguments for this story, derived from the args object we constructed.
 CheckboxGroup.args = args;
+
+// Standalone documentation page
+export const Documentation = () => <ReactCheckboxGroupDescription />;
+Documentation.parameters = {
+  docsOnly: true,
+};
+
+// Rename the sidebar label for this story
+CheckboxGroup.storyName = "Checkbox Group Build";

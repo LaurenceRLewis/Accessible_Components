@@ -1,17 +1,29 @@
 import React from "react";
 import ReactTableSortable from "./ReactTableSortable";
-import reactTableSortableDescription from "./ReactTableSortableDescription";
+import ReactTableSortableDescription from "./ReactTableSortableDescription";
+import {
+  Title,
+  Subtitle,
+  Description,
+  Primary,
+  ArgsTable,
+} from '@storybook/blocks';
 
 export default {
   title: "Tables/Table (Sort function)",
   component: ReactTableSortable,
   parameters: {
     docs: {
-      description: {
-        component: reactTableSortableDescription,
-      },
+      page: () => (
+        <>
+          <Title />
+          <Subtitle>Subtitle if needed</Subtitle>
+          <Description markdown={ReactTableSortableDescription} />
+          <Primary />
+          <ArgsTable story="Table (Sort function)" />
+        </>
+      ),
     },
-    docsOnly: true,
   },
   argTypes: {
     sortable: {
@@ -90,3 +102,12 @@ SortableTableColumns.args = {
   includeAriaDescription: true,
   showDescriptionAll: "No", // Set default to "No"
 };
+
+// Standalone documentation page
+export const Documentation = () => <ReactTableSortableDescription />;
+Documentation.parameters = {
+  docsOnly: true,
+};
+
+// Rename the sidebar label for this story
+SortableTableColumns.storyName = "Table (Sort function) Build";

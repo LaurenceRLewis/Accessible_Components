@@ -1,17 +1,29 @@
 import React from "react";
 import ReactMultiSelect from "./ReactMultiSelect";
-import reactMultiSelectDescription from "./ReactMultiSelectDescription";
+import ReactMultiSelectDescription from "./ReactMultiSelectDescription";
+import {
+  Title,
+  Subtitle,
+  Description,
+  Primary,
+  ArgsTable,
+} from '@storybook/blocks';
 
 export default {
   title: "Components/Multi-Select Listbox",
   component: ReactMultiSelect,
   parameters: {
     docs: {
-      description: {
-        component: reactMultiSelectDescription,
-      },
+      page: () => (
+        <>
+          <Title />
+          <Subtitle>Subtitle if needed</Subtitle>
+          <Description markdown={ReactMultiSelectDescription} />
+          <Primary />
+          <ArgsTable story="Multi-Select Listbox" />
+        </>
+      ),
     },
-    docsOnly: true,
   },
   argTypes: {
     buttonsPosition: {
@@ -42,3 +54,12 @@ MultiSelectListbox.args = {
   buttonsPosition: "bottom",
   interactionMode: "Keep selected in list",
 };
+
+// Standalone documentation page
+export const Documentation = () => <ReactMultiSelectDescription />;
+Documentation.parameters = {
+  docsOnly: true,
+};
+
+// Rename the sidebar label for this story
+MultiSelectListbox.storyName = "Multi-Select Listbox Build";
