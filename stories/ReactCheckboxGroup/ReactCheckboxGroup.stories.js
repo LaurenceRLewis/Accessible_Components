@@ -6,7 +6,7 @@ import {
   Subtitle,
   Description,
   Primary,
-  ArgsTable,
+  ArgTypes,
 } from '@storybook/blocks';
 
 // Defines the count of checkboxes that will be displayed in the Storybook UI
@@ -56,7 +56,7 @@ export default {
           <Subtitle>Subtitle if needed</Subtitle>
           <Description markdown={ReactCheckboxGroupDescription} />
           <Primary />
-          <ArgsTable story="ARIA Slider" />
+          <ArgTypes story="ARIA Slider" />
         </>
       ),
     },

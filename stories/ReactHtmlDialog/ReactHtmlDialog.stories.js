@@ -8,7 +8,7 @@ import {
   Subtitle,
   Description,
   Primary,
-  ArgsTable,
+  ArgTypes,
 } from '@storybook/blocks';
 
 // Storybook configuration
@@ -23,7 +23,7 @@ export default {
           <Subtitle>Subtitle if needed</Subtitle>
           <Description markdown={ReactHtmlDialogDescription} />
           <Primary />
-          <ArgsTable story="Modal Dialog (HTML)" />
+          <ArgTypes story="Modal Dialog (HTML)" />
         </>
       ),
     },

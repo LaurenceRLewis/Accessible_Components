@@ -6,7 +6,7 @@ import {
   Subtitle,
   Description,
   Primary,
-  ArgsTable,
+  ArgTypes,
 } from '@storybook/blocks';
 
 // Defines the count of radio buttons that will be displayed in the Storybook UI
@@ -56,7 +56,7 @@ export default {
           <Subtitle>Subtitle if needed</Subtitle>
           <Description markdown={ReactRadioButtonGroupDescription} />
           <Primary />
-          <ArgsTable story="Radio Button Group" />
+          <ArgTypes story="Radio Button Group" />
         </>
       ),
     },

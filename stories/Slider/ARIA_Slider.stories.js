@@ -1,17 +1,17 @@
 import React from "react";
-import AriaSlider from "./AriaSlider";
-import ReactAriaSliderDescription from "./ReactAriaSliderDescription";
+import ARIA_Slider from "./ARIA_Slider";
+import ARIA_SliderDescription from "./ARIA_SliderDescription";
 import {
   Title,
   Subtitle,
   Description,
   Primary,
-  ArgsTable,
+  ArgTypes,
 } from '@storybook/blocks';
 
 export default {
   title: "Components/Slider (ARIA)",
-  component: AriaSlider,
+  component: ARIA_Slider,
   parameters: {
         docs: {
           page: () => (
@@ -20,7 +20,7 @@ export default {
               <Subtitle>Subtitle if needed</Subtitle>
               <Description markdown={ReactAccordionDescription} />
               <Primary />
-              <ArgsTable story="ARIA Slider" />
+              <ArgTypes story="ARIA Slider" />
             </>
           ),
         },
@@ -59,7 +59,7 @@ export default {
   },
 };
 
-const Template = (args) => <AriaSlider {...args} />;
+const Template = (args) => <ARIA_Slider {...args} />;
 
 export const Slider = Template.bind({});
 Slider.args = {
@@ -72,7 +72,7 @@ Slider.args = {
 };
 
 // Standalone documentation page
-export const Documentation = () => <ReactAriaSliderDescription />;
+export const Documentation = () => <ARIA_SliderDescription />;
 Documentation.parameters = {
   docsOnly: true,
 };

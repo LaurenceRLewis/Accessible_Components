@@ -1,4 +1,4 @@
-export default function ReactAccordionDescription() {
+export default function ARIA_AccordionDescription() {
   return (
     <div>
       <h1>React Accordion</h1>

@@ -6,7 +6,7 @@ import {
   Subtitle,
   Description,
   Primary,
-  ArgsTable,
+  ArgTypes,
 } from '@storybook/blocks';
 
 
@@ -21,7 +21,7 @@ export default {
           <Subtitle>Subtitle if needed</Subtitle>
           <Description markdown={ReactFormInputDescription} />
           <Primary />
-          <ArgsTable story="Disclosure (HTML Details-Summary)" />
+          <ArgTypes story="Disclosure (HTML Details-Summary)" />
         </>
       ),
     },

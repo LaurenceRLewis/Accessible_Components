@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styles from "./ReactAccordion.module.css";
+import styles from "./ARIA_Accordion.module.css";
 
 // Define ChevronRight SVG icon component
 const ChevronRight = () => (

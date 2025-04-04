@@ -6,7 +6,7 @@ import {
   Subtitle,
   Description,
   Primary,
-  ArgsTable,
+  ArgTypes,
 } from '@storybook/blocks';
 
 export default {
@@ -20,7 +20,7 @@ export default {
           <Subtitle>Subtitle if needed</Subtitle>
           <Description markdown={ReactInputPasswordDescription} />
           <Primary />
-          <ArgsTable story="Password Input" />
+          <ArgTypes story="Password Input" />
         </>
       ),
     },

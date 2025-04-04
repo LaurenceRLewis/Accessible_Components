@@ -1,12 +1,12 @@
 import React from "react";
-import AccordionBuild from "./ReactAccordion";
-import ReactAccordionDescription from "./ReactAccordionDescription";
+import AccordionBuild from "./ARIA_Accordion";
+import ARIA_AccordionDescription from "./ARIA_AccordionDescription";
 import {
   Title,
   Subtitle,
   Description,
   Primary,
-  ArgsTable,
+  ArgTypes,
 } from '@storybook/blocks';
 
 export default {
@@ -18,9 +18,9 @@ export default {
           <>
             <Title />
             <Subtitle>Subtitle if needed</Subtitle>
-            <Description markdown={ReactAccordionDescription} />
+            <Description markdown={ARIA_AccordionDescription} />
             <Primary />
-            <ArgsTable story="Accordion" />
+            <ArgTypes story="Accordion" />
           </>
         ),
       },
@@ -111,7 +111,7 @@ Accordion.args = {
 };
 
 // Standalone documentation page
-export const Documentation = () => <ReactAccordionDescription />;
+export const Documentation = () => <ARIA_AccordionDescription />;
 Documentation.parameters = {
   docsOnly: true,
 };

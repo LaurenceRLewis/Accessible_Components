@@ -6,7 +6,7 @@ import {
   Subtitle,
   Description,
   Primary,
-  ArgsTable,
+  ArgTypes,
 } from '@storybook/blocks';
 
 export default {
@@ -20,7 +20,7 @@ export default {
           <Subtitle>Native HTML input with locale-aware formatting</Subtitle>
           <Description markdown={NativeDatePickerDescription} />
           <Primary />
-          <ArgsTable story="HTMLDatepicker" />
+          <ArgTypes story="HTMLDatepicker" />
         </>
       ),
     },

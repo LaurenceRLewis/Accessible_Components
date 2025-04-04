@@ -6,7 +6,7 @@ import {
   Subtitle,
   Description,
   Primary,
-  ArgsTable,
+  ArgTypes,
 } from '@storybook/blocks';
 
 export default {
@@ -20,7 +20,7 @@ export default {
           <Subtitle>Subtitle if needed</Subtitle>
           <Description markdown={ReactDetailsDisclosureDescription} />
           <Primary />
-          <ArgsTable story="Disclosure (HTML Details-Summary)" />
+          <ArgTypes story="Disclosure (HTML Details-Summary)" />
         </>
       ),
     },

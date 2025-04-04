@@ -6,10 +6,10 @@ import {
   Subtitle,
   Description,
   Primary,
-  ArgsTable,
+  ArgTypes,
 } from '@storybook/blocks';
 import styles from "./ReactTabsNestedAccordion.module.css";
-import AccordionBuild from "../ReactAccordion/ReactAccordion";
+import AccordionBuild from "../Accordion/ARIA_Accordion";
 import scottyImage from "./images/Scotty.jpg";
 import louieImage from "./images/Louie.jpg";
 import murphyImage from "./images/Murphy.jpg";
@@ -26,7 +26,7 @@ export default {
           <Subtitle>Subtitle if needed</Subtitle>
           <Description markdown={ReactTabsNestedAccordionDescription} />
           <Primary />
-          <ArgsTable story="Tabs (with a nested accordion)" />
+          <ArgTypes story="Tabs (with a nested accordion)" />
         </>
       ),
     },

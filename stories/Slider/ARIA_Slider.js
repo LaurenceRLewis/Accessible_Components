@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import styles from "./AriaSlider.module.css";
+import styles from "./ARIA_Slider.module.css";
 
-const AriaSlider = ({
+const ARIA_Slider = ({
   min,
   max,
   step,
@@ -272,4 +272,4 @@ const AriaSlider = ({
   );
 };
 
-export default AriaSlider;
+export default ARIA_Slider;

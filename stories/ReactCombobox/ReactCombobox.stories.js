@@ -6,7 +6,7 @@ import {
   Subtitle,
   Description,
   Primary,
-  ArgsTable,
+  ArgTypes,
 } from '@storybook/blocks';
 
 export default {
@@ -20,7 +20,7 @@ export default {
           <Subtitle>Subtitle if needed</Subtitle>
           <Description markdown={ReactComboboxDescription} />
           <Primary />
-          <ArgsTable story="Combobox (List)" />
+          <ArgTypes story="Combobox (List)" />
         </>
       ),
     },

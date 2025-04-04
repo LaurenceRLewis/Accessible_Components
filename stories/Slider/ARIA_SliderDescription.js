@@ -1,4 +1,4 @@
-export default function ReactARIASliderDescription() {
+export default function ARIA_SliderDescription() {
     return (
       <div>
         <h1>Slider</h1>
