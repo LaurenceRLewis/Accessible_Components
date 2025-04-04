@@ -1,12 +1,12 @@
 import React from "react";
-import AccordionBuild from "./ARIA_Accordion";
+import AccordionBuild from "./ARIA_AccordionAccordion";
 import ARIA_AccordionDescription from "./ARIA_AccordionDescription";
 import {
   Title,
   Subtitle,
   Description,
   Primary,
-  ArgTypes,
+  ArgsTable,
 } from '@storybook/blocks';
 
 export default {
@@ -20,7 +20,7 @@ export default {
             <Subtitle>Subtitle if needed</Subtitle>
             <Description markdown={ARIA_AccordionDescription} />
             <Primary />
-            <ArgTypes story="Accordion" />
+            <ArgsTable story="Accordion" />
           </>
         ),
       },
