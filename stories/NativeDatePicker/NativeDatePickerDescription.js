@@ -12,15 +12,10 @@ export default function NativeDatePickerDescription() {
           <li>Native date or datetime input</li>
           <li>Toggle input mode with the <code>mode</code> prop</li>
           <li>Localized confirmation using <code>@internationalized/date</code></li>
-          <li>Responsive to browser locale (e.g., <code>en-AU</code> vs <code>en-US</code>)</li>
         </ul>
   
         <h2>Localization Behavior</h2>
-        <p>The following formats are used for date messaging based on locale:</p>
-        <ul>
-          <li><code>en</code>, <code>en-AU</code>, <code>en-GB</code>: <strong>dd/mm/yyyy</strong></li>
-          <li><code>en-US</code>, <code>ja-JP</code>: <strong>yyyy/mm/dd</strong></li>
-        </ul>
+        <p>Implements Adobe REACT Spectrum - Localization</p>
   
         <h2>Controls</h2>
         <ul>
