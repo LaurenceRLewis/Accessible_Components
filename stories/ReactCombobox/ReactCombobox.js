@@ -3,30 +3,107 @@ import ariaAnnounce from "../../.storybook/utils/ariaAnnounce";
 import { townsAndCities } from "./ReactComboboxData";
 import styles from "./ReactCombobox.module.css";
 
-const ReactCombobox = ({ showHelpText = false, showToggleButton = true }) => {
+const ReactCombobox = ({
+  showHelpText = false,
+  showToggleButton = true,
+  showAllOptionsAfterSelection = "No",
+}) => {
   const [inputValue, setInputValue] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const [showOptions, setShowOptions] = useState(false);
   const [options, setOptions] = useState(townsAndCities);
   const [resultCount, setResultCount] = useState(0);
+  const [shouldFocusOnOption, setShouldFocusOnOption] = useState(false);
+  const [lastSelectedValue, setLastSelectedValue] = useState(null);
   const inputRef = useRef(null);
+
+  const filterOptions = (value) =>
+    townsAndCities.filter((city) =>
+      city.toLowerCase().startsWith(value.toLowerCase())
+    );
+
   const toggleOptions = () => {
+    if (!showOptions) {
+      if (showAllOptionsAfterSelection === "Yes" && lastSelectedValue) {
+        setOptions(townsAndCities);
+        const idx = townsAndCities.findIndex((c) => c === lastSelectedValue);
+        setSelectedIndex(idx);
+        setResultCount(townsAndCities.length);
+        setShouldFocusOnOption(true);
+      } else if (lastSelectedValue) {
+        setOptions([lastSelectedValue]);
+        setSelectedIndex(0);
+        setResultCount(1);
+        setShouldFocusOnOption(true);
+      } else {
+        const filtered = filterOptions(inputValue);
+        setOptions(filtered);
+        setSelectedIndex(0);
+        setResultCount(filtered.length);
+        setShouldFocusOnOption(true);
+      }
+    }
     setShowOptions(!showOptions);
   };
 
-  useEffect(() => {
-    if (inputRef.current) {
-      inputRef.current.focus();
+  const handleInputChange = (e) => {
+    const { value } = e.target;
+    setInputValue(value);
+    const filtered = filterOptions(value);
+    setOptions(filtered);
+    setResultCount(filtered.length);
+    setSelectedIndex(0);
+    setShowOptions(true);
+    setShouldFocusOnOption(true);
+  };
+
+  const handleOptionClick = (value) => {
+    setInputValue(value);
+    setLastSelectedValue(value);
+    setShowOptions(false);
+    setSelectedIndex(-1);
+    setShouldFocusOnOption(false);
+    ariaAnnounce(`Selected ${value}`);
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      if (!showOptions) {
+        toggleOptions();
+      } else {
+        setSelectedIndex((prev) =>
+          prev === options.length - 1 ? 0 : prev + 1
+        );
+        setShouldFocusOnOption(true);
+      }
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      if (!showOptions) {
+        toggleOptions();
+      } else {
+        setSelectedIndex((prev) =>
+          prev <= 0 ? options.length - 1 : prev - 1
+        );
+        setShouldFocusOnOption(true);
+      }
+    } else if (e.key === "Enter" && selectedIndex !== -1) {
+      handleOptionClick(options[selectedIndex]);
+    } else if (e.key === "Escape") {
+      setShowOptions(false);
+      setSelectedIndex(-1);
     }
-  }, [showOptions]);
+  };
 
   useEffect(() => {
-    const filteredOptions = townsAndCities.filter((city) =>
-      city.toLowerCase().startsWith(inputValue.toLowerCase())
-    );
-    setOptions(filteredOptions);
-    setResultCount(filteredOptions.length);
-  }, [inputValue]);
+    if (showOptions && shouldFocusOnOption) {
+      if (selectedIndex >= 0 && selectedIndex < options.length) {
+        document
+          .getElementById(`option-${selectedIndex}`)
+          ?.scrollIntoView({ block: "nearest" });
+      }
+    }
+  }, [showOptions, selectedIndex, shouldFocusOnOption]);
 
   useEffect(() => {
     if (showOptions) {
@@ -34,134 +111,8 @@ const ReactCombobox = ({ showHelpText = false, showToggleButton = true }) => {
     }
   }, [showOptions, resultCount]);
 
-  useEffect(() => {
-    if (inputRef.current) {
-      inputRef.current.focus();
-    }
-  }, [showOptions]);
-
-  const handleOptionClick = (value) => {
-    setInputValue(value);
-    setShowOptions(false);
-    setSelectedIndex(-1);
-    ariaAnnounce(`Selected ${value}`);
-  };
-
-  const handleInputChange = (event) => {
-    const { value } = event.target;
-    setInputValue(value);
-    if (value === "") {
-      setShowOptions(false);
-      setOptions(townsAndCities);
-      setResultCount(townsAndCities.length);
-    } else {
-      const filteredOptions = townsAndCities.filter((city) =>
-        city.toLowerCase().startsWith(value.toLowerCase())
-      );
-      setOptions(filteredOptions);
-      setResultCount(filteredOptions.length);
-      setShowOptions(true);
-    }
-  };
-
-  const [shouldFocusOnOption, setShouldFocusOnOption] = useState(false);
-
-  useEffect(() => {
-    if (showOptions && shouldFocusOnOption) {
-      if (selectedIndex >= 0 && selectedIndex < options.length) {
-        document.getElementById(`option-${selectedIndex}`).scrollIntoView();
-      }
-    } else if (inputRef.current) {
-      inputRef.current.focus();
-    }
-  }, [showOptions, selectedIndex, shouldFocusOnOption]);
-
-  const handleFocus = (e) => {
-    e.target.setSelectionRange(e.target.value.length, e.target.value.length);
-  };
-
-  const handleKeyPress = (e) => {
-    if (e.key === "Backspace") {
-      if (inputValue !== "") {
-        e.preventDefault();
-        const newValue = inputValue.slice(0, -1);
-        setInputValue(newValue);
-
-        const filteredOptions = townsAndCities.filter((city) =>
-          city.toLowerCase().startsWith(newValue.toLowerCase())
-        );
-        setOptions(filteredOptions);
-        setResultCount(filteredOptions.length);
-        setShowOptions(true);
-
-        if (filteredOptions.length > 0) {
-          setSelectedIndex(0);
-          setShouldFocusOnOption(true);
-        } else {
-          setInputValue("");
-          setShowOptions(false);
-        }
-      }
-    }
-
-    if (e.key === "ArrowDown") {
-      if (inputValue === "" && !showOptions) {
-        setShowOptions(true);
-        setSelectedIndex(0);
-        setShouldFocusOnOption(true);
-      } else if (inputValue !== "" && !showOptions) {
-        setShowOptions(true);
-        setSelectedIndex(0);
-        setShouldFocusOnOption(true);
-      } else if (showOptions && selectedIndex < options.length - 1) {
-        setSelectedIndex((prevIndex) => prevIndex + 1);
-        setShouldFocusOnOption(true);
-      }
-    } else if (e.key === "ArrowUp") {
-      if (selectedIndex === -1 || selectedIndex === 0) {
-        if (!showOptions) {
-          setShowOptions(true);
-          setShouldFocusOnOption(false);
-        }
-        setSelectedIndex(options.length - 1);
-      } else if (selectedIndex > 0) {
-        setSelectedIndex(selectedIndex - 1);
-        setShouldFocusOnOption(true);
-      }
-    } else if (e.key === "Enter" && selectedIndex !== -1) {
-      setInputValue(options[selectedIndex]);
-      setSelectedIndex(-1);
-      setShowOptions(false);
-      setShouldFocusOnOption(false);
-    } else if (e.key === "Escape") {
-      setShowOptions(false);
-      setSelectedIndex(-1);
-      setShouldFocusOnOption(false);
-    } else if (e.key === "Home") {
-      if (inputRef.current) {
-        inputRef.current.setSelectionRange(0, 0);
-      }
-    } else if (e.key === "End") {
-      if (inputRef.current) {
-        inputRef.current.setSelectionRange(
-          inputValue.length,
-          inputValue.length
-        );
-      }
-    } else if (e.key === "Tab") {
-      setShowOptions(false);
-      setShouldFocusOnOption(false);
-    }
-  };
-
   const ChevronDown = () => (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="20"
-      height="20"
-      viewBox="0 0 20 20"
-      fill="white"
-    >
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="white">
       <path
         fillRule="evenodd"
         d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
@@ -171,13 +122,7 @@ const ReactCombobox = ({ showHelpText = false, showToggleButton = true }) => {
   );
 
   const ChevronUp = () => (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="20"
-      height="20"
-      viewBox="0 0 20 20"
-      fill="white"
-    >
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="white">
       <path
         fillRule="evenodd"
         d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z"
@@ -189,7 +134,6 @@ const ReactCombobox = ({ showHelpText = false, showToggleButton = true }) => {
   return (
     <>
       <h1>ARIA Combobox (List)</h1>
-      <p>The version uses the aria-autocomplete list methid.</p>
       <div className={styles["comboboxContainer"]}>
         <label id="combobox-label" htmlFor="combobox-input">
           Australian cities and towns
@@ -207,41 +151,43 @@ const ReactCombobox = ({ showHelpText = false, showToggleButton = true }) => {
         <div className={styles["comboboxWrapper"]}>
           <input
             id="combobox-input"
+            ref={inputRef}
             className={styles["comboboxInput"]}
             role="combobox"
             aria-autocomplete="list"
-            autocomplete="off"
-            aria-controls={showOptions ? "combobox-listbox" : ""}
+            autoComplete="off"
+            aria-controls="combobox-listbox"
             aria-activedescendant={
               selectedIndex === -1 ? "" : `option-${selectedIndex}`
             }
             aria-expanded={showOptions}
             aria-labelledby="combobox-label"
             aria-describedby={`
-            ${showHelpText === "Yes" ? "help-text" : ""}
-            ${showOptions ? "result-count" : ""}
+              ${showHelpText === "Yes" ? "datalistHelpText" : ""}
+              ${showOptions ? "result-count" : ""}
             `.trim()}
-            ref={inputRef}
             type="text"
             value={inputValue}
             onChange={handleInputChange}
             onKeyDown={handleKeyPress}
-            onFocus={handleFocus}
+            onFocus={(e) =>
+              e.target.setSelectionRange(e.target.value.length, e.target.value.length)
+            }
           />
           {showToggleButton && (
-                    <button
-                        id="toggle-button"
-                        aria-label="Australian towns and cities"
-                        aria-controls={showOptions ? "combobox-listbox" : ""}
-                        aria-expanded={showOptions}
-                        role="button"
-                        tabIndex="-1"
-                        className={styles["toggleButton"]}
-                        onClick={toggleOptions}
-                    >
-                        {showOptions ? <ChevronUp /> : <ChevronDown />}
-                    </button>
-                )}
+            <button
+              id="toggle-button"
+              aria-label="Toggle list of Australian towns and cities"
+              aria-controls="combobox-listbox"
+              aria-expanded={showOptions}
+              role="button"
+              tabIndex="-1"
+              className={styles["toggleButton"]}
+              onClick={toggleOptions}
+            >
+              {showOptions ? <ChevronUp /> : <ChevronDown />}
+            </button>
+          )}
         </div>
         {showOptions && (
           <ul
@@ -253,10 +199,8 @@ const ReactCombobox = ({ showHelpText = false, showToggleButton = true }) => {
             {options.map((option, index) => (
               <li
                 id={`option-${index}`}
-                className={
-                  index === selectedIndex ? styles["selectedOption"] : ""
-                }
                 key={option}
+                className={index === selectedIndex ? styles["selectedOption"] : ""}
                 role="option"
                 aria-selected={index === selectedIndex}
                 onClick={() => handleOptionClick(option)}
@@ -271,4 +215,5 @@ const ReactCombobox = ({ showHelpText = false, showToggleButton = true }) => {
   );
 };
 
+ReactCombobox.displayName = "ReactCombobox"; // <- Fix for Storybook Docs
 export default ReactCombobox;

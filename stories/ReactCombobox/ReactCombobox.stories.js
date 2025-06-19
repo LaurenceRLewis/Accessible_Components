@@ -1,23 +1,17 @@
 import React from "react";
-import ReactComboboxList from "./ReactCombobox";
+import ReactCombobox from "./ReactCombobox";
 import ReactComboboxDescription from "./ReactComboboxDescription";
-import {
-  Title,
-  Subtitle,
-  Description,
-  Primary,
-  ArgTypes,
-} from '@storybook/blocks';
+import { Title, Subtitle, Description, Primary, ArgTypes } from "@storybook/blocks";
 
 export default {
   title: "Components/Combobox (List)",
-  component: ReactComboboxList,
+  component: ReactCombobox,
   parameters: {
     docs: {
       page: () => (
         <>
           <Title />
-          <Subtitle>Subtitle if needed</Subtitle>
+          <Subtitle>ARIA Combobox with aria-autocomplete="list"</Subtitle>
           <Description markdown={ReactComboboxDescription} />
           <Primary />
           <ArgTypes story="Combobox (List)" />
@@ -31,31 +25,34 @@ export default {
       control: "radio",
       options: ["Yes", "No"],
       defaultValue: "No",
-      description: "Display help text",
+      description: "Display help text below the label",
     },
     showToggleButton: {
       name: "Show toggle button",
       control: "boolean",
       defaultValue: true,
-      description: "Toggle the visibility of the button",
+      description: "Toggle button to show/hide the options",
+    },
+    showAllOptionsAfterSelection: {
+      name: "Show all options after selection",
+      control: "radio",
+      options: ["Yes", "No"],
+      defaultValue: "Yes",
+      description:
+        "If Yes, opening the listbox after selecting shows all options again, otherwise shows only the selected value.",
     },
   },
 };
 
-const Template = (args) => <ReactComboboxList {...args} />;
+const Template = (args) => <ReactCombobox {...args} />;
 
 export const ComboboxList = Template.bind({});
 ComboboxList.storyName = "Combobox (List)";
 ComboboxList.args = {
   showHelpText: "No",
   showToggleButton: true,
+  showAllOptionsAfterSelection: "Yes",
 };
 
-// Standalone documentation page
 export const Documentation = () => <ReactComboboxDescription />;
-Documentation.parameters = {
-  docsOnly: true,
-};
-
-// Rename the sidebar label for this story
-ComboboxList.storyName = "Combobox (List) Build";
+Documentation.parameters = { docsOnly: true };
