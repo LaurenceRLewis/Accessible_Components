@@ -1,5 +1,5 @@
 import React from "react";
-import AccordionBuild from "./ARIA_AccordionAccordion";
+import AccordionBuild from "./ARIA_Accordion";
 import ARIA_AccordionDescription from "./ARIA_AccordionDescription";
 import {
   Title,
