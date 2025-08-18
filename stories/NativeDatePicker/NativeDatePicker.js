@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { DateFormatter } from "@internationalized/date";
+import { DateFormatter, getLocalTimeZone, today, now } from "@internationalized/date";
 import styles from "./NativeDatePicker.module.css";
 
 export default function NativeDatePicker({ mode = "date" }) {
@@ -9,56 +9,74 @@ export default function NativeDatePicker({ mode = "date" }) {
 
   const isDateTime = mode === "datetime";
 
+  const resolveLocale = () => {
+    const raw = (navigator.language || "en-AU").trim();
+    // Normalize plain "en" to AU per your requirement
+    if (raw.toLowerCase() === "en") return "en-AU";
+    return raw;
+  };
+
+  const pad2 = (n) => String(n).padStart(2, "0");
+
   const handleChange = (e) => {
     setDate(e.target.value);
     setConfirmationMessage("");
   };
 
-const handleSetDate = () => {
-  if (!date) return;
+  const handleSetDate = () => {
+    if (!date) return;
 
-  const [datePart, timePart] = date.split("T");
-  const [year, month, day] = datePart.split("-").map(Number);
+    const userLocale = resolveLocale();
 
-  // Determine locale from browser
-  let userLocale = navigator.language?.toLowerCase() || "en-au";
+    // Split the native input value
+    const [datePart, timePart] = date.split("T");
+    if (!datePart) return;
 
-  // Normalize "en" to "en-AU"
-  if (userLocale === "en") {
-    userLocale = "en-AU";
-  }
+    const [y, m, d] = datePart.split("-").map(Number);
+    const hasTime = Boolean(timePart) && isDateTime;
 
-  // Build a DateFormatter with AU-style formatting
-  const formatter = new DateFormatter(userLocale, {
-    day: "2-digit",
-    month: "2-digit",
-    year: "numeric",
-  });
+    let h = 0, min = 0;
+    if (hasTime) {
+      const [hh, mm] = timePart.split(":").map(Number);
+      h = Number.isFinite(hh) ? hh : 0;
+      min = Number.isFinite(mm) ? mm : 0;
+    }
 
-  const jsDate = new Date(year, month - 1, day);
-  const formattedDate = formatter.format(jsDate);
+    // Interpret as local time (matches how <input type="date|datetime-local"> behaves)
+    const jsDate = new Date(y, (m || 1) - 1, d || 1, h, min);
 
-  const message =
-    mode === "datetime" && timePart
-      ? `You set the delivery time for ${formattedDate} at ${timePart}`
+    const dateFmt = new DateFormatter(userLocale, { dateStyle: "long" });
+    const timeFmt = new DateFormatter(userLocale, { timeStyle: "short" });
+
+    const formattedDate = dateFmt.format(jsDate);
+    const formattedTime = hasTime ? timeFmt.format(jsDate) : null;
+
+    const message = hasTime
+      ? `You set the delivery time for ${formattedDate} at ${formattedTime}`
       : `You set the delivery time for ${formattedDate}`;
 
-  setConfirmationMessage(message);
-};   
+    setConfirmationMessage(message);
+  };
 
   const handleResetDate = () => {
-    const now = new Date();
-    const yyyy = now.getFullYear();
-    const mm = String(now.getMonth() + 1).padStart(2, "0");
-    const dd = String(now.getDate()).padStart(2, "0");
-    const hh = String(now.getHours()).padStart(2, "0");
-    const mi = String(now.getMinutes()).padStart(2, "0");
+    const tz = getLocalTimeZone();
 
-    const formatted = isDateTime
-      ? `${yyyy}-${mm}-${dd}T${hh}:${mi}`
-      : `${yyyy}-${mm}-${dd}`;
+    if (isDateTime) {
+      const z = now(tz); // ZonedDateTime
+      const yyyy = z.year;
+      const mm = pad2(z.month);
+      const dd = pad2(z.day);
+      const hh = pad2(z.hour);
+      const mi = pad2(z.minute);
+      setDate(`${yyyy}-${mm}-${dd}T${hh}:${mi}`);
+    } else {
+      const t = today(tz); // CalendarDate
+      const yyyy = t.year;
+      const mm = pad2(t.month);
+      const dd = pad2(t.day);
+      setDate(`${yyyy}-${mm}-${dd}`);
+    }
 
-    setDate(formatted);
     setConfirmationMessage("");
   };
 
@@ -66,7 +84,10 @@ const handleSetDate = () => {
     <>
       <h1>HTML Datepicker</h1>
       <div className={styles.datePickerContainer}>
-        <label htmlFor="date-picker">Select a {isDateTime ? "date and time" : "date"}:</label>
+        <label htmlFor="date-picker">
+          Select a {isDateTime ? "date and time" : "date"}:
+        </label>
+
         <input
           ref={inputRef}
           type={isDateTime ? "datetime-local" : "date"}

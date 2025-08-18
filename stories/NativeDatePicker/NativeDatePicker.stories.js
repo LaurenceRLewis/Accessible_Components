@@ -1,13 +1,7 @@
 import React from 'react';
 import NativeDatePicker from './NativeDatePicker';
 import NativeDatePickerDescription from './NativeDatePickerDescription';
-import {
-  Title,
-  Subtitle,
-  Description,
-  Primary,
-  ArgTypes,
-} from '@storybook/blocks';
+import { Title, Subtitle, Description, Primary, ArgTypes } from '@storybook/blocks';
 
 export default {
   title: 'Native HTML Components/HTML Datepicker',
@@ -17,7 +11,7 @@ export default {
       page: () => (
         <>
           <Title />
-          <Subtitle>Native HTML input with locale-aware formatting</Subtitle>
+          <Subtitle>Native HTML input using @internationalized/date for locale-aware formatting</Subtitle>
           <Description markdown={NativeDatePickerDescription} />
           <Primary />
           <ArgTypes story="HTMLDatepicker" />
@@ -38,15 +32,9 @@ export default {
 const Template = (args) => <NativeDatePicker {...args} />;
 
 export const HTMLDatepicker = Template.bind({});
-HTMLDatepicker.args = {
-  mode: 'date',
-};
+HTMLDatepicker.args = { mode: 'date' };
 
-// Standalone documentation page
 export const Documentation = () => <NativeDatePickerDescription />;
-Documentation.parameters = {
-  docsOnly: true,
-};
+Documentation.parameters = { docsOnly: true };
 
-// Rename the sidebar label for this story
 HTMLDatepicker.storyName = "HTML Datepicker Build";
