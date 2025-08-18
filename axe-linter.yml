@@ -1,0 +1,63 @@
+# axe-linter.yml (project root)
+
+# 1) Scope: ignore noise and generated code
+exclude:
+  - 'dist/**'
+  - 'build/**'
+  - 'coverage/**'
+  - 'node_modules/**'
+  - '**/*.min.*'
+  - '**/*.snap'
+  - '.storybook/**'
+  - '**/*.stories.*'
+
+# 2) Rules: enable/disable surgically (examples only—tune to your stack)
+rules:
+  html-has-lang: true
+  image-alt: true
+  button-has-name: true
+  aria-roles: true
+  # Example toggles:
+  # heading-order: false
+  # tabindex: false
+
+# 3) Tags: narrow to WCAG 2.1 A/AA + best practices (fast, focused)
+tags:
+  - wcag22a
+  - wcag22aa
+  - best-practices
+
+# 4) Framework awareness: treat your design system components as real HTML
+# Map custom components (Lit/Angular/React) to the native elements they emit.
+# Start simple with element mapping—then refine with attributes as needed.
+global-components:
+  # Lit/Custom: <custom-image ...> → <img ...>
+  custom-image: img
+
+  # Attribute mapping example (only attributes listed are passed through):
+  custom-image-attr:
+    element: img
+    attributes:
+      - alternative-text: alt   # rename attribute to alt
+      - aria-*                  # pass all aria-* through
+      - src                     # pass through specific attributes
+      - loading                 # pass through specific attributes
+
+  # Text-content mapping (Lit/React): move a prop into the element text
+  custom-button:
+    element: button
+    attributes:
+      - label: <text>
+      - aria-*
+
+# 5) Prebuilt library mappings (if you use them)
+global-libraries:
+  # - '@mui/material'
+  # - 'react-native'
+
+# 6) Per-file overrides (useful for template files or non-standard suffixes)
+overrides:
+  - files: 'src/**/*.vue.html'
+    linter: vue
+  - files: 'scripts/**/*.php.html'
+    linter: null   # turn the linter off for these synthetic files
